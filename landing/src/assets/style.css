@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../../.flowbite-react/class-list.json";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant theme-midnight (&:where([data-theme="midnight"] *));
+
+@theme {
+  --breakpoint-sm: 340px;
+  --breakpoint-md: 540px;
+  --breakpoint-lg: 768px;
+  --breakpoint-xl: 1180px;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: bolder;
+}
+/* @theme {
+  --breakpoint-sm: 30rem;
+} */
+/* 
+.successIconButton {
+
+}
+.themeIcone{
+
+} */
+.btn_success_line{
+    @apply flex items-center justify-center p-2 rounded bg-[#d1f7ff] text-[#00abd1] hover:bg-green-600 size-10 w-10 h-10 ;
+}
+
+.btn_success_line_roundedfull{
+    @apply flex items-center justify-center p-1 rounded-full bg-[#d1f7ff] text-[#00abd1] hover:bg-green-600 w-10 h-10 ;
+}
+.icon_carre_line {
+  @apply w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center hover:bg-gray-100
+}
+.icon_carre_line_none {
+  @apply w-12 h-12  rounded flex items-center justify-center hover:bg-gray-100
+}
+
