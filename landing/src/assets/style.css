@@ -3,13 +3,21 @@
 @source "../../.flowbite-react/class-list.json";
 
 @custom-variant dark (&:where(.dark, .dark *));
-@custom-variant theme-midnight (&:where([data-theme="midnight"] *));
+@custom-variant theme-pink (&:where([data-theme="pink"] *));
+@custom-variant theme-yellow (&:where([data-theme="yellow"] *));
+@custom-variant theme-turquoise (&:where([data-theme="turquoise"] *));
+@custom-variant theme-lime (&:where([data-theme="lime"] *));
+@custom-variant theme-magenta (&:where([data-theme="magenta"] *));
+
 
 @theme {
   --breakpoint-sm: 340px;
   --breakpoint-md: 540px;
   --breakpoint-lg: 768px;
   --breakpoint-xl: 1180px;
+  --color-orange: "#FFB6C1";
+  --color-green: "#FFD700";
+  --color-blue: "#00CED1";
 }
 
 h1 {
@@ -33,10 +41,81 @@ h1 {
 .btn_success_line_roundedfull{
     @apply flex items-center justify-center p-1 rounded-full bg-[#d1f7ff] text-[#00abd1] hover:bg-green-600 w-10 h-10 ;
 }
+/* delete */
 .icon_carre_line {
-  @apply w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center hover:bg-gray-100
+   @apply w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center hover:bg-gray-100
 }
 .icon_carre_line_none {
   @apply w-12 h-12  rounded flex items-center justify-center hover:bg-gray-100
 }
+/* fin delete */
 
+.icon_square_with_line {
+  @apply w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center hover:bg-gray-100
+}
+.icon_with_padding {
+  @apply w-12 h-12  rounded flex items-center justify-center hover:bg-gray-100
+}
+.input_formulaire {
+  @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent
+}
+/* -------------------------- */
+/*        BLUE THEME          */
+/* -------------------------- */
+.theme-blue {
+  --bg-color: #000000;
+  --text-color: #003366;
+  --button-bg: #1e40af;
+  --button-text: #ffffff;
+}
+/* -------------------------- */
+/*        GREEN THEME         */
+/* -------------------------- */
+.theme-green {
+  --bg-color: #e6ffe6;
+  --text-color: #004d1a;
+  --button-bg: #16a34a;
+  --button-text: #ffffff;
+}
+
+/* -------------------------- */
+/*        ORANGE THEME        */
+/* -------------------------- */
+.theme-orange {
+  --bg-color: #fff2e6;
+  --text-color: #663300;
+  --button-bg: #ea580c;
+  --button-text: #ffffff;
+}
+
+/* Apply CSS variables globally */
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --button-bg: black;
+  --button-text: white;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* reusable button */
+.btn {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  @apply px-4 py-2 rounded-lg font-semibold;
+}
+.custom-list {
+  margin: 0;
+  padding-left: 1.2em; /* espace pour les puces */
+  line-height: 1.6;
+}
+
+.custom-list::before {
+  content: "•"; /* puce */
+  position: absolute;
+  margin-left: -1.2em; /* place la puce dans le padding */
+  color: gray; /* couleur de la puce */
+}
