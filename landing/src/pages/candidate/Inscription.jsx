@@ -92,7 +92,7 @@ export default function Inscription(){
                             <label class="block text-sm font-medium text-gray-700 mb-2">Localisation</label>
                             <div class="relative">
                                 <input 
-                                    type="email" 
+                                    type="text" 
                                     placeholder="votre email" 
                                     class="input_singup"
                                 />

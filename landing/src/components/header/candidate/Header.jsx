@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { HiBars3} from "react-icons/hi2";
 import RenderMenuHorizontal from '../../../function/RendermenuHorizontal';
 import { HiChatBubbleBottomCenterText,HiBell,HiMiniUser } from "react-icons/hi2";
-import CardChangePassWord from '../../card/CardChangePassWord';
-import CardNotification from '../../card/CardNotification';
+import CardChangePassWord from '../../card/popup/CardChangePassWord';
+import CardNotification from '../../card/popup/CardNotification';
+
 import LogOut from '../../../function/Deconnexion';
 export default function Header () {
   const menus = [

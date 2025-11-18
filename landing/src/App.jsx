@@ -17,9 +17,13 @@ import Listeposte from './pages/candidate/AvailableJob'
 import { Routes, Route, Link } from "react-router-dom";
 import AvailableJob from './pages/candidate/AvailableJob';
 import Profile from './pages/candidate/Profile';
-import CardNotification from './components/card/CardNotification';
+// import CardNotification from './components/card/CardNotification';
+import CardNotification from './components/card/popup/CardNotification';
 import Sidebar from './components/sidebar/Sidebar';
-import CriterenPost from './pages/manager/CriterienPost';
+import CriterenStaff from './pages/manager/CriterienStaff';
+import CardCalendar from './components/card/CardCalendar';
+import Calendar from './components/card/CardCalendar';
+import DashboardManager from './pages/manager/Dasboard';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -84,8 +88,9 @@ function App() {
         <Route path="/candidate/availableposte" element={<AvailableJob />} />
         <Route path="/candidate/profile" element={<Profile />} />
         <Route path="/notification" element={<CardNotification/>}></Route>
-        <Route path="/sidebar" element={<Sidebar/>}></Route>
-        <Route path="/criterien" element={<CriterenPost/>}></Route>
+        <Route path="/criterien" element={<CriterenStaff/>}></Route>
+        <Route path="/dasboard-manager" element={<DashboardManager/>}></Route>
+
 
 
       </Routes>
