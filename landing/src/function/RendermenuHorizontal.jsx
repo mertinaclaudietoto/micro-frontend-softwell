@@ -1,20 +1,19 @@
 import React,{useState} from 'react';
 export default function RenderMenuHorizontal({ menus, defaultActiveItem ,tailwinddefault ,tailwindActif }) {
-  console.log(menus)
   const [activeItem, setActiveItem] = useState(defaultActiveItem);
   return (
     <>
       {menus.map((menu) => (
         <a
-          key={menu}
-          href="#"
-          onClick={() => setActiveItem(menu)}
+          key={menu.item}
+          href={menu.link}
+          onClick={() => setActiveItem(menu.item)}
           className={`${tailwinddefault} ${
-          activeItem === menu ? tailwindActif : ""
+          activeItem === menu.item ? tailwindActif : ""
         }`}
 
         >
-          {menu}
+          {menu.item}
         </a>
       ))}
     </>

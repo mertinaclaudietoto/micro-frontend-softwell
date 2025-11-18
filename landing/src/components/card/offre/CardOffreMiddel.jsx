@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiOutlineBookmark,HiOutlinePaperAirplane } from "react-icons/hi2";
 
-export default function  CardOffreMiddel  ()  {
+export default function  CardOffreMiddel  ({lading})  {
   return (
     // border border-gray-300
    <div class="rounded-xl p-4 md:p-6">       
@@ -11,14 +11,17 @@ export default function  CardOffreMiddel  ()  {
                     <i class="fas fa-slack text-white text-2xl"></i>
                 </div>
                 <div>
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-1">Junior UI/UX Designer</h2>
+                    <h2 class="title_seconde">Junior UI/UX Designer</h2>
                     <p class="text-gray-600">Slack Technologies, LLC</p>
                 </div>
             </div>
-            <div class="flex gap-2 flex-shrink-0">
+            {!lading ?
+            (<div class="flex gap-2 flex-shrink-0">
                 <button class="bg-blue-600 text-white px-4 md:px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 text-sm md:text-base"><HiOutlinePaperAirplane/></button>
                 <button class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 text-sm md:text-base"><HiOutlineBookmark/></button>
-            </div>
+            </div>)
+            : ""}
+           
         </div>
         <div class="flex flex-wrap gap-2 py-2">
             <span class="px-3 py-1 bg-gray-100 text-xs rounded-full">Full Time</span>

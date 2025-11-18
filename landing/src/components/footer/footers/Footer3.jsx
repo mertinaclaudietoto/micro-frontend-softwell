@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
 const Footer3 = () => {
   return (
-    <div class="mx-auto px-4 py-8">
+    <div class="mx-auto mt-0">
         <div class="bg-white rounded-lg shadow-lg p-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
                 <div>
@@ -50,7 +50,7 @@ const Footer3 = () => {
                 </div>
             </div>
 
-            <div class="border-t pt-6">
+            {/* <div class="border-t pt-6">
                 <h3 class="font-bold text-xl mb-3">About Us</h3>
                 <p class="text-gray-600 text-sm mb-6">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
@@ -63,7 +63,7 @@ const Footer3 = () => {
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
     </div>
   );

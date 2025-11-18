@@ -1,9 +1,8 @@
 import React from 'react';
-import Header from '../components/header/candidat/Header';
-import CardOffreSmall from '../components/card/offre/CardOffresmall';
-import CardOffreMiddel from '../components/card/offre/CardOffreMiddel';
-export default function ListPoste() {
-  
+import Header from '../../components/header/candidate/Header';
+import CardOffreSmall from '../../components/card/offre/CardOffreSmall';
+import CardOffreMiddel from '../../components/card/offre/CardOffreMiddel';
+export default function AvailableJob() {
   return (
     <>
         <div class="bg-white  overflow-hidden h-max">

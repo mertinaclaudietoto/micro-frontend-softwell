@@ -1,7 +1,7 @@
 import React from 'react';
 const CardCommentaire = () => {
   return (
-    <div class="bg-gray-50 rounded-2xl p-6 hover:shadow-md transition-shadow">
+    <div class="bg_grain_rounded_2xl my-4">
         <div class="text-indigo-600 text-3xl mb-4">"</div>
         <p class="text-gray-600 text-sm mb-6 leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.

@@ -8,11 +8,18 @@ import ThemeSwitcher from "./ThemeSwitcher";
 import HeroDefault from './components/hero/HeroDefault';
 import CardOffremiddel from './components/card/offre/CardOffreMiddel';
 import HeroOffre from './components/hero/HeroOffre';
-// import Landing from './pages/Landing';
+import Landing from './pages/candidate/Landing';
 import Test from './pages/Test';
-import Application from './pages/customer/application';
+import Application from './pages/candidate/application';
 import LocationSelector from './components/LocationSelector';
-
+import Inscription from './pages/candidate/Inscription';
+import Listeposte from './pages/candidate/AvailableJob'
+import { Routes, Route, Link } from "react-router-dom";
+import AvailableJob from './pages/candidate/AvailableJob';
+import Profile from './pages/candidate/Profile';
+import CardNotification from './components/card/CardNotification';
+import Sidebar from './components/sidebar/Sidebar';
+import CriterenPost from './pages/manager/CriterienPost';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -66,10 +73,22 @@ function App() {
       <HeroDefault></HeroDefault>
       */}
       {/* <Landing></Landing> */}
-      <Test></Test>
+      {/* <Test></Test> */}
+      {/* <Inscription></Inscription> */}
       {/* <Application/> */}
       {/* <LocationSelector></LocationSelector> */}
+      <Routes>
+        <Route path="/candidate" element={ <Landing/>  } />
+        <Route path="/candidate/inscription" element={<Inscription />} />
+        <Route path="/candidate/application" element={<Application />} />
+        <Route path="/candidate/availableposte" element={<AvailableJob />} />
+        <Route path="/candidate/profile" element={<Profile />} />
+        <Route path="/notification" element={<CardNotification/>}></Route>
+        <Route path="/sidebar" element={<Sidebar/>}></Route>
+        <Route path="/criterien" element={<CriterenPost/>}></Route>
 
+
+      </Routes>
     </>
   )
 }

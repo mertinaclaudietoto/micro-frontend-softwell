@@ -3,7 +3,7 @@ import { HiBars3} from "react-icons/hi2";
 
 const HeroDefault = () => {
   return (
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+    <section  id="home" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/header/candidat/Header';
+import Header from '../../components/header/candidate/Header';
 import CardOffreSmallCandidate from '../../components/card/offre/CardOffreSmallCandidate';
 import CardOffreMiddel from '../../components/card/offre/CardOffreMiddel';
 export default function Application() {

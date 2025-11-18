@@ -3,7 +3,8 @@ export default function CardOffreSmall(){
     return(
         <>
         {/* border border-gray-300 */}
-            <div class="border border-gray-300 rounded-xl p-4 mb-4 hover:shadow-lg transition-shadow cursor-pointer">
+         {/* <div class="mb-4 cursor-pointer bg_grain_rounded_2xl"></div> */}
+            <div class="bg-gray-50  rounded-xl p-4 mb-4 hover:shadow-md transition-shadow cursor-pointer">
                 <div class="flex items-start gap-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-slack text-white text-xl"></i>

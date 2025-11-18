@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
 const Footer5 = () => {
   return (
-    <div class="px-4 py-8  mx-auto">
+    <div class=" mx-auto">
         <div class="bg-white rounded-lg shadow-lg p-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div>

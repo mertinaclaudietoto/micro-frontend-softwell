@@ -18,6 +18,37 @@
   --color-orange: "#FFB6C1";
   --color-green: "#FFD700";
   --color-blue: "#00CED1";
+  --color-softbleu: #2e427b;
+  --color-or: #e1c340;
+
+--color-softbleushade-12:#090c17;
+--color-softbleushade-11:#0e1425;
+--color-softbleushade-10:#131c34;
+--color-softbleushade-9:#192342;
+--color-softbleushade-8:#1e2b50;;
+--color-softbleushade-7:#23335e;
+--color-softbleushade-6:#293a6d;
+--color-softbleushade-5:#2e427b;
+--color-softbleushade-4:#334a89;
+--color-softbleushade-3:#395198;
+--color-softbleushade-2:#3e59a6;
+--color-softbleushade-1:#4361b4;
+
+ 
+--color-softbleutini-12:#4e6bbd;
+--color-softbleutini-11:#5c77c2;
+--color-softbleutini-10:#6b83c8;
+--color-softbleutini-9:#798fcd;
+--color-softbleutini-8:#879bd2;
+--color-softbleutini-7:#96a7d8;
+--color-softbleutini-6:#a4b3dd;
+--color-softbleutini-5:#b2bfe2;
+--color-softbleutini-4:#c0cbe8;;
+--color-softbleutini-3:#cfd7ed;
+--color-softbleutini-2:#dde2f2;
+--color-softbleutini-1:#ebeef8;
+--color-softbleutini-13:#fafafd;
+
 }
 
 h1 {
@@ -34,6 +65,9 @@ h1 {
 .themeIcone{
 
 } */
+.btn_rectangle_action{
+  @apply p-2  bg-softbleu  text-white rounded font-semibold text-lg hover:shadow-xl transition-all
+}
 .btn_success_line{
     @apply flex items-center justify-center p-2 rounded bg-[#d1f7ff] text-[#00abd1] hover:bg-green-600 size-10 w-10 h-10 ;
 }
@@ -48,6 +82,9 @@ h1 {
 .icon_carre_line_none {
   @apply w-12 h-12  rounded flex items-center justify-center hover:bg-gray-100
 }
+.icone_input{
+  @apply w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2
+}
 /* fin delete */
 
 .icon_square_with_line {
@@ -59,6 +96,66 @@ h1 {
 .input_formulaire {
   @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent
 }
+.background_transparent_popup{
+  @apply fixed z-100 inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center
+}
+/* -------------------------- */
+/*        Font Application    */
+/* -------------------------- */
+.title_seconde {
+  @apply text-xl md:text-2xl font-bold text-gray-900 mb-1
+}
+/* -------------------------- */
+/*        Effet Card          */
+/* -------------------------- */
+.shadow_rounded_2xl{
+  @apply rounded-2xl p-6 shadow-lg
+}
+.bg_grain_rounded_2xl{
+  @apply bg-gray-50 rounded-2xl p-6 hover:shadow-md transition-shadow
+}
+/* -------------------------- */
+/*        Icone               */
+/* -------------------------- */
+.icone12{
+  @apply w-12 h-12 rounded-lg flex items-center justify-center mb-4
+}
+.iconerond10{
+  @apply w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors
+}
+.iconerond10indigo{
+  @apply w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center hover:bg-indigo-700 transition-colors
+}
+.input_#_2e427b{
+  @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent
+}
+.input_singup{
+  @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-softbleu  focus:border-transparent
+}
+
+.rounded-card{
+  @apply rounded-xl 
+}
+.padding-card{
+  @apply p-4
+}
+.card-text-s-green{
+  @apply flex items-center gap-1 bg-emerald-50 px-2 py-1 rounded text-xs text-emerald-700
+}
+.card-text-s-orange{
+  @apply flex items-center gap-1 bg-amber-50 px-2 py-1 rounded text-xs text-amber-700
+}
+.card-text-s-blue{
+  @apply flex items-center gap-1 bg-amber-50 px-2 py-1 rounded text-xs text-blue-700
+}
+
+.card-text-color-blue{
+  @apply p-2
+}
+.icone-size-xs{
+  @apply w-6 h-6
+}
+
 /* -------------------------- */
 /*        BLUE THEME          */
 /* -------------------------- */
