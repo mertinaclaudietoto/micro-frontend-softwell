@@ -1,7 +1,7 @@
 // Footer.jsx
 import React, { useState } from 'react';
 import { HiBars3} from "react-icons/hi2";
-import RenderMenuHorizontal from '../../../function/RendermenuHorizontal';
+import RenderMenuHorizontal from '../../card/RendermenuHorizontal';
 import { HiChatBubbleBottomCenterText,HiBell,HiMiniUser } from "react-icons/hi2";
 import CardChangePassWord from '../../card/popup/CardChangePassWord';
 import CardNotification from '../../card/popup/CardNotification';

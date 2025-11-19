@@ -1,8 +1,6 @@
 import { useState,useEffect } from "react";
 import {  HiOutlineMap,HiOutlineXMark,HiOutlineEnvelope, HiOutlinePhone} from "react-icons/hi2";
-import RenderMenuHorizontal from "../../function/RendermenuHorizontal";
-
-
+import RenderMenuHorizontal from "../../components/card/RendermenuHorizontal";
 export default function Inscription(){
     const [index,setIndex] =useState(1);
     const nextOrPrecedent = (nbr) => {

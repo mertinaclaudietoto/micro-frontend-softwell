@@ -1,7 +1,7 @@
 // Footer.jsx
 import React,{useState} from 'react';
 import { HiBars3} from "react-icons/hi2";
-import RenderMenuHorizontal from '../../../function/RendermenuHorizontal';
+import RenderMenuHorizontal from '../../card/RendermenuHorizontal';
 import CardLogin from '../../card/popup/CardLogin';
 import { Navigate, useNavigate } from "react-router-dom";
 

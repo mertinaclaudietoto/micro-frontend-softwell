@@ -145,6 +145,16 @@ h1 {
   @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or  focus:border-transparent
 }
 
+.border-bottom{
+  @apply border-b border-gray-200
+}
+.border-rigth{
+  @apply border-r border-gray-200
+}
+.border-top{
+  @apply border-t border-gray-200
+}
+
 .rounded-card{
   @apply rounded-xl 
 }
@@ -239,4 +249,16 @@ body {
   position: absolute;
   margin-left: -1.2em; /* place la puce dans le padding */
   color: gray; /* couleur de la puce */
+}
+/* -------------------------- */
+/*        Side Bar            */
+/* -------------------------- */
+.card-icone-text{
+  @apply w-full flex items-center gap-3 px-4 py-3 rounded-lg  text-left 
+}
+.card-icone-simple{
+  @apply w-10 h-10 flex items-center justify-center rounded-lg 
+}
+.text-sm-gray{
+  @apply text-sm text-gray-500 mb-1
 }

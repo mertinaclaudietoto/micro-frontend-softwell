@@ -24,6 +24,8 @@ import CriterenStaff from './pages/manager/CriterienStaff';
 import CardCalendar from './components/card/CardCalendar';
 import Calendar from './components/card/CardCalendar';
 import DashboardManager from './pages/manager/Dasboard';
+import ListDemande from './pages/manager/Request';
+import CVCandidate from './pages/manager/sous/CVcandidate';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -88,10 +90,10 @@ function App() {
         <Route path="/candidate/availableposte" element={<AvailableJob />} />
         <Route path="/candidate/profile" element={<Profile />} />
         <Route path="/notification" element={<CardNotification/>}></Route>
-        <Route path="/criterien" element={<CriterenStaff/>}></Route>
-        <Route path="/dasboard-manager" element={<DashboardManager/>}></Route>
-
-
+        <Route path="/manager/criterien" element={<CriterenStaff/>}></Route>
+        <Route path="/manager/dasboard" element={<DashboardManager/>}></Route>
+        <Route path="/manager/listrequeste" element={<ListDemande/>}></Route>
+        <Route path="/test" element={<CVCandidate/>}></Route>
 
       </Routes>
     </>
