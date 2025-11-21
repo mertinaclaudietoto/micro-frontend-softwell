@@ -26,6 +26,10 @@ import Calendar from './components/card/CardCalendar';
 import DashboardManager from './pages/manager/Dasboard';
 import ListDemande from './pages/manager/Request';
 import CVCandidate from './pages/manager/sous/CVcandidate';
+import Statistique from './pages/rh/Statistique';
+import DashboardRh from './pages/rh/Dasboard';
+import ListRequeste from './pages/rh/Listrequeste';
+import StepRecruitement from './pages/rh/StepRecruitment';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -90,15 +94,17 @@ function App() {
         <Route path="/candidate/availableposte" element={<AvailableJob />} />
         <Route path="/candidate/profile" element={<Profile />} />
         <Route path="/notification" element={<CardNotification/>}></Route>
-        <Route path="/manager/criterien" element={<CriterenStaff/>}></Route>
+        <Route path="/manager-criterien" element={<CriterenStaff/>}></Route>
         <Route path="/manager/dasboard" element={<DashboardManager/>}></Route>
         <Route path="/manager/listrequeste" element={<ListDemande/>}></Route>
         <Route path="/test" element={<CVCandidate/>}></Route>
-
+        <Route path="/rh-dasboard" element={<DashboardRh/>}></Route>
+        <Route path="/rh-statistique" element={<Statistique/>}></Route>
+        <Route path="/rh-listrequeste" element={<ListRequeste/>}></Route>
+        <Route path="/rh-steprecruitment" element={<StepRecruitement/>}></Route>
       </Routes>
     </>
   )
 }
-
 export default App
 

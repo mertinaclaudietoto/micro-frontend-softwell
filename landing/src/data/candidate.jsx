@@ -89,3 +89,75 @@ export const infocandidate = {
     post:12,
     namepost:"Developpeur C#"
 }
+export const listCandidate = [
+  {
+    id: "1",
+    name: "Sarah Randri",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 12,
+    listskile: ["Communication", "Organisation"]
+  },
+  {
+    id: "2",
+    name: "Miala Ando",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 15,
+    listskile: ["Leadership", "Créativité"]
+  },
+  {
+    id: "3",
+    name: "Tiana Ravelo",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 17,
+    listskile: ["Gestion de projet", "Analyse"]
+  },
+  {
+    id: "4",
+    name: "Anja Razafy",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 14,
+    listskile: ["Marketing", "Réseaux sociaux"]
+  },
+  {
+    id: "5",
+    name: "Lova Saholy",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 18,
+    listskile: ["Programmation", "Résolution de problèmes"]
+  },
+  {
+    id: "6",
+    name: "Fanja Hanitra",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 11,
+    listskile: ["Comptabilité", "Rigueur"]
+  },
+  {
+    id: "7",
+    name: "Mamy Noeline",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 13,
+    listskile: ["Vente", "Relation client"]
+  },
+  {
+    id: "8",
+    name: "Sitraka Elodie",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 16,
+    listskile: ["Design", "UX/UI"]
+  },
+  {
+    id: "9",
+    name: "Hasina Marie",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 12,
+    listskile: ["Gestion du temps", "Planification"]
+  },
+  {
+    id: "10",
+    name: "Farah Odile",
+    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
+    note: 19,
+    listskile: ["Analyse de données", "Esprit critique"]
+  }
+];

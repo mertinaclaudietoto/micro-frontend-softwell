@@ -1,4 +1,4 @@
-export default function CardCriterienState(){
+export default function CardCriterienRh(){
     return (
          <div class="border border-gray-200 rounded-card padding-card">
             {/* identifiant */}
@@ -8,11 +8,13 @@ export default function CardCriterienState(){
                 </div>
                 <div class="flex-1">
                     <div class="font-medium">Fhayla Richard</div>
-                    <div class="text-xs text-gray-500">Wed, July 12, 2023</div>
+                    <div class="text-xs text-gray-500"> departement 12-03-2025 / 13-04-2025</div>
                 </div>
                 <div class="flex items-center gap-1 bg-blue-50 px-2 py-1 rounded text-xs text-blue-700">
-                    <i class="fas fa-check-double"></i>
-                    <span>Completed</span>
+                    {/* <i class="fas fa-check-double"></i> */}
+                    <i class="fa-solid fa-1 text-lg"></i>
+                    <i class="fa-solid fa-0 text-lg"></i>
+                    {/* <span>10</span> */}
                 </div>
             </div>
             <div class="space-y-2 text-sm mb-4">
@@ -49,8 +51,8 @@ export default function CardCriterienState(){
                 </p>
             </div>
             <div class="flex gap-2">
-                <button class="flex-1 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50">See Details</button>
-                <button class="flex-1 py-2 bg-amber-400 rounded-lg text-sm font-medium hover:bg-amber-500">Pay Bills</button>
+                <button class="flex-1 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50">Refuser</button>
+                <button class="flex-1 py-2 bg-amber-400 rounded-lg text-sm font-medium hover:bg-amber-500">Accepter</button>
             </div>
         </div>
     )
