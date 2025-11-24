@@ -2,7 +2,7 @@
 import React,{useState} from 'react';
 import { HiBars3} from "react-icons/hi2";
 import RenderMenuHorizontal from '../../card/RendermenuHorizontal';
-import CardLogin from '../../card/popup/CardLogin';
+import CardLoginUser from '../../card/popup/CardLoginUser';
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -14,12 +14,12 @@ const Header = () => {
   // 
   const menus = [
     {item:"Home",link:"#home"},
-    {item:"Pourquoi-nous",link:"#why"},
+    // {item:"Pourquoi-nous",link:"#why"},
     {item:"Poste disponible",link:"#post"},
   ];
   const [showLogin,setShowLogin]=useState(false);
-  const inscription =()=>{
-    navigate("/candidate/inscription");
+  const registration =()=>{
+    navigate("/candidate-registration");
   }
   return (
   <>
@@ -29,14 +29,13 @@ const Header = () => {
                 <div class="flex items-center">
                     <span class="text-2xl font-bold pink:bg-pink-300">Logo</span>
                 </div>
-                
                 {/* <!-- Desktop Navigation --> */}
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden md:flex items-center  space-x-8">
                   <RenderMenuHorizontal menus={menus} defaultActiveItem={"Discover"} tailwinddefault={"text-gray-700 hover:text-gray-900"} tailwindActif={"border-b-2 border-gray-700"}/>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
                     <button class="text-gray-700 hover:text-gray-900" onClick={()=>{setShowLogin(true)}}>Connexion</button>
-                    <button class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800" onClick={()=>{inscription()}}>
+                    <button class="bg-softbleu text-white px-6 py-2 rounded-full hover:bg-softbleushade-12" onClick={()=>{registration()}}>
                         Inscription
                     </button>
                 </div>
@@ -53,7 +52,7 @@ const Header = () => {
               <div class="px-4 pt-2 pb-3 space-y-1">
                   <RenderMenuHorizontal menus={menus} defaultActiveItem={"Discover"} tailwinddefault={"block px-3 py-2 text-gray-700 hover:text-gray-900"} tailwindActif={"border-b-2 border-gray-700"}/>
                   <button class="w-full bg-gray-300 text-white px-6 py-2 rounded-full mt-2  hover:text-gray-900" onClick={()=>{setShowLogin(true)}}>Connexion</button>
-                    <button class="w-full bg-black text-white px-6 py-2 rounded-full mt-2" onClick={()=>{inscription()}}>
+                    <button class="w-full bg-softbleu text-white px-6 py-2 rounded-full mt-2 hover:bg-softbleushade-12" onClick={()=>{registration()}}>
                         Sign in
                     </button>
               </div>
@@ -63,7 +62,7 @@ const Header = () => {
           )}
         
     </nav>
-    {showLogin ==true ?  <CardLogin closePopup={setShowLogin} />: <></>}
+    {showLogin ==true ?  <CardLoginUser closePopup={setShowLogin} />: <></>}
   </>
   );
 };

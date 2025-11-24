@@ -1,7 +1,5 @@
-import CardCalendar from "../../components/card/CardCalendar";
-import { ProgressCircle } from "../../components/dasboard/ProgressCircle";
-import Sidebar from "../../components/sidebar/Sidebar";
-import TextState from "../../components/state/TextState";
+
+import {ProgressCircle,Sidebar,CardCalendar,TextState} from "../../components";
 import { dashboardState, request } from "../../data/recrutement";
 import { numberToIcons } from "../../function/utils";
 export default function Dashboard(){

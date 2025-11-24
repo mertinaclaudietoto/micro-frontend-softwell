@@ -1,35 +1,24 @@
-import React,{useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
+import { Routes, Route } from "react-router-dom";
 import './assets/style.css'
-import { HiMiniXCircle,HiChevronRight,HiChevronLeft } from "react-icons/hi2";
-import Header from './components/header/landing/Header'
-// import FooterChoice from './components/footer/FooterChoice'
+import { 
+  Application,
+  AvailableJob,
+  Landing,
+  Profile,
+  Registration,
+  DashboardRh,
+  ListRequeste,
+  Statistique,
+  StepRecruitment,
+  DashboardManager,
+  CriterienStaff,
+  Request
+} from "./pages";
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
-import HeroDefault from './components/hero/HeroDefault';
-import CardOffremiddel from './components/card/offre/CardOffreMiddel';
-import HeroOffre from './components/hero/HeroOffre';
-import Landing from './pages/candidate/Landing';
-import Test from './pages/Test';
-import Application from './pages/candidate/application';
-import LocationSelector from './components/LocationSelector';
-import Inscription from './pages/candidate/Inscription';
-import Listeposte from './pages/candidate/AvailableJob'
-import { Routes, Route, Link } from "react-router-dom";
-import AvailableJob from './pages/candidate/AvailableJob';
-import Profile from './pages/candidate/Profile';
 // import CardNotification from './components/card/CardNotification';
-import CardNotification from './components/card/popup/CardNotification';
-import Sidebar from './components/sidebar/Sidebar';
-import CriterenStaff from './pages/manager/CriterienStaff';
-import CardCalendar from './components/card/CardCalendar';
-import Calendar from './components/card/CardCalendar';
-import DashboardManager from './pages/manager/Dasboard';
-import ListDemande from './pages/manager/Request';
 import CVCandidate from './pages/manager/sous/CVcandidate';
-import Statistique from './pages/rh/Statistique';
-import DashboardRh from './pages/rh/Dasboard';
-import ListRequeste from './pages/rh/Listrequeste';
-import StepRecruitement from './pages/rh/StepRecruitment';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -89,19 +78,19 @@ function App() {
       {/* <LocationSelector></LocationSelector> */}
       <Routes>
         <Route path="/candidate" element={ <Landing/>  } />
-        <Route path="/candidate/inscription" element={<Inscription />} />
-        <Route path="/candidate/application" element={<Application />} />
-        <Route path="/candidate/availableposte" element={<AvailableJob />} />
-        <Route path="/candidate/profile" element={<Profile />} />
-        <Route path="/notification" element={<CardNotification/>}></Route>
-        <Route path="/manager-criterien" element={<CriterenStaff/>}></Route>
+        <Route path="/candidate-registration" element={<Registration />} />
+        <Route path="/candidate-application" element={<Application />} />
+        <Route path="/candidate-availableposte" element={<AvailableJob />} />
+        <Route path="/candidate-profile" element={<Profile />} />
+        {/* <Route path="/notification" element={<CardNotification/>}></Route> */}
+        <Route path="/manager-criterien" element={<CriterienStaff/>}></Route>
         <Route path="/manager/dasboard" element={<DashboardManager/>}></Route>
-        <Route path="/manager/listrequeste" element={<ListDemande/>}></Route>
+        <Route path="/manager/listrequeste" element={<Request/>}></Route>
         <Route path="/test" element={<CVCandidate/>}></Route>
         <Route path="/rh-dasboard" element={<DashboardRh/>}></Route>
         <Route path="/rh-statistique" element={<Statistique/>}></Route>
         <Route path="/rh-listrequeste" element={<ListRequeste/>}></Route>
-        <Route path="/rh-steprecruitment" element={<StepRecruitement/>}></Route>
+        <Route path="/rh-steprecruitment" element={<StepRecruitment/>}></Route>
       </Routes>
     </>
   )

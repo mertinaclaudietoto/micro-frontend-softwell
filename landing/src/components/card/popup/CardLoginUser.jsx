@@ -1,4 +1,4 @@
-export default function CardLogin({closePopup}){
+export default function CardLoginUser({closePopup}){
     const close =()=>{
         closePopup(false);
     }
@@ -17,7 +17,7 @@ export default function CardLogin({closePopup}){
                     <label class="block text-sm font-medium text-gray-700 mb-2">Login</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Entrer votre login" 
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                 </div>
@@ -25,7 +25,7 @@ export default function CardLogin({closePopup}){
                     <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Entrer votre mots de passe" 
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                 </div>
@@ -36,7 +36,7 @@ export default function CardLogin({closePopup}){
                     <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close()}}>
                         Cancel
                     </button>
-                    <button class="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium" onClick={()=>{close()}}>
+                    <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium" onClick={()=>{close()}}>
                         Save
                     </button>
                 </div>

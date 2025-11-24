@@ -1,4 +1,4 @@
-import Sidebar from "../../components/sidebar/rh/Sidebar"
+import Sidebar from "../../components/sidebar/Sidebar"
 import Detailed from "./sublistrequeste/Detailed"
 import ListRequest from "./sublistrequeste/ListRequest"
 

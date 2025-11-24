@@ -1,3 +1,4 @@
+///candidate
 export const infocandidate = { 
     photo:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
     name: 'Mertina Claudie TOTO',
@@ -161,3 +162,4 @@ export const listCandidate = [
     listskile: ["Analyse de données", "Esprit critique"]
   }
 ];
+//

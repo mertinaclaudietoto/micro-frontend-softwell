@@ -3,7 +3,7 @@ import HeadGray from "../../components/table/thead/HeadGray";
 import ListRequest from "./sous/ListRequest";
 import ListCandidate from "./sous/ListCandidate";
 import CVCandidate from "./sous/CVcandidate";
-import Sidebar from "../../components/sidebar/manager/Sidebar";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 export default function ListDemande(){
     // const [isOpenCandidat,setIsOpenCandidat]=useState(true); 

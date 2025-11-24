@@ -4,7 +4,13 @@ import Icon from "@mdi/react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
-const Footer3 = () => {
+import RenderMenuHorizontal from '../../card/RendermenuHorizontal';
+export default function  Footer3 () {
+    const menus = [
+    {item:"Home",link:"#home"},
+    {item:"Pourquoi-nous",link:"#why"},
+    {item:"Poste disponible",link:"#post"},
+  ];
   return (
     <div class="mx-auto mt-0">
         <div class="bg-white rounded-lg shadow-lg p-8">
@@ -29,25 +35,16 @@ const Footer3 = () => {
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
-                    <p class="font-bold mt-4">Follow Us</p>
+                    {/* <p class="font-bold mt-4">Follow Us</p> */}
                 </div>
-                <div class="flex flex-col md:flex-row gap-8">
-                    <nav class="flex gap-6 text-sm">
-                        <a href="#" class="hover:text-red-500">About</a>
-                        <a href="#" class="hover:text-red-500">Blog</a>
-                        <a href="#" class="hover:text-red-500">Menu</a>
-                        <a href="#" class="text-red-500 font-semibold">Services</a>
-                        <a href="#" class="hover:text-red-500">FAQ</a>
-                        <a href="#" class="hover:text-red-500">Support</a>
-                    </nav>
-
+                {/* <div class="flex justify-start md:flex-row gap-8">
                     <div class="text-sm">
                         <p class="font-semibold mb-1">Call:</p>
                         <p class="text-gray-600 mb-3">+0123 456 789 00</p>
                         <p class="font-semibold mb-1">Email:</p>
                         <p class="text-gray-600">user@example.com</p>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* <div class="border-t pt-6">
@@ -63,10 +60,9 @@ const Footer3 = () => {
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
-            </div> */}
+            </div>  */}
         </div>
     </div>
   );
 };
 
-export default Footer3;

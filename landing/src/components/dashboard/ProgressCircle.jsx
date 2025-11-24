@@ -1,5 +1,5 @@
 import { getColorByValue } from "../../function/utils";
-export const ProgressCircle = ({ value, percent }) => {
+export default function  ProgressCircle ({ value, percent }){
   const perimeter = 2 * Math.PI * 20; // r = 20
   const offset = perimeter - (percent / 100) * perimeter;
 
