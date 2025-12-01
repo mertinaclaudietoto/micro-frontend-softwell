@@ -11,4 +11,8 @@ export * from "./criterien";
 export * from "./offre";
 // eslint-disable-next-line react-refresh/only-export-components
 export * from "./popup";
+export * from "./access";
+export * from "./formation";
+
+
 

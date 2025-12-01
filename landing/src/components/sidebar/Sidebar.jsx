@@ -7,13 +7,13 @@ import { parametres,short } from "../../data/rh";
 import { datasidebar } from "../../data/Sidebar";
 export default function Sidebar(){
     const [isOpen ,setIsOpen]=useState(false);
-    const datasidebarvalue =datasidebar(2);
+    const datasidebarvalue =datasidebar(1);
     return (
-        <div class="bg-white-200 ">
-            <div class="flex gap-4 max-w-4xl">
+        <div class="bg-white-200 h-full ">
+            <div class="flex gap-4 max-w-3xl md:w-[250px] ">
                 {isOpen ? (
                     // short siderbar version
-                <aside class="w-16 bg-white border-r border-gray-200 p-3 flex flex-col items-center gap-3">
+                <aside class="w-16 bg-white border-r h-full border-gray-200 p-3 flex flex-col items-center gap-3">
                     {/* shrunk  logo*/}
                     <button class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-gray-50" onClick={()=>{setIsOpen(!isOpen)}}>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -87,7 +87,7 @@ export default function Sidebar(){
                             <div class="p-4">
                                 <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Menu</h3>
                                 <div class="space-y-1">
-                                    {datasidebarvalue.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} item={value.item}  actif={value.actif}/>))}
+                                    {datasidebarvalue.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
                                 </div>
                             </div>
                             {/* pub */}
@@ -101,7 +101,7 @@ export default function Sidebar(){
                             </div>
                           
                             <div class="p-4 border-t border-gray-100 space-y-1">
-                                {parametres.map((value,index)=>(<SidebarLargButton index={index} item={value.item} icone={value.icone} actif={value.actif}/>))}
+                                {parametres.map((value,index)=>(<SidebarLargButton index={index} label={value.label} icone={value.icone} actif={value.actif}/>))}
                             </div>
                         </div>
                         {/* compte */}

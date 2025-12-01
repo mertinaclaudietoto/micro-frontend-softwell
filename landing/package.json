@@ -17,6 +17,7 @@
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "@tailwindcss/vite": "^4.1.17",
+    "axios": "^1.13.2",
     "date-fns": "^4.1.0",
     "flowbite": "^4.0.0",
     "flowbite-react": "^0.12.10",

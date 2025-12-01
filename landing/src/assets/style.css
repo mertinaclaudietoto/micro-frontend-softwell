@@ -80,6 +80,9 @@ h1 {
 .btn_success_line{
     @apply flex items-center justify-center p-2 rounded bg-[#d1f7ff] text-[#00abd1] hover:bg-green-600 size-10 w-10 h-10 ;
 }
+.btn-neutre-gray{
+  @apply px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50
+}
 
 .btn_success_line_roundedfull{
     @apply flex items-center justify-center p-1 rounded-full bg-[#d1f7ff] text-[#00abd1] hover:bg-green-600 w-10 h-10 ;

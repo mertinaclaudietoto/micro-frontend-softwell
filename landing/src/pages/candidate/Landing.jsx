@@ -3,7 +3,7 @@ import {Footer3,HeroDefault,HeroOffre,CardOffreSmall,CardCommentaire,HeaderLandi
 import { criteriens } from '../../data/data';
 function Landing() {
     const redirecte = true ;
-    const [isOpen,setIsOpen]=useState(true)
+    const [isOpen,setIsOpen]=useState(false)
     return (
     <> 
         <HeaderLanding></HeaderLanding>

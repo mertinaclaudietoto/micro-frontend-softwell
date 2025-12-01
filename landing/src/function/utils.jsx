@@ -13,3 +13,9 @@ export const getColorByValue = (value) => {
   if (value <= 100) return "stroke-green-700 opacity-90";
   return "stroke-gray-700 opacity-90";
 };
+export const handlerVariable = (name, value,setFunction) => {
+        setFunction((previous) => ({
+            ...previous,
+            [name]: value,
+        }));
+    };

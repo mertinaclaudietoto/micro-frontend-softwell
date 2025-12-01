@@ -4,4 +4,9 @@ export * from "./candidate";
 export * from "./manager";
 // eslint-disable-next-line react-refresh/only-export-components
 export * from "./rh";
+// eslint-disable-next-line react-refresh/only-export-components
+export * from "./accessmanagement";
+export * from "./formation";
+
+
 

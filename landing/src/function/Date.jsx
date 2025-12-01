@@ -28,8 +28,6 @@ export const dateToLetters = (dateString) => {
     return `${jour} ${moisNom} ${annee}`;
 };
 export const diffDate = (date1, date2) => {
-    console.log(date1)
-    console.log(date2)
     // Convertir "DD-MM-YYYY" en "YYYY-MM-DD"
     const toISO = (str) => {
         const [day, month, year] = str.split("-");

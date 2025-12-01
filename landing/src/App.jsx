@@ -13,8 +13,14 @@ import {
   StepRecruitment,
   DashboardManager,
   CriterienStaff,
-  Request
+  Request,
+  ProfileAccess,
+  Setaccess,
+  UserProfile,
+  DemandeFormation
+  
 } from "./pages";
+import {Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import CardNotification from './components/card/CardNotification';
@@ -91,6 +97,10 @@ function App() {
         <Route path="/rh-statistique" element={<Statistique/>}></Route>
         <Route path="/rh-listrequeste" element={<ListRequeste/>}></Route>
         <Route path="/rh-steprecruitment" element={<StepRecruitment/>}></Route>
+        <Route path="/access-profile" element={<ProfileAccess/>}></Route>
+        <Route path="/access-set" element={<Setaccess/>}></Route>
+        <Route path="/access-user" element={<UserProfile/>}></Route>
+        <Route path="/formation-demande" element={<DemandeFormation/>}></Route>
       </Routes>
     </>
   )

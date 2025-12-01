@@ -9,17 +9,8 @@ export const infocandidate = {
     tel: '+261 34 12 345 67',
     localisation: 'Antananarivo, Madagascar',
     vision: "Développer mes compétences pour devenir une experte en gestion de projets digitaux et contribuer à des solutions innovantes.",
-    hardskill: [
-        { id: '1', name: 'Développement Web (React, JS)' },
-        { id: '2', name: 'Analyse de données' },
-        { id: '3', name: 'UI/UX Design' },
-    ],
-    softskill: [
-        { id: '1', name: 'Communication' },
-        { id: '2', name: 'Travail en équipe' },
-        { id: '3', name: 'Gestion du temps' },
-    ],
-
+    hardskill: ['Développement Web (React, JS)','Analyse de données','UI/UX Design'],
+    softskill: ['Communication','Travail en équipe' ,'Gestion du temps' ],
     education: [
   { 
     id: "1", 
@@ -402,3 +393,316 @@ export const typeExperience = [
   { id: "DP2", name: "Personnelle" },
   { id: "DP3", name: "Academique" },
 ];
+export const couleurs700 = {
+  slate: "bg-slate-700",
+  gray: "bg-gray-700",
+  zinc: "bg-zinc-700",
+  neutral: "bg-neutral-700",
+  stone: "bg-stone-700",
+
+  red: "bg-red-700",
+  orange: "bg-orange-700",
+  amber: "bg-amber-700",
+  yellow: "bg-yellow-700",
+  lime: "bg-lime-700",
+  green: "bg-green-700",
+  emerald: "bg-emerald-700",
+  teal: "bg-teal-700",
+  cyan: "bg-cyan-700",
+  sky: "bg-sky-700",
+  blue: "bg-blue-700",
+  indigo: "bg-indigo-700",
+  violet: "bg-violet-700",
+  purple: "bg-purple-700",
+  fuchsia: "bg-fuchsia-700",
+  pink: "bg-pink-700",
+  rose: "bg-rose-700",
+};
+export const profileSummaryCards = [
+  { icone: "fas fa-user-tie", name: "Manager", nbr: 12, color: "blue" },
+  { icone: "fas fa-user-gear", name: "IT Admin", nbr: 8, color: "green" },
+  { icone: "fas fa-id-card", name: "RH", nbr: 5, color: "yellow" },
+  { icone: "fas fa-money-bill-wave", name: "Finance", nbr: 7, color: "purple" },
+  { icone: "fas fa-shopping-cart", name: "Commercial", nbr: 10, color: "pink" },
+  { icone: "fas fa-boxes-stacked", name: "Logistics", nbr: 6, color: "indigo" },
+  { icone: "fas fa-microscope", name: "Quality", nbr: 3, color: "teal" },
+  { icone: "fas fa-phone", name: "Assistant", nbr: 4, color: "orange" },
+  { icone: "fas fa-graduation-cap", name: "Trainer", nbr: 9, color: "red" },
+  { icone: "fas fa-tools", name: "Maintenance", nbr: 2, color: "gray" },
+  { icone: "fas fa-user-shield", name: "Security", nbr: 5, color: "blue" },
+  { icone: "fas fa-user-nurse", name: "Medical", nbr: 7, color: "green" },
+  { icone: "fas fa-user-circle", name: "Guest", nbr: 15, color: "yellow" },
+  { icone: "fas fa-chart-line", name: "Performance", nbr: 11, color: "purple" },
+  { icone: "fas fa-handshake", name: "Partnership", nbr: 6, color: "pink" },
+  { icone: "fas fa-chess-king", name: "CEO", nbr: 1, color: "indigo" },
+  { icone: "fas fa-laptop-code", name: "Developer", nbr: 14, color: "teal" },
+  { icone: "fas fa-clipboard-check", name: "Inspector", nbr: 3, color: "orange" },
+  { icone: "fas fa-bullhorn", name: "Marketing", nbr: 8, color: "red" },
+  { icone: "fas fa-calendar-check", name: "Scheduler", nbr: 5, color: "gray" }
+];
+export  const listProfile=[
+  { icone: "fas fa-user-tie", name: "Manager", nbr: 12, color: "blue",percentage:30 },
+  { icone: "fas fa-user-gear", name: "IT Admin", nbr: 8, color: "green",percentage:30 },
+  { icone: "fas fa-id-card", name: "RH", nbr: 5, color: "yellow",percentage:30 },
+  { icone: "fas fa-money-bill-wave", name: "Finance", nbr: 7, color: "purple",percentage:30 },
+  { icone: "fas fa-shopping-cart", name: "Commercial", nbr: 10, color: "pink" ,percentage:30},
+  { icone: "fas fa-boxes-stacked", name: "Logistics", nbr: 6, color: "indigo",percentage:30 },
+  { icone: "fas fa-microscope", name: "Quality", nbr: 3, color: "teal",percentage:30 },
+  { icone: "fas fa-phone", name: "Assistant", nbr: 4, color: "orange",percentage:30 },
+  { icone: "fas fa-graduation-cap", name: "Trainer", nbr: 9, color: "red",percentage:30 },
+  { icone: "fas fa-tools", name: "Maintenance", nbr: 2, color: "gray",percentage:30 },
+  { icone: "fas fa-user-shield", name: "Security", nbr: 5, color: "blue",percentage:30 },
+  { icone: "fas fa-user-nurse", name: "Medical", nbr: 7, color: "green",percentage:30 },
+  { icone: "fas fa-user-circle", name: "Guest", nbr: 15, color: "yellow",percentage:30 },
+  { icone: "fas fa-chart-line", name: "Performance", nbr: 11, color: "purple",percentage:30 },
+  { icone: "fas fa-handshake", name: "Partnership", nbr: 6, color: "pink",percentage:30 },
+  { icone: "fas fa-chess-king", name: "CEO", nbr: 1, color: "indigo",percentage:30 },
+  { icone: "fas fa-laptop-code", name: "Developer", nbr: 14, color: "teal",percentage:30 },
+  { icone: "fas fa-clipboard-check", name: "Inspector", nbr: 3, color: "orange",percentage:30 },
+  { icone: "fas fa-bullhorn", name: "Marketing", nbr: 8, color: "red",percentage:30 },
+  { icone: "fas fa-calendar-check", name: "Scheduler", nbr: 5, color: "gray",percentage:30 }
+]
+export const widthClasses = (percentage)=>{
+  return "w-["+percentage+"%]"
+};
+export const accessinfo ={
+  icone:"fas fa-user-tie",
+  name:"manager",
+  nbruser:10,
+  percentage:30,
+  listuser: [
+    { login: "alice", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" },
+    { login: "bob", photo: "https://images.unsplash.com/photo-1502767089025-6572583495b4?w=300&h=300&fit=crop" },
+    { login: "carol", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop" },
+    { login: "david", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop" },
+    { login: "eva", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop" },
+    { login: "frank", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop" },
+    { login: "grace", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop" },
+    { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop" },
+    { login: "irene", photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" },
+    { login: "jack", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop" },
+    { login: "karen", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop" },
+    { login: "leo", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop" },
+    { login: "mia", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" },
+    { login: "nathan", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop" },
+    { login: "olivia", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop" }
+  ],
+  listpage : [
+  { icone: "fas fa-tachometer-alt", name: "Dashboard", listfunction: [{ name: "voir", boolean: [true,false,true] }] },
+  { icone: "fas fa-users", name: "Utilisateurs", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
+  { icone: "fas fa-briefcase", name: "Projets", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
+  { icone: "fas fa-chart-line", name: "Ventes", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
+  { icone: "fas fa-box", name: "Produits", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
+  { icone: "fas fa-warehouse", name: "Stocks", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
+  { icone: "fas fa-money-check-alt", name: "Finance", listfunction: [{ name: "voir", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
+  { icone: "fas fa-handshake", name: "Partenaires", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
+  { icone: "fas fa-file-invoice", name: "Factures", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
+  { icone: "fas fa-truck", name: "Livraisons", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
+  { icone: "fas fa-bell", name: "Notifications", listfunction: [{ name: "voir", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
+  { icone: "fas fa-cogs", name: "Paramètres", listfunction: [{ name: "modifier", boolean: [true,false,true] }] },
+  { icone: "fas fa-user-shield", name: "Roles & Permissions", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
+  { icone: "fas fa-file-alt", name: "Rapports", listfunction: [{ name: "export", boolean: [true,false,true] }] },
+  { icone: "fas fa-comments", name: "Support", listfunction: [{ name: "répondre", boolean: [true,false,true] }] },
+  { icone: "fas fa-calendar-alt", name: "Agenda", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
+  { icone: "fas fa-gift", name: "Promotions", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
+  { icone: "fas fa-star", name: "Feedback", listfunction: [{ name: "voir", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
+  { icone: "fas fa-shield-alt", name: "Sécurité", listfunction: [{ name: "modifier", boolean: [true,false,true] }] },
+  { icone: "fas fa-info-circle", name: "Aide", listfunction: [{ name: "voir", boolean: [true,false,true] }] }
+]
+
+}
+
+export const profilesicone = [
+  { icone: "fas fa-building", name: "Direction Générale" },
+  { icone: "fas fa-user-tie", name: "Management" },
+  { icone: "fas fa-users-cog", name: "Ressources Humaines" },
+  { icone: "fas fa-handshake", name: "Relations Partenaires" },
+  { icone: "fas fa-user-tag", name: "Commercial" },
+  { icone: "fas fa-bullhorn", name: "Marketing" },
+  { icone: "fas fa-warehouse", name: "Magasin / Stock" },
+  { icone: "fas fa-cash-register", name: "Ventes" },
+  { icone: "fas fa-parachute-box", name: "Logistique" },
+  { icone: "fas fa-truck-moving", name: "Transport" },
+  { icone: "fas fa-chart-line", name: "Finance" },
+  { icone: "fas fa-file-invoice-dollar", name: "Comptabilité" },
+  { icone: "fas fa-gavel", name: "Juridique" },
+  { icone: "fas fa-shield-alt", name: "Sécurité" },
+  { icone: "fas fa-network-wired", name: "Informatique" },
+  { icone: "fas fa-laptop-code", name: "Développement IT" },
+  { icone: "fas fa-headset", name: "Support Client" },
+  { icone: "fas fa-clipboard-check", name: "Contrôle Qualité" },
+  { icone: "fas fa-industry", name: "Production" },
+  { icone: "fas fa-microscope", name: "Recherche & Développement" },
+  { icone: "fas fa-leaf", name: "Hygiène & Environnement" },
+  { icone: "fas fa-sitemap", name: "Organisation" },
+  { icone: "fas fa-graduation-cap", name: "Formation" },
+  { icone: "fas fa-hospital-user", name: "Service Médical" },
+  { icone: "fas fa-user-shield", name: "Protection & Accès" },
+  { icone: "fas fa-lightbulb", name: "Innovation" },
+  { icone: "fas fa-phone-alt", name: "Standard & Accueil" },
+  { icone: "fas fa-hand-holding-usd", name: "Achats" },
+  { icone: "fas fa-folder-open", name: "Documentation" },
+  { icone: "fas fa-chart-pie", name: "Audit & Analyse" }
+];
+export const usersprofile = [
+  { login: "alice",  photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop", role: "ADMIN", departement: "IT", status: "Tech Lead", password: "alice123" },
+  { login: "bob", photo: "https://images.unsplash.com/photo-1502767089025-6572583495b4?w=300&h=300&fit=crop", role: "MANAGER", departement: "Finance", status: "Financial Analyst", password: "bob123" },
+  { login: "carol", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop", role: "USER", departement: "IT", status: "QA Engineer", password: "carol123" },
+  { login: "david", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop", role: "MANAGER", departement: "HR", status: "HR Manager", password: "david123" },
+  { login: "eva", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop", role: "USER", departement: "Marketing", status: "Marketing Specialist", password: "eva123" },
+  { login: "frank", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop", role: "USER", departement: "Finance", status: "Accountant", password: "frank123" },
+  { login: "grace", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop", role: "MANAGER", departement: "IT", status: "Developer", password: "grace123" },
+  { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "henry123" },
+ 
+];
+export const listsmallformation = [
+  {
+    id: "F001",
+    title: "Gestion du temps",
+    description: "Apprendre à organiser et optimiser son temps de travail.",
+    competence: ["Planification", "Organisation"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F002",
+    title: "Introduction à l’Excel",
+    description: "Les bases d’Excel : formules simples, tableaux, filtres.",
+    competence: ["Excel", "Analyse de données"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F003",
+    title: "Communication professionnelle",
+    description: "Améliorer la communication écrite et orale au travail.",
+    competence: ["Communication", "Expression orale"],
+  type: "fa-solid fa-globe"
+  },
+  {
+    id: "F004",
+    title: "Sécurité informatique",
+    description: "Règles de cybersécurité pour protéger les données.",
+    competence: ["Sécurité", "Informatique"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F005",
+    title: "Leadership & Management",
+    description: "Développer les compétences managériales.",
+    competence: ["Leadership", "Gestion d’équipe"],
+  type: "fa-solid fa-globe"
+  },
+  {
+    id: "F006",
+    title: "Création de tableaux de bord",
+    description: "Visualiser et suivre les indicateurs de performance.",
+    competence: ["Reporting", "KPI"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F007",
+    title: "Débuter en Développement Web",
+    description: "Bases du HTML, CSS et JavaScript.",
+    competence: ["HTML", "CSS"],
+   type: "fa-solid fa-user-graduate"
+  },
+  {
+    id: "F008",
+    title: "Techniques de vente",
+    description: "Améliorer les performances commerciales.",
+    competence: ["Négociation", "CRM"],
+  type: "fa-solid fa-globe"
+  },
+  {
+    id: "F009",
+    title: "Microsoft PowerPoint",
+    description: "Créer des présentations professionnelles.",
+    competence: ["Présentation", "Design"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F010",
+    title: "Gestion du stress",
+    description: "Méthodes pour réduire le stress au travail.",
+    competence: ["Bien-être", "Productivité"],
+   type: "fa-solid fa-globe"
+  },
+  {
+    id: "F011",
+    title: "Analyse financière",
+    description: "Lire et interpréter les états financiers.",
+    competence: ["Finance", "Analyse"],
+  type: "fa-solid fa-globe"
+  },
+  {
+    id: "F012",
+    title: "Service client",
+    description: "Gestion des demandes et réclamations clients.",
+    competence: ["Relation client", "Communication"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F013",
+    title: "Autoformation sur YouTube",
+    description: "Apprentissage autodidacte via des tutoriels vidéo.",
+    competence: ["Autonomie", "Nouvelles compétences"],
+   type: "fa-solid fa-user-graduate"
+  },
+  {
+    id: "F014",
+    title: "Organisation des réunions",
+    description: "Préparer et animer efficacement une réunion.",
+    competence: ["Animation", "Gestion du temps"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F015",
+    title: "Sécurité au travail",
+    description: "Normes et bonnes pratiques de sécurité.",
+    competence: ["Hygiène", "Sécurité"],
+  type: "fa-solid fa-globe"
+  },
+  {
+    id: "F016",
+    title: "Initiation Power BI",
+    description: "Créer des rapports interactifs.",
+    competence: ["BI", "Data"],
+   type: "fa-solid fa-building"
+  },
+  {
+    id: "F017",
+    title: "Prise de parole en public",
+    description: "Gagner en confiance lors des interventions.",
+    competence: ["Oral", "Présence"],
+  type: "fa-solid fa-globe"
+  },
+  {
+    id: "F018",
+    title: "Autoformation Google Workspace",
+    description: "Utilisation avancée de Gmail, Drive et Docs.",
+    competence: ["Outils collaboratifs", "Organisation"],
+   type: "fa-solid fa-user-graduate"
+  },
+  {
+    id: "F019",
+    title: "Gestion de projet Agile",
+    description: "Principes Scrum et gestion itérative.",
+    competence: ["Agile", "Scrum"],
+  type: "fa-solid fa-globe"
+  },
+  {
+    id: "F020",
+    title: "Maîtriser Outlook",
+    description: "Gestion avancée des emails et agendas.",
+    competence: ["Communication", "Productivité"],
+   type: "fa-solid fa-building"
+  }
+];
+
+
+//  { login: "irene", photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop", role: "USER", departement: "Marketing", status: "SEO Expert", password: "irene123" },
+//   { login: "jack", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop", role: "ADMIN", departement: "Security", status: "Security Officer", password: "jack123" },
+//   { login: "karen", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop", role: "USER", departement: "Security", status: "Compliance Analyst", password: "karen123" },
+//   { login: "leo", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop", role: "MANAGER", departement: "IT", status: "Tech Lead", password: "leo123" },
+//   { login: "mia", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "mia123" },
+//   { login: "nathan", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop", role: "USER", departement: "Security", status: "Compliance Analyst", password: "nathan123" },
+//   { login: "olivia", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop", role: "ADMIN", departement: "Marketing", status: "Brand Manager", password: "olivia123" }
