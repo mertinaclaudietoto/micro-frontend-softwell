@@ -1156,4 +1156,23 @@ export const listeformateur = [
   }
 ];
 
+export   const  datasidebar =
+        {
+            formation :[
+                    {label :"Thème",icone : "fa-solid fa-palette",actif:false,link:"/training-demande",subItems:null},
+                    {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/manager/dasboard",subItems:null},
+                    {label :"Souhaite",icone : "fa-solid fa-layer-group",actif:false,link:"/training-wish",subItems:null},
+                    {label :"Validation",icone : "fa-solid fa-circle-check",actif:false,link:"/manager/dasboard",subItems:null},
+                ],
+                // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
+                // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
+                // {label :"gestion d'acces",icone : "fa-solid fa-clipboard-check",actif:false,link:"/manager/criterien",
+                //     subItems:[
+                //         {label :"profile",actif:false,link:"/access-profile"},
+                //         {label :"utilisateur",actif:false,link:"/access-user"},
+                //     ]
+                // },
+                // {label :"critère de sélection",icone : "fa-solid fa-clipboard-check",actif:false,link:"/manager/criterien"},
+                // {label :"Listes demande",icone : "fa-solid fa-bullhorn",actif:false,link:"/manager/listrequeste"},
+        }
 

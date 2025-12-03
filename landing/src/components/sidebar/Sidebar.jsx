@@ -3,11 +3,11 @@ import { useState } from "react"
 import SidebarLargButton from "./button/SidebarLargButton";
 import CardPub from "./card/CardPub";
 import SidebarShortButton from "./button/SidebarShortButton";
-import { parametres,short } from "../../data/rh";
-import { datasidebar } from "../../data/Sidebar";
+import { datasidebar } from "../../data/data";
 export default function Sidebar(){
     const [isOpen ,setIsOpen]=useState(false);
-    const datasidebarvalue =datasidebar(1);
+    const pages =datasidebar;
+    console.log(pages)
     return (
         <div class="bg-white-200 h-full ">
             <div class="flex gap-4 max-w-3xl md:w-[250px] ">
@@ -27,9 +27,9 @@ export default function Sidebar(){
                         ))}
                     {/* dasboard */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
-                        {datasidebarvalue.map((value,index)=>(
+                        {/* {pages.map((value,index)=>(
                             <SidebarShortButton link={value.link} index={index} icone={value.icone} actif={value.actif}  />
-                        ))}
+                        ))} */}
                     <div class="flex-1"></div>
                     {/* pro version */}
                     <button class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-50 text-indigo-600 mb-4">
@@ -37,9 +37,9 @@ export default function Sidebar(){
                     </button>
 
                     {/* parametre */}
-                        {parametres.map((value,index)=>(
+                        {/* {parametres.map((value,index)=>(
                             <SidebarShortButton  link={value.link} icone={value.icone} index={index} />
-                        )) }
+                        )) } */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
                     {/* change password user */}
                     <button class="w-10 h-10 rounded-full overflow-hidden">
@@ -60,20 +60,7 @@ export default function Sidebar(){
                             </button>
                         </div>
 
-                        <div class="p-4 border-b border-gray-100">
-                            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 text-left text-gray-600">
-                                <i class="fas fa-search text-gray-400"></i>
-                                <span>Quick search</span>
-                            </button>
-                        </div>
                         <div class="p-4 border-b border-gray-100 space-y-1">
-                            <button class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-50 text-left">
-                                <div class="flex items-center gap-3 text-gray-700">
-                                    <i class="fas fa-inbox"></i>
-                                    <span>Inbox</span>
-                                </div>
-                                <span class="text-sm font-medium text-gray-500">12</span>
-                            </button>
                             <button class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-50 text-left">
                                 <div class="flex items-center gap-3 text-gray-700">
                                     <i class="fas fa-bell"></i>
@@ -85,9 +72,9 @@ export default function Sidebar(){
 
                         <div class="flex-1 overflow-y-auto">
                             <div class="p-4">
-                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Menu</h3>
+                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Formation</h3>
                                 <div class="space-y-1">
-                                    {datasidebarvalue.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+                                    {pages.formation.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
                                 </div>
                             </div>
                             {/* pub */}
@@ -100,9 +87,9 @@ export default function Sidebar(){
                                 </button>
                             </div>
                           
-                            <div class="p-4 border-t border-gray-100 space-y-1">
+                            {/* <div class="p-4 border-t border-gray-100 space-y-1">
                                 {parametres.map((value,index)=>(<SidebarLargButton index={index} label={value.label} icone={value.icone} actif={value.actif}/>))}
-                            </div>
+                            </div> */}
                         </div>
                         {/* compte */}
                         <div class="p-4 border-t border-gray-100">

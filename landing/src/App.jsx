@@ -20,7 +20,8 @@ import {
   DemandeTraining,
   InprogressTraining,
   Trainer,
-  TrainingState
+  TrainingState,
+  Wish
   
 } from "./pages";
 import {Tablesearch} from "./components"
@@ -107,6 +108,7 @@ function App() {
         <Route path="/training-inprogress" element={<InprogressTraining/>}></Route>
         <Route path="/training-trainer" element={<Trainer/>}></Route>
         <Route path="/training-state" element={<TrainingState/>}></Route>
+        <Route path="/training-wish" element={<Wish/>}></Route>
       </Routes>
     </>
   )
