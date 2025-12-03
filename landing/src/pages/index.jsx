@@ -6,7 +6,10 @@ export * from "./manager";
 export * from "./rh";
 // eslint-disable-next-line react-refresh/only-export-components
 export * from "./accessmanagement";
-export * from "./formation";
+// eslint-disable-next-line react-refresh/only-export-components
+
+export * from "./training";
+
 
 
 

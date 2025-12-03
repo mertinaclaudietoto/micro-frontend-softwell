@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 export { default as CardCalendar } from "./CardCalendar";
 export { default as CardCommentaire } from "./CardCommentaire";
 export { default as CardIconeDescription } from "./CardIconeDescription";
@@ -12,7 +13,7 @@ export * from "./offre";
 // eslint-disable-next-line react-refresh/only-export-components
 export * from "./popup";
 export * from "./access";
-export * from "./formation";
+export * from "./training";
 
 
 

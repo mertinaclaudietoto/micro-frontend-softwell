@@ -418,6 +418,28 @@ export const couleurs700 = {
   pink: "bg-pink-700",
   rose: "bg-rose-700",
 };
+export const textbackground = { 
+  0: "bg-purple-100 text-purple-800",
+  1: "bg-red-100 text-red-800",
+  2: "bg-orange-100 text-orange-800",
+  3: "bg-amber-100 text-amber-800",
+  4: "bg-yellow-100 text-yellow-800",
+  5: "bg-lime-100 text-lime-800",
+  6: "bg-green-100 text-green-800",
+  7: "bg-emerald-100 text-emerald-800",
+  8: "bg-teal-100 text-teal-800",
+  9: "bg-cyan-100 text-cyan-800",
+  10: "bg-sky-100 text-sky-800",
+  11: "bg-blue-100 text-blue-800",
+  12: "bg-indigo-100 text-indigo-800",
+  13: "bg-violet-100 text-violet-800",
+  14: "bg-fuchsia-100 text-fuchsia-800",
+  15: "bg-pink-100 text-pink-800",
+  16: "bg-rose-100 text-rose-800",
+};
+
+
+
 export const profileSummaryCards = [
   { icone: "fas fa-user-tie", name: "Manager", nbr: 12, color: "blue" },
   { icone: "fas fa-user-gear", name: "IT Admin", nbr: 8, color: "green" },
@@ -555,154 +577,583 @@ export const usersprofile = [
   { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "henry123" },
  
 ];
-export const listsmallformation = [
-  {
+export const newformation=
+   {
     id: "F001",
     title: "Gestion du temps",
     description: "Apprendre à organiser et optimiser son temps de travail.",
-    competence: ["Planification", "Organisation"],
-   type: "fa-solid fa-building"
+    skill: ["Planification", "Organisation"],
+    listeparticipant:[
+        { id:"",login: "irene", photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop", role: "USER", departement: "Marketing", status: "SEO Expert", password: "irene123" },
+        {id:"", login: "jack", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop", role: "ADMIN", departement: "Security", status: "Security Officer", password: "jack123" },
+        { id:"",login: "karen", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop", role: "USER", departement: "Security", status: "Compliance Analyst", password: "karen123" },
+        { id:"",login: "leo", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop", role: "MANAGER", departement: "IT", status: "Tech Lead", password: "leo123" },
+        { id:"",login: "mia", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "mia123" },
+        { id:"",login: "nathan", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop", role: "USER", departement: "Security", status: "Compliance Analyst", password: "nathan123" },
+        { id:"",login: "olivia", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop", role: "ADMIN", departement: "Marketing", status: "Brand Manager", password: "olivia123" }
+    ],
+    type: "fa-solid fa-building",
+    datestarttraining:"2024-05-12"
+  };
+
+export const listsmallformation = [
+  {
+    id: "F001",
+    name: "Gestion du temps",
+    description: "Apprendre à organiser et optimiser son temps de travail.",
+    skill: ["Planification", "Organisation"],
+    type: "fa-solid fa-building"
   },
   {
     id: "F002",
-    title: "Introduction à l’Excel",
+    name: "Introduction à l’Excel",
     description: "Les bases d’Excel : formules simples, tableaux, filtres.",
-    competence: ["Excel", "Analyse de données"],
+    skill: ["Excel", "Analyse de données"],
    type: "fa-solid fa-building"
   },
   {
     id: "F003",
-    title: "Communication professionnelle",
+    name: "Communication professionnelle",
     description: "Améliorer la communication écrite et orale au travail.",
-    competence: ["Communication", "Expression orale"],
+    skill: ["Communication", "Expression orale"],
   type: "fa-solid fa-globe"
   },
   {
     id: "F004",
-    title: "Sécurité informatique",
+    name: "Sécurité informatique",
     description: "Règles de cybersécurité pour protéger les données.",
-    competence: ["Sécurité", "Informatique"],
+    skill: ["Sécurité", "Informatique"],
    type: "fa-solid fa-building"
   },
   {
     id: "F005",
-    title: "Leadership & Management",
+    name: "Leadership & Management",
     description: "Développer les compétences managériales.",
-    competence: ["Leadership", "Gestion d’équipe"],
+    skill: ["Leadership", "Gestion d’équipe"],
   type: "fa-solid fa-globe"
   },
   {
     id: "F006",
-    title: "Création de tableaux de bord",
+    name: "Création de tableaux de bord",
     description: "Visualiser et suivre les indicateurs de performance.",
-    competence: ["Reporting", "KPI"],
+    skill: ["Reporting", "KPI"],
    type: "fa-solid fa-building"
   },
   {
     id: "F007",
-    title: "Débuter en Développement Web",
+    name: "Débuter en Développement Web",
     description: "Bases du HTML, CSS et JavaScript.",
-    competence: ["HTML", "CSS"],
+    skill: ["HTML", "CSS"],
    type: "fa-solid fa-user-graduate"
   },
   {
     id: "F008",
-    title: "Techniques de vente",
+    name: "Techniques de vente",
     description: "Améliorer les performances commerciales.",
-    competence: ["Négociation", "CRM"],
+    skill: ["Négociation", "CRM"],
   type: "fa-solid fa-globe"
   },
   {
     id: "F009",
-    title: "Microsoft PowerPoint",
+    name: "Microsoft PowerPoint",
     description: "Créer des présentations professionnelles.",
-    competence: ["Présentation", "Design"],
+    skill: ["Présentation", "Design"],
    type: "fa-solid fa-building"
   },
   {
     id: "F010",
-    title: "Gestion du stress",
+    name: "Gestion du stress",
     description: "Méthodes pour réduire le stress au travail.",
-    competence: ["Bien-être", "Productivité"],
+    skill: ["Bien-être", "Productivité"],
    type: "fa-solid fa-globe"
   },
   {
     id: "F011",
-    title: "Analyse financière",
+    name: "Analyse financière",
     description: "Lire et interpréter les états financiers.",
-    competence: ["Finance", "Analyse"],
+    skill: ["Finance", "Analyse"],
   type: "fa-solid fa-globe"
   },
   {
     id: "F012",
-    title: "Service client",
+    name: "Service client",
     description: "Gestion des demandes et réclamations clients.",
-    competence: ["Relation client", "Communication"],
+    skill: ["Relation client", "Communication"],
    type: "fa-solid fa-building"
   },
   {
     id: "F013",
-    title: "Autoformation sur YouTube",
+    name: "Autoformation sur YouTube",
     description: "Apprentissage autodidacte via des tutoriels vidéo.",
-    competence: ["Autonomie", "Nouvelles compétences"],
+    skill: ["Autonomie", "Nouvelles compétences"],
    type: "fa-solid fa-user-graduate"
   },
   {
     id: "F014",
-    title: "Organisation des réunions",
+    name: "Organisation des réunions",
     description: "Préparer et animer efficacement une réunion.",
-    competence: ["Animation", "Gestion du temps"],
+    skill: ["Animation", "Gestion du temps"],
    type: "fa-solid fa-building"
   },
   {
     id: "F015",
-    title: "Sécurité au travail",
+    name: "Sécurité au travail",
     description: "Normes et bonnes pratiques de sécurité.",
-    competence: ["Hygiène", "Sécurité"],
+    skill: ["Hygiène", "Sécurité"],
   type: "fa-solid fa-globe"
   },
   {
     id: "F016",
-    title: "Initiation Power BI",
+    name: "Initiation Power BI",
     description: "Créer des rapports interactifs.",
-    competence: ["BI", "Data"],
+    skill: ["BI", "Data"],
    type: "fa-solid fa-building"
   },
   {
     id: "F017",
-    title: "Prise de parole en public",
+    name: "Prise de parole en public",
     description: "Gagner en confiance lors des interventions.",
-    competence: ["Oral", "Présence"],
+    skill: ["Oral", "Présence"],
   type: "fa-solid fa-globe"
   },
   {
     id: "F018",
-    title: "Autoformation Google Workspace",
+    name: "Autoformation Google Workspace",
     description: "Utilisation avancée de Gmail, Drive et Docs.",
-    competence: ["Outils collaboratifs", "Organisation"],
+    skill: ["Outils collaboratifs", "Organisation"],
    type: "fa-solid fa-user-graduate"
   },
   {
     id: "F019",
-    title: "Gestion de projet Agile",
+    name: "Gestion de projet Agile",
     description: "Principes Scrum et gestion itérative.",
-    competence: ["Agile", "Scrum"],
+    skill: ["Agile", "Scrum"],
   type: "fa-solid fa-globe"
   },
   {
     id: "F020",
-    title: "Maîtriser Outlook",
+    name: "Maîtriser Outlook",
     description: "Gestion avancée des emails et agendas.",
-    competence: ["Communication", "Productivité"],
+    skill: ["Communication", "Productivité"],
    type: "fa-solid fa-building"
   }
 ];
 
 
-//  { login: "irene", photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop", role: "USER", departement: "Marketing", status: "SEO Expert", password: "irene123" },
-//   { login: "jack", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop", role: "ADMIN", departement: "Security", status: "Security Officer", password: "jack123" },
-//   { login: "karen", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop", role: "USER", departement: "Security", status: "Compliance Analyst", password: "karen123" },
-//   { login: "leo", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop", role: "MANAGER", departement: "IT", status: "Tech Lead", password: "leo123" },
-//   { login: "mia", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "mia123" },
-//   { login: "nathan", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop", role: "USER", departement: "Security", status: "Compliance Analyst", password: "nathan123" },
-//   { login: "olivia", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop", role: "ADMIN", departement: "Marketing", status: "Brand Manager", password: "olivia123" }
+export const listsmallformationinprogress = [
+  {
+    id: "F001",
+    name: "Gestion du temps",
+    description: "Apprendre à organiser et optimiser son temps de travail.",
+    skill: ["Planification", "Organisation"],
+    type: "fa-solid fa-building",
+    participant:[
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+    ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F002",
+    name: "Introduction à l’Excel",
+    description: "Les bases d’Excel : formules simples, tableaux, filtres.",
+    skill: ["Excel", "Analyse de données"],
+   type: "fa-solid fa-building",
+   participant:[
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+    ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F003",
+    name: "Communication professionnelle",
+    description: "Améliorer la communication écrite et orale au travail.",
+    skill: ["Communication", "Expression orale"],
+    type: "fa-solid fa-globe",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F004",
+    name: "Sécurité informatique",
+    description: "Règles de cybersécurité pour protéger les données.",
+    skill: ["Sécurité", "Informatique"],
+    type: "fa-solid fa-building",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F005",
+    name: "Leadership & Management",
+    description: "Développer les compétences managériales.",
+    skill: ["Leadership", "Gestion d’équipe"],
+    type: "fa-solid fa-globe",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F006",
+    name: "Création de tableaux de bord",
+    description: "Visualiser et suivre les indicateurs de performance.",
+    skill: ["Reporting", "KPI"],
+    type: "fa-solid fa-building",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F007",
+    name: "Débuter en Développement Web",
+    description: "Bases du HTML, CSS et JavaScript.",
+    skill: ["HTML", "CSS"],
+    type: "fa-solid fa-user-graduate",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F008",
+    name: "Techniques de vente",
+    description: "Améliorer les performances commerciales.",
+    skill: ["Négociation", "CRM"],
+    type: "fa-solid fa-globe",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F009",
+    name: "Microsoft PowerPoint",
+    description: "Créer des présentations professionnelles.",
+    skill: ["Présentation", "Design"],
+    type: "fa-solid fa-building",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F010",
+    name: "Gestion du stress",
+    description: "Méthodes pour réduire le stress au travail.",
+    skill: ["Bien-être", "Productivité"],
+    type: "fa-solid fa-globe",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ] ,
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F011",
+    name: "Analyse financière",
+    description: "Lire et interpréter les états financiers.",
+    skill: ["Finance", "Analyse"],
+    type: "fa-solid fa-globe",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F012",
+    name: "Service client",
+    description: "Gestion des demandes et réclamations clients.",
+    skill: ["Relation client", "Communication"],
+    type: "fa-solid fa-building",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F013",
+    name: "Autoformation sur YouTube",
+    description: "Apprentissage autodidacte via des tutoriels vidéo.",
+    skill: ["Autonomie", "Nouvelles compétences"],
+    type: "fa-solid fa-user-graduate",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F014",
+    name: "Organisation des réunions",
+    description: "Préparer et animer efficacement une réunion.",
+    skill: ["Animation", "Gestion du temps"],
+    type: "fa-solid fa-building",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F015",
+    name: "Sécurité au travail",
+    description: "Normes et bonnes pratiques de sécurité.",
+    skill: ["Hygiène", "Sécurité"],
+  type: "fa-solid fa-globe",
+  participant:[
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+    ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F016",
+    name: "Initiation Power BI",
+    description: "Créer des rapports interactifs.",
+    skill: ["BI", "Data"],
+    type: "fa-solid fa-building",
+    participant:[
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+      ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  },
+  {
+    id: "F017",
+    name: "Prise de parole en public",
+    description: "Gagner en confiance lors des interventions.",
+    skill: ["Oral", "Présence"],
+  type: "fa-solid fa-globe",
+  participant:[
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+    ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F018",
+    name: "Autoformation Google Workspace",
+    description: "Utilisation avancée de Gmail, Drive et Docs.",
+    skill: ["Outils collaboratifs", "Organisation"],
+   type: "fa-solid fa-user-graduate",
+   participant:[
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+    ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F019",
+    name: "Gestion de projet Agile",
+    description: "Principes Scrum et gestion itérative.",
+    skill: ["Agile", "Scrum"],
+  type: "fa-solid fa-globe",
+  participant:[
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+    ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+
+  },
+  {
+    id: "F020",
+    name: "Maîtriser Outlook",
+    description: "Gestion avancée des emails et agendas.",
+    skill: ["Communication", "Productivité"],
+   type: "fa-solid fa-building",
+   participant:[
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop"
+    ],
+    datedebut: "2025-01-01", datefin: "2025-01-10" ,
+  }
+];
+
+export const listeformateur = [ 
+  {
+    id: "1",
+    logo: "https://randomuser.me/api/portraits/men/10.jpg",
+    name: "Jean Dupont",
+    tel: "+261 34 12 345 67",
+    email: "jean.dupont@example.com",
+    nif: "2001234567",
+    stat: "12345 A",
+    fieldofstudy: [
+      { id: "1", name: "Développement Web" }
+    ]
+  },
+  {
+    id: "2",
+    logo: "https://randomuser.me/api/portraits/women/21.jpg",
+    name: "Marie Raso",
+    tel: "+261 32 66 789 01",
+    email: "marie.raso@example.com",
+    nif: "2007654321",
+    stat: "54321 B",
+    fieldofstudy: [
+      { id: "2", name: "Comptabilité" }
+    ]
+  },
+  {
+    id: "3",
+    logo: "https://randomuser.me/api/portraits/men/17.jpg",
+    name: "Hery Andry",
+    tel: "+261 34 78 111 22",
+    email: "hery.andry@example.com",
+    nif: "2011122334",
+    stat: "99887 C",
+    fieldofstudy: [
+      { id: "3", name: "Marketing Digital" }
+    ]
+  },
+  {
+    id: "4",
+    logo: "https://randomuser.me/api/portraits/women/30.jpg",
+    name: "Nina Rakoto",
+    tel: "+261 38 45 998 20",
+    email: "nina.rakoto@example.com",
+    nif: "2015566778",
+    stat: "11223 D",
+    fieldofstudy: [
+      { id: "4", name: "Gestion de projet" }
+    ]
+  },
+  {
+    id: "5",
+    logo: "https://randomuser.me/api/portraits/men/45.jpg",
+    name: "Patrick Hanitra",
+    tel: "+261 34 00 223 45",
+    email: "patrick.hanitra@example.com",
+    nif: "2009988776",
+    stat: "44556 E",
+    fieldofstudy: [
+      { id: "5", name: "Systèmes Informatiques" }
+    ]
+  },
+  {
+    id: "6",
+    logo: "https://randomuser.me/api/portraits/women/58.jpg",
+    name: "Lova Razafy",
+    tel: "+261 33 55 889 10",
+    email: "lova.razafy@example.com",
+    nif: "2023344556",
+    stat: "77889 F",
+    fieldofstudy: [
+      { id: "6", name: "Ressources Humaines" }
+    ]
+  },
+  {
+    id: "7",
+    logo: "https://randomuser.me/api/portraits/men/60.jpg",
+    name: "Michel Randri",
+    tel: "+261 34 90 110 87",
+    email: "michel.randri@example.com",
+    nif: "2032211445",
+    stat: "55664 G",
+    fieldofstudy: [
+      { id: "7", name: "Logistique" }
+    ]
+  },
+  {
+    id: "8",
+    logo: "https://randomuser.me/api/portraits/women/65.jpg",
+    name: "Fara Velonasy",
+    tel: "+261 32 11 554 22",
+    email: "fara.velonasy@example.com",
+    nif: "2029988775",
+    stat: "33445 H",
+    fieldofstudy: [
+      { id: "8", name: "Informatique Bureautique" }
+    ]
+  },
+  {
+    id: "9",
+    logo: "https://randomuser.me/api/portraits/men/81.jpg",
+    name: "Solo Rakotomanga",
+    tel: "+261 34 22 998 33",
+    email: "solo.rakoto@example.com",
+    nif: "2014456678",
+    stat: "88990 I",
+    fieldofstudy: [
+      { id: "9", name: "Sécurité Informatique" }
+    ]
+  },
+  {
+    id: "10",
+    logo: "https://randomuser.me/api/portraits/women/75.jpg",
+    name: "Tiana Ravelo",
+    tel: "+261 32 77 990 55",
+    email: "tiana.ravelo@example.com",
+    nif: "2006677445",
+    stat: "22334 J",
+    fieldofstudy: [
+      { id: "10", name: "Design Graphique" }
+    ]
+  }
+];
+
+

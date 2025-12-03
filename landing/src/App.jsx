@@ -17,7 +17,10 @@ import {
   ProfileAccess,
   Setaccess,
   UserProfile,
-  DemandeFormation
+  DemandeTraining,
+  InprogressTraining,
+  Trainer,
+  TrainingState
   
 } from "./pages";
 import {Tablesearch} from "./components"
@@ -100,7 +103,10 @@ function App() {
         <Route path="/access-profile" element={<ProfileAccess/>}></Route>
         <Route path="/access-set" element={<Setaccess/>}></Route>
         <Route path="/access-user" element={<UserProfile/>}></Route>
-        <Route path="/formation-demande" element={<DemandeFormation/>}></Route>
+        <Route path="/training-demande" element={<DemandeTraining/>}></Route>
+        <Route path="/training-inprogress" element={<InprogressTraining/>}></Route>
+        <Route path="/training-trainer" element={<Trainer/>}></Route>
+        <Route path="/training-state" element={<TrainingState/>}></Route>
       </Routes>
     </>
   )
