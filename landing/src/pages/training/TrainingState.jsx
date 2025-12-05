@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { infocandidate, listeformateur, listsmallformation, textbackground, usersprofile } from "../../data/data";
-import { getAge,dateToLetters, diffDate } from "../../function/Date";
+import { infocandidate, listeformateur, listsmallformation, textbackground, trainingListToBeValidated, usersprofile ,getcolorstate, participantTraining} from "../../data/data";
+import { getAge,dateToLetters,  diffDate1 } from "../../function/Date";
 import {  CardAddSession, Sidebar, TextState,CardSmallTraining } from "../../components";
 import CardSession from "../../components/card/training/CardSession";
 export default function TrainingState(){
@@ -16,9 +16,7 @@ export default function TrainingState(){
                 <div class=" md:p-8 bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
                     <div className="flex bg-white">
                         <div className="flex-1 w-2/3 border-rigth ">
-                            <div className="grid grid-cols-1 p-8 ">
-                                
-                                <div class="flex items-start gap-3">
+                            <div class="flex items-start gap-3 p-8">
                                     <div class={`w-12 h-12 bg-softbleutini-12 rounded-lg flex items-center justify-center text-white font-bold`}>
                                             {info.id}
                                     </div>
@@ -26,7 +24,10 @@ export default function TrainingState(){
                                     <div class="flex-1 min-w-0 w-100">
                                         <h4 class="font-bold text-gray-900 mb-1 text-start">{info.name}</h4>
                                         {/* <p class="text-sm text-gray-500 mb-3">Slack Technologies, LLC</p> */}
-                                        <p class="text-xs text-gray-600 mb-3 text-start">{info.description} </p>
+                                        <p class="text-xs text-gray-600 mb-3 text-start">{info.description} 
+                                            former par &nbsp;<button className="text-blue-800 text-sm font-bold underline" onClick={()=>setShowTrainer(true)}>Softwell</button> &nbsp; cout  &nbsp;
+                                            <b className="text-blue-800 text-sm font-bold underline ">2 000 000 ar</b>
+                                        </p>
                                         <div class="flex flex-wrap gap-2 w-100">
                                             {info.skill.map((value)=>(
                                                 <span class="px-3 py-1 bg-gray-100 text-xs rounded-full">{value}</span>
@@ -34,104 +35,69 @@ export default function TrainingState(){
                                         </div>
                                     </div>
                                         <TextState text={""} cssCard={"card-text-s-blue"} icone={info.type} />
-                                </div>
-                                <div class="p-2">
-                                    <div class="flex items-center justify-center">
-                                        <div className="flex items-center gap-2 overflow-x-auto flex-nowrap w-300">
-                                            {usersprofile.map((value, idx) => (
-                                                <div
-                                                key={idx}
-                                                className="bg-white  p-4 flex flex-col justify-center items-center gap-2 w-[100px] shrink-0"
-                                                >
-                                                <img
-                                                    src={value.photo}
-                                                    className="w-10 h-10 rounded-lg"
-                                                    alt={value.login}
-                                                />
-                                                <div className="text-gray-500 text-xs text-center">
-                                                    <p className="break-all">{value.login}</p>
-                                                </div>
-                                                </div>
+                                       
+                            </div>
+                            <div className="grid grid-cols-1 p-8 justify-center items-center ">
+                                <div class="overflow-x-auto  mt-2 ">
+                                    <h3 class="font-semibold text-gray-800 mb-1">Listes participant</h3>
+                                    <table class="w-full">
+                                        <thead class="bg-gray-50 border-b border-gray-200">
+                                            <tr>
+                                                <th class="tr-thead ">#</th>
+                                                <th class="tr-thead">Login</th>
+                                                <th class="tr-thead">Departement</th>
+                                                <th class="tr-thead">Status</th>
+                                                <th class="tr-thead">Presence</th>
+                                                <th class="tr-thead">Note</th>
+                                                <th class="tr-thead">Feed back</th>
+                                                <th class="tr-thead"> ⋮</th>
+                                                {/* <th class="tr-thead"></th> */}
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            {participantTraining.map((value,index)=>(
+                                                <tr index={index} className="hover:bg-gray-50">
+                                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                                        <img
+                                                                src={value.photo}
+                                                                className="w-10 h-10 rounded-lg"
+                                                                alt={value.login}
+                                                            />
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm font-medium text-gray-900">{value.name}</div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm font-medium text-gray-900">{value.departement}</div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm font-medium text-gray-900">{value.status}</div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm font-medium text-gray-900">{value.presence}</div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="text-sm font-medium text-gray-900">{value.note}</div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${value.evaluationformateur ? "bg-blue-100 text-blue-800" : "bg-red-100 text-red-800"}`}>formateur</span>
+                                                    </td>
+                                                    {/* <td class="px-6 py-4">
+                                                        <div class="text-sm font-medium text-gray-900">{value.daterequest}</div>
+                                                    </td> */}
+                                                    {/* <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getcolorstate(value.state)}`}>{value.state}</span></td>
+                                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                                        ⋮
+                                                    </td> */}
+                                                </tr>
                                             ))}
-                                        </div>
-                                        <div className="bg-white  p-4 flex flex-col justify-center items-center gap-2 w-[100px] shrink-0">
-                                                <button className="btn-neutre-gray">
-                                                    <i class="fa-solid fa-plus"></i>
-                                                </button>
-                                                <div className="text-gray-500 text-xs text-center">
-                                                    <p className="break-all">ajouter</p>
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="mt-8">
-                                    <div class="mb-8">
-                                        <table class="w-full">
-                                            <thead>
-                                                
-                                                <tr class="bg-gray-50 border-b border-gray-200 border-gray-300">
-                                                    <th class="tr-thead">Description</th>
-                                                    <th class="tr-thead w-24">Durée</th>
-                                                    <th class="tr-thead w-40">Prix unitaire</th>
-                                                    <th class="tr-thead w-32">Total HT</th>
-                                                    <th class="tr-thead w-10"> ⋮</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="border-b border-gray-200">
-                                                    <td class="py-4 px-2">
-                                                        <div class="font-semibold text-gray-800 mb-1">Formation Développement Web Full Stack</div>
-                                                        <div class="text-sm text-gray-600">
-                                                            Formation complète incluant HTML, CSS, JavaScript, React, Node.js et bases de données. 
-                                                            Support pédagogique et certificat inclus.
-                                                        </div>
-                                                        <div class="text-xs text-gray-500 mt-2">
-                                                            Dates: 10-14 janvier 2025 | Lieu: Paris ou en ligne
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center py-4 px-2 text-gray-800">5 jours</td>
-                                                    <td class="text-right py-4 px-2 text-gray-800">450,00 €</td>
-                                                    <td class="text-right py-4 px-2 font-semibold text-gray-800">2 250,00 €</td>
-                                                </tr>
-                                                <tr class="border-b border-gray-200">
-                                                    <td class="py-4 px-2">
-                                                        <div class="font-semibold text-gray-800 mb-1">Coaching individuel post-formation</div>
-                                                        <div class="text-sm text-gray-600">
-                                                            3 séances de coaching individuel d'une heure avec un formateur expert pour accompagnement personnalisé.
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center py-4 px-2 text-gray-800">3 heures</td>
-                                                    <td class="text-right py-4 px-2 text-gray-800">100,00 €</td>
-                                                    <td class="text-right py-4 px-2 font-semibold text-gray-800">300,00 €</td>
-                                                </tr>
-                                                <tr class="border-b border-gray-200">
-                                                    <td class="py-4 px-2">
-                                                        <div class="font-semibold text-gray-800 mb-1">Accès plateforme e-learning (12 mois)</div>
-                                                        <div class="text-sm text-gray-600">
-                                                            Accès illimité à notre plateforme avec plus de 200 heures de contenu vidéo et exercices pratiques.
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center py-4 px-2 text-gray-800">12 mois</td>
-                                                    <td class="text-right py-4 px-2 text-gray-800">300,00 €</td>
-                                                    <td class="text-right py-4 px-2 font-semibold text-gray-800">300,00 €</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="flex justify-end mb-8">
-                                        <div class="w-80">
-                                            <div class="flex justify-between text-lg font-bold text-gray-900">
-                                                <span>Total TTC</span>
-                                                <span>2 850,00 €</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                        </tbody>
+                                    </table>
+                                </div>  
                             </div>
                         </div>
                         <div className="w-1/3" >
-                            <div class="bg-white mx-2 px-6">
+                            <div class=" mx-2 px-6">
                                 <div class="space-y-3 relative">
                                     <div class="absolute top-5 right-5 ">
                                         <button class={"card-text-s-blue"} onClick={()=>{setShowAddsession(true)}}>
@@ -140,7 +106,7 @@ export default function TrainingState(){
                                         </button>
                                     </div>
                                    <div class=" min-h-screen">
-                                        <div class="bg-white max-w-md mx-auto min-h-screen">
+                                        <div class=" max-w-md mx-auto min-h-screen">
                                             <div class="px-6 py-8">
                                                 <CardSession title={"Convocation"} image={"convocation.svg"} state={true} description={"La convocation est envoyée."} datedebut={"01-12-2025 8:30"} datefin={"01-12-2025 12:30"}/>
                                                 {/*  */}
@@ -164,7 +130,7 @@ export default function TrainingState(){
                 <div class="bg-white rounded-xl mt-2 p-8 relative">
                     <div class="absolute top-6 right-6 ">
                         <span class="text-gray-800 text-lg font-semibold">
-                        <button class="" onClick={()=>(close(false))}>
+                        <button class="" onClick={()=>(setShowTrainer(false))}>
                             <i class="fa-solid fa-xmark "></i>
                         </button></span>
                     </div>
@@ -175,7 +141,7 @@ export default function TrainingState(){
                                 <th class="tr-thead">Nom</th>
                                 <th class="tr-thead">Email</th>
                                 <th class="tr-thead">Tel</th>
-                                <th class="tr-thead">En activiter</th>
+                                <th class="tr-thead">Prix</th>
                                 <th class="tr-thead"></th>
                             </tr>
                         </thead>
@@ -191,11 +157,20 @@ export default function TrainingState(){
                                     <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.email}</span></td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{value.tel}</td>
                                     
-                                    <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">Active</span></td>
-                                    <td class="px-6 py-4 text-sm text-gray-500">
-                                        <button className="btn-neutre-gray">
+                                    <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">2 000 000 ar</span></td>
+                                    {/* <td class="px-6 py-4 text-sm text-gray-500">
+                                        <button>
                                                 ⋮
                                         </button>
+                                    </td> */}
+                                    <td class="px-6 py-4 text-sm text-gray-500">
+                                        
+                                        <input 
+                                            type="radio" 
+                                            name="choice" 
+                                            className="peer" 
+                                            // className="hidden peer" 
+                                        />
                                     </td>
                                 </tr>
                             ))}

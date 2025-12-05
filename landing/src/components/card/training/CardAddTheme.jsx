@@ -1,36 +1,69 @@
-import { useState } from "react";
-import {  newformation, usersprofile } from "../../../data/data";
+import { useEffect, useState } from "react";
+import {   themeM, usersprofile ,url,trainingTypes} from "../../../data/data";
+import { TextState } from "../../state";
+import { getData, send } from "../../../function/Axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function CardNewTraining({close}){
-    const [infodemande,setInfodemande]=useState(newformation);
+
+export default function CardAddTheme({close}){
+    const [theme,setTheme]=useState(themeM);
+    const [trainingType,setTrainingType]=useState(trainingTypes);
     const [skill,setSkill]=useState("");
     const handlerChangeTable = (name, value, index = null) => {
-        setInfodemande((previous) => {
-            const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
-            if (index !== null) {
-                const newArray = currentArray.filter((_, i) => i !== index);
-                return {
-                    ...previous,
-                    [name]: newArray,
-                };
-            }
-         return {
+    setTheme((previous) => {
+        const currentString = previous[name] || "";
+        let currentArray = currentString
+            .split(",")
+            .map(s => s.trim())
+            .filter(s => s !== "");
+        if (index !== null) {
+            const newArray = currentArray.filter((_, i) => i !== index);
+
+            return {
                 ...previous,
-                [name]: [...currentArray, value],
+                [name]: newArray.join(","),
             };
-        });
+        }
+        const newArray = [...currentArray, value];
+        return {
+            ...previous,
+            [name]: newArray.join(","),
+        };
+    });
+
         setSkill("");
     };
+
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
             ...previous,
             [name]: value,
         }));
     };
+    const submit = async ()=>{
+        const value = await send(theme,url + "training-themes")
+        console.log(value)
+        if (value == true) {
+            toast.success("Données insérées avec succès !");
+            close(false);
+        } else {
+            toast.error("Problème serveur, réessayez plus tard !");
+        }
+    }
+    useEffect(() => {
+    const loadData = async () => {
+        const data = await getData(url + "training-types");
+        if(data.data!=null)
+            setTrainingType(data.data);
+    };
+        loadData();
+    }, []);
     const [index,setIndex]=useState(1);
     return(
         <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white  p-10 rounded-card w-120 relative">
+                <h3>Ajout d'un nouveau theme</h3>
                 <div class="absolute top-6 right-6">
                     <span class="text-gray-800 text-lg font-semibold">
                     <button class="" onClick={()=>(close(false))}>
@@ -50,26 +83,39 @@ export default function CardNewTraining({close}){
                     <label class="label-formulaire">Nom formation</label>
                     <div class="relative">
                         <input 
-                            type="email" 
-                            placeholder={infodemande.name} 
+                            type="text" 
+                            placeholder={theme.name} 
                             class="input_singup"
+                            onChange={(event)=>{handlerVariable("name",event.target.value,setTheme)}}
+                            required
                         />
                     </div>
                 </div>
+                <label class="label-formulaire mt-4 mb-2">Type formation</label>
+                <div className="grid grid-cols-3 gap-3 mb-4">
+                    {trainingType.map((v,id)=>(
+                         <button index={id} class={"card-text-s-blue hover:bg-black-100"} onClick={()=>handlerVariable("idtypetraining",v.id,setTheme)}>
+                            <i className={`${v.icone} icone-size-s`}></i>
+                            <span>{v.name}</span>
+                        </button>
+                    ))}
+                </div>
                 {/* why  */}
                 <div className="my-2">
-                    <label class="label-formulaire">Pourquoi voulez-vous cette formation?</label>
+                    <label class="label-formulaire">Qu’attendons-nous de cette formation ?</label>
                     <textarea 
-                        placeholder={infodemande.description} 
+                        required
+                        placeholder={theme.description} 
                         rows="4"
                         class="input_singup"
+                        onChange={(event)=>{handlerVariable("description",event.target.value,setTheme)}}
                     ></textarea>
                 </div>
                 {/* skill */}
                 <div className="my-2">
                     <div class="">
                             <div class="flex items-center justify-between mb-4">
-                                <label class="label-formulaire gap-1">Quelles compétences aurez-vous acquises à l’issue de cette formation ?
+                                <label class="label-formulaire gap-1">Quelles compétences devriez-vous avoir à l’issue de cette formation ?
                                     <button class="text-or   font-bold text-sm flex items-center gap-2" onClick={()=>handlerChangeTable("skill",skill,null)}>
                                         <i class="fas fa-plus"></i>
                                         Ajouter
@@ -81,25 +127,28 @@ export default function CardNewTraining({close}){
                                 <div>
                                     <input 
                                         type="text" 
-                                        placeholder="Enter Degree" 
+                                        placeholder="Enter compétences" 
                                         class="input_singup"
                                         onChange={(event)=>{setSkill(event.target.value)}}
+                                        
                                     />
                                 </div>
                                 <div>   
                                 <div class="flex flex-wrap gap-2">
-                                    {infodemande.skill.map((value,index)=>(
-                                        <button className="card-text-rounded-gray" onClick={()=>handlerChangeTable("skill",skill,index)}>
-                                                {value}
-                                                <span className="ml-2">
-                                                        <i className="fa-solid fa-xmark text-gray-500"></i>
-                                                </span>
+                                    {theme.skill.split(",").map((value, index) => (
+                                        <button
+                                            key={index}
+                                            className="card-text-rounded-gray"
+                                            onClick={() => handlerChangeTable("skill", value, index)}
+                                        >
+                                            {value}
+                                            <span className="ml-2">
+                                                <i className="fa-solid fa-xmark text-gray-500"></i>
+                                            </span>
                                         </button>
-                                        ))
-                                    }
-                                    </div>
+                                    ))}
                                 </div>
-                            
+                                </div>
                             </div>  
                     </div>
                 
@@ -108,14 +157,14 @@ export default function CardNewTraining({close}){
                     <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close(false)}}>
                         Annuler
                     </button>
-                    <button class="btn-action" onClick={()=>setIndex(2)}>
-                        Suivant
+                    <button class="btn-action" onClick={()=> submit()}>
+                        Enregistrer
                     </button>
                 </div>
 
                 </> :
                 <>
-                <div className="my-2">
+                {/* <div className="my-2">
                     <label class="label-formulaire">Quand souhaitez-vous suivre cette formation ?</label>
                     <div class="relative">
                         <input 
@@ -175,7 +224,7 @@ export default function CardNewTraining({close}){
                             ))}
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div class="flex items-center justify-end gap-3 mt-2">
                     <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>setIndex(1)} >
                         Précédent

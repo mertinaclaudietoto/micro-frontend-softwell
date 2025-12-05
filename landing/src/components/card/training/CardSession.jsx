@@ -2,7 +2,7 @@ import { diffDate } from "../../../function/Date";
 
 export default function CardSession({index,image,state,title,description,datedebut,datefin}){
     return(
-        <div class="flex items-start mb-12">
+        <div class="flex items-start mb-12 ">
             <div class="flex flex-col items-center mr-4">
                 {state ? 
                 <div class="w-10 h-10 rounded-full bg-softbleu flex items-center justify-center text-white font-semibold">

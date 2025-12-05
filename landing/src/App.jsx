@@ -1,5 +1,6 @@
 import {useState,useEffect} from 'react';
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import './assets/style.css'
 import { 
   Application,
@@ -17,11 +18,12 @@ import {
   ProfileAccess,
   Setaccess,
   UserProfile,
-  DemandeTraining,
+  TrainingTheme,
   InprogressTraining,
   Trainer,
   TrainingState,
-  Wish
+  Wish,
+  Validation
   
 } from "./pages";
 import {Tablesearch} from "./components"
@@ -50,6 +52,7 @@ function App() {
   return (
     // div qui vas contenir les theme 
     <>
+    <ToastContainer />
       {/* {isOpen ? (
           <div className='grid grid-cols-3 absolute bottom-50 right-15 gap-1'>
             <button class="icon_carre_line_none" onClick={()=>{changeTheme("theme-blue")}}>
@@ -104,11 +107,13 @@ function App() {
         <Route path="/access-profile" element={<ProfileAccess/>}></Route>
         <Route path="/access-set" element={<Setaccess/>}></Route>
         <Route path="/access-user" element={<UserProfile/>}></Route>
-        <Route path="/training-demande" element={<DemandeTraining/>}></Route>
+        <Route path="/training-theme" element={<TrainingTheme/>}></Route>
         <Route path="/training-inprogress" element={<InprogressTraining/>}></Route>
         <Route path="/training-trainer" element={<Trainer/>}></Route>
         <Route path="/training-state" element={<TrainingState/>}></Route>
         <Route path="/training-wish" element={<Wish/>}></Route>
+        <Route path="/training-validation" element={<Validation/>}></Route>
+
       </Routes>
     </>
   )

@@ -3,8 +3,9 @@ import { useState } from "react";
 import { TextState } from "../../state";
 import { listsmallformation } from "../../../data/data";
 
-export default function CardSmallTraining({value }){
-    const [info,setInfo]=useState(value ?? listsmallformation[0])
+export default function CardSmallTraining({info }){
+    // console.log(value)
+    // const [info,setInfo]=useState(value ?? listsmallformation[0])
     return(
         <> 
         <div class="flex items-start gap-3">
@@ -17,14 +18,13 @@ export default function CardSmallTraining({value }){
                 {/* <p class="text-sm text-gray-500 mb-3">Slack Technologies, LLC</p> */}
                 <p class="text-xs text-gray-600 mb-3 text-start">{info.description} </p>
                 <div class="flex flex-wrap gap-2 w-100">
-                    {info.skill.map((value)=>(
+                    {info?.skill.split(",")?.map((value)=>(
                         <span class="px-3 py-1 bg-gray-100 text-xs rounded-full">{value}</span>
                     ))}
                 </div>
             </div>
-                <TextState text={""} cssCard={"card-text-s-blue"} icone={info.type} />
+                <TextState text={info.nametype} cssCard={"card-text-s-blue"} icone={info.icone} />
         </div>
-        
           
         </>
     )

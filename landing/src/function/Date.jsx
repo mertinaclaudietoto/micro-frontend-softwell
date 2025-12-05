@@ -61,3 +61,43 @@ export const diffDate = (date1, date2) => {
     }
     return `${years} an(s) et ${months} mois`;
 };
+export const diffDate1 = (date1) => {
+    // Convertir "DD-MM-YYYY" en "YYYY-MM-DD"
+    const toISO = (str) => {
+        const [day, month, year] = str.split("-");
+        return `${year}-${month}-${day}`;
+    };
+
+    const d1 = new Date(toISO(date1));
+    const d2 = new Date(); // Date actuelle
+
+    // Assurer d1 <= d2
+    const start = d1 < d2 ? d1 : d2;
+    const end = d1 < d2 ? d2 : d1;
+
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+    let days = end.getDate() - start.getDate();
+
+    // Ajustement si le jour est négatif
+    if (days < 0) {
+        months--;
+        const previousMonth = new Date(end.getFullYear(), end.getMonth(), 0).getDate();
+        days += previousMonth;
+    }
+
+    // Ajustement si le mois est négatif
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    // Conditions d'affichage
+    if (years === 0 && months === 0) {
+        return `${days} jours`;
+    }
+    if (years === 0) {
+        return `${months} mois`;
+    }
+    return `${years} an(s) et ${months} mois`;
+};

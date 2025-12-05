@@ -7,7 +7,6 @@ import { datasidebar } from "../../data/data";
 export default function Sidebar(){
     const [isOpen ,setIsOpen]=useState(false);
     const pages =datasidebar;
-    console.log(pages)
     return (
         <div class="bg-white-200 h-full ">
             <div class="flex gap-4 max-w-3xl md:w-[250px] ">

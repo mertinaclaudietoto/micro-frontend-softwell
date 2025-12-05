@@ -577,9 +577,25 @@ export const usersprofile = [
   { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "henry123" },
  
 ];
+export const url ="http://localhost:5172/api/";
+export const themeM = {
+  name: "...........................",
+  description: ".........................",
+  skill: "",
+  idtypetraining: 0,
+  Nametype: "",
+  Icone: ""
+};
+export const trainingTypes = [
+  { id: 1, name: 'interne', icone: 'fa-solid fa-building' },
+  { id: 2, name: 'externe', icone: 'fa-solid fa-globe' },
+  { id: 3, name: 'auto-formation', icone: 'fa-solid fa-user-graduate' }
+];
+
+
 export const newformation=
    {
-    id: "F001",
+    id: null,
     title: "Gestion du temps",
     description: "Apprendre à organiser et optimiser son temps de travail.",
     skill: ["Planification", "Organisation"],
@@ -1159,10 +1175,10 @@ export const listeformateur = [
 export   const  datasidebar =
         {
             formation :[
-                    {label :"Thème",icone : "fa-solid fa-palette",actif:false,link:"/training-demande",subItems:null},
-                    {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/manager/dasboard",subItems:null},
+                    {label :"Thème",icone : "fa-solid fa-palette",actif:false,link:"/training-theme",subItems:null},
+                    {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/training-trainer",subItems:null},
                     {label :"Souhaite",icone : "fa-solid fa-layer-group",actif:false,link:"/training-wish",subItems:null},
-                    {label :"Validation",icone : "fa-solid fa-circle-check",actif:false,link:"/manager/dasboard",subItems:null},
+                    {label :"Validation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null},
                 ],
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
@@ -1174,5 +1190,156 @@ export   const  datasidebar =
                 // },
                 // {label :"critère de sélection",icone : "fa-solid fa-clipboard-check",actif:false,link:"/manager/criterien"},
                 // {label :"Listes demande",icone : "fa-solid fa-bullhorn",actif:false,link:"/manager/listrequeste"},
-        }
+}
 
+export const getcolorstate = (text) => {
+  switch (text) {
+    case "non valide":
+      return "bg-red-100 text-red-800";
+    case "valide":
+      return "bg-green-100 text-green-800";
+    case "en attente":
+      return "bg-yellow-100 text-yellow-800";
+    case "en cours":
+      return "bg-blue-100 text-blue-800";
+    case "terminé":
+      return "bg-purple-100 text-purple-800";
+    default:
+      return "bg-gray-100 text-gray-800"; // valeur par défaut propre
+  }
+};
+export const trainingListToBeValidated = [
+  {
+    id: "T001",
+    daterequest: "12-11-2025",
+    theme: "Management d'équipe",
+    applicant: "Société BATAR",
+    state: "non valide",
+    nbrparticipant: 15,
+  },
+  {
+    id: "T002",
+    daterequest: "02-10-2025",
+    theme: "Développement Web",
+    applicant: "Mamadou R.",
+    state: "valide",
+    nbrparticipant: 20,
+  },
+  {
+    id: "T003",
+    daterequest: "28-09-2025",
+    theme: "Comptabilité avancée",
+    applicant: "Entreprise RANAIVO",
+    state: "en cours",
+    nbrparticipant: 12,
+  },
+  {
+    id: "T004",
+    daterequest: "15-08-2025",
+    theme: "Leadership & Coaching",
+    applicant: "Aina Consulting",
+    state: "terminé",
+    nbrparticipant: 10,
+  },
+  {
+    id: "T005",
+    daterequest: "03-11-2025",
+    theme: "Excel niveau avancé",
+    applicant: "Solo Herizo",
+    state: "en attente",
+    nbrparticipant: 18,
+  },
+  {
+    id: "T006",
+    daterequest: "10-10-2025",
+    theme: "Service Client & Communication",
+    applicant: "ETS Malaza",
+    state: "en cours",
+    nbrparticipant: 22,
+  },
+  {
+    id: "T007",
+    daterequest: "20-09-2025",
+    theme: "Sécurité Informatique",
+    applicant: "IT Global",
+    state: "valide",
+    nbrparticipant: 16,
+  },
+  {
+    id: "T008",
+    daterequest: "07-09-2025",
+    theme: "Gestion de Projet Agile",
+    applicant: "Fitiavana M.",
+    state: "terminé",
+    nbrparticipant: 14,
+  },
+  {
+    id: "T009",
+    daterequest: "30-10-2025",
+    theme: "Marketing Digital",
+    applicant: "Madamarket SARL",
+    state: "non valide",
+    nbrparticipant: 25,
+  },
+  {
+    id: "T010",
+    daterequest: "12-09-2025",
+    theme: "Gestion du Stress",
+    applicant: "Hery Consulting",
+    state: "en attente",
+    nbrparticipant: 9,
+  },
+];
+
+export const participantTraining = [
+  {
+    id: "P001",
+    photo: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=300",
+    name: "Marie Dupont",
+    departement: "Informatique",
+    status: "Lead Développeuse",
+    note: 17,
+    presence: "5/5",
+    evaluationformateur: true
+  },
+  {
+    id: "P002",
+    photo: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=300",
+    name: "Ahmed Rakoto",
+    departement: "Informatique",
+    status: "Scrum Master",
+    note: 14,
+    presence: "4/5",
+    evaluationformateur: true
+  },
+  {
+    id: "P003",
+    photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300",
+    name: "Lucie Raso",
+    departement: "Ressources Humaines",
+    status: "Chargée RH",
+    note: 16,
+    presence: "5/5",
+    evaluationformateur: false
+  },
+  {
+    id: "P004",
+    photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300",
+    name: "Hery Andrian",
+    departement: "Comptabilité",
+    status: "Auditeur",
+    note: 12,
+    presence: "3/5",
+    evaluationformateur: true
+  },
+  {
+    id: "P005",
+    photo: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=300",
+    name: "Fanja R.",
+    departement: "Marketing",
+    status: "Social Media Manager",
+    note: 15,
+    presence: "4/5",
+    evaluationformateur: true
+  }
+];
