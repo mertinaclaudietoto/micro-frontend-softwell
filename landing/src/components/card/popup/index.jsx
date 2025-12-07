@@ -5,7 +5,7 @@ export { default as CardLogin } from "./CardLogin";
 export { default as CardModifCriterien } from "./CardModifCriterien";
 export { default as CardNotification } from "./CardNotification";
 export { default as Delete } from "./Delete";
-export { default as CardAddTraining } from "./CardAddTraining";
+
 export { default as CardAddSession } from "./CardAddSession";
 
 

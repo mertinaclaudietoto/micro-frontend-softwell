@@ -19,3 +19,8 @@ export const handlerVariable = (name, value,setFunction) => {
             [name]: value,
         }));
     };
+export const formatMoney =(amount)=> {
+  if (amount == null) return '';
+  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+

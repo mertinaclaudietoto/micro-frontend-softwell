@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 // SearchableSelect.jsx
 // Composant React (Tailwind) : select filtrable à chaque lettre
 
-export default function Select({ options = [], placeholder = "Rechercher...", onChange }) {
+export default function Select({ options = [], placeholder = "Rechercher...", onChange ,css }) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
@@ -83,7 +83,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
   }
 
   return (
-    <div className="w-full max-w-md relative  mb-4">
+    <div className="w-full max-w-md -mb-6">
       <div className="flex items-center gap-2">
         <div className="flex-1 relative">
           <input
@@ -96,7 +96,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
             }}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className="input_formulaire"
+            className={`${css !=null ? css: "input_formulaire" }`} 
             onFocus={() => setOpen(true)}
             aria-expanded={open}
             aria-haspopup="listbox"
@@ -115,7 +115,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
 
       <div
         ref={listRef}
-        className={`absolute z-20 mt-2 w-full max-h-60 overflow-auto bg-white border border-gray-200 rounded-md shadow-lg transition-opacity duration-150 ${
+        className={`absolute z-20 mt-2 w-full max-w-md max-h-60 overflow-auto bg-white border border-gray-200 rounded-md shadow-lg transition-opacity duration-150 ${
           open ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         role="listbox"

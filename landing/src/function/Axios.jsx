@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const send = async (datasend, url) => {
   try {
+    console.log(url,datasend)
     const response = await axios.post(url, datasend);
     console.log("Réponse de l'API :", response.data);
     return true;      // succès

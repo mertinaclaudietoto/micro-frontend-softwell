@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {   themeM, usersprofile ,url,trainingTypes} from "../../../data/data";
+import {   themeM,url,trainingTypes} from "../../../data/data";
 import { TextState } from "../../state";
 import { getData, send } from "../../../function/Axios";
 import { toast } from "react-toastify";

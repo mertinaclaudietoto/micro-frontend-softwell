@@ -5,6 +5,9 @@ export { default as CardTrainingInprogress } from "./CardTrainingInprogress";
 export { default as CardSession } from "./CardSession";
 export { default as CardWish } from "./CardWish";
 export { default as CardUpdateTheme } from "./CardUpdateTheme";
+export { default as CardAddTraining } from "./CardAddTraining";
+export { default as CardAddTrainer } from "./CardAddTrainer";
+
 
 
 

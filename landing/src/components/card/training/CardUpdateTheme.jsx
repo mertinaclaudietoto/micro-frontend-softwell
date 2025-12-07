@@ -140,7 +140,6 @@ export default function CardUpdateTheme({close,value}){
                                         placeholder="Enter compétences" 
                                         class="input_singup"
                                         onChange={(event)=>{setSkill(event.target.value)}}
-                                        
                                     />
                                 </div>
                                 <div>   

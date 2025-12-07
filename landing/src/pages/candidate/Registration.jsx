@@ -30,7 +30,6 @@ export default function Registration(){
                     [name]: newArray,
                 };
             }
-            console.log("ajout",[...currentArray, value])
          return {
                 ...previous,
                 [name]: [...currentArray, value],
