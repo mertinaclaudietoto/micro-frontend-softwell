@@ -36,8 +36,8 @@ export default function CardLogin({closePopup}){
                     <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close()}}>
                         Cancel
                     </button>
-                    <button class="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium" onClick={()=>{close()}}>
-                        Save
+                    <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium"  onClick={()=>submit()}>
+                        Connexion
                     </button>
                 </div>
             </div>

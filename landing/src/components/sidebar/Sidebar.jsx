@@ -8,7 +8,8 @@ export default function Sidebar(){
     const [isOpen ,setIsOpen]=useState(false);
     const pages =datasidebar;
     return (
-        <div class="bg-white-200 h-full ">
+        <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll "> 
+        <div class="bg-white-200  h-screen ">
             <div class="flex gap-4 max-w-3xl md:w-[250px] ">
                 {isOpen ? (
                     // short siderbar version
@@ -21,9 +22,11 @@ export default function Sidebar(){
                     </button>
                     {/* notification */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
-                        {short.map((value,index)=>(
-                            <SidebarShortButton link={value.link} index={index} icone={value.icone} actif={value.actif}  />
-                        ))}
+                        {pages.formation.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+
+                        {/* {short.map((value,index)=>(
+                            // <SidebarShortButton link={value.link} index={index} icone={value.icone} actif={value.actif}  />
+                        ))} */}
                     {/* dasboard */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
                         {/* {pages.map((value,index)=>(
@@ -52,14 +55,14 @@ export default function Sidebar(){
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                                     <path d="M16 4L19 13L28 16L19 19L16 28L13 19L4 16L13 13L16 4Z" fill="#4F46E5"/>
                                 </svg>
-                                <span class="text-xl font-semibold text-gray-800">Pointsale</span>
+                                <span class="text-xl font-semibold text-gray-800">SoftWell</span>
                             </div>
                             <button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-500" onClick={()=>{setIsOpen(!isOpen)}}>
                                 <i class="fas fa-bars"></i>
                             </button>
                         </div>
 
-                        <div class="p-4 border-b border-gray-100 space-y-1">
+                        {/* <div class="p-4 border-b border-gray-100 space-y-1">
                             <button class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-50 text-left">
                                 <div class="flex items-center gap-3 text-gray-700">
                                     <i class="fas fa-bell"></i>
@@ -67,7 +70,7 @@ export default function Sidebar(){
                                 </div>
                                 <span class="text-sm font-medium text-gray-500">15+</span>
                             </button>
-                        </div>
+                        </div> */}
 
                         <div class="flex-1 overflow-y-auto">
                             <div class="p-4">
@@ -76,15 +79,21 @@ export default function Sidebar(){
                                     {pages.formation.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
                                 </div>
                             </div>
+                            <div class="p-4">
+                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Parametre</h3>
+                                <div class="space-y-1">
+                                    {pages.parametre.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+                                </div>
+                            </div>
                             {/* pub */}
                             {/* <CardPub/> */}
                             <div class="flex-1"></div>
                             {/* pro version */}
-                            <div className="pl-4">
+                            {/* <div className="pl-4">
                                 <button class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-50 text-indigo-600 mb-4">
                                     <i class="fas fa-bolt"></i>
                                 </button>
-                            </div>
+                            </div> */}
                           
                             {/* <div class="p-4 border-t border-gray-100 space-y-1">
                                 {parametres.map((value,index)=>(<SidebarLargButton index={index} label={value.label} icone={value.icone} actif={value.actif}/>))}
@@ -106,6 +115,7 @@ export default function Sidebar(){
                     </aside>
                 ) }
             </div>
+        </div>
         </div>
     )
 }

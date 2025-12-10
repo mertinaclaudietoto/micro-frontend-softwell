@@ -11,6 +11,15 @@ export const send = async (datasend, url) => {
     return false;     // échec
   }
 };
+export const _login = async (datasend, url) => {
+  try {
+    const response = await axios.post(url, datasend);
+    return response;      // succès
+  } catch (error) {
+    console.error("Erreur :", error.response ? error.response.data : error.message);
+    return false;     // échec
+  }
+};
 export const update = async (datasend, url) => {
   try {
     const response = await axios.put(url, datasend);

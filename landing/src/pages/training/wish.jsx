@@ -11,7 +11,7 @@ export default function Trainer(){
     const [data,setData]=useState([]); 
     const [dataGroup,setDataGroup]=useState([]); 
     const [close,setClose]=useState(false); 
-    const [closeAddTraining,setCloseAddTraining]=useState(true); 
+    const [closeAddTraining,setCloseAddTraining]=useState(false); 
    
     const [manageTraining,setManageTraining]=useState(null);
     const [seeTrainingListe,setSeeTrainingListe]=useState(false);
@@ -79,13 +79,16 @@ export default function Trainer(){
                                         
                                         <div class="flex items-center space-x-3">
                                             <div className="flex space-x-2">
+                                                <button class="btn-neutre-gray" onClick={()=>{setSeeTrainingListe(false)}}>
+                                                     ⋮
+                                                </button>
                                                 <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
                                                     total
                                                 </button>
                                                 <button class="btn-neutre-gray" onClick={()=>{setClose(true)}}>
                                                     souhait
                                                 </button>
-                                                <button class="btn-neutre-gray" onClick={()=>{setSeeTrainingListe(true)}}>
+                                                <button class="btn-neutre-gray" onClick={()=>{setCloseAddTraining(true)}}>
                                                     validation
                                                 </button>
                                                 <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">

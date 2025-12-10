@@ -37,8 +37,7 @@ export default function Setaccess(){
                                 <p class="text-sm text-gray-600">Si vous voulez ajouter un nouveau profile <span className="text-or font-semibold">cliquez ici</span> ou  <Link to="/access-profile"><span className="text-softbleu font-semibold">retour</span></Link> .</p>
                             </div>
                         </div>
-                        <div className=" border-t   border-gray-200 hover:bg-gray-100 px-10 py-4 grid grid-cols-5 justify-center items-center gap-2 ">
-                                        {/* Colonne # (icone + nombre) */}
+                        {/* <div className=" border-t   border-gray-200 hover:bg-gray-100 px-10 py-4 grid grid-cols-5 justify-center items-center gap-2 ">
                             <div className="flex items-center">
                                 <div className="bg-softbleutini-12 rounded-lg p-2 mr-3 relative">
                                     <button onClick={()=>{setIsOpenIconeCard(true)}}>
@@ -65,16 +64,10 @@ export default function Setaccess(){
                                 {info.percentage}%
                                 </span>
                             </div>
-                            {/* <div className="flex justify-end">
-                                <button class="bg-softbleutini-12 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2">
-                                    <i class="fa-solid fa-plus text-white"></i>
-                                    utilisateur
-                                </button>
-                            </div> */}
-                        </div>
+                        </div> */}
                         
                         {/* list utilisateur */}
-                        <div class="border-t border-gray-200 p-2">
+                        {/* <div class="border-t border-gray-200 p-2">
                             <div class="flex items-center justify-center">
                                 <div className="flex items-center gap-2 overflow-x-auto flex-nowrap w-300">
                                     {info.listuser.map((value, idx) => (
@@ -95,7 +88,7 @@ export default function Setaccess(){
                                 </div>
 
                             </div>
-                        </div>
+                        </div> */}
                         
                         <div class="p-6 border-t border-gray-200">
                             <div class="overflow-x-auto relative">

@@ -23,10 +23,11 @@ import {
   Trainer,
   TrainingState,
   Wish,
-  Validation
+  Validation,
+  Login
   
 } from "./pages";
-import {Tablesearch} from "./components"
+import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import CardNotification from './components/card/CardNotification';
@@ -90,6 +91,7 @@ function App() {
       {/* <Application/> */}
       {/* <LocationSelector></LocationSelector> */}
       <Routes>
+        <Route path="/" element={ <Login/>  } />
         <Route path="/candidate" element={ <Landing/>  } />
         <Route path="/candidate-registration" element={<Registration />} />
         <Route path="/candidate-application" element={<Application />} />
@@ -110,10 +112,9 @@ function App() {
         <Route path="/training-theme" element={<TrainingTheme/>}></Route>
         <Route path="/training-inprogress" element={<InprogressTraining/>}></Route>
         <Route path="/training-trainer" element={<Trainer/>}></Route>
-        <Route path="/training-state" element={<TrainingState/>}></Route>
         <Route path="/training-wish" element={<Wish/>}></Route>
         <Route path="/training-validation" element={<Validation/>}></Route>
-
+        <Route path="/training-state/:id" element={<TrainingState />} />
       </Routes>
     </>
   )

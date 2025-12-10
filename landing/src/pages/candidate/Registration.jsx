@@ -20,6 +20,7 @@ export default function Registration(){
             [name]: value,
         }));
     };
+    
     const handlerChangeTableInfocandidate = (name, value, index = null) => {
         setInfoCandidate((previous) => {
             const currentArray = Array.isArray(previous[name]) ? previous[name] : [];

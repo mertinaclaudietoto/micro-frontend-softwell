@@ -578,6 +578,8 @@ export const usersprofile = [
  
 ];
 export const url ="http://localhost:5172/api/";
+// export const url ="http://151.80.218.41:1010/api/";
+
 export const themeM = {
   name: "...........................",
   description: ".........................",
@@ -1172,14 +1174,20 @@ export const listeformateur = [
   }
 ];
 
+
 export   const  datasidebar =
         {
             formation :[
                     {label :"Thème",icone : "fa-solid fa-palette",actif:false,link:"/training-theme",subItems:null},
                     {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/training-trainer",subItems:null},
                     {label :"Souhaite",icone : "fa-solid fa-layer-group",actif:false,link:"/training-wish",subItems:null},
-                    {label :"Validation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null},
+                    {label :"Formation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null},
                 ],
+            parametre:[
+                {label :"Profile",icone : "fa-solid fa-user",actif:false,link:"/access-profile",subItems:null},
+                // {label :"Access",icone : "fa-solid fa-users",actif:false,link:"/access-set",subItems:null},
+                {label :"Compte",icone : "fa-solid fa-users",actif:false,link:"/access-user",subItems:null},
+            ]
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
                 // {label :"gestion d'acces",icone : "fa-solid fa-clipboard-check",actif:false,link:"/manager/criterien",
@@ -1194,9 +1202,9 @@ export   const  datasidebar =
 
 export const getcolorstate = (text) => {
   switch (text) {
-    case "non valide":
+    case 2:
       return "bg-red-100 text-red-800";
-    case "valide":
+    case 1:
       return "bg-green-100 text-green-800";
     case "en attente":
       return "bg-yellow-100 text-yellow-800";

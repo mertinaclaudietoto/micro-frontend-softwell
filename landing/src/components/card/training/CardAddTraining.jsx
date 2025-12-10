@@ -12,29 +12,30 @@ export default function CardAddTraining({close}){
     const [listTheme ,setListTheme]=useState([]);
     const [listParticipant ,setListParticipant]=useState([]);
     const [listTrainer ,setListTrainer]=useState([]);
-    const [value,setValue]=useState()
-
-    const addNewWish=(value,index=null)=>{
-        if(idtheme!=null){
-            setValue((previous) => {
-                        if (index !== null) {
-                            const newArray = previous.filter((_, i) => i !== index);
-                            return newArray;
-                        }
-                        return [...previous, {
-                            idtrainingvalidate:null,
-                            idparticipant:value.idbeneficary,
-                        }];
-                    }
-                    )
-        }
-    }
+    const [value,setValue]=useState({
+         Id :null,
+         Idtheme: null,
+         Idadmin:1 , //donner statique
+         Idtrainer:null,//formateur  
+         Date:(new Date()).toISOString(),
+         Statu:1 
+        ,participant:[]
+    })
     const getUser = async (matricule)=>{
-            const data =  await getData(
-                url + `employ/getby?matricule=${matricule}`
-            );
-            if(data.data!=null)
-                addNewWish(data.data)
+        const data =  await getData(
+            url + `employ/getby?matricule=${matricule}`
+        );
+        console.log(data.data)
+        if(data.data!=null){
+            setListParticipant((previous)=>{
+                return [...previous,{
+                    idBeneficiary:data.data.id,
+                    beneficiaryMatricule :data.data.matricule,
+                    beneficiaryName:data.data.name,
+                    beneficiaryFirstname:data.data.firstname
+                }]
+            })
+        }    
     }
     const getListThemes = async ()=>{
         const datalistThemes =  await getData(
@@ -48,6 +49,7 @@ export default function CardAddTraining({close}){
             url + `vtrainertheme/getbyidtheme?idtheme=`+idtheme
         );
         if(datalistThemes.data!=null)
+            console.log(datalistThemes.data)
             setListTrainer(datalistThemes.data)
     }
     const getListParticipant = async (idtheme)=>{
@@ -58,50 +60,81 @@ export default function CardAddTraining({close}){
             console.log("participant",datalistThemes.data)
             setListParticipant(datalistThemes.data)
     }
-     
+    const handlerVariable = (name, value,setFunction) => {
+        setFunction((previous) => ({
+            ...previous,
+            [name]: value,
+        }));
+    };
     const handlerTheme =(opt) =>{
         console.log(opt)
         if(opt!=null){
             getListParticipant(opt.id)
             getListTrainer(opt.id);
+            handlerVariable("Idtheme",opt.id,setValue)
         }
-       
     }
-    const handlerListThemeTrainer=  (name, value, index = null) => {
-        console.log(value)
+    const addParticipant = (value) => {
         setValue((previous) => {
-            const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
-            if (index !== null) {
-                const newArray = currentArray.filter((_, i) => i !== index);
-                return {
-                    ...previous,
-                    [name]: newArray,
-                };
+            const currentArray = Array.isArray(previous["participant"]) 
+                ? previous["participant"] 
+                : [];
+            const exists = currentArray.some(item => item.IdParticipant === value.idBeneficiary);
+            let newArray;
+            if (exists) {
+                newArray = currentArray.filter(item => item.IdParticipant !== value.idBeneficiary);
+            } else {
+                newArray = [
+                    ...currentArray,
+                    {
+                        Id: null,
+                        IdTrainingValidate: null,
+                        IdParticipant: value.idBeneficiary
+                    }
+                ];
             }
-         return {
+            return {
                 ...previous,
-                [name]: [...currentArray, value],
+                participant: newArray
             };
         });
-        setPrice({
-        id: 0,
-        idtrainer: 0,
-        idtheme: 0,
-        idunit: 0,
-        unitprice: 0,
-        maxpersonne: 0,
-        description: "",
-        nameTheme: "",
-        nameTrainer: "",
-        nif: "",
-        stat: "",
-        tel: "",
-        email: "",
-        active: 3,
-        nameActive: "",
-        nameunit: ""
-    });
     };
+
+    // const handlerListThemeTrainer=  (name, value, index = null) => {
+    //     console.log(value)
+    //     setValue((previous) => {
+    //         const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
+    //         if (index !== null) {
+    //             const newArray = currentArray.filter((_, i) => i !== index);
+    //             return {
+    //                 ...previous,
+    //                 [name]: newArray,
+    //             };
+    //         }
+    //      return {
+    //             ...previous,
+    //             [name]: [...currentArray, value],
+    //         };
+    //     });
+    //     setPrice({
+    //     id: 0,
+    //     idtrainer: 0,
+    //     idtheme: 0,
+    //     idunit: 0,
+    //     unitprice: 0,
+    //     maxpersonne: 0,
+    //     description: "",
+    //     nameTheme: "",
+    //     nameTrainer: "",
+    //     nif: "",
+    //     stat: "",
+    //     tel: "",
+    //     email: "",
+    //     active: 3,
+    //     nameActive: "",
+    //     nameunit: ""
+    // });
+    // };
     useEffect(() => {
             getListThemes();
         }, []);
@@ -176,10 +209,9 @@ export default function CardAddTraining({close}){
                                                 type="radio"
                                                 name="training" 
                                                 value={value.id}  
-                                                // onChange={() => showTraining(value)}
+                                                onChange={() => handlerVariable("Idtrainer",value.idtrainer,setValue)}
                                             />
                                             </td>
-
                                         </tr>
                                         </>
                                     ))}
@@ -209,7 +241,7 @@ export default function CardAddTraining({close}){
                                         <input
                                             type="checkbox"
                                             className="btn-neutre-gray"
-                                            // onChange={(e) => handlerListThemeTrainer("Trainerthemes", price, k, e.target.checked)}
+                                            onChange={() => addParticipant(v)}
                                         />
                                         </td>
 

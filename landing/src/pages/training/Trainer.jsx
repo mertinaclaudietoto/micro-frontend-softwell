@@ -2,7 +2,7 @@
 import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
-import { CardAddTrainer, Filter,Sidebar } from "../../components";
+import { CardAddTrainer, Filter,Sidebar ,CardAddTraining} from "../../components";
 import { url, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
@@ -11,7 +11,7 @@ export default function Trainer(){
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
     const [listTheme ,setListTheme]=useState([]);
-    const [idtheme ,setIdteme]=useState(null);
+    const [idtheme ,setIdtheme]=useState(null);
     const [manageTraining,setManageTraining]=useState(null);
     const [seeTrainingListe,setSeeTrainingListe]=useState(false);
     const showTraining=(value)=>{
@@ -65,7 +65,7 @@ export default function Trainer(){
       return(
         <>
         
-        {seeTrainingListe  ? <CardAddTraining  listThemes={listTheme} close={setSeeTrainingListe} infoTraining={manageTraining} />:<>
+        {seeTrainingListe  ? <CardAddTrainer  listThemes={listTheme} close={setSeeTrainingListe} infoTraining={manageTraining} />:<>
         <div class="flex h-screen ">
             <Sidebar/>
             <main class="flex-1 ">    
@@ -90,7 +90,7 @@ export default function Trainer(){
                                     
                                     </div>
                                     <div class="relative ">
-                                        <Select options={listTheme} placeholder={"liste formation"}  onChange={setIdteme} css={"pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"}/>
+                                        <Select options={listTheme} placeholder={"liste formation"}  onChange={setIdtheme} css={"pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"}/>
                                         <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
@@ -122,6 +122,7 @@ export default function Trainer(){
                                     <th class="tr-thead">Email</th>
                                     <th class="tr-thead">Tel</th>
                                     <th class="tr-thead">En activiter</th>
+                                    {/* <th class="tr-thead"></th> */}
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -137,11 +138,11 @@ export default function Trainer(){
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.tel}</td>
                                         
                                         <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">{value.nameActive}</span></td>
-                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                        {/* <td class="px-6 py-4 text-sm text-gray-500">
                                             <button onClick={()=>{showTraining(value)}}>
                                                     ⋮
                                             </button>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                     </>
                                 ))}
