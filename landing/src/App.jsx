@@ -110,7 +110,7 @@ function App() {
         <Route path="/access-set" element={<Setaccess/>}></Route>
         <Route path="/access-user" element={<UserProfile/>}></Route>
         <Route path="/training-theme" element={<TrainingTheme/>}></Route>
-        <Route path="/training-inprogress" element={<InprogressTraining/>}></Route>
+        {/* <Route path="/training-inprogress" element={<InprogressTraining/>}></Route> */}
         <Route path="/training-trainer" element={<Trainer/>}></Route>
         <Route path="/training-wish" element={<Wish/>}></Route>
         <Route path="/training-validation" element={<Validation/>}></Route>

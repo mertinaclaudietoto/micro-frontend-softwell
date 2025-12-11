@@ -510,26 +510,37 @@ export const accessinfo ={
     { login: "olivia", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop" }
   ],
   listpage : [
-  { icone: "fas fa-tachometer-alt", name: "Dashboard", listfunction: [{ name: "voir", boolean: [true,false,true] }] },
-  { icone: "fas fa-users", name: "Utilisateurs", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
-  { icone: "fas fa-briefcase", name: "Projets", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
-  { icone: "fas fa-chart-line", name: "Ventes", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
-  { icone: "fas fa-box", name: "Produits", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
-  { icone: "fas fa-warehouse", name: "Stocks", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
-  { icone: "fas fa-money-check-alt", name: "Finance", listfunction: [{ name: "voir", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
-  { icone: "fas fa-handshake", name: "Partenaires", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
-  { icone: "fas fa-file-invoice", name: "Factures", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "export", boolean: [true,false,true] }] },
-  { icone: "fas fa-truck", name: "Livraisons", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
-  { icone: "fas fa-bell", name: "Notifications", listfunction: [{ name: "voir", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
-  { icone: "fas fa-cogs", name: "Paramètres", listfunction: [{ name: "modifier", boolean: [true,false,true] }] },
-  { icone: "fas fa-user-shield", name: "Roles & Permissions", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
-  { icone: "fas fa-file-alt", name: "Rapports", listfunction: [{ name: "export", boolean: [true,false,true] }] },
-  { icone: "fas fa-comments", name: "Support", listfunction: [{ name: "répondre", boolean: [true,false,true] }] },
-  { icone: "fas fa-calendar-alt", name: "Agenda", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "modifier", boolean: [true,false,true] }] },
-  { icone: "fas fa-gift", name: "Promotions", listfunction: [{ name: "ajout", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
-  { icone: "fas fa-star", name: "Feedback", listfunction: [{ name: "voir", boolean: [true,false,true] }, { name: "supprimer", boolean: [true,false,true] }] },
-  { icone: "fas fa-shield-alt", name: "Sécurité", listfunction: [{ name: "modifier", boolean: [true,false,true] }] },
-  { icone: "fas fa-info-circle", name: "Aide", listfunction: [{ name: "voir", boolean: [true,false,true] }] }
+  { icone: "fas fa-tachometer-alt",access:"theme" ,name: "Themes", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-tachometer-alt",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-tachometer-alt",access:"wish", name: "Souhait", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-tachometer-alt",access:"validation", name: "Formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-tachometer-alt",access:"profile", name: "Profile", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-tachometer-alt",access:"compte", name: "Compte", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+
+
+
+
+
+
+  // { icone: "fas fa-users", name: "Utilisateurs", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
+  // { icone: "fas fa-briefcase", name: "Projets", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
+  // { icone: "fas fa-chart-line", name: "Ventes", listfunction: [{ name: "ajout", boolean: [false] }, { name: "export", boolean: [false] }] },
+  // { icone: "fas fa-box", name: "Produits", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
+  // { icone: "fas fa-warehouse", name: "Stocks", listfunction: [{ name: "ajout", boolean: [false] }, { name: "export", boolean: [false] }] },
+  // { icone: "fas fa-money-check-alt", name: "Finance", listfunction: [{ name: "voir", boolean: [false] }, { name: "export", boolean: [false] }] },
+  // { icone: "fas fa-handshake", name: "Partenaires", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
+  // { icone: "fas fa-file-invoice", name: "Factures", listfunction: [{ name: "ajout", boolean: [false] }, { name: "export", boolean: [false] }] },
+  // { icone: "fas fa-truck", name: "Livraisons", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
+  // { icone: "fas fa-bell", name: "Notifications", listfunction: [{ name: "voir", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
+  // { icone: "fas fa-cogs", name: "Paramètres", listfunction: [{ name: "modifier", boolean: [false] }] },
+  // { icone: "fas fa-user-shield", name: "Roles & Permissions", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
+  // { icone: "fas fa-file-alt", name: "Rapports", listfunction: [{ name: "export", boolean: [false] }] },
+  // { icone: "fas fa-comments", name: "Support", listfunction: [{ name: "répondre", boolean: [false] }] },
+  // { icone: "fas fa-calendar-alt", name: "Agenda", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
+  // { icone: "fas fa-gift", name: "Promotions", listfunction: [{ name: "ajout", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
+  // { icone: "fas fa-star", name: "Feedback", listfunction: [{ name: "voir", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
+  // { icone: "fas fa-shield-alt", name: "Sécurité", listfunction: [{ name: "modifier", boolean: [false] }] },
+  // { icone: "fas fa-info-circle", name: "Aide", listfunction: [{ name: "voir", boolean: [false] }] }
 ]
 
 }
@@ -1178,15 +1189,15 @@ export const listeformateur = [
 export   const  datasidebar =
         {
             formation :[
-                    {label :"Thème",icone : "fa-solid fa-palette",actif:false,link:"/training-theme",subItems:null},
-                    {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/training-trainer",subItems:null},
-                    {label :"Souhaite",icone : "fa-solid fa-layer-group",actif:false,link:"/training-wish",subItems:null},
-                    {label :"Formation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null},
+                    {label :"Thème",icone : "fa-solid fa-palette",actif:false,link:"/training-theme",subItems:null,acces:"theme"},
+                    {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/training-trainer",subItems:null,acces:"trainer"},
+                    {label :"Souhaite",icone : "fa-solid fa-layer-group",actif:false,link:"/training-wish",subItems:null,acces:"wish"},
+                    {label :"Formation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null,acces:"validation"},
                 ],
             parametre:[
-                {label :"Profile",icone : "fa-solid fa-user",actif:false,link:"/access-profile",subItems:null},
+                {label :"Profile",icone : "fa-solid fa-user",actif:false,link:"/access-profile",subItems:null,acces:"profile"},
                 // {label :"Access",icone : "fa-solid fa-users",actif:false,link:"/access-set",subItems:null},
-                {label :"Compte",icone : "fa-solid fa-users",actif:false,link:"/access-user",subItems:null},
+                {label :"Compte",icone : "fa-solid fa-users",actif:false,link:"/access-user",subItems:null,acces:"compte"},
             ]
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},

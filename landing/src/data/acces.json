@@ -1,0 +1,38 @@
+{
+  "theme": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "trainer": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "wish": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "validation": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "profile": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "compte": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  }
+}

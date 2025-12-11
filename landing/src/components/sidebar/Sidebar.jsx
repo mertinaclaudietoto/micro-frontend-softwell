@@ -23,15 +23,8 @@ export default function Sidebar(){
                     {/* notification */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
                         {pages.formation.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
-
-                        {/* {short.map((value,index)=>(
-                            // <SidebarShortButton link={value.link} index={index} icone={value.icone} actif={value.actif}  />
-                        ))} */}
                     {/* dasboard */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
-                        {/* {pages.map((value,index)=>(
-                            <SidebarShortButton link={value.link} index={index} icone={value.icone} actif={value.actif}  />
-                        ))} */}
                     <div class="flex-1"></div>
                     {/* pro version */}
                     <button class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-50 text-indigo-600 mb-4">
@@ -76,15 +69,16 @@ export default function Sidebar(){
                             <div class="p-4">
                                 <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Formation</h3>
                                 <div class="space-y-1">
-                                    {pages.formation.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+                                    {pages.formation.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                 </div>
                             </div>
                             <div class="p-4">
                                 <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Parametre</h3>
                                 <div class="space-y-1">
-                                    {pages.parametre.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+                                    {pages.parametre.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                 </div>
                             </div>
+
                             {/* pub */}
                             {/* <CardPub/> */}
                             <div class="flex-1"></div>

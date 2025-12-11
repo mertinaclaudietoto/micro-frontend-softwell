@@ -1,13 +1,32 @@
 import React,{ useState } from "react";
-import { accessinfo, listProfile, widthClasses } from "../../data/data";
+import { accessinfo, listProfile, url, widthClasses } from "../../data/data";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import { handlerVariable } from "../../function/utils";
 import { IconeAccess, Sidebar } from "../../components";
-export default function Setaccess(){
-    const [info ,setAccessinfo]=useState(accessinfo);
+import { send, update } from "../../function/Axios";
+export default function Setaccess({value,close}){
+    const [info ,setAccessinfo]=useState(
+        accessinfo
+    );
+    const [data,setValue]=useState(  value && value["access"] ?   JSON.parse(value["access"])  :{})
+    const [profile,setProfile]=useState(value!=null? value:{
+        id:null,
+        name:null,
+        access:null,
+    })
+    const updateAccess = (key1, key2, value) => {
+        setValue(prev => ({
+            ...prev,
+            [key1]: {
+                ...prev[key1],
+                [key2]: value
+            }
+        }));
+    };
     const [openIconeCard,setIsOpenIconeCard]=useState(false);
     const [openComparaison,setOpenComparaison]=useState(false);
-
     const changeIcone=(iconename)=>{
         handlerVariable("icone",iconename,setAccessinfo);
     }
@@ -17,6 +36,18 @@ export default function Setaccess(){
             [name]: value,
         }));
     };
+
+   const submit = async ()=>{
+        console.log(profile)
+        handlerVariable("access",JSON.stringify(data),setProfile);
+        const response = value != null ?  await update(profile,url + "roles")  :   await send(profile,url + "roles")
+        if (response == true) {
+            toast.success("Données insérées avec succès !");
+            close(false);
+        } else {
+            toast.error("Problème serveur, réessayez plus tard !");
+        }
+    }
     return(<>
     <div class="flex h-screen ">
         <Sidebar/> 
@@ -29,66 +60,19 @@ export default function Setaccess(){
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <h1 class="text-xl font-semibold text-gray-900">Gestion Accès <b className="text-softbleu">{info.name}</b></h1>
-                                    <button class="bg-softbleutini-12 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2">
+                                    
+                                    <button class="bg-softbleutini-12 hover:bg-softbleushade-12 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={()=>submit()}>
                                         <i class="fa-solid fa-pen text-white"></i>
-                                        modifier
+                                        valider changement
                                     </button>
                                 </div>
-                                <p class="text-sm text-gray-600">Si vous voulez ajouter un nouveau profile <span className="text-or font-semibold">cliquez ici</span> ou  <Link to="/access-profile"><span className="text-softbleu font-semibold">retour</span></Link> .</p>
+                                <p class="text-sm text-gray-600">Si vous voulez ajouter un nouveau profile <span className="text-or font-semibold">cliquez ici</span> ou 
+                                {close!=null ? <button className="text-softbleu font-semibold" onClick={()=>{close(false)}}>retour</button>
+                                 : <Link to="/access-profile"> <span className="text-softbleu font-semibold" onClick={()=>{close(false)}}>retour</span></Link>
+                                }
+                                .</p>
                             </div>
                         </div>
-                        {/* <div className=" border-t   border-gray-200 hover:bg-gray-100 px-10 py-4 grid grid-cols-5 justify-center items-center gap-2 ">
-                            <div className="flex items-center">
-                                <div className="bg-softbleutini-12 rounded-lg p-2 mr-3 relative">
-                                    <button onClick={()=>{setIsOpenIconeCard(true)}}>
-                                        <i className={`${info.icone} text-sm text-white`}/>
-                                    </button>
-                                        {openIconeCard ?
-                                    <div className="absolute top-0 right-0 mt-2 z-50 bg-white shadow-md rounded-lg p-3 w-64">
-                                        <IconeAccess nameIcone={info.icone}  changericone={changeIcone} close={setIsOpenIconeCard}/>
-                                    </div> :<></>}
-                                </div>
-                                <div className="text-sm font-bold text-gray-700">{info.nbr}</div>
-                            </div>
-                            <div className="text-sm font-medium text-gray-800">
-                                    <input className="text-sm" placeholder={info.name} onChange={(event)=>handlerVariable("name",event.target.value,setAccessinfo)}/>
-                            </div>    
-                            <div className="text-sm font-medium text-gray-800">
-                                {info.nbruser} utilisateurs
-                            </div>              
-                            <div className="col-span-2 bg-gray-200 rounded-full h-2 relative w-full">
-                                <div
-                                className={`h-2 rounded-full bg-softbleutini-12 ${widthClasses(info.percentage)}`}
-                                ></div>
-                                <span className="absolute inset-0 flex justify-center items-center text-[10px] font-semibold text-gray-600">
-                                {info.percentage}%
-                                </span>
-                            </div>
-                        </div> */}
-                        
-                        {/* list utilisateur */}
-                        {/* <div class="border-t border-gray-200 p-2">
-                            <div class="flex items-center justify-center">
-                                <div className="flex items-center gap-2 overflow-x-auto flex-nowrap w-300">
-                                    {info.listuser.map((value, idx) => (
-                                        <div
-                                        key={idx}
-                                        className="bg-white border border-gray-200 p-4 flex flex-col justify-center items-center gap-2 w-[100px] shrink-0"
-                                        >
-                                        <img
-                                            src={value.photo}
-                                            className="w-10 h-10 rounded-lg"
-                                            alt={value.login}
-                                        />
-                                        <div className="text-gray-500 text-xs text-center">
-                                            <p className="break-all">{value.login}</p>
-                                        </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                            </div>
-                        </div> */}
                         
                         <div class="p-6 border-t border-gray-200">
                             <div class="overflow-x-auto relative">
@@ -135,21 +119,27 @@ export default function Setaccess(){
                                     </div>
                                 : <></>}
                                 {/* fonctionnaliter */}
+                                <div className="my-2">
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">Nom</label>
+                                    <input 
+                                        type="text" 
+                                        placeholder={profile.name} 
+                                        className="input_singup"
+                                        onChange={(event) => handlerVariable("name", event.target.value,setProfile)}
+                                    />
+                                </div>
                                 <table class="w-full h-screen overflow-y-auto ">
                                     <thead>
                                         <tr class="border-b border-gray-200">
-                                            <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Profile</th>
-                                            <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">Member</th>
-                                            <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">Manager</th>
-                                            <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">Admin</th>
-                                            <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">
+                                            <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Fonctionnalitees</th>
+                                            <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">Access</th>
+                                            {/* <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">
                                                 <div className="flex space-x-2">
                                                     <button class="btn-neutre-gray" onClick={()=>{setOpenComparaison(true)}}>
                                                         <i class="fa-solid fa-plus"></i>
                                                     </button>
                                                 </div>
-                                            </th>
-
+                                            </th> */}
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-100">
@@ -164,20 +154,20 @@ export default function Setaccess(){
                                                         </div>
                                                     </td>
                                                 </tr>
-
                                                 {/* Lignes des fonctions si elles existent */}
                                                 {value.listfunction?.map((func, idx) => (
                                                     <tr key={idx}>
                                                         <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.name}</td>
                                                         {func.boolean.map((b, i) => (
                                                         <td key={i} className="py-4 px-4 text-center">
-                                                            <input
-                                                            type="checkbox"
-                                                            className="w-4 h-4 text-blue-600 rounded border-gray-300"
-                                                            checked={b}
-                                                            readOnly
+                                                             <input
+                                                                type="checkbox"
+                                                                className="w-4 h-4 text-blue-600 rounded border-gray-300"
+                                                                checked={ data && data[value.access] ? data[value.access][func.name] : false }
+                                                                onChange={(event) => updateAccess(value.access, func.name, event.target.checked)}
                                                             />
                                                         </td>
+
                                                         ))}
                                                     </tr>
                                                 ))}
