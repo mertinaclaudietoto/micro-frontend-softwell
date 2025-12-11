@@ -3,11 +3,11 @@ import { listeformateur, listsmallformation, url } from "../../../data/data";
 import SearchableSelect from "../../../function/select";
 import Select from "../../../function/selectSimple";
 import { Sidebar } from "../../sidebar";
-import { getData, send } from "../../../function/Axios";
+import { getData, send, update } from "../../../function/Axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function CardAddTrainer({close,infoTraining,listThemes}){
-    console.log("deddee 1223")
+export default function CardUpTrainer({close,id,listThemes}){
+    console.log("update")
     const [value, setValue] = useState({
                     id: 0,
                     name: "",
@@ -18,6 +18,27 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                     active: 3,
                     Trainerthemes: []  
                 });
+    const [data,setData]=useState(null);
+    const getValue = async ()=>{
+        const datalistThemes =  await getData(
+            url + `trainer?id=${id}`
+        );
+        if(datalistThemes.data!=null){
+            console.log(datalistThemes)
+                setData(datalistThemes.data)
+                var valuex= datalistThemes.data;
+                console.log(valuex)
+                handlerVariable("id",valuex.trainer.id,setValue)
+                handlerVariable("name",valuex.trainer.name,setValue)
+                handlerVariable("nif",valuex.trainer.nif,setValue)
+                handlerVariable("stat",valuex.trainer.stat,setValue)
+                handlerVariable("tel",valuex.trainer.tel,setValue)
+                handlerVariable("email",valuex.trainer.email,setValue)
+                handlerVariable("active",valuex.trainer.active,setValue)
+                handlerVariable("Trainerthemes",valuex.vTrainerThemes,setValue)
+                console.log(valuex.v)
+        }
+    }
     const [listUnits,setListUnits]=useState([])
     const [price ,setPrice ]=useState({
         id: 0,
@@ -59,8 +80,8 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
             [name]: value,
         }));
     };
-    const handlerListThemeTrainer=  (name, value, index = null) => {
-        console.log(value)
+    const handlerListThemeTrainer=  (name, tabev, index = null) => {
+
         setValue((previous) => {
             const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
             if (index !== null) {
@@ -72,7 +93,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
             }
          return {
                 ...previous,
-                [name]: [...currentArray, value],
+                [name]: [...currentArray, tabev],
             };
         });
 
@@ -97,9 +118,11 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
     };
     useEffect(() => {
             getListUnit();
+            getValue();
         }, []);
     const submit = async ()=>{
-        const data = await send(value,url + "trainer")
+        // console.log(value)
+        const data = await update(value,url + "trainer")
         // console.log(value)
         if (data == true) {
             toast.success("Données insérées avec succès !");
@@ -191,7 +214,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                             class="input_singup"
                                             min="0"                  // force positif
                                             step="0.01"
-                                            placeholder={value.nif}
+                                            placeholder=""
                                             onChange={(event) => handlerVariable("unitprice", event.target.value,setPrice)}
                                         />
                                         {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
@@ -206,7 +229,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                             min="0"                  // force positif
                                             step="0.01"
                                             class="input_singup"
-                                            placeholder={value.nif}
+                                            placeholder=""
                                             onChange={(event) => handlerVariable("maxpersonne", event.target.value,setPrice)}
                                         />
                                         {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
@@ -227,7 +250,8 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                     ></textarea>
                                 </div>
                             </div>
-                            <div id="tasksList" class="space-y-4 max-h-30 overflow-y-auto">
+                            {/* max-h-30 overflow-y-auto */}
+                            <div id="tasksList" class="space-y-4 ">
                                  <table class="w-full">
                                  <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>

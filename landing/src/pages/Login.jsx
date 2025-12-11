@@ -21,7 +21,6 @@ export default function Login({closePopup}){
     const submit = async () => {
         try {
             const response = await _login(login, url + "employ/login");
-            console.log("responce",response.data)
             if(response.data.success==false){
                 setText("Login ou Mot de passe incorrecte")
             }
@@ -33,7 +32,8 @@ export default function Login({closePopup}){
             }
              if (response.data.data.access) {
                 sessionStorage.setItem("access", response.data.data.access);
-                 navigate("/training-theme");
+                // console.log(response.data.data.access)
+                navigate("/training-theme");
             }
         } catch (error) {
             setText("Login ou Mot de passe incorrecte")

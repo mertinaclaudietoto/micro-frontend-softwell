@@ -5,6 +5,9 @@ import CardAdduserapk from "../../components/card/popup/CardAdduserapk";
 import { getData } from "../../function/Axios";
 import Select from "../../function/selectSimple";
 export default function UserProfile(){
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
+
     const[data,setData]=useState([]);
     const [visible, setVisible] = useState(false);
     const [addCompte, setAddCompte] = useState(false);
@@ -14,7 +17,7 @@ export default function UserProfile(){
     const [numpage,setNumpage]=useState(1);
     const [search ,setSearch]=useState(null);
     const [idrole ,setIdRole]=useState(null);
-
+    
      const getNbrLigne = async ()=>{
         const data = await getData(url + `employ/profile-count`);
         if(data.data!=null)
@@ -89,9 +92,13 @@ export default function UserProfile(){
                                     </button>
                                 </div>
                                 <div className="flex space-x-2">
-                                    <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setAddCompte(true)}}>
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
+                                    {accesObj && (accesObj?.profile?.modification != null || accesObj?.profile?.modification !== undefined)  ? null : (
+                                        <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setAddCompte(true)}}>
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    )}
+
+                                   
                                     <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                     <i className="fas fa-arrow-left"></i>
                                     </button>
@@ -145,7 +152,6 @@ export default function UserProfile(){
                                             <button type="button" className="text-blue-500 text-xs underline" onClick={() => setVisible(!visible)}>
                                                  <i class="fa-solid fa-pen"></i>
                                             </button>
-                                            
                                             </td> 
                                         </tr>
                                     </React.Fragment>

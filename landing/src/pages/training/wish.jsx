@@ -8,6 +8,9 @@ import { useState } from "react";
 import Select from "../../function/selectSimple";
 export default function Trainer(){
     // TODO:delete and update
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
+
     const [data,setData]=useState([]); 
     const [dataGroup,setDataGroup]=useState([]); 
     const [close,setClose]=useState(false); 
@@ -85,12 +88,14 @@ export default function Trainer(){
                                                 <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
                                                     total
                                                 </button>
-                                                <button class="btn-neutre-gray" onClick={()=>{setClose(true)}}>
-                                                    souhait
-                                                </button>
-                                                <button class="btn-neutre-gray" onClick={()=>{setCloseAddTraining(true)}}>
+                                                {accesObj && (accesObj?.wish?.suppression == null || accesObj?.wish?.suppression == undefined)  ? null : (
+                                                    <button class="btn-neutre-gray" onClick={()=>{setClose(true)}}>
+                                                        souhait
+                                                    </button>
+                                                )}
+                                                {/* <button class="btn-neutre-gray" onClick={()=>{setCloseAddTraining(true)}}>
                                                     validation
-                                                </button>
+                                                </button> */}
                                                 <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                                 <i className="fas fa-arrow-left"></i>
                                                 </button>

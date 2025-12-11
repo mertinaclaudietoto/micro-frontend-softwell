@@ -514,6 +514,7 @@ export const accessinfo ={
   { icone: "fas fa-tachometer-alt",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-tachometer-alt",access:"wish", name: "Souhait", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-tachometer-alt",access:"validation", name: "Formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-tachometer-alt",access:"session", name: "Session formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-tachometer-alt",access:"profile", name: "Profile", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-tachometer-alt",access:"compte", name: "Compte", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
 
@@ -588,8 +589,8 @@ export const usersprofile = [
   { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "henry123" },
  
 ];
-export const url ="http://localhost:5172/api/";
-// export const url ="http://151.80.218.41:1010/api/";
+// export const url ="http://localhost:5172/api/";
+export const url ="http://151.80.218.41:1010/api/";
 
 export const themeM = {
   name: "...........................",
@@ -1362,3 +1363,5 @@ export const participantTraining = [
     evaluationformateur: true
   }
 ];
+
+

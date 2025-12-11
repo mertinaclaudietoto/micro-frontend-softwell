@@ -7,6 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 export default function CardUpdateTheme({close,value}){
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
+
     const [theme,setTheme]=useState(value!=null ? value:themeM);
     const [trainingType,setTrainingType]=useState(trainingTypes);
     const [skill,setSkill]=useState("");
@@ -61,7 +64,7 @@ export default function CardUpdateTheme({close,value}){
             toast.success("Données supprimer avec succès !");
             close(false);
         } else {
-            toast.error("Problème serveur, réessayez plus tard !");
+            toast.error("Problème serveur où il ne peut pas être supprimé!");
         }
     }
     useEffect(() => {
@@ -163,9 +166,11 @@ export default function CardUpdateTheme({close,value}){
                 
                 </div>
                 <div class="flex items-center justify-end gap-3 mt-2">
-                    <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{del()}}>
-                        Supprimer
-                    </button>
+                    {accesObj && (accesObj?.theme?.suppression == null || accesObj?.theme?.suppression == undefined)  ? null : (
+                       <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{del()}}>
+                            Supprimer
+                        </button>
+                    )}
                     <button class="btn-action" onClick={()=> submit()}>
                         Modifier
                     </button>

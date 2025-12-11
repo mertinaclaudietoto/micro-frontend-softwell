@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { getData } from "../../function/Axios";
 import Setaccess from "./Setaccess";
 export default function ProfileAccess(){
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
+
     const [search ,setSearch]=useState("");
     const [close,setClose]=useState(false);
     const [updateValue,setUpDateValue]=useState(null);
@@ -48,15 +51,11 @@ export default function ProfileAccess(){
                                         </div> */}
                                     
                                         <div className="flex space-x-2">
-                                            <Link  to="/access-set" class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{showAddPopup(true)}}>
-                                                <i class="fa-solid fa-plus"></i>
-                                            </Link>
-                                            {/* <button className="btn-neutre-gray"  title="Précédent">
-                                            <i className="fas fa-arrow-left"></i>
-                                            </button>
-                                            <button className="btn-neutre-gray"  title="Suivant">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </button> */}
+                                            {accesObj && (accesObj?.profile?.ajout != null || accesObj?.profile?.ajout !== undefined)  ? null : (
+                                               <Link  to="/access-set" class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{showAddPopup(true)}}>
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </Link>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -82,9 +81,11 @@ export default function ProfileAccess(){
                                                 <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.name}</span></td>
                                                 {/* <td class="px-6 py-4 text-sm text-gray-500">{value.access}</td> */}
                                                 <td class="px-6 py-4 text-sm text-gray-500">
-                                                    <button  onClick={()=>{changeValue(value)}}>
-                                                            ⋮
-                                                    </button>
+                                                    {accesObj && (accesObj?.profile?.modification != null || accesObj?.profile?.modification !== undefined)  ? null : (
+                                                        <button  onClick={()=>{changeValue(value)}}>
+                                                                ⋮
+                                                        </button>
+                                                    )}
                                                 </td>
                                             </tr>
                                             </>
@@ -97,10 +98,7 @@ export default function ProfileAccess(){
                 </main>
             </div>
         </>
-
         }
-          
-
         </>
     )
 }

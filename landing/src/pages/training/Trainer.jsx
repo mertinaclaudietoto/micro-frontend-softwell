@@ -2,20 +2,25 @@
 import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
-import { CardAddTrainer, Filter,Sidebar ,CardAddTraining} from "../../components";
+import { CardAddTrainer, Filter,Sidebar ,CardAddTraining, CardUpTrainer} from "../../components";
 import { url, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
 export default function Trainer(){
     // TODO:delete and update
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
+
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
     const [listTheme ,setListTheme]=useState([]);
     const [idtheme ,setIdtheme]=useState(null);
     const [manageTraining,setManageTraining]=useState(null);
     const [seeTrainingListe,setSeeTrainingListe]=useState(false);
-    const showTraining=(value)=>{
-        setSeeTrainingListe(true);
+    const [seeUp,setUp]=useState(false);
+    const upTrainer=(value)=>{
+
+        setUp(true);
         setManageTraining(value)
     }
     const nbrSize=10;
@@ -65,7 +70,7 @@ export default function Trainer(){
       return(
         <>
         
-        {seeTrainingListe  ? <CardAddTrainer  listThemes={listTheme} close={setSeeTrainingListe} infoTraining={manageTraining} />:<>
+        {seeUp ? <CardUpTrainer close={setUp} id={manageTraining.id}  listThemes={listTheme}  /> :    seeTrainingListe  ? <CardAddTrainer  listThemes={listTheme} close={setSeeTrainingListe} infoTraining={manageTraining} />:<>
         <div class="flex h-screen ">
             <Sidebar/>
             <main class="flex-1 ">    
@@ -99,9 +104,11 @@ export default function Trainer(){
                                         </button>
                                     </div>
                                     <div className="flex space-x-2">
-                                        <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
+                                        {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (
+                                            <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        )}
                                         <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                         <i className="fas fa-arrow-left"></i>
                                         </button>
@@ -138,11 +145,13 @@ export default function Trainer(){
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.tel}</td>
                                         
                                         <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">{value.nameActive}</span></td>
-                                        {/* <td class="px-6 py-4 text-sm text-gray-500">
-                                            <button onClick={()=>{showTraining(value)}}>
-                                                    ⋮
-                                            </button>
-                                        </td> */}
+                                         {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
+                                            <td class="px-6 py-4 text-sm text-gray-500">
+                                                <button onClick={()=>{upTrainer(value)}}>
+                                                        ⋮
+                                                </button>
+                                            </td>
+                                        )}
                                     </tr>
                                     </>
                                 ))}

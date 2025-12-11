@@ -5,6 +5,9 @@ import {Filter,Sidebar,CardSmallTraining, CardDemandeTraining,CardAddTheme,CardU
 import { useState } from "react"
 import { getData } from "../../function/Axios";
 export default function TrainingTheme(){
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
+
     const [close ,setClose]=useState(false);
     const [closeUpdate ,setCloseUpdate]=useState(false);
 
@@ -80,9 +83,14 @@ export default function TrainingTheme(){
                                     
                                     
                                         <div className="flex space-x-2">
-                                            <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setClose(true)}}>
-                                                <i class="fa-solid fa-plus"></i>
-                                            </button>
+                                           {accesObj && (accesObj?.theme?.ajout == null || accesObj?.theme?.ajout == undefined) ? null : (
+                                                <button
+                                                    className="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu"
+                                                    onClick={() => setClose(true)}
+                                                >
+                                                    <i className="fa-solid fa-plus"></i>
+                                                </button>
+                                            )}
                                             <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                             <i className="fas fa-arrow-left"></i>
                                             </button>
@@ -96,11 +104,21 @@ export default function TrainingTheme(){
                             {/* filtre */}
                             <div class="overflow-x-auto  mt-2">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4  my-auto overflow-y-auto mx-auto bg-white p-2 ">
-                                {dataList.map((value,index) => (
-                                    <button   onClick={()=>updateValue(value)} index={index} class="bg-gray-50  rounded-xl p-4 mb-4 hover:shadow-md shadow-sm transition-shadow cursor-pointer">
-                                        <CardSmallTraining   info={value} />
-                                    </button>
-                                ))}
+                               {dataList.map((value, index) => {
+                                
+                                    const isModifiable = accesObj && (accesObj?.theme?.modification == null || accesObj?.theme?.modification == undefined) 
+
+                                    return (
+                                        <button
+                                            key={index}
+                                            onClick={isModifiable ? undefined : () => updateValue(value)}
+                                            className="bg-gray-50 rounded-xl p-4 mb-4 hover:shadow-md shadow-sm transition-shadow cursor-pointer"
+                                        >
+                                            <CardSmallTraining info={value} />
+                                        </button>
+
+                                    );
+                                })}
                                 </div>
                             </div>  
                         </div>

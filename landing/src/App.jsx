@@ -24,7 +24,8 @@ import {
   TrainingState,
   Wish,
   Validation,
-  Login
+  Login,
+  ProtectedRoute
   
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
@@ -106,15 +107,15 @@ function App() {
         <Route path="/rh-statistique" element={<Statistique/>}></Route>
         <Route path="/rh-listrequeste" element={<ListRequeste/>}></Route>
         <Route path="/rh-steprecruitment" element={<StepRecruitment/>}></Route>
-        <Route path="/access-profile" element={<ProfileAccess/>}></Route>
-        <Route path="/access-set" element={<Setaccess/>}></Route>
-        <Route path="/access-user" element={<UserProfile/>}></Route>
-        <Route path="/training-theme" element={<TrainingTheme/>}></Route>
+        <Route path="/access-profile" element={<ProtectedRoute> <ProfileAccess/> </ProtectedRoute>}></Route>
+        <Route path="/access-set" element={<ProtectedRoute> <Setaccess/> </ProtectedRoute>}></Route>
+        <Route path="/access-user" element={<ProtectedRoute> <UserProfile/> </ProtectedRoute>}></Route>
+        <Route path="/training-theme" element={<ProtectedRoute> <TrainingTheme/> </ProtectedRoute>}></Route>
         {/* <Route path="/training-inprogress" element={<InprogressTraining/>}></Route> */}
-        <Route path="/training-trainer" element={<Trainer/>}></Route>
-        <Route path="/training-wish" element={<Wish/>}></Route>
-        <Route path="/training-validation" element={<Validation/>}></Route>
-        <Route path="/training-state/:id" element={<TrainingState />} />
+        <Route path="/training-trainer" element={<ProtectedRoute><Trainer/></ProtectedRoute>}></Route>
+        <Route path="/training-wish" element={<ProtectedRoute><Wish/> </ProtectedRoute>}></Route>
+        <Route path="/training-validation" element={ <ProtectedRoute><Validation/></ProtectedRoute>}></Route>
+        <Route path="/training-state/:id" element={ <ProtectedRoute><TrainingState /> </ProtectedRoute>} />
       </Routes>
     </>
   )
