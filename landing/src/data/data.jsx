@@ -492,58 +492,22 @@ export const accessinfo ={
   name:"manager",
   nbruser:10,
   percentage:30,
-  listuser: [
-    { login: "alice", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" },
-    { login: "bob", photo: "https://images.unsplash.com/photo-1502767089025-6572583495b4?w=300&h=300&fit=crop" },
-    { login: "carol", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop" },
-    { login: "david", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop" },
-    { login: "eva", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop" },
-    { login: "frank", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop" },
-    { login: "grace", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop" },
-    { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop" },
-    { login: "irene", photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" },
-    { login: "jack", photo: "https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=300&h=300&fit=crop" },
-    { login: "karen", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop" },
-    { login: "leo", photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop" },
-    { login: "mia", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" },
-    { login: "nathan", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop" },
-    { login: "olivia", photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=300&h=300&fit=crop" }
-  ],
   listpage : [
-  { icone: "fas fa-tachometer-alt",access:"theme" ,name: "Themes", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-tachometer-alt",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-tachometer-alt",access:"wish", name: "Souhait", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-tachometer-alt",access:"validation", name: "Formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-tachometer-alt",access:"session", name: "Session formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-tachometer-alt",access:"profile", name: "Profile", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-tachometer-alt",access:"compte", name: "Compte", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-
-
-
-
-
-
-  // { icone: "fas fa-users", name: "Utilisateurs", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
-  // { icone: "fas fa-briefcase", name: "Projets", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
-  // { icone: "fas fa-chart-line", name: "Ventes", listfunction: [{ name: "ajout", boolean: [false] }, { name: "export", boolean: [false] }] },
-  // { icone: "fas fa-box", name: "Produits", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
-  // { icone: "fas fa-warehouse", name: "Stocks", listfunction: [{ name: "ajout", boolean: [false] }, { name: "export", boolean: [false] }] },
-  // { icone: "fas fa-money-check-alt", name: "Finance", listfunction: [{ name: "voir", boolean: [false] }, { name: "export", boolean: [false] }] },
-  // { icone: "fas fa-handshake", name: "Partenaires", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
-  // { icone: "fas fa-file-invoice", name: "Factures", listfunction: [{ name: "ajout", boolean: [false] }, { name: "export", boolean: [false] }] },
-  // { icone: "fas fa-truck", name: "Livraisons", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
-  // { icone: "fas fa-bell", name: "Notifications", listfunction: [{ name: "voir", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
-  // { icone: "fas fa-cogs", name: "Paramètres", listfunction: [{ name: "modifier", boolean: [false] }] },
-  // { icone: "fas fa-user-shield", name: "Roles & Permissions", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
-  // { icone: "fas fa-file-alt", name: "Rapports", listfunction: [{ name: "export", boolean: [false] }] },
-  // { icone: "fas fa-comments", name: "Support", listfunction: [{ name: "répondre", boolean: [false] }] },
-  // { icone: "fas fa-calendar-alt", name: "Agenda", listfunction: [{ name: "ajout", boolean: [false] }, { name: "modifier", boolean: [false] }] },
-  // { icone: "fas fa-gift", name: "Promotions", listfunction: [{ name: "ajout", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
-  // { icone: "fas fa-star", name: "Feedback", listfunction: [{ name: "voir", boolean: [false] }, { name: "supprimer", boolean: [false] }] },
-  // { icone: "fas fa-shield-alt", name: "Sécurité", listfunction: [{ name: "modifier", boolean: [false] }] },
-  // { icone: "fas fa-info-circle", name: "Aide", listfunction: [{ name: "voir", boolean: [false] }] }
+  { icone: "fa-solid fa-palette",access:"theme" ,name: "Themes", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-chalkboard-user",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-layer-groupr",access:"wish", name: "Souhait", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-circle-check",access:"validation", name: "Formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-calendar-alt",access:"session", name: "Session formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-user",access:"profile", name: "Profile", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-users",access:"compte", name: "Compte", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  // recruitment
+  { icone: "fas fa-briefcase",access:"post", name: "Post", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-file-alt",access:"demandepost", name: "Demande recrutement", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-check-circle",access:"validepost", name: "Les demande que j'ai validee", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-folder-open",access:"alldemande", name: "Tout les demande de recrutement", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-clipboard-check",access:"infoselectionrecruitment", name: "Information pour les recrutements", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-building",access:"infoentreprise", name: "Information generale de l'entreprise", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
 ]
-
 }
 
 export const profilesicone = [
@@ -589,8 +553,12 @@ export const usersprofile = [
   { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "henry123" },
  
 ];
-// export const url ="http://localhost:5172/api/";
-export const url ="http://151.80.218.41:1010/api/";
+export const url ="http://localhost:5172/api/";
+// export const url ="http://151.80.218.41:1010/api/";
+// export const url_recrutement ="http://151.80.218.41:5050/api/";
+
+export const url_recrutement ="http://localhost:5118/api/";
+
 
 export const themeM = {
   name: "...........................",
@@ -1199,15 +1167,36 @@ export   const  datasidebar =
                 {label :"Profile",icone : "fa-solid fa-user",actif:false,link:"/access-profile",subItems:null,acces:"profile"},
                 // {label :"Access",icone : "fa-solid fa-users",actif:false,link:"/access-set",subItems:null},
                 {label :"Compte",icone : "fa-solid fa-users",actif:false,link:"/access-user",subItems:null,acces:"compte"},
+            ],
+            recrutement:[
+                {label :"Post",icone : "fas fa-briefcase",actif:false,link:"/addpost",subItems:null,acces:"post"},
+                {label :"Demande",icone : "fas fa-file-alt",actif:false,link:"/myrequest",subItems:null,acces:"demandepost"},
+                {label :"Mes Validation",icone : " fas fa-check-circle ",actif:false,link:"/myvalidation",subItems:null,acces:"validepost"},
+                {label :"Tout les demandes",icone : "fas fa-folder-open",actif:false,link:"/allrequest",subItems:null,acces:"alldemande"},
+                {label :"info generale",icone : "fas fa-clipboard-check",actif:false,link:"#",acces:"infoselectionrecruitment",
+                    subItems:[
+                        {label :"Certification",actif:false,link:"/crud-certification"},
+                        {label :"Diplome",actif:false,link:"/crud-diplome"},
+                        {label :"Hard Skill",actif:false,link:"/crud-hardskill"},
+                        {label :"Language",actif:false,link:"/crud-Language"},
+                        {label :"Obligatoire",actif:false,link:"/crud-mandatory"},
+                        {label :"Soft Skill",actif:false,link:"/crud-softskill"},
+                        {label :"Contrat",actif:false,link:"/crud-contrat"},
+                    ]
+                },
+            ],
+            infoentreprise :[
+                {label :"info generale",icone : "fas fa-building",actif:false,link:"#",acces:"infoentreprise",
+                    subItems:[
+                        {label :"Civility",actif:false,link:"/crud-civility"},
+                        {label :"Localisation",actif:false,link:"/crud-localisation"},
+                    ]
+                },
+
             ]
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
                 // {label :"Dashboard",icone : "fas fa-th",actif:false,link:"/manager/dasboard",subItems:null},
-                // {label :"gestion d'acces",icone : "fa-solid fa-clipboard-check",actif:false,link:"/manager/criterien",
-                //     subItems:[
-                //         {label :"profile",actif:false,link:"/access-profile"},
-                //         {label :"utilisateur",actif:false,link:"/access-user"},
-                //     ]
-                // },
+               
                 // {label :"critère de sélection",icone : "fa-solid fa-clipboard-check",actif:false,link:"/manager/criterien"},
                 // {label :"Listes demande",icone : "fa-solid fa-bullhorn",actif:false,link:"/manager/listrequeste"},
 }

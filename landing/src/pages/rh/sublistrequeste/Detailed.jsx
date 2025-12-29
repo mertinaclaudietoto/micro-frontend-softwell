@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { infocandidate, listCandidate } from "../../../data/candidate";
 import { getAge,dateToLetters, diffDate } from "../../../function/Date";
-import CardCriterien from "../../../components/card/criterien/CardCriterien";
+import CardCriterien from "../../../components/card/criterien/AddPost";
 import CardCriterienRh from "../../../components/card/criterien/CardCriterienRh";
 import Step from "../../../components/step/Step";
 import { step } from "../../../data/rh";

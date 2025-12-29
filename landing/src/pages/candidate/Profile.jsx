@@ -3,9 +3,9 @@ import Header from "../../components/header/candidate/Header";
 
 export default function Profile(){
     return (
-    <>
+    <div className="p-8">
     <Header></Header>
-    <div class="relative z-10 bg-white  w-full max-w-4xl  mx-auto p-6 md:p-10">
+    <div class="relative z-10 bg-white  w-full max-w-4xl  mx-auto p-6 md:p-10 ">
        {/* etaps formulaire */}
        {/* fin formulaire */}
        {/* etap 1 */}
@@ -345,7 +345,7 @@ export default function Profile(){
         </div>
         </div>
     </div> 
-    </>
+    </div>
     
     );
 }

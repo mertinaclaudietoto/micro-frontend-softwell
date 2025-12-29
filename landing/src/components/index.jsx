@@ -9,6 +9,8 @@ export * from "./card";
 export * from "./hero";
 export * from "./dashboard";
 export * from "./state";
+export * from "./crud";
+
 
 
 

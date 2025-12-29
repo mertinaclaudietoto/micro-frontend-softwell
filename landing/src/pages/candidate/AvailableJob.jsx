@@ -1,11 +1,12 @@
 import React from 'react';
 import Header from '../../components/header/candidate/Header';
 import CardOffreSmall from '../../components/card/offre/CardOffreSmall';
+import { CardOffreSmallCandidate } from '../../components';
 import CardOffreMiddel from '../../components/card/offre/CardOffreMiddel';
 export default function AvailableJob() {
   return (
     <>
-        <div class="bg-white  overflow-hidden h-max">
+        <div class="bg-white  overflow-hidden h-max p-8">
 
             <Header></Header>
             {/* Filter */}
@@ -40,10 +41,14 @@ export default function AvailableJob() {
                             <h3 class="text-lg font-bold">Related Jobs</h3>
                             <button class="text-sm border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50">More Filters</button>
                         </div>
+                        {/* <CardOffreSmall></CardOffreSmall>
                         <CardOffreSmall></CardOffreSmall>
                         <CardOffreSmall></CardOffreSmall>
-                        <CardOffreSmall></CardOffreSmall>
-                        <CardOffreSmall></CardOffreSmall>
+                        <CardOffreSmall></CardOffreSmall> */}
+                        <CardOffreSmallCandidate/>
+                        <CardOffreSmallCandidate/>
+                        <CardOffreSmallCandidate/>
+                        <CardOffreSmallCandidate/>
                     </div>
                     <div class="lg:col-span-2">
                         <CardOffreMiddel></CardOffreMiddel>

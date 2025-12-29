@@ -21,14 +21,15 @@ export default function Login({closePopup}){
     const submit = async () => {
         try {
             const response = await _login(login, url + "employ/login");
+            // console.log(response.data.data)
             if(response.data.success==false){
                 setText("Login ou Mot de passe incorrecte")
             }
             if (response.data.data.token) {
-                sessionStorage.setItem("token", response.data.token);
+                sessionStorage.setItem("token", response.data.data.token);
             }
             if (response.data.data.id) {
-                sessionStorage.setItem("userId", response.data.id);
+                sessionStorage.setItem("userId", response.data.data.id);
             }
              if (response.data.data.access) {
                 sessionStorage.setItem("access", response.data.data.access);

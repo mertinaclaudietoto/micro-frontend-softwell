@@ -1,9 +1,11 @@
 // Footer.jsx
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { HiBars3} from "react-icons/hi2";
 import RenderMenuHorizontal from '../../card/RendermenuHorizontal';
 import CardLoginUser from '../../card/popup/CardLoginUser';
 import { Navigate, useNavigate } from "react-router-dom";
+import { url_recrutement } from '../../../data/data';
+import { getData } from '../../../function/Axios';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false); 
@@ -21,13 +23,28 @@ const Header = () => {
   const registration =()=>{
     navigate("/candidate-registration");
   }
+  const [infoCompany,setCompany]=useState(null);
+  const loadData =async () => {
+      const data = await getData(
+          url_recrutement + `company/info`
+      );
+      console.log(data);
+      if(data.data!=null){
+        setCompany( data.data);
+        console.log(data);
+      }
+  };
+  useEffect(() => {
+          loadData();
+      }, []);
+  
   return (
   <>
     <nav class="shadow-sm sticky top-0 z-50 pink">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <span class="text-2xl font-bold pink:bg-pink-300">Logo</span>
+                    <span class="text-2xl font-bold pink:bg-pink-300">{infoCompany?.companyName}</span>
                 </div>
                 {/* <!-- Desktop Navigation --> */}
                 <div class="hidden md:flex items-center  space-x-8">

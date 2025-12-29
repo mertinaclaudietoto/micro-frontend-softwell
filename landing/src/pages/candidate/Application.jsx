@@ -5,7 +5,7 @@ import CardOffreMiddel from '../../components/card/offre/CardOffreMiddel';
 export default function Application() {
   return (
     <>
-        <div class="bg-white  overflow-hidden h-max">
+        <div class="bg-white  overflow-hidden h-max px-8">
 
             <Header></Header>
             <div class="px-4 md:px-8 py-6 ">

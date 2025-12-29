@@ -92,13 +92,11 @@ export default function UserProfile(){
                                     </button>
                                 </div>
                                 <div className="flex space-x-2">
-                                    {accesObj && (accesObj?.profile?.modification != null || accesObj?.profile?.modification !== undefined)  ? null : (
+                                    {accesObj && (accesObj?.profile?.modification == null || accesObj?.profile?.modification == undefined)  ? null : (
                                         <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setAddCompte(true)}}>
                                             <i class="fa-solid fa-plus"></i>
                                         </button>
                                     )}
-
-                                   
                                     <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                     <i className="fas fa-arrow-left"></i>
                                     </button>

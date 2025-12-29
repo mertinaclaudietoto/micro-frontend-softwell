@@ -38,9 +38,15 @@ export default function Setaccess({value,close}){
     };
 
    const submit = async ()=>{
-        console.log(profile)
+        
         handlerVariable("access",JSON.stringify(data),setProfile);
-        const response = value != null ?  await update(profile,url + "roles")  :   await send(profile,url + "roles")
+        var newprofile ={
+             id:profile.id,
+            name:profile.name,
+            access:JSON.stringify(data),
+         }
+        console.log(newprofile);
+        const response = newprofile.id != null ?  await update(newprofile,url + "roles")  :   await send(newprofile,url + "roles")
         if (response == true) {
             toast.success("Données insérées avec succès !");
             close(false);
@@ -186,3 +192,4 @@ export default function Setaccess({value,close}){
     </>);
 
 }
+

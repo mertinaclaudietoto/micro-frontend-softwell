@@ -1,7 +1,6 @@
 import { couleurs700 } from "../../../data/data";
 import TextState from "../../state/TextState";
 export default function CardOffreSmall({criterien ,onclick}){
-    console.log(criterien.color)
     return(
         <>
             <button onClick={()=>onclick(true)} class="bg-gray-50  rounded-xl p-4 mb-4 hover:shadow-md transition-shadow cursor-pointer">

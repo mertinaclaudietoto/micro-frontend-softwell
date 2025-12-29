@@ -26,20 +26,16 @@ export default function Sidebar(){
                     {/* dasboard */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
                     <div class="flex-1"></div>
-                    {/* pro version */}
-                    <button class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-50 text-indigo-600 mb-4">
-                        <i class="fas fa-bolt"></i>
-                    </button>
-
-                    {/* parametre */}
-                        {/* {parametres.map((value,index)=>(
-                            <SidebarShortButton  link={value.link} icone={value.icone} index={index} />
-                        )) } */}
+                        {pages.recrutement.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
-                    {/* change password user */}
-                    <button class="w-10 h-10 rounded-full overflow-hidden">
-                        <img src="https://i.pravatar.cc/100?img=8" alt="User" class="w-full h-full object-cover"/>
-                    </button>
+                    <div class="flex-1"></div>
+                    <div class="w-full h-px bg-gray-200 my-1"></div>
+                        {pages.infoentreprise.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+                        {pages.parametre.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+
+
+
+                    
                 </aside>
                 ) : (
                     <aside class="w-80 bg-white  flex flex-col border-r border-gray-200">
@@ -73,8 +69,15 @@ export default function Sidebar(){
                                 </div>
                             </div>
                             <div class="p-4">
+                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Recrutement</h3>
+                                <div class="space-y-1">
+                                    {pages.recrutement.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
+                                </div>
+                            </div>
+                            <div class="p-4">
                                 <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Parametre</h3>
                                 <div class="space-y-1">
+                                    {pages.infoentreprise.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                     {pages.parametre.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                 </div>
                             </div>
@@ -82,16 +85,7 @@ export default function Sidebar(){
                             {/* pub */}
                             {/* <CardPub/> */}
                             <div class="flex-1"></div>
-                            {/* pro version */}
-                            {/* <div className="pl-4">
-                                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-50 text-indigo-600 mb-4">
-                                    <i class="fas fa-bolt"></i>
-                                </button>
-                            </div> */}
-                          
-                            {/* <div class="p-4 border-t border-gray-100 space-y-1">
-                                {parametres.map((value,index)=>(<SidebarLargButton index={index} label={value.label} icone={value.icone} actif={value.actif}/>))}
-                            </div> */}
+                           
                         </div>
                         {/* compte */}
                         <div class="p-4 border-t border-gray-100">

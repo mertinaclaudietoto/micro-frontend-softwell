@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react';
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import './assets/style.css'
+import { CRUDIdName } from './components';
 import { 
   Application,
   AvailableJob,
@@ -25,7 +26,8 @@ import {
   Wish,
   Validation,
   Login,
-  ProtectedRoute
+  ProtectedRoute,
+
   
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
@@ -33,6 +35,10 @@ import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import CardNotification from './components/card/CardNotification';
 import CVCandidate from './pages/manager/sous/CVcandidate';
+import CardCriterien from './components/card/criterien/AddPost';
+import AllRequeste from './pages/recruitment/AllRequeste';
+import MyRequeste from './pages/recruitment/MyRequeste';
+import MyValidation from './pages/recruitment/Myvalidation';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -93,16 +99,18 @@ function App() {
       {/* <LocationSelector></LocationSelector> */}
       <Routes>
         <Route path="/" element={ <Login/>  } />
+        {/* partie candidate */}
         <Route path="/candidate" element={ <Landing/>  } />
         <Route path="/candidate-registration" element={<Registration />} />
         <Route path="/candidate-application" element={<Application />} />
         <Route path="/candidate-availableposte" element={<AvailableJob />} />
         <Route path="/candidate-profile" element={<Profile />} />
+
         {/* <Route path="/notification" element={<CardNotification/>}></Route> */}
-        <Route path="/manager-criterien" element={<CriterienStaff/>}></Route>
-        <Route path="/manager/dasboard" element={<DashboardManager/>}></Route>
-        <Route path="/manager/listrequeste" element={<Request/>}></Route>
-        <Route path="/test" element={<CVCandidate/>}></Route>
+        <Route path="/addpost" element={<CriterienStaff/>}></Route>
+        <Route path="/manager-dasboard" element={<DashboardManager/>}></Route>
+        <Route path="/manager-listrequeste" element={<Request/>}></Route>
+        {/* <Route path="/test" element={<CVCandidate/>}></Route> */}
         <Route path="/rh-dasboard" element={<DashboardRh/>}></Route>
         <Route path="/rh-statistique" element={<Statistique/>}></Route>
         <Route path="/rh-listrequeste" element={<ListRequeste/>}></Route>
@@ -111,11 +119,30 @@ function App() {
         <Route path="/access-set" element={<ProtectedRoute> <Setaccess/> </ProtectedRoute>}></Route>
         <Route path="/access-user" element={<ProtectedRoute> <UserProfile/> </ProtectedRoute>}></Route>
         <Route path="/training-theme" element={<ProtectedRoute> <TrainingTheme/> </ProtectedRoute>}></Route>
+
         {/* <Route path="/training-inprogress" element={<InprogressTraining/>}></Route> */}
         <Route path="/training-trainer" element={<ProtectedRoute><Trainer/></ProtectedRoute>}></Route>
         <Route path="/training-wish" element={<ProtectedRoute><Wish/> </ProtectedRoute>}></Route>
         <Route path="/training-validation" element={ <ProtectedRoute><Validation/></ProtectedRoute>}></Route>
         <Route path="/training-state/:id" element={ <ProtectedRoute><TrainingState /> </ProtectedRoute>} />
+        <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} /> } />
+        <Route path="/crud-localisation" element={ <CRUDIdName key={2} entityName={"localisation"} Name={"Localisation"} /> } />
+        <Route path="/crud-yearofexperience" element={ <CRUDIdName key={3} entityName={"yearsofexperience"} Name={"Annee d'experience"} /> } />
+        <Route path="/crud-certification" element={ <CRUDIdName key={4} entityName={"certification"} Name={"Certification"} /> } />
+        <Route path="/crud-diplome" element={ <CRUDIdName key={5} entityName={"diplome"} Name={"Diplome"} /> } />
+        <Route path="/crud-hardskill" element={ <CRUDIdName key={6} entityName={"hardSkill"} Name={"Hard Skill"} /> } />
+        <Route path="/crud-Language" element={ <CRUDIdName key={6} entityName={"language"} Name={"Hard Skill"} /> } />
+        <Route path="/crud-mandatory" element={ <CRUDIdName key={6} entityName={"mandatory"} Name={"Obligatoire Status"} /> } />
+        <Route path="/crud-softskill" element={ <CRUDIdName key={6} entityName={"softskill"} Name={"Soft Skill"} /> } />
+        <Route path="/crud-contrat" element={ <CRUDIdName key={6} entityName={"typecontrat"} Name={"Type Contrat"} /> } />
+        
+
+
+        <Route path="/test" element={ <CardCriterien /> } />
+        <Route path="/allrequest" element={ <AllRequeste /> } />
+        <Route path="/myrequest" element={ <MyRequeste /> } />
+        <Route path="/myvalidation" element={ <MyValidation /> } />
+        
       </Routes>
     </>
   )
