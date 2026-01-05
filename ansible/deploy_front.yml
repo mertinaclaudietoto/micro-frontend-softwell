@@ -16,6 +16,8 @@
         dest: C:\inetpub\wwwroot\gestion_formation_api\front
         force: yes
 
+        
+
     - name: Start IIS Site
       win_shell: |
         Import-Module WebAdministration

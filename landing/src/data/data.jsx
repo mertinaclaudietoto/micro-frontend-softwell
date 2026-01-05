@@ -562,9 +562,6 @@ export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";
 
 
 
-
-
-
 export const themeM = {
   name: "...........................",
   description: ".........................",

@@ -117,7 +117,7 @@ export default function SidebarLargButton({ link, icone, label, actif, subItems 
                     </button>
                     
                     {/* Dropdown */}
-                    <div className={`ml-8 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <div className={`ml-8 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${isOpen ? ' opacity-100' : 'max-h-0 opacity-0'}`}>
                       {subItems.map((subItem, index) => (
                         <Link key={index} to={subItem.link}>
                           <button className={`card-icone-text ${subItem.actif ? "bg-gray-50 text-gray-900 hover:bg-gray-100" : "text-gray-600 hover:bg-gray-50"}`}>
