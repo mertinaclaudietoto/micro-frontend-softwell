@@ -1,0 +1,48 @@
+# Quand et dans quel ordre exécuter les actions ?
+name: Frontend CI/CD
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "landing/**"
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1️⃣ Récupérer le code
+    - name: Checkout source code
+      uses: actions/checkout@v4
+
+    # 2️⃣ Installer Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    # 3️⃣ Installer les dépendances
+    - name: Install dependencies
+      run: |
+        cd landing
+        npm install
+
+    # 4️⃣ Build du landing
+    - name: Build landing
+      run: |
+        cd landing
+        npm run build
+
+    # 5️⃣ Installer Ansible
+    - name: Install Ansible
+      run: |
+        sudo apt update
+        sudo apt install ansible -y
+
+    # 6️⃣ Déploiement avec Ansible
+    - name: Deploy to Windows server
+      env:
+        ANSIBLE_PASSWORD: ${{ secrets.ANSIBLE_PASSWORD }}
+      run: |
+        cd ansible
+        ansible-playbook -i hosts.ini deploy_front.yml

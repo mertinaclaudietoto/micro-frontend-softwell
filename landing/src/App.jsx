@@ -27,6 +27,7 @@ import {
   Validation,
   Login,
   ProtectedRoute,
+  LoginCandidate,
 
   
 } from "./pages";
@@ -39,6 +40,7 @@ import CardCriterien from './components/card/criterien/AddPost';
 import AllRequeste from './pages/recruitment/AllRequeste';
 import MyRequeste from './pages/recruitment/MyRequeste';
 import MyValidation from './pages/recruitment/Myvalidation';
+import ListCandidate from './pages/recruitment/ListCandidate';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -110,7 +112,7 @@ function App() {
         <Route path="/addpost" element={<CriterienStaff/>}></Route>
         <Route path="/manager-dasboard" element={<DashboardManager/>}></Route>
         <Route path="/manager-listrequeste" element={<Request/>}></Route>
-        {/* <Route path="/test" element={<CVCandidate/>}></Route> */}
+       
         <Route path="/rh-dasboard" element={<DashboardRh/>}></Route>
         <Route path="/rh-statistique" element={<Statistique/>}></Route>
         <Route path="/rh-listrequeste" element={<ListRequeste/>}></Route>
@@ -131,17 +133,29 @@ function App() {
         <Route path="/crud-certification" element={ <CRUDIdName key={4} entityName={"certification"} Name={"Certification"} /> } />
         <Route path="/crud-diplome" element={ <CRUDIdName key={5} entityName={"diplome"} Name={"Diplome"} /> } />
         <Route path="/crud-hardskill" element={ <CRUDIdName key={6} entityName={"hardSkill"} Name={"Hard Skill"} /> } />
-        <Route path="/crud-Language" element={ <CRUDIdName key={6} entityName={"language"} Name={"Hard Skill"} /> } />
-        <Route path="/crud-mandatory" element={ <CRUDIdName key={6} entityName={"mandatory"} Name={"Obligatoire Status"} /> } />
-        <Route path="/crud-softskill" element={ <CRUDIdName key={6} entityName={"softskill"} Name={"Soft Skill"} /> } />
-        <Route path="/crud-contrat" element={ <CRUDIdName key={6} entityName={"typecontrat"} Name={"Type Contrat"} /> } />
+        <Route path="/crud-Language" element={ <CRUDIdName key={7} entityName={"language"} Name={"Hard Skill"} /> } />
+        <Route path="/crud-mandatory" element={ <CRUDIdName key={8} entityName={"mandatory"} Name={"Obligatoire Status"} /> } />
+        <Route path="/crud-softskill" element={ <CRUDIdName key={9} entityName={"softskill"} Name={"Soft Skill"} /> } />
+        <Route path="/crud-contrat" element={ <CRUDIdName key={10} entityName={"typecontrat"} Name={"Type Contrat"} /> } />
+        <Route path="/crud-genre" element={ <CRUDIdName key={11} entityName={"genre"} Name={"Genre"} /> } />
+        <Route path="/crud-localisation_candidate" element={ <CRUDIdName key={12} entityName={"localisation_candidate"} Name={"Localisation des candidates"} /> } />
+        <Route path="/crud-university" element={ <CRUDIdName key={13} entityName={"university"} Name={"Etablisement d'origine"} /> } />
+        <Route path="/crud-typeexperience" element={ <CRUDIdName key={14} entityName={"typeexperience"} Name={"Type d'experience "} /> } />
+
         
 
-
-        <Route path="/test" element={ <CardCriterien /> } />
+        {/* <Route path="/test" element={ <CardCriterien /> } /> */}
         <Route path="/allrequest" element={ <AllRequeste /> } />
         <Route path="/myrequest" element={ <MyRequeste /> } />
         <Route path="/myvalidation" element={ <MyValidation /> } />
+        {/* page candidate */}
+        <Route path="/logincandidate" element={ <LoginCandidate /> } />
+
+
+        <Route path="/listecandidate" element={ <ListCandidate /> } />
+        <Route path="/infocandidate/:id" element={<CVCandidate />} />
+
+        
         
       </Routes>
     </>

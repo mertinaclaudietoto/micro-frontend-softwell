@@ -10,11 +10,13 @@ export default function ListDemande(){
     const getMain=(value)=>{
         switch(value){
             case 1: 
-                return <ListRequest/>
+            <ListRequest/>
+                return  <></>
             case 2: 
-                return <ListCandidate/>
+            // <ListCandidate/>
+                return <></>
             case 3: 
-                return <CVCandidate/>
+                return <></>
             default : <></>
         }
     }

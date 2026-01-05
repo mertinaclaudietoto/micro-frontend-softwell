@@ -3,6 +3,8 @@ export { default as AvailableJob } from "./AvailableJob";
 export { default as Registration } from "./Registration";
 export { default as Landing } from "./Landing";
 export { default as Profile } from "./Profile";
+export { default as LoginCandidate } from "./LoginCandidate";
+
 
 
 

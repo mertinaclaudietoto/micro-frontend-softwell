@@ -1,0 +1,21 @@
+# Comment déployer concrètement sur le PC Windows ?
+- name: Déployer Frontend IIS
+  hosts: windows_front
+  tasks:
+
+    - name: Stop IIS Site
+      win_shell: |
+        Import-Module WebAdministration
+        Stop-Website -Name "gestion-formation"
+
+    - name: Copier les fichiers du build
+      win_copy:
+        src: ../landing/dist/
+        dest: C:\inetpub\wwwroot\gestion_formation_api\front
+        force: yes
+        
+    - name: Start IIS Site
+      win_shell: |
+        Import-Module WebAdministration
+        Start-Website -Name "gestion-formation"
+

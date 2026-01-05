@@ -225,7 +225,6 @@ export default function AddPost({close}){
         // handlerVariable("nameTheme", opt.name,setPrice)
     }
 
-    
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
             ...previous,

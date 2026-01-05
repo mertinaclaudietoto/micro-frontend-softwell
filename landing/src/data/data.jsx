@@ -558,6 +558,8 @@ export const url ="http://localhost:5172/api/";
 // export const url_recrutement ="http://151.80.218.41:5050/api/";
 
 export const url_recrutement ="http://localhost:5118/api/";
+export const url_recrutement_image ="http://localhost:5118/uploads/";
+
 
 
 export const themeM = {
@@ -1182,6 +1184,9 @@ export   const  datasidebar =
                         {label :"Obligatoire",actif:false,link:"/crud-mandatory"},
                         {label :"Soft Skill",actif:false,link:"/crud-softskill"},
                         {label :"Contrat",actif:false,link:"/crud-contrat"},
+                        {label :"Genre",actif:false,link:"/crud-genre"},
+                        {label :"Localisation",actif:false,link:"/crud-localisation_candidate"},
+                        {label :"Universitee",actif:false,link:"/crud-university"},
                     ]
                 },
             ],

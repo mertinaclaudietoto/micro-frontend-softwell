@@ -1,18 +1,233 @@
 import { useState,useEffect,useRef } from "react";
 import {  HiOutlineMap,HiOutlineXMark,HiOutlineEnvelope, HiOutlinePhone} from "react-icons/hi2";
 import RenderMenuHorizontal from "../../components/card/RendermenuHorizontal";
-import { diplome, infocandidate, localisation, typeExperience } from "../../data/data";
+import { diplome, infocandidate, localisation, typeExperience, url_recrutement, url_recrutement_image } from "../../data/data";
 import { diffDate } from "../../function/Date";
 import axios from "axios";
+import { uploadCompressedImage } from "../../function/uplaodimage";
+import { getData, send } from "../../function/Axios";
+import Select from "../../function/selectSimple";
 
 export default function Registration(){
-    const [skill,setSkill] =useState('');
-    const [degree,setDegree] =useState({ id: "", school: '', graduationyear: '', diplome: '',description:""});
-    const [experience,setExperience] =useState({ id: "", entreprise: '', poste: '', datedebut: '',datefin:"",description:"",type:""});
-    const [candidate ,setInfoCandidate]=useState(infocandidate);
-    const [scrollPercentage, setScrollPercentage] = useState(0);
-    const save =()=>{
-        console.log(candidate)
+
+    const [data, setData] = useState({
+    photo:null,
+    name: null,
+    FirstName: null,
+    birthDate: null,
+    idGenre: null,
+    email: null,
+    tel: null,
+    idLocalisation: 3,
+    description: null,
+    login: null,
+    password: null,
+    candidateLanguages: [],
+    candidatehardskill: [],
+    candidatesoftskill: [],
+    education: [],
+    experience: [],
+    certificationCandidates: []
+    });
+    const handleUpload = async (e) => {
+        const file = e.target.files[0];
+
+        try {
+            const fileName = await uploadCompressedImage(file);
+            console.log("Fichier envoyé :", fileName);
+            handlerVariable("photo",fileName,setData);
+        } catch (err) {
+            console.error(err.message);
+        }
+    };
+    const [listGenre,setListGenre]=useState([]);
+    const getListGenre = async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `genre`
+        );
+        if(datalistThemes.data!=null)
+            setListGenre(datalistThemes.data)
+    }
+    const handlerGenre =(opt) =>{
+        console.log(opt)
+        handlerVariable("idGenre", opt.id,setData);
+        // handlerVariable("nameTheme", opt.name,setPrice)
+    }
+    ///localisation
+    const [listLocalisation,setListLocalisation]=useState([]);
+    const getListLocalisation= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `localisation_candidate`
+        );
+        if(datalistThemes.data!=null)
+            setListLocalisation(datalistThemes.data)
+    }
+    const handlerLocalisation =(opt) =>{
+        console.log(opt)
+        handlerVariable("idLocalisation", opt.id,setData);
+        // handlerVariable("nameTheme", opt.name,setPrice)
+    }
+    ///hardskill
+    const [listHardSkill,setListHardSkill]=useState([]);
+    const getListHardSkill= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `hardskill`
+        );
+        if(datalistThemes.data!=null)
+            setListHardSkill(datalistThemes.data)
+    }
+    const handlerHardSkill =(opt) =>{
+        handlerChangeTableInfocandidate("candidatehardskill",{
+            idHardSkill:opt.id,
+            name:opt.name
+        },null);
+    }
+    //softskill
+    const [listSoftSkill,setListSoftSkill]=useState([]);
+    const getListSoftSkill= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `softskill`
+        );
+        if(datalistThemes.data!=null)
+            setListSoftSkill(datalistThemes.data)
+    }
+    const handlerSoftSkill =(opt) =>{
+        console.log(opt)
+        handlerChangeTableInfocandidate("candidatesoftskill",{
+            idSoftSkill:opt.id,
+            name:opt.name
+        },null);
+    }
+    ///education 
+    const [education,setEducation] =useState({});
+    const deleteAddEducation =()=>{
+          setEducation(previous => ({
+            ...previous,
+            idDiplome: null,
+            nameDiplome: null, 
+            IdUniversity: null,
+            nameUniversity: null,
+            Description:null,
+            Year:null
+         }));
+    }
+        ///diplome 
+    const [listDiplome,setListDiplome]=useState([]);
+    const getListDiplome= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `diplome`
+        );
+        if(datalistThemes.data!=null)
+            setListDiplome(datalistThemes.data)
+    }
+    const handlerDiplome =(opt) =>{
+        console.log(opt)
+        setEducation(previous => ({
+            ...previous,
+            idDiplome: opt.id,
+            nameDiplome: opt.name
+         }));
+    }
+        //university
+    const [listUniversity,setListUniversity]=useState([]);
+    const getListUniversity= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `university`
+        );
+        if(datalistThemes.data!=null)
+            setListUniversity(datalistThemes.data)
+    }
+    const handlerUniversity =(opt) =>{
+        console.log(opt)
+        setEducation(previous => ({
+            ...previous,
+            IdUniversity: opt.id,
+            nameUniversity: opt.name
+         }));
+    }
+    ///type experience 
+    const [experience,setExperiences] =useState({
+        Entreprise: null,
+        Poste: null,
+        DateDebut: null,
+        DateFin: null,
+        IdTypeExperience: null,
+        Description:null,
+        name: null
+        });
+    const [listExperience,setListExperience]=useState([]);
+    const getListExperience= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `typeexperience`
+        );
+        if(datalistThemes.data!=null)
+            setListExperience(datalistThemes.data)
+    }
+    const initExperience=()=>{
+         setExperiences(previous => ({
+            ...previous,
+                Entreprise: null,
+                Poste: null,
+                DateDebut: null,
+                DateFin: null,
+                IdTypeExperience: null,
+                Description:null,
+                name: null
+         }));
+    }
+    const handlerExperience =(opt) =>{
+        console.log(opt)
+        setExperiences(previous => ({
+            ...previous,
+            IdTypeExperience: opt.id,
+            name: opt.name
+         }));
+    }
+    //language
+    const [listLanguage,setListLanguage]=useState([]);
+    const getListLanguage= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `language`
+        );
+        if(datalistThemes.data!=null)
+           setListLanguage(datalistThemes.data)
+    }
+    const handlerLanguage =(opt) =>{
+        console.log(opt)
+        handlerChangeTableInfocandidate("candidateLanguages",{
+            idLanguage:opt.id,
+            name:opt.name
+        },null);
+    }
+     //certification
+    const [listCertification,setCertification]=useState([]);
+    const getListCertification= async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `certification`
+        );
+        if(datalistThemes.data!=null)
+           setCertification(datalistThemes.data)
+    }
+    const handlerCertification =(opt) =>{
+        console.log(opt)
+         handlerChangeTableInfocandidate("certificationCandidates",{
+            idCertification:opt.id,
+            name:opt.name
+        },null);
+    }
+    const save = async ()=>{
+        console.log(data);
+        const value = await send(data,url_recrutement + "candidate")
+        // console.log(value)
+        if (value == true) {
+            // toast.success("Données insérées avec succès !");
+            window.location.replace("/logincandidate");
+            close(false);
+        } else {
+            // toast.error("Problème serveur, réessayez plus tard !");
+        }
+
+
     }
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
@@ -21,9 +236,8 @@ export default function Registration(){
         }));
     };
     
-    
     const handlerChangeTableInfocandidate = (name, value, index = null) => {
-        setInfoCandidate((previous) => {
+        setData((previous) => {
             const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
             if (index !== null) {
                 const newArray = currentArray.filter((_, i) => i !== index);
@@ -37,132 +251,52 @@ export default function Registration(){
                 [name]: [...currentArray, value],
             };
         });
-        setSkill("");
     };
     const fileInputRef = useRef(null);
 
     const handleClick = () => {
         fileInputRef.current.click();
     };
-
-    const handlePhotoChange = async (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
-        // 1. Afficher l'image en preview dans React
-        const localUrl = URL.createObjectURL(file);
-        handlerVariable("photo",localUrl,setInfoCandidate);
-        // 2. Uploader au backend
-        const formData = new FormData();
-        formData.append("photo", file);
-        await axios.post("http://localhost:3000/upload", formData, { //sende vers serveur
-            headers: { "Content-Type": "multipart/form-data" },
-        });
-    };
-
     useEffect(() => {
-        console.log(candidate)
-        const handleScroll = () => {
-          const scrollTop = window.scrollY;
-          const docHeight = document.body.scrollHeight - window.innerHeight;
-          const scrolled = (scrollTop / docHeight) * 100;
-          setScrollPercentage(scrolled);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        getListGenre();
+        getListLocalisation();
+        getListHardSkill();
+        getListSoftSkill();
+        getListDiplome();
+        getListUniversity();
+        getListExperience();
+        getListLanguage();
+        getListCertification();
+        // const handleScroll = () => {
+        //   const scrollTop = window.scrollY;
+        //   const docHeight = document.body.scrollHeight - window.innerHeight;
+        //   const scrolled = (scrollTop / docHeight) * 100;
+        //   setScrollPercentage(scrolled);
+        // };
+        // window.addEventListener("scroll", handleScroll);
+        // return () => window.removeEventListener("scroll", handleScroll);
       }, []);
 
     return (
     <> 
-    <div class="relative z-10 bg-white  w-full max-w-4xl  mx-auto p-6 md:p-10">
+        <div class="relative z-10 bg-white  w-full max-w-4xl  mx-auto p-6 md:p-10">
             <div class="flex items-center  justify-center mb-4">
                 <h1 class="text-2xl md:text-3xl font-bold text-softbleu">Inscription</h1>
             </div>
             <p class="text-sm text-gray-600 flex items-center justify-center">
-                Est-ce que tu as un compte ? 
+                Est-ce que tu as un compte ?  <b className="text-white"> x </b>
                 <a href="#" class="text-or hover:font-bold  font-semibold">Connecte-toi</a>
             </p>
-        {/* etaps formulaire */}
-            <div class="flex items-center justify-center mb-5 sticky top-0 z-50 bg-gray-50 p-4">
-                <div className="flex items-center justify-center mb-5">
-                    <div className="flex items-center gap-4 md:gap-8 w-full max-w-3xl">
-                        {/* Step 1 */}
-                        <div className="flex flex-col items-center gap-2 relative">
-                            <div className="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-blue-500 text-white">
-                                1
-                            </div>
-                        {/* Ligne de progression */}
-                            <div className="absolute top-1/2 left-full -translate-y-1/2 w-24 h-0.5 bg-gray-300">
-                                <div
-                                className="h-0.5 bg-blue-500"
-                                style={{
-                                    width:
-                                    scrollPercentage > 33
-                                        ? "100%"
-                                        : `${(scrollPercentage / 33) * 100}%`,
-                                }}
-                                ></div>
-                            </div>
-                        </div>
-
-                        {/* Step 2 */}
-                        <div className="flex flex-col items-center gap-2 relative">
-                            <div
-                                className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm ${
-                                scrollPercentage > 33 ? "bg-blue-500 text-white" : "bg-gray-300"
-                                }`}
-                            >
-                                2
-                            </div>
-                        {/* Ligne de progression */}
-                            <div className="absolute top-1/2 left-full -translate-y-1/2 w-24 h-0.5 bg-gray-300 z-0">
-                                <div
-                                className="h-0.5 bg-blue-500"
-                                style={{
-                                    width:
-                                    scrollPercentage > 66
-                                        ? "100%"
-                                        : scrollPercentage < 33
-                                        ? "0%"
-                                        : `${((scrollPercentage - 33) / 33) * 100}%`,
-                                }}
-                                ></div>
-                            </div>
-                        </div>
-
-                        {/* Step 3 */}
-                        <div
-                            className={`flex flex-col items-center gap-2 z-1  rounded-full ${
-                                scrollPercentage > 66 ? "bg-blue-500 text-white" : ""
-                            }`}
-                            >
-                            <div
-                                className={`w-10 h-10 z-1 rounded-full flex items-center justify-center font-semibold text-sm ${
-                                scrollPercentage > 66 ? "bg-blue-500 text-white rounded-full" : "bg-gray-300"
-                                }`}
-                            >
-                                3
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-       {/* {etaps(index)} */}
         <div>
-            <div class="grid grid-cols-1">
+            <div class="grid grid-cols-1 mt-6">
                 <div>
-                    {/* <div class="flex flex-col items-center">
-                        <div class="w-32 h-32 bg-softbleu rounded-full flex items-center justify-center mb-4 cursor-pointer hover:bg-orange-600 transition-colors">
-                            <img src={candidate.photo}  className="rounded-full"/>
-                        </div>
-                        <p class="text-sm font-semibold text-gray-700">Entrer votre photo</p>
-                    </div> */}
                     <div className="flex flex-col items-center">
                         <div
                             className="w-32 h-32 bg-softbleu rounded-full flex items-center justify-center mb-4 cursor-pointer hover:bg-orange-600 transition-colors overflow-hidden"
                             onClick={handleClick}
                         >
-                            {candidate.photo ? (
-                                <img src={candidate.photo} className="rounded-full w-full h-full object-cover" />
+                            {data.photo ? (
+                                <img src={url_recrutement_image+"uploads/"+data.photo} className="rounded-full w-full h-full object-cover" />
                             ) : (
                                 <span className="text-white">+</span>
                             )}
@@ -173,7 +307,7 @@ export default function Registration(){
                             accept="image/*"
                             ref={fileInputRef}
                             className="hidden"
-                            onChange={handlePhotoChange}
+                            onChange={handleUpload}
                         />
                     </div>
                 </div>
@@ -185,7 +319,7 @@ export default function Registration(){
                                 type="text" 
                                 placeholder="Entrer votre nom" 
                                 className="input_singup"
-                                onChange={(event) => handlerVariable("name", event.target.value,setInfoCandidate)}
+                                onChange={(event) => handlerVariable("name", event.target.value,setData)}
                             />
                         </div>
                         <div className="my-2">
@@ -194,7 +328,27 @@ export default function Registration(){
                                 type="text" 
                                 placeholder="Entrer votre prenom" 
                                 className="input_singup"
-                                onChange={(event) => handlerVariable("firstname", event.target.value,setInfoCandidate)}
+                                onChange={(event) => handlerVariable("FirstName", event.target.value,setData)}
+                            />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
+                        <div className="my-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Login</label>
+                            <input 
+                                type="text" 
+                                placeholder="Entrer votre nom" 
+                                className="input_singup"
+                                onChange={(event) => handlerVariable("login", event.target.value,setData)}
+                            />
+                        </div>
+                        <div className="my-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+                            <input 
+                                type="text" 
+                                placeholder="Entrer votre prenom" 
+                                className="input_singup"
+                                onChange={(event) => handlerVariable("password", event.target.value,setData)}
                             />
                         </div>
                     </div>
@@ -205,29 +359,19 @@ export default function Registration(){
                                 <input 
                                     type="date" 
                                     class="input_singup"
-                                    onChange={(event) => handlerVariable("birthday", event.target.value,setInfoCandidate)}
+                                    onChange={(event) => handlerVariable("birthDate", event.target.value,setData)}
                                 />
                                 {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
                             </div>
                         </div>     
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">genre</label>
                             <div class="flex gap-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="gender" value="male"  class="w-5 h-5 text-softbleu/100 focus:ring-orange-500" 
-                                        onChange={() => handlerVariable("genre", 1,setInfoCandidate)}
-                                    />
-                                    <span class="text-sm text-gray-700">Male</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="gender" value="female" class="w-5 h-5 text-orange-500 focus:ring-orange-500"
-                                    onChange={() => handlerVariable("genre", 0,setInfoCandidate)}/>
-                                    <span class="text-sm text-gray-700">Female</span>
-                                </label>
+                                <Select onChange={handlerGenre} placeholder="...." options={listGenre}/>
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2  sm:mt-8 gap-4 my-2">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                             <div class="relative">
@@ -235,7 +379,7 @@ export default function Registration(){
                                     type="email" 
                                     placeholder="votre email" 
                                     class="input_singup"
-                                    onChange={(event) => handlerVariable("email", event.target.value,setInfoCandidate)}
+                                    onChange={(event) => handlerVariable("email", event.target.value,setData)}
                                 />
                                 <i className="fa-regular fa-envelope icone_input"></i>
                             </div>
@@ -248,7 +392,7 @@ export default function Registration(){
                                     type="text" 
                                     placeholder="votre email" 
                                     class="input_singup"
-                                    onChange={(event) => handlerVariable("tel", event.target.value,setInfoCandidate)}
+                                    onChange={(event) => handlerVariable("tel", event.target.value,setData)}
                                 />
                                 
                                 <HiOutlinePhone className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" />
@@ -258,37 +402,25 @@ export default function Registration(){
                     <div className='my-2'>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Localisation</label>
                         <div className="relative">
-                            <select className="input_singup appearance-none">
-                                {localisation.map((value)=>(
-                                        <option value={value.id}>{value.name}</option>
-                                ))}
-                            </select>
+                            <Select onChange={handlerLocalisation} placeholder="...." options={listLocalisation}/>
                             <i className="fa-solid fa-map-marker-alt w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2"></i>
                         </div>
                     </div>
-                            {/* hard skill */}
-                    <div class=" border-t border-gray-200">
-                        <div class="flex items-center justify-between mb-4">
+                    {/* hard skill */} 
+                    <div class=" border-t border-gray-200 mt-8">
+                        <div class="flex items-center justify-between mb-4 mt-2">
                             <h3 class="block text-sm font-medium text-gray-700 mb-2">Hard skill</h3>
-                            <button class="text-or   font-bold text-sm flex items-center gap-1" onClick={()=>handlerChangeTableInfocandidate("hardskill",skill,null)}>
-                                <i class="fas fa-plus"></i>
-                                Ajouter
-                            </button>
+                           
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
                             <div>
-                                <input 
-                                    type="text" 
-                                    placeholder="Enter Degree" 
-                                    class="input_singup"
-                                    onChange={(event)=>{setSkill(event.target.value)}}
-                                />
+                                <Select onChange={handlerHardSkill} placeholder="...." options={listHardSkill}/>
                             </div>
                             <div>   
-                            <div class="flex flex-wrap gap-2">
-                                {candidate.hardskill.map((value,index)=>(
-                                    <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("hardskill",skill,index)}>
-                                            {value}
+                            <div class="flex flex-wrap gap-2 sm:mt-8">
+                                {data.candidatehardskill.map((value,index)=>(
+                                    <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("candidatehardskill",null,index)}>
+                                            {value.name}
                                              <span className="ml-2">
                                                     <i className="fa-solid fa-xmark text-gray-500"></i>
                                             </span>
@@ -301,32 +433,22 @@ export default function Registration(){
                         </div>  
                     </div>
                     {/* soft skill */}
-                    <div class="border-t border-gray-200">
-                        <div class="flex items-center justify-between mb-4">
+                    <div class="border-t border-gray-200 mt-8">
+                        <div class="flex items-center justify-between mb-4 mt-2">
                             <h3 class="block text-sm font-medium text-gray-700 mb-2">Soft skill</h3>
-                            <button class="text-or   font-bold text-sm flex items-center gap-1">
-                                <i class="fas fa-plus"></i>
-                                Ajouter
-                            </button>
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
                             <div>
-                                <input 
-                                    type="text" 
-                                    placeholder="Enter Degree" 
-                                    class="input_singup"
-                                    onChange={(event)=>{setSkill(event.target.value)}}
-                                />
+                                <Select onChange={handlerSoftSkill} placeholder="...." options={listSoftSkill}/>
                             </div>
-                            <div>   
+                            <div className="sm:mt-8">   
                                 <div class="flex flex-wrap gap-2">
-                                    {candidate.softskill.map((value,index)=>(
-                                        <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("softskill",skill,index)}>
-                                            {value} 
+                                    {data.candidatesoftskill.map((value,index)=>(
+                                        <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("candidatesoftskill",null,index)}>
+                                            {value.name} 
                                             <span className="ml-2">
                                                     <i className="fa-solid fa-xmark text-gray-500"></i>
                                             </span>
-                                            
                                         </button>
                                     ))
                                     }
@@ -334,13 +456,85 @@ export default function Registration(){
                             </div>
                         </div>  
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Vision & Mission</label>
+                    {/* language */}
+                    <div class="border-t border-gray-200 mt-8">
+                        <div class="flex items-center justify-between mb-4 mt-2">
+                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Language</h3>
+                        </div>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
+                            <div>
+                                <Select onChange={handlerLanguage} placeholder="...." options={listLanguage}/>
+                            </div>
+                            <div className="sm:mt-8">   
+                                <div class="flex flex-wrap gap-2">
+                                    {data.candidateLanguages.map((value,index)=>(
+                                        <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("candidateLanguages",null,index)}>
+                                            {value.name} 
+                                            <span className="ml-2">
+                                                    <i className="fa-solid fa-xmark text-gray-500"></i>
+                                            </span>
+                                        </button>
+                                    ))
+                                    }
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    {/* certification */}
+                    <div class="border-t border-gray-200 mt-8">
+                        <div class="flex items-center justify-between mb-4 mt-2">
+                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Certification</h3>
+                        </div>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
+                            <div>
+                                <Select onChange={handlerCertification} placeholder="...." options={listCertification}/>
+                            </div>
+                            <div className="sm:mt-8">   
+                                <div class="flex flex-wrap gap-2">
+                                    {data.certificationCandidates.map((value,index)=>(
+                                        <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("certificationCandidates",null,index)}>
+                                            {value.name} 
+                                            <span className="ml-2">
+                                                    <i className="fa-solid fa-xmark text-gray-500"></i>
+                                            </span>
+                                        </button>
+                                    ))
+                                    }
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    {/* certification */}
+                     {/* <div class="border-t border-gray-200 mt-8">
+                        <div class="flex items-center justify-between mb-4 mt-2">
+                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Language</h3>
+                        </div>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
+                            <div>
+                                <Select onChange={handlerLanguage} placeholder="...." options={listLanguage}/>
+                            </div>
+                            <div>   
+                                <div class="flex flex-wrap gap-2">
+                                    {data.candidatesoftskill.map((value,index)=>(
+                                        <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("certificationCandidates",null,index)}>
+                                            {value.name} 
+                                            <span className="ml-2">
+                                                    <i className="fa-solid fa-xmark text-gray-500"></i>
+                                            </span>
+                                        </button>
+                                    ))
+                                    }
+                                </div>
+                            </div>
+                        </div>  
+                    </div> */}
+                    <div className="mt-8">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Descrivez-vous</label>
                         <textarea 
                             placeholder="Type here..." 
                             rows="4"
                             class="input_singup"
-                            onChange={(event)=>{handlerVariable("vision",event.target.name,setInfoCandidate)}}
+                            onChange={(event)=>{handlerVariable("description",event.target.value,setData)}}
                         ></textarea>
                     </div>
                 </div>
@@ -358,11 +552,11 @@ export default function Registration(){
                                 Ajouter
                             </button> */}
                             <div class="flex items-center justify-end gap-3 mt-2">
-                                <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>(setDegree({ id: "", school: '', graduationyear: '', diplome: '',description:""}))}>
+                                <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>(deleteAddEducation())}>
                                     Annuler
                                 </button>
                                 <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium"
-                                    onClick={()=>handlerChangeTableInfocandidate("education",degree,null)}>
+                                    onClick={()=>handlerChangeTableInfocandidate("education",education,null)}>
                                     Ajouter
                                 </button>
                             </div>
@@ -371,70 +565,61 @@ export default function Registration(){
                             {/* diplome */}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Diplome</label>
-                                <select className="input_singup appearance-none" onChange={(event)=>{ handlerVariable("diplome",event.target.name,setDegree)}}>
-                                    {diplome.map((value)=>(
-                                        <option value={value.id}>{value.name}</option>
-                                    ))}
-                                </select>
+                                <Select onChange={handlerDiplome} placeholder={education.nameDiplome} options={listDiplome}/>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Ecole</label>
-                                <input 
-                                    type="text" 
-                                    placeholder="Enter College / University" 
-                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                    onChange={(event)=>{ handlerVariable("school",event.target.name,setDegree)}}
-                                />
+                            <div className="sm:mt-8 md:mt-0">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Universite</label>
+                                <Select onChange={handlerUniversity} placeholder={education.nameUniversity} options={listUniversity}/>
                             </div>
-                            <div>
+                            <div className="sm:mt-8 md:mt-0">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Annee de remise de dimplome</label>
                                 <div class="relative">
                                     <input 
                                         type="date" 
                                         // placeholder="MM/DD/YYYY" 
+                                        value={education.Year}
                                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                        onChange={(event)=>{ handlerVariable("graduationyear",event.target.name,setDegree)}}
+                                        onChange={(event)=>{ handlerVariable("Year",event.target.value,setEducation)}}
                                     />
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className="mt-8">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                             <textarea 
-                                placeholder="Type here..." 
+                                placeholder={education.Description}
                                 rows="4"
                                 class="input_singup"
-                                onChange={(event)=>{handlerVariable("description",event.target.name,setDegree)}}
+                                onChange={(event)=>{handlerVariable("Description",event.target.value,setEducation)}}
                             ></textarea>
                         </div>
                     </div>
-                     <h5 className="text-or   font-bold text-sm my-2">Liste de vos Diplomes</h5>
-
-                    {candidate.education.map((value,index)=>(
+                    <h5 className="text-or   font-bold text-sm my-2">Liste de vos Diplomes</h5>
+                    {data.education.map((value,index)=>(
                         <div index={index} class="mt-4 bg-gray-50 rounded-lg p-4 relative">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
                                     <p class="text-xs text-gray-500 mb-1">Diplome</p>
-                                    <p class="font-medium text-gray-900">{value.diplome}</p>
+                                    <p class="font-medium text-gray-600">{value.nameDiplome}</p>
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-500 mb-1">College / University</p>
-                                    <p class="font-medium text-gray-900">{value.school}</p>
+                                    <p class="font-medium text-gray-600">{value.nameUniversity}</p>
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-500 mb-1">Graduation Year</p>
-                                    <p class="font-medium text-gray-900">{value.graduationyear}</p>
+                                    <p class="font-medium text-gray-600">{value.Year}</p>
                                 </div>
                             </div>
                             <div class="absolute top-4 right-4 flex gap-2">
                                 {/* <button class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100" >
                                     <i class="fas fa-pen text-gray-600 text-xs"></i>
                                 </button> */}
-                                <button class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100"  onClick={()=>handlerChangeTableInfocandidate("education",degree,index)}>
+                                <button class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100"  onClick={()=>handlerChangeTableInfocandidate("education",education,index)}>
                                     <i class="fas fa-trash text-gray-600 text-xs"></i>
                                 </button>
                             </div>
-                            <p className="text-sm text-gray-700 mt-2 font-light ">{value.description}</p>
+                            <p className="text-sm text-gray-700 mt-2 font-light ">{value.Description}</p>
                         </div>
                     ))}
                 </div>
@@ -447,11 +632,11 @@ export default function Registration(){
                         <div class="flex items-center justify-between py-4">
                             <h3 class="text-lg font-bold text-gray-900">Experience</h3>
                             <div class="flex items-center justify-end gap-3">
-                                <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium">
+                                <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{initExperience}}>
                                     Annuler
                                 </button>
                                 <button class="px-6 py-2 bg-softbleu hover:bg-softbleutini-12 text-white rounded-lg font-medium" 
-                                    onClick={()=>handlerChangeTableInfocandidate("experience",degree,null)}>
+                                    onClick={()=>handlerChangeTableInfocandidate("experience",experience,null)}>
                                     Ajouter
                                 </button>
                             </div>
@@ -463,17 +648,19 @@ export default function Registration(){
                                 <input 
                                     type="text" 
                                     placeholder="Enter Degree" 
+                                    value={experience.Entreprise}
                                     class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent"
-                                    onChange={(event)=>{ handlerVariable("entreprise",event.target.value,setExperience)}}
+                                    onChange={(event)=>{ handlerVariable("Entreprise",event.target.value,setExperiences)}}
                                 />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Votre Poste</label>
                                 <input 
                                     type="text" 
+                                    value={experience.Poste}
                                     placeholder="Enter College / University" 
                                     class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent"
-                                    onChange={(event)=>{ handlerVariable("poste",event.target.value,setExperience)}}
+                                    onChange={(event)=>{ handlerVariable("Poste",event.target.value,setExperiences)}}
                                 />
                             </div>
                             
@@ -483,8 +670,9 @@ export default function Registration(){
                                     <input 
                                         type="date" 
                                         placeholder="MM/DD/YYYY" 
+                                        value={experience.DateDebut}
                                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent"
-                                        onChange={(event)=>{ handlerVariable("datestart",event.target.value,setExperience)}}
+                                        onChange={(event)=>{ handlerVariable("DateDebut",event.target.value,setExperiences)}}
                                     />
                                 </div>
                             </div>
@@ -494,53 +682,55 @@ export default function Registration(){
                                     <input 
                                         type="date" 
                                         placeholder="MM/DD/YYYY" 
+                                        value={experience.DateFin}
                                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent"
-                                        onChange={(event)=>{ handlerVariable("dateend",event.target.value,setExperience)}}
+                                        onChange={(event)=>{ handlerVariable("DateFin",event.target.value,setExperiences)}}
                                     />
                                 </div>
                             </div>
                         
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Type d'experiences</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Type d'experience</label>
                                 <div class="relative">
-                                    <select className="input_singup appearance-none" onChange={(event)=>{ handlerVariable("type",event.target.value,setExperience)}}>
-                                        {typeExperience.map((value)=>(
-                                            <option value={value.id}>{value.name}</option>
-                                        ))}
-                                    </select>
+                                    <Select onChange={handlerExperience} placeholder={experience.name} options={listExperience}/>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                             <textarea 
-                                placeholder="Type here..." 
+                                placeholder={experience.Description} 
                                 rows="4"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent resize-none"
-                                onChange={(event)=>{ handlerVariable("description",event.target.value,setExperience)}}
+                                onChange={(event)=>{ handlerVariable("Description",event.target.value,setExperiences)}}
                             ></textarea>
                         </div>
                     </div>
-
-                    <label class="text-or   font-bold text-sm my-2">Liste de vos  experiences</label>
-                    {candidate.experience.map((value,index)=>(
+                    <label class="text-or   font-bold text-sm my-2">Liste de vos  experience</label>
+                    {data.experience.map((value,index)=>(
                         <div index={index} class="mt-4 bg-gray-50 rounded-lg p-4 relative">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 <div>
                                     <p class="text-xs text-gray-500 mb-1">Entreprise</p>
-                                    <p class="font-medium text-gray-900">{value.entreprise}</p>
+                                    <p class="font-medium text-gray-700">{value.Entreprise}</p>
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-500 mb-1">Poste</p>
-                                    <p class="font-medium text-gray-900">{value.poste}</p>
+                                    <p class="font-medium text-gray-700">{value.Poste}</p>
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-500 mb-1">Date debut et Date fin </p>
-                                    <p class="font-medium text-gray-900">{value.datedebut} / {value.datefin} {diffDate(value.datefin,value.datedebut)}</p>
+                                    <p class="font-medium text-gray-700 ">{value.DateDebut} / {value.DateFin} </p>
+                                    {/* {diffDate(value.datefin,value.datedebut)} */}
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Type d'experience</p>
+                                    <p class="font-medium text-gray-700">{value.name}</p>
                                 </div>
                             </div>
-                        <p class="text-xs text-gray-500 mb-1 py-2">Description</p>
-                        <p className='text-xs text-gray-700'>{value.description}
+                          
+                        <p class="text-xs text-gray-500 mb-1 py-2 mt-8" >Description</p>
+                        <p className='text-xs text-gray-700'>{value.Description}
                         </p>
                         <div class="absolute top-2 right-2 flex gap-2">
                             {/* <button class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100">
@@ -552,7 +742,6 @@ export default function Registration(){
                         </div>
                     </div>
                     ))}
-                  
                 </div>
             </div>
             <div class="flex justify-end mt-8">
