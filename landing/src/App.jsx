@@ -23,16 +23,19 @@ import {
   InprogressTraining,
   Trainer,
   TrainingState,
-  Wish1,
+  Wish,
   Validation,
   Login,
   ProtectedRoute,
   LoginCandidate,
+
+  
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import CardNotification from './components/card/CardNotification';
+
 import CVCandidate from './pages/manager/sous/CVCandidate';
 import CardCriterien from './components/card/criterien/AddPost';
 import AllRequeste from './pages/recruitment/AllRequeste';
@@ -122,7 +125,7 @@ function App() {
 
         {/* <Route path="/training-inprogress" element={<InprogressTraining/>}></Route> */}
         <Route path="/training-trainer" element={<ProtectedRoute><Trainer/></ProtectedRoute>}></Route>
-        <Route path="/training-wish" element={<ProtectedRoute><Wish1/> </ProtectedRoute>}></Route>
+        <Route path="/training-wish" element={<ProtectedRoute><Wish/> </ProtectedRoute>}></Route>
         <Route path="/training-validation" element={ <ProtectedRoute><Validation/></ProtectedRoute>}></Route>
         <Route path="/training-state/:id" element={ <ProtectedRoute><TrainingState /> </ProtectedRoute>} />
         <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} /> } />
