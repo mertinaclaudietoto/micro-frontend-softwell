@@ -35,7 +35,7 @@ import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import CardNotification from './components/card/CardNotification';
-import CVCandidate from './pages/manager/sous/CVcandidate';
+import CVCandidate from './pages/manager/sous/CVCandidate';
 import CardCriterien from './components/card/criterien/AddPost';
 import AllRequeste from './pages/recruitment/AllRequeste';
 import MyRequeste from './pages/recruitment/MyRequeste';
