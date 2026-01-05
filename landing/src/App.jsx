@@ -28,8 +28,6 @@ import {
   Login,
   ProtectedRoute,
   LoginCandidate,
-
-  
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
