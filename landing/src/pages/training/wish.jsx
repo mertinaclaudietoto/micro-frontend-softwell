@@ -6,7 +6,7 @@ import { CardAddTraining, Filter,Sidebar,CardWish } from "../../components";
 import { url, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
-// change
+
 export default function Wish(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
