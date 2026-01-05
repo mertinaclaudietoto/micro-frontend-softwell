@@ -29,14 +29,10 @@ import {
   ProtectedRoute,
   LoginCandidate,
 } from "./pages";
-
-
-
-
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
-import CardNotification from './components/card/CardNotification';
+// import CardNotification from './components/card/CardNotification';
 
 import CVCandidate from './pages/manager/sous/CVCandidate';
 import CardCriterien from './components/card/criterien/AddPost';
