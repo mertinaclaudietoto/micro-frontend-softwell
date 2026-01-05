@@ -45,4 +45,4 @@ jobs:
         ANSIBLE_PASSWORD: ${{ secrets.ANSIBLE_PASSWORD }}
       run: |
         cd ansible
-        ansible-playbook -i hosts.ini deploy_front.yml
+        ansible-playbook -i hosts.ini deploy_front.yml --extra-vars "ansible_password=$ANSIBLE_PASSWORD"

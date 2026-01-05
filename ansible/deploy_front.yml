@@ -1,5 +1,7 @@
 # Comment déployer concrètement sur le PC Windows ?
 - name: Déployer Frontend IIS
+  vars:
+    ansible_password: "{{ ansible_password }}"
   hosts: windows_front
   tasks:
 
@@ -13,7 +15,7 @@
         src: ../landing/dist/
         dest: C:\inetpub\wwwroot\gestion_formation_api\front
         force: yes
-        
+
     - name: Start IIS Site
       win_shell: |
         Import-Module WebAdministration
