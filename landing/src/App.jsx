@@ -33,7 +33,6 @@ import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import CardNotification from './components/card/CardNotification';
-
 import CVCandidate from './pages/manager/sous/CVCandidate';
 import CardCriterien from './components/card/criterien/AddPost';
 import AllRequeste from './pages/recruitment/AllRequeste';
@@ -106,7 +105,6 @@ function App() {
         <Route path="/candidate-application" element={<Application />} />
         <Route path="/candidate-availableposte" element={<AvailableJob />} />
         <Route path="/candidate-profile" element={<Profile />} />
-
         {/* <Route path="/notification" element={<CardNotification/>}></Route> */}
         <Route path="/addpost" element={<CriterienStaff/>}></Route>
         <Route path="/manager-dasboard" element={<DashboardManager/>}></Route>
