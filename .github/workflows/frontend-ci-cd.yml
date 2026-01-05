@@ -42,7 +42,7 @@ jobs:
     - name: Install Ansible & WinRM Python modules
       run: |
         sudo apt update
-        sudo apt install -y python3-pip
+        sudo apt install -y python3 python3-pip
         pip3 install ansible pywinrm requests
   
     # 6️⃣ Déploiement avec Ansible

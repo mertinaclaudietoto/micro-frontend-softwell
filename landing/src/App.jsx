@@ -29,6 +29,10 @@ import {
   ProtectedRoute,
   LoginCandidate,
 } from "./pages";
+
+
+
+
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
