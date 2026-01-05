@@ -23,7 +23,7 @@ import {
   InprogressTraining,
   Trainer,
   TrainingState,
-  Wish,
+  Wish1,
   Validation,
   Login,
   ProtectedRoute,
@@ -122,7 +122,7 @@ function App() {
 
         {/* <Route path="/training-inprogress" element={<InprogressTraining/>}></Route> */}
         <Route path="/training-trainer" element={<ProtectedRoute><Trainer/></ProtectedRoute>}></Route>
-        <Route path="/training-wish" element={<ProtectedRoute><Wish/> </ProtectedRoute>}></Route>
+        <Route path="/training-wish" element={<ProtectedRoute><Wish1/> </ProtectedRoute>}></Route>
         <Route path="/training-validation" element={ <ProtectedRoute><Validation/></ProtectedRoute>}></Route>
         <Route path="/training-state/:id" element={ <ProtectedRoute><TrainingState /> </ProtectedRoute>} />
         <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} /> } />

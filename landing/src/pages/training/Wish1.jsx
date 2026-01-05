@@ -7,7 +7,7 @@ import { url, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
 
-export default function Wish(){
+export default function Wish1(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
