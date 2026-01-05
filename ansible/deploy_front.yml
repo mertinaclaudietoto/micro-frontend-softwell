@@ -8,7 +8,7 @@
     - name: Stop IIS Site
       win_shell: |
         Import-Module WebAdministration
-        Stop-Website -Name "gestion-formation"
+        Stop-Website -Name "gestion_formation"
 
     - name: Copier les fichiers du build
       win_copy:
@@ -19,5 +19,5 @@
     - name: Start IIS Site
       win_shell: |
         Import-Module WebAdministration
-        Start-Website -Name "gestion-formation"
+        Start-Website -Name "gestion_formation"
 
