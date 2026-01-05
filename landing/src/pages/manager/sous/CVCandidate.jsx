@@ -5,6 +5,7 @@ import { Sidebar } from "../../../components";
 import { useParams } from "react-router-dom";
 import { url_recrutement, url_recrutement_image } from "../../../data/data";
 import { getData } from "../../../function/Axios";
+
 export default function CVCandidate(){
     const [experience ,setExperience]=useState('1');
     const { id } = useParams();
