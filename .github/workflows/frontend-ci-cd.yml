@@ -34,10 +34,17 @@ jobs:
         npm run build
 
     # 5️⃣ Installer Ansible
-    - name: Install Ansible
+    # - name: Install Ansible
+    #   run: |
+    #     sudo apt update
+    #     sudo apt install ansible -y
+    # Avant de lancer ansible-playbook
+    - name: Install Ansible & WinRM Python modules
       run: |
         sudo apt update
-        sudo apt install ansible -y
+        sudo apt install -y python3-pip
+        pip3 install ansible pywinrm requests
+  
     # 6️⃣ Déploiement avec Ansible
     - name: Deploy to Windows server
       env:
