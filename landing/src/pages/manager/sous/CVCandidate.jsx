@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { infocandidate } from "../../../data/candidate";
+// import { infocandidate } from "../../../data/candidate";
 import { getAge,dateToLetters, diffDate } from "../../../function/Date";
 import { Sidebar } from "../../../components";
 import { useParams } from "react-router-dom";
