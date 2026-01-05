@@ -38,7 +38,6 @@ jobs:
       run: |
         sudo apt update
         sudo apt install ansible -y
-
     # 6️⃣ Déploiement avec Ansible
     - name: Deploy to Windows server
       env:
