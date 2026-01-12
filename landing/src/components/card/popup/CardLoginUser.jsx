@@ -1,7 +1,50 @@
+import { url_recrutement } from "../../../data/data";
+import { useNavigate } from "react-router-dom";
+import { _login } from "../../../function/Axios";
+import { useState } from "react";
+
 export default function CardLoginUser({closePopup}){
+    const navigate = useNavigate();
+    const [text,setText]=useState("");
     const close =()=>{
         closePopup(false);
     }
+    const [login,setLogin]= useState({
+        login:'',
+        password:''
+    });
+    const handlerVariable = (name, value,setFunction) => {
+        setFunction((previous) => ({
+            ...previous,
+            [name]: value,
+        }));
+    };
+    const submit = async () => {
+        try {
+            const response = await _login(login, url_recrutement + "candidate/login");
+            console.log(response.data.data)
+            if(response.data.success==false){
+                setText("Login ou Mot de passe incorrecte")
+            }
+            if (response.data.data.token) {
+                sessionStorage.setItem("token", response.data.data.token);
+            }
+            if (response.data.data.id) {
+                sessionStorage.setItem("userId", response.data.data.id);
+                navigate("/candidate-availableposte");
+            }
+            // if (response.data.data.access) {
+            //     sessionStorage.setItem("access", response.data.data.access);
+              
+            // }
+            // console.log("merci ty");
+            
+        } catch (error) {
+            setText("Login ou Mot de passe incorrecte")
+            console.error("Erreur login:", error);
+        }
+    };
+   
     return(
         <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white w-100 p-10 rounded-xl">
@@ -17,27 +60,29 @@ export default function CardLoginUser({closePopup}){
                     <label class="block text-sm font-medium text-gray-700 mb-2">Login</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre login" 
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        placeholder={login.login} 
+                        class="input_formulaire"
+                        onChange={(event)=>{handlerVariable("login",event.target.value,setLogin)}}
                     />
                 </div>
                 <div className='my-2'>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
                     <input 
-                        type="text" 
-                        placeholder="Entrer votre mots de passe" 
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        type="password" 
+                        class="input_formulaire"
+                        placeholder={login.password}
+                        onChange={(event)=>{handlerVariable("password",event.target.value,setLogin)}}
                     />
                 </div>
                 <p className="text-softbleu text-sm  flex justify-center items-center ">
                     vous n'avez pas de compte inscrivez-vous
                 </p>
                 <div class="flex items-center justify-end gap-3 mt-3">
-                    <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close()}}>
-                        Cancel
+                    <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close(false)}}>
+                        Annuler
                     </button>
-                    <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium" onClick={()=>{close()}}>
-                        Save
+                    <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium" onClick={()=>submit()}>
+                        Connexion
                     </button>
                 </div>
             </div>

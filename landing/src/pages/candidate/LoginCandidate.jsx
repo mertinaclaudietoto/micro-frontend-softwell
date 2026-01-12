@@ -30,12 +30,14 @@ export default function Login({closePopup}){
             }
             if (response.data.data.id) {
                 sessionStorage.setItem("userId", response.data.data.id);
+                navigate("/candidate-availableposte");
             }
-             if (response.data.data.access) {
-                sessionStorage.setItem("access", response.data.data.access);
-                console.log("merci ty");
-                // navigate("/training-theme");
-            }
+            // if (response.data.data.access) {
+            //     sessionStorage.setItem("access", response.data.data.access);
+              
+            // }
+            // console.log("merci ty");
+            
         } catch (error) {
             setText("Login ou Mot de passe incorrecte")
             console.error("Erreur login:", error);

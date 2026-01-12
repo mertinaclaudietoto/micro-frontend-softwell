@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 // SearchableSelect.jsx
 // Composant React (Tailwind) : select filtrable à chaque lettre
 
-export default function Select({ options = [], placeholder = "Rechercher...", onChange ,css }) {
+export default function Select({ options = [], placeholder = "Rechercher...", onChange ,css , value= true}) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
@@ -83,7 +83,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
   }
 
   return (
-    <div className="w-full max-w-md -mb-6">
+    <div className={`w-full max-w-md ${value==true ? "-mb-6": ""} `} >
       <div className="flex items-center gap-2">
         <div className="flex-1 relative">
           <input

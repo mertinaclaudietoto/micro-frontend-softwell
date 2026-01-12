@@ -7,6 +7,8 @@ export { default as CardNotification } from "./CardNotification";
 export { default as Delete } from "./Delete";
 
 export { default as CardAddSession } from "./CardAddSession";
+export { default as CardShowOffre } from "./CardShowOffre";
+
 
 
 

@@ -1,19 +1,18 @@
 
 import { useEffect,useCallback } from "react";
-import { getData, update } from "../../function/Axios";
+import { getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
 import { url_recrutement, textbackground } from "../../data/data";
 import { useState } from "react";
 import { Sidebar } from "../../components";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-export default function AllRequeste(){
+
+export default function StatRh(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
     const [nameE,setNameE]=useState("recruitment_request");
     const [data,setData]=useState([]); 
-   
+    const [search ,setSearch]=useState("");
     const nbrSize=10;
     const [nbrligne ,setNbrLigne]=useState(0)
     const [numpage,setNumpage]=useState(1);
@@ -26,34 +25,14 @@ export default function AllRequeste(){
             : value
         );
     }
-
-
-    const changeState = async (value,id)=>{
-        // console.log(value)
-        value.statusSetByUserId=sessionStorage.getItem("userId");
-        value.statusId=id;
-        value.statusSetDate= new Date().toISOString().split('T')[0];
-        console.log(value);
-        const data = await update(value,url_recrutement + "recruitment_request")
-        // console.log(value)
-        if (data == true) {
-            toast.success("Données insérées avec succès !");
-            close(false);
-            window.location.reload();
-
-        } else {
-            toast.error("Problème serveur, réessayez plus tard !");
-        }
-    }
-    
     const loadData = useCallback(async () => {
         console.log(nameE)
         const data = await getData(
-            url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
+            url_recrutement + `${nameE}/getByIdRequester?pageNumber=${numpage}&pageSize=${nbrSize}&id=${sessionStorage.getItem("userId")}`
         );
         setData( data.data);
         console.log(data);
-    }, [numpage, nameE]); // dépendances de loadData
+    }, [numpage, search,nameE]); // dépendances de loadData
 
   
     const sendsearch = async()=>{
@@ -83,6 +62,7 @@ export default function AllRequeste(){
                                 <div class="flex items-center space-x-3">
                                    
                                     <div className="flex space-x-2">
+                                       
                                         <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                         <i className="fas fa-arrow-left"></i>
                                         </button>
@@ -98,14 +78,23 @@ export default function AllRequeste(){
                         <table class="w-full">
                             <thead class="bg-gray-50 border-b border-gray-200">
                                 <tr>
-                                    <th class="tr-thead w-8">#</th>
-                                    <th class="tr-thead">Post</th>
-                                    <th class="tr-thead">Date demande</th>
-                                    <th class="tr-thead">Date Changement Status</th>
-                                    <th class="tr-thead">Status</th>
-                                    <th class="tr-thead">Volue</th>
-                                    <th class="tr-thead">Postulants</th>
+                                    <th class="tr-thead">Poste</th>
+                                    <th class="tr-thead w-10">Refusée</th>
+                                    <th class="tr-thead w-10">
+                                        <i class="fa-solid fa-hourglass-half"></i> 1re convocation
+                                    </th>
+                                    <th class="tr-thead w-10">
+                                        <i class="fa-solid fa-hourglass-half"></i> 2e convocation
+                                    </th>
+                                    <th class="tr-thead w-10">
+                                        <i class="fa-solid fa-hourglass-half"></i> 3e convocation
+                                    </th>
+                                    <th class="tr-thead w-10">Recrutée</th>
+                                    <th class="tr-thead w-10">Embauchée</th>
+                                    <th class="tr-thead w-10">Total</th>
+                                    <th class="tr-thead w-10">Clôturée</th>
                                 </tr>
+
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 {data.map((value,index)=>(
@@ -118,35 +107,25 @@ export default function AllRequeste(){
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.statusSetDate?.split('T')[0]}</td>
                                         {value.statusId ==null ?
                                             <>
-                                                <td class="px-6 py-4"><button
-                                                onClick={()=>changeState(value,2)} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[1]}`}>refusée</button></td>
-                                                <td class="px-6 py-4"><button
-                                                    onClick={()=>changeState(value,1)} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>validée</button></td>
                                             </> :
-                                            value.statusId==1 ? 
-                                            <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>validée</span></td>: 
+                                            value.statusId==1 ? (
+                                                <>
+                                                    <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>validée</span></td> 
+                                                   
+                                                </>
+                                            ):
                                             value.statusId== 2 ? 
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[1]}`}>refusée</span></td>: 
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium `}></span></td>
                                         }
                                         <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.numberOfCandidates}</span></td>
                                         <td className="px-6 py-4">
-                                            <Link to={`/postulants/${value.id}/${value.postId}`}>
+                                             <Link to={`/postulants/${value.id}/${value.postId}`}>
                                                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>
                                                 {value.nbrpostulant}
                                                 </span>
                                             </Link>
                                         </td>
-                                        {/* <button onClick={()=>{setUpValue(value)}}>
-                                            ⋮
-                                        </button> */}
-                                         {/* {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
-                                            <td class="px-6 py-4 text-sm text-gray-500">
-                                                <button onClick={()=>{setUpValue(value)}}>
-                                                        ⋮
-                                                </button>
-                                            </td>
-                                        )} */}
                                     </tr>
                                     </>
                                 ))}

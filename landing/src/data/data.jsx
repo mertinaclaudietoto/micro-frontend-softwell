@@ -437,6 +437,11 @@ export const textbackground = {
   15: "bg-pink-100 text-pink-800",
   16: "bg-rose-100 text-rose-800",
 };
+export const textmandatory = { 
+  1: "bg-red-100 text-red-800",
+  2: "bg-green-100 text-green-800",
+  0: "bg-gray-100 text-gray-800",
+};
 
 
 
@@ -553,12 +558,12 @@ export const usersprofile = [
   { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "henry123" },
  
 ];
-// export const url ="http://localhost:5172/api/";
-// export const url_recrutement ="http://localhost:5118/api/";
-// export const url_recrutement_image ="http://localhost:5118/uploads/";
-export const url ="http://151.80.218.41:1010/api/";
-export const url_recrutement ="http://151.80.218.41:5050/api/";
-export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";
+export const url ="http://localhost:5172/api/";
+export const url_recrutement ="http://localhost:5118/api/";
+export const url_recrutement_image ="http://localhost:5118/uploads/";
+// export const url ="http://151.80.218.41:1010/api/";
+// export const url_recrutement ="http://151.80.218.41:5050/api/";
+// export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";
 
 
 
@@ -1187,6 +1192,8 @@ export   const  datasidebar =
                         {label :"Genre",actif:false,link:"/crud-genre"},
                         {label :"Localisation",actif:false,link:"/crud-localisation_candidate"},
                         {label :"Universitee",actif:false,link:"/crud-university"},
+                        {label :"Etaps Recrutement",actif:false,link:"/crud-steprecruitment"},
+
                     ]
                 },
             ],

@@ -12,7 +12,6 @@ import {
   DashboardRh,
   ListRequeste,
   Statistique,
-  StepRecruitment,
   DashboardManager,
   CriterienStaff,
   Request,
@@ -32,6 +31,7 @@ import {
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
+import StepRecruitment from './pages/recruitment/StepRecruitment';
 // import CardNotification from './components/card/CardNotification';
 import CVCandidate from './pages/manager/sous/CVCandidate';
 import CardCriterien from './components/card/criterien/AddPost';
@@ -39,6 +39,8 @@ import AllRequeste from './pages/recruitment/AllRequeste';
 import MyRequeste from './pages/recruitment/MyRequeste';
 import MyValidation from './pages/recruitment/Myvalidation';
 import ListCandidate from './pages/recruitment/ListCandidate';
+import NoteCandidate from './pages/recruitment/NoteCandidate';
+import CVCandidateGeneral from './pages/manager/sous/CVCandidateGeneral';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -103,7 +105,7 @@ function App() {
         <Route path="/candidate" element={ <Landing/>  } />
         <Route path="/candidate-registration" element={<Registration />} />
         <Route path="/candidate-application" element={<Application />} />
-        <Route path="/candidate-availableposte" element={<AvailableJob />} />
+        <Route path="/candidate-availableposte" element={<ProtectedRoute><AvailableJob /></ProtectedRoute>} />
         <Route path="/candidate-profile" element={<Profile />} />
         {/* <Route path="/notification" element={<CardNotification/>}></Route> */}
         <Route path="/addpost" element={<CriterienStaff/>}></Route>
@@ -113,7 +115,7 @@ function App() {
         <Route path="/rh-dasboard" element={<DashboardRh/>}></Route>
         <Route path="/rh-statistique" element={<Statistique/>}></Route>
         <Route path="/rh-listrequeste" element={<ListRequeste/>}></Route>
-        <Route path="/rh-steprecruitment" element={<StepRecruitment/>}></Route>
+
         <Route path="/access-profile" element={<ProtectedRoute> <ProfileAccess/> </ProtectedRoute>}></Route>
         <Route path="/access-set" element={<ProtectedRoute> <Setaccess/> </ProtectedRoute>}></Route>
         <Route path="/access-user" element={<ProtectedRoute> <UserProfile/> </ProtectedRoute>}></Route>
@@ -138,6 +140,11 @@ function App() {
         <Route path="/crud-localisation_candidate" element={ <CRUDIdName key={12} entityName={"localisation_candidate"} Name={"Localisation des candidates"} /> } />
         <Route path="/crud-university" element={ <CRUDIdName key={13} entityName={"university"} Name={"Etablisement d'origine"} /> } />
         <Route path="/crud-typeexperience" element={ <CRUDIdName key={14} entityName={"typeexperience"} Name={"Type d'experience "} /> } />
+       
+        <Route path="/crud-steprecruitment" element={ <StepRecruitment /> } />
+
+
+        
 
         
 
@@ -150,7 +157,10 @@ function App() {
 
 
         <Route path="/listecandidate" element={ <ListCandidate /> } />
-        <Route path="/infocandidate/:id" element={<CVCandidate />} />
+        <Route path="/infocandidate/:id/:idrequest/:idpost" element={<CVCandidate />} />
+        <Route path="/infocandidateGenerala/:id" element={<CVCandidateGeneral />} />
+        <Route path="/postulants/:id/:idpost" element={ <ProtectedRoute><NoteCandidate /> </ProtectedRoute>} />
+
 
         
         

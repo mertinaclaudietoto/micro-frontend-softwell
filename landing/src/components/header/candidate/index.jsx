@@ -1,1 +1,1 @@
-export { default as HeaderCandidate } from "./Header";
+export { default as Header } from "./Header";

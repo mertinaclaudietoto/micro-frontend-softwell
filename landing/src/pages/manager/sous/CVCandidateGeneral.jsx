@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { textbackground, textmandatory, url_recrutement, url_recrutement_image } from "../../../data/data";
 import { getData } from "../../../function/Axios";
 // modifi
-export default function CVCandidate(){
+export default function CVCandidateGeneral(){
     const [experience ,setExperience]=useState('1');
     const [note ,setNote]=useState(null);
     const { id ,idrequest,idpost} = useParams();
@@ -27,26 +27,14 @@ export default function CVCandidate(){
     candidateLanguages: [],
     candidatehardskill: [],
     candidatesoftskill: [],
-    candidatediplomes:[],
     education: [],
     experience: [],
     certificationCandidates: []
     });
-    
-    const getNote = async ()=>{
-        const datalistThemes =  await getData(
-            url_recrutement + `notecandidate/getById?idcandidat=${id}&&idrequest=${idrequest}`
-        );
-        if(datalistThemes.data!=null){
-            console.log(datalistThemes.data);
-            setNote(datalistThemes.data)
-        }
-    }
     const getInfoCandidate = async ()=>{
         const datalistThemes =  await getData(
-            url_recrutement + `candidate/post?id=`+id+`&&idpost=`+idpost
+            url_recrutement + `candidate/`+id
         );
-        console.log(  url_recrutement + `candidate/post?id=`+id+`&&idpost=`+idpost)
         if(datalistThemes.data!=null){
             console.log(datalistThemes.data);
             setData(datalistThemes.data)
@@ -55,7 +43,6 @@ export default function CVCandidate(){
     }
     useEffect(() => {
         getInfoCandidate();
-        getNote();
     },[])
     return(
         <div class="flex h-screen ">
@@ -86,27 +73,6 @@ export default function CVCandidate(){
                                         <p class="text-sm-gray">age:  {getAge(data.birthDate)}</p>
                                         <p class="text-sm-gray"></p>
                                         <p class="text-sm-gray col-span-2">{data.description}</p>
-                                        <p class="text-sm-gray col-span-2">
-                                            <table class="w-full">
-                                                <thead class="bg-gray-50 border-b border-gray-200">
-                                                    <tr>
-                                                        <th class="tr-thead">Obligatoire</th>
-                                                        <th class="tr-thead">Souhaiter</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="bg-white divide-y divide-gray-200">
-                                                    {note!=null ?
-                                                        <>
-                                                        <tr >
-                                                            <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[2]}`}>{note.totalCandidatRequired}/{note.totalPostRequired}</span></td>
-                                                            <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{note.totalCandidatWish}/{note.totalPostWish}</span></td>
-                                                        </tr>
-                                                        </>
-                                                        :null
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </p>
                                     </div>
                                 </div>
                                 <div class="md:col-span-2 border-top">
@@ -151,45 +117,28 @@ export default function CVCandidate(){
                         <div className="w-1/3" >
                             <div class="bg-white m-2 p-6 border-bottom">
                                 <div class="grid grid-cols-1  gap-6">
-                                    <p class="text-sm-gray">Diplomes</p>
-                                    <div className="flex flex-wrap gap-1">
-                                        {data.candidatediplomes.map((value,index)=>(
-                                             value.idCandidat!=null ? 
-                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[value.MandatoryId!=null ? value.MandatoryId:0 ]}`}>{value.name}</span>
-                                            :null
-                                        ))}
-                                    </div>
-
                                     <p class="text-sm-gray">Certifications</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.certificationCandidates.map((value,index)=>(
-                                             value.idCandidat!=null ? 
-                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[value.mandatory!=null ? value.mandatory:0 ]}`}>{value.name}</span>
-                                            :null
+                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[0]}`}>{value.name}</span>
                                         ))}
                                     </div>
                                     <p class="text-sm-gray">Langues</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidateLanguages.map((value,index)=>(
-                                            value.idCandidat!=null ? 
-                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[value.mandatory!=null ? value.mandatory:0 ]}`}>{value.name}</span>
-                                            :null
+                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[0]}`}>{value.name}</span>
                                         ))}
                                     </div>
                                     <p class="text-sm-gray">Hard skills</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidatehardskill.map((value,index)=>(
-                                            value.idCandidat!=null ? 
-                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[value.mandatory!=null ? value.mandatory:0 ]}`}>{value.name}</span>
-                                            : null
+                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[0]}`}>{value.name}</span>
                                         ))}
                                     </div>
                                     <p class="text-sm-gray">Soft skills</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidatesoftskill.map((value,index)=>(
-                                            value.idCandidat!=null ? 
-                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[value.mandatory!=null ? value.mandatory:0 ]}`}>{value.name}</span>
-                                            :null
+                                            <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[0]}`}>{value.name}</span>
                                         ))}
                                     </div>
                                 </div>

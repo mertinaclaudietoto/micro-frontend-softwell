@@ -1,5 +1,5 @@
 // Footer.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HiBars3} from "react-icons/hi2";
 import RenderMenuHorizontal from '../../card/RendermenuHorizontal';
 import { HiChatBubbleBottomCenterText,HiBell,HiMiniUser } from "react-icons/hi2";
@@ -7,7 +7,24 @@ import CardChangePassWord from '../../card/popup/CardChangePassWord';
 import CardNotification from '../../card/popup/CardNotification';
 
 import LogOut from '../../../function/Deconnexion';
+import { url_recrutement } from '../../../data/data';
+import { getData } from '../../../function/Axios';
 export default function Header () {
+  const [infoCompany,setCompany]=useState(null);
+  const loadData =async () => {
+      const data = await getData(
+          url_recrutement + `company/info`
+      );
+      console.log(data);
+      if(data.data!=null){
+          setCompany( data.data);
+          console.log(data);
+      }
+  };
+  useEffect(() => {
+          loadData();
+      }, []);
+        
   const menus = [
     {item:"Postes disponible",link:"/candidate/availableposte"},
     {item:"Vos candidature",link:"/candidate/application"},
@@ -21,8 +38,8 @@ export default function Header () {
     <header class="py-4 border-b border-gray-200">
       <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-              <i class="fas fa-briefcase text-2xl text-blue-600"></i>
-              <h1 class="text-xl md:text-2xl font-bold text-blue-600">JOB CORP</h1>
+              <i class="fas fa-briefcase text-2xl text-softbleu"></i>
+              <h1 class="text-xl md:text-2xl font-bold pink:bg-pink-300">{infoCompany?.companyName}</h1>
           </div>
           <nav class="hidden md:flex items-center gap-6">
             <RenderMenuHorizontal menus={menus} defaultActiveItem={"Find Jobs"} tailwinddefault={"text-gray-700 hover:text-gray-900"} tailwindActif={"border-b-2 border-gray-700"}/>

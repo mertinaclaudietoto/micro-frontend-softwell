@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { url_recrutement, textbackground } from "../../data/data";
 import { useState } from "react";
 import { Sidebar } from "../../components";
+
 export default function MyRequeste(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
@@ -24,7 +25,6 @@ export default function MyRequeste(){
             : value
         );
     }
-    
     const loadData = useCallback(async () => {
         console.log(nameE)
         const data = await getData(
@@ -80,10 +80,11 @@ export default function MyRequeste(){
                                 <tr>
                                     <th class="tr-thead w-8">#</th>
                                     <th class="tr-thead">Nom</th>
-                                    <th class="tr-thead">Candidate</th>
                                     <th class="tr-thead">Date demande</th>
                                     <th class="tr-thead">Date Changement Status</th>
-                                    <th class="tr-thead"></th>
+                                    <th class="tr-thead">Status</th>
+                                    <th class="tr-thead">Volue</th>
+                                    <th class="tr-thead">Postulants</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -92,18 +93,30 @@ export default function MyRequeste(){
                                     <tr index={index} className={value.StatusId==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.id}</td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.nomPost}</td>
-                                        <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.numberOfCandidates}</span></td>
+                                        
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.requestDate.split('T')[0]}</td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.statusSetDate?.split('T')[0]}</td>
                                         {value.statusId ==null ?
                                             <>
                                             </> :
-                                            value.statusId==1 ? 
-                                            <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>validée</span></td>: 
+                                            value.statusId==1 ? (
+                                                <>
+                                                    <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>validée</span></td> 
+                                                   
+                                                </>
+                                            ):
                                             value.statusId== 2 ? 
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[1]}`}>refusée</span></td>: 
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium `}></span></td>
                                         }
+                                        <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.numberOfCandidates}</span></td>
+                                        <td className="px-6 py-4">
+                                             <Link to={`/postulants/${value.id}/${value.postId}`}>
+                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>
+                                                {value.nbrpostulant}
+                                                </span>
+                                            </Link>
+                                        </td>
                                     </tr>
                                     </>
                                 ))}
