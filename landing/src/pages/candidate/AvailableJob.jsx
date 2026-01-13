@@ -28,11 +28,10 @@ export default function AvailableJob() {
         // Construction des paramètres de l'URL de manière sécurisée
         const params = new URLSearchParams();
         params.append("pageNumber", numpage);
-
         if (filter.mot) params.append("name", filter.mot);
         if (filter.idlocalisation && filter.idlocalisation > 0) params.append("idlocalisation", filter.idlocalisation);
         if (filter.idcontrat && filter.idcontrat > 0) params.append("idcontrat", filter.idcontrat);
-        const fullUrl = `${url_recrutement}vpostrecruitementrequest?${params.toString()}`;
+        const fullUrl = `${url_recrutement} ?${params.toString()}`;
         const data = await getData(fullUrl);
         setData(data.data);
         console.log(data.data);

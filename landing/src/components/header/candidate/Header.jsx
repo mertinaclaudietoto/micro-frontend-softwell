@@ -26,9 +26,9 @@ export default function Header () {
       }, []);
         
   const menus = [
-    {item:"Postes disponible",link:"/candidate/availableposte"},
-    {item:"Vos candidature",link:"/candidate/application"},
-    {item:"Profile",link:"/candidate/profile"},
+    {item:"Postes disponible",link:"/candidate-availableposte"},
+    {item:"Vos candidature",link:"/candidate-application"},
+    {item:"Profile",link:"/candidate-profile"},
   ];
   const [changePasseWord,setChangePasseWord]=useState(false);
   const [showNotification,setShowNotification]=useState(false);
@@ -38,7 +38,7 @@ export default function Header () {
     <header class="py-4 border-b border-gray-200">
       <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-              <i class="fas fa-briefcase text-2xl text-softbleu"></i>
+              {/* <i class="fas fa-briefcase text-2xl text-softbleu"></i> */}
               <h1 class="text-xl md:text-2xl font-bold pink:bg-pink-300">{infoCompany?.companyName}</h1>
           </div>
           <nav class="hidden md:flex items-center gap-6">

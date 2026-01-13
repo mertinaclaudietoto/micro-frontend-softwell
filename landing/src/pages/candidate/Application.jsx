@@ -85,7 +85,7 @@ export default function Application() {
             <Header></Header>
             {/* Filter */}
                 <div class="px-4 md:px-8 py-4 border-b border-gray-200 pb-10 grid "> 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:w-1/2 ml-auto items-end" >
+                <div class="grid grid-cols-1  md:grid-cols-1 lg:grid-cols-4 gap-3 md:w-1/2 ml-auto items-end" >
                     <div class="relative ">
                         <input type="text" placeholder="ui/ux Designer" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         onClick={(event)=>{ handlerVariable("mot",event.target.value,setFilter)}}

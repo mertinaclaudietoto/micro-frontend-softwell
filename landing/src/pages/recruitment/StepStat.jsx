@@ -5,46 +5,25 @@ import { Link } from "react-router-dom";
 import { url_recrutement, textbackground } from "../../data/data";
 import { useState } from "react";
 import { Sidebar } from "../../components";
+import { useParams } from "react-router-dom";
 
-export default function StatManager(){
+export default function StepStat({value,close}){
     // TODO:delete and update
+    const { idrequest} = value.id;
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
-    const [nameE,setNameE]=useState("recruitment_request");
     const [data,setData]=useState([]); 
-    const [search ,setSearch]=useState("");
-    const nbrSize=10;
-    const [nbrligne ,setNbrLigne]=useState(0)
-    const [numpage,setNumpage]=useState(1);
-    const pagination =(value)=>{
-        setNumpage(
-        value < 1
-            ? 1
-            : value > Math.ceil(nbrligne / nbrSize)
-            ? Math.ceil(nbrligne / nbrSize)
-            : value
-        );
-    }
+    const [post,setPost]=useState([]); 
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
-            url_recrutement + `${nameE}/getByIdRequester?pageNumber=${numpage}&pageSize=${nbrSize}&id=${sessionStorage.getItem("userId")}`
+            url_recrutement + `vstatstep/${value.id}/${sessionStorage.getItem("userRole")}`
         );
         setData( data.data);
         console.log(data);
-    }, [numpage, search,nameE]); // dépendances de loadData
-
-  
-    const sendsearch = async()=>{
-        setNumpage(1);
-    }
- 
-
+    }, []); // dépendances de loadData
     useEffect(() => {
             loadData();
         }, [loadData]);
-
-
       return(
         <>
         <div class="flex h-screen ">
@@ -55,19 +34,13 @@ export default function StatManager(){
                         {/* filtre */}
                         <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                             <div class="flex items-center justify-between">
-                                <h2 class="text-xl font-semibold text-gray-800">Liste Des demandes
+                                <h2 class="text-xl font-semibold text-gray-800">Etaps de recrutement
                                     {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                                 </h2>
-                                
                                 <div class="flex items-center space-x-3">
-                                   
                                     <div className="flex space-x-2">
-                                       
-                                        <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
-                                        <i className="fas fa-arrow-left"></i>
-                                        </button>
-                                        <button className="btn-neutre-gray" onClick={()=>pagination(numpage+1)} title="Suivant">
-                                            <i className="fas fa-arrow-right"></i>
+                                        <button className="btn-neutre-gray"  onClick={()=>{close(false)}} title="Précédent">
+                                            retour
                                         </button>
                                     </div>
                                 </div>
@@ -77,31 +50,21 @@ export default function StatManager(){
                         <div class="overflow-x-auto  mt-2">
                         <table class="w-full">
                             <thead class="bg-gray-50 border-b border-gray-200">
-                                <tr>
-                                    <th class="tr-thead">Poste</th>
-                                    <th class="tr-thead w-10">Refusée</th>
-                                    <th class="tr-thead w-10">
-                                        <i class="fa-solid fa-hourglass-half"></i> Sélectionnée
-                                    </th>
-                                    <th class="tr-thead w-10">
-                                        <i class="fa-solid fa-hourglass-half"></i> 1er test
-                                    </th>
-                                    <th class="tr-thead w-10">
-                                        <i class="fa-solid fa-hourglass-half"></i> 1er entretien
-                                    </th>
-                                    <th class="tr-thead w-10">Embauchée</th>
-                                    <th class="tr-thead w-10">Total</th>
+                                 <tr>
+                                    <th class="tr-thead w-8">#</th>
+                                    <th class="tr-thead">Post</th>
+                                    <th class="tr-thead">Date demande</th>
+                                    <th class="tr-thead">Status</th>
+                                    <th class="tr-thead">Volue</th>
+                                    <th class="tr-thead">Postulants</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                {data.map((value,index)=>(
-                                    <>
-                                    <tr index={index} className={value.StatusId==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
+                                <tr index={1} className={value.StatusId==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.id}</td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.nomPost}</td>
                                         
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.requestDate.split('T')[0]}</td>
-                                        <td class="px-6 py-4 text-sm text-gray-500">{value.statusSetDate?.split('T')[0]}</td>
                                         {value.statusId ==null ?
                                             <>
                                             </> :
@@ -115,19 +78,39 @@ export default function StatManager(){
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[1]}`}>refusée</span></td>: 
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium `}></span></td>
                                         }
-                                        <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.numberOfCandidates}</span></td>
-                                        <td className="px-6 py-4">
-                                             <Link to={`/postulants/${value.id}/${value.postId}`}>
-                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>
-                                                {value.nbrpostulant}
-                                                </span>
-                                            </Link>
-                                        </td>
                                     </tr>
-                                    </>
-                                ))}
                             </tbody>
                         </table>
+                            <div className="max-w-7xl mx-auto">
+                                {/* Header */}
+                                <div className="flex justify-between items-center mb-6">
+                                </div>
+                                {/* Stats Grid */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                {data.map((stat, index) => (
+                                <Link to={`/postulants/${value.id}/${stat.postId}/${stat.stepId}/${stat.rang}`}>
+                                    <div
+                                    key={index}
+                                    className={`${textbackground[index]} rounded-lg p-6 relative overflow-hidden`}
+                                    >
+                                        <div className="flex justify-between items-start">
+                                            <div>
+                                                <p className={`${textbackground[index]} text-sm mb-2`} >{stat.name}</p>
+                                                <h2 className={` ${textbackground[index]} text-3xl font-bold  mb-2`}>
+                                                    {stat.nbr}
+                                                </h2>
+                                            </div>
+                                            {/* {stat.icon && (
+                                            <div className={`${stat.iconBg} w-12 h-12 rounded-full flex items-center justify-center text-white text-xl`}>
+                                                {stat.icon}
+                                            </div>
+                                            )} */}
+                                        </div>
+                                    </div>
+                                </Link> 
+                                ))}
+                            </div>
+                            </div>
                         </div>  
                     </div>
                 </div>

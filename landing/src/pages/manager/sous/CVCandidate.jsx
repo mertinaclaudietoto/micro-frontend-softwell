@@ -4,12 +4,14 @@ import { getAge,dateToLetters, diffDate } from "../../../function/Date";
 import { Sidebar } from "../../../components";
 import { useParams } from "react-router-dom";
 import { textbackground, textmandatory, url_recrutement, url_recrutement_image } from "../../../data/data";
-import { getData } from "../../../function/Axios";
+import { getData, update } from "../../../function/Axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // modifi
 export default function CVCandidate(){
     const [experience ,setExperience]=useState('1');
     const [note ,setNote]=useState(null);
-    const { id ,idrequest,idpost} = useParams();
+    const { id ,idrequest,idpost,rang} = useParams();
     console.log({id,idrequest})
     const [data, setData] = useState({
     photo:null,
@@ -53,6 +55,26 @@ export default function CVCandidate(){
         }
         
     }
+    const refusée =async ()=>{
+        const data =  await update(
+            url_recrutement + `candidate/refused?id=`+id
+        );
+         if (data == true) {
+            toast.success("Données insérées avec succès !");
+        } else {
+            toast.error("Problème serveur, réessayez plus tard !");
+        }
+    }
+    const validée =async ()=>{
+       const data =  await update(
+            url_recrutement + `candidate/nextstep?id=`+id+`&range=`+rang
+        );
+         if (data == true) {
+            toast.success("Données insérées avec succès !");
+        } else {
+            toast.error("Problème serveur, réessayez plus tard !");
+        }
+    }
     useEffect(() => {
         getInfoCandidate();
         getNote();
@@ -66,18 +88,24 @@ export default function CVCandidate(){
                     <div className="flex">
                         <div className="flex-1 w-2/3 border-rigth ">
                             <div className="grid grid-cols-1 lg:grid-cols-2 ">
-                            
                                 <div class="bg-white  p-8 border-rigth ">
                                     <div class="flex flex-col items-center">
                                         <img src={url_recrutement_image+data.photo} 
                                             alt="Kate Prokopchuk" 
                                             class="w-32 h-32 rounded-full object-cover mb-4"/>
-                                        {/* <h2 class="text-2xl font-bold text-gray-800 text-center">{data.name}</h2>
-                                        <h3 class="text-2xl font-bold text-gray-800 mb-4">{data.firstName}</h3> */}
+                                        <div class="flex items-center space-x-3">
+                                            <div className="flex space-x-2">
+                                                <button className="btn-neutre-gray" onClick={()=>refusée()} title="Précédent">
+                                                    refusée
+                                                </button>
+                                                <button className="btn-neutre-gray" onClick={()=>validée()} title="Suivant">
+                                                   étape suivante
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="bg-white p-6 ">
-                                
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <p class=" text-sm-gray col-span-2">{data.name} {data.firstName}</p>
                                         <p class="text-sm-gray col-span-2">{data.email}</p>

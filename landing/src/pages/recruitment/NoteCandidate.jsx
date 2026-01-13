@@ -12,7 +12,7 @@ import { getAge } from "../../function/Date";
 import { useNavigate } from "react-router-dom";
 export default function NoteCandidate(){
     const navigate = useNavigate();
-    const { id,idpost } = useParams();
+    const { id,idpost ,idstep} = useParams();
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
@@ -33,9 +33,9 @@ export default function NoteCandidate(){
     const loadData = useCallback(async () => {
         console.log(nameE)
         const data = await getData(
-            url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}&idrequest=${id}`
+            url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}&idrequest=${id}&stepId=${idstep}`
         );
-        console.log( url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}&idrequest=${id}`);
+        console.log( url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}&idrequest=${id}&stepId=${idstep}`);
         setData( data.data);
         console.log(data.data);
     }, [numpage, nameE]); // dépendances de loadData

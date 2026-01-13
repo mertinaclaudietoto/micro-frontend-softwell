@@ -21,6 +21,7 @@ export default function StepRecruitment(){
     const nbrSize=10;
     const [nbrligne ,setNbrLigne]=useState(0)
     const [numpage,setNumpage]=useState(1);
+    const booleanList=[{id:1,name:'OUI'},{id:0,name:'NON'}];
     const modification = (value)=>{
             setUpValue(value);
             setShowUpdate(true);
@@ -73,8 +74,8 @@ console.log(data.data);
       return(
         <>
         
-        {showAdd ? <AddStepRecruitement  close={setShowAdd}   listeRole={rules} entityName={nameE}   />  :<></> }
-        {showUpdate  ? <UpdateRecruitment close={setShowUpdate} listeRole={rules} valueUp={upValue}  entityName={nameE} /> : <></>}
+        {showAdd ? <AddStepRecruitement  close={setShowAdd}   listeRole={rules} entityName={nameE}  booleanEmail={booleanList} />  :<></> }
+        {showUpdate  ? <UpdateRecruitment close={setShowUpdate} listeRole={rules} valueUp={upValue}  entityName={nameE} booleanEmail={booleanList} /> : <></>}
 
         <div class="flex h-screen ">
             <Sidebar/>
@@ -126,6 +127,7 @@ console.log(data.data);
                                     <th class="tr-thead w-8">#</th>
                                     <th class="tr-thead">Nom</th>
                                     <th class="tr-thead">Responsable</th>
+                                    <th class="tr-thead">Envois Email</th>
                                     <th class="tr-thead"></th>
                                     {/* <th class="tr-thead"></th> */}
                                 </tr>
@@ -139,6 +141,9 @@ console.log(data.data);
                                         <td className="px-6 py-4 text-sm text-gray-500">
                                             {rules.find(v => v.id === value.idrole)?.name}
                                         </td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">
+                                            {booleanList.find(v => v.id === value.email)?.name}
+                                        </td>
                                         <td className="px-6 py-4 ">
                                             <span
                                                 // className="inline-flex items-center justify-center px-2.5 py-1 rounded
@@ -149,7 +154,7 @@ console.log(data.data);
                                             >
                                                 <i className="fas fa-edit text-gray-400"></i>
                                             </span>
-                                            </td>
+                                        </td>
                                     </tr>
                                     </>
                                 ))}

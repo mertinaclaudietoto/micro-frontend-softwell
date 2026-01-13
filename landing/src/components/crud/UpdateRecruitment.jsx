@@ -4,7 +4,7 @@ import Select from "../../function/selectSimple";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { url_recrutement } from "../../data/data";
-export default function UpdateRecruitment({close,valueUp,entityName,listeRole}){
+export default function UpdateRecruitment({close,valueUp,entityName,listeRole,booleanEmail}){
     const [value, setValue] = useState({
                     id:valueUp.id ,
                     name: valueUp.name,
@@ -19,6 +19,9 @@ export default function UpdateRecruitment({close,valueUp,entityName,listeRole}){
     };
     const handlerRule = (opt) => {
        handlerVariable("idrole",opt.id,setValue)
+    };
+    const handlerEmail = (opt) => {
+       handlerVariable("email",opt.id,setValue)
     };
     const submit = async ()=>{
         // console.log(value)
@@ -77,6 +80,10 @@ export default function UpdateRecruitment({close,valueUp,entityName,listeRole}){
                 <div className='mt-4 mb-6'>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
                     <Select options={listeRole} onChange={handlerRule} placeholder={listeRole?.find(v => v.id === value.idrole)?.name} value={false} />
+                </div>
+                <div className='mt-4 mb-6'>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Envois Email</label>
+                    <Select options={listeRole} onChange={handlerEmail} placeholder={booleanEmail?.find(v => v.id === value.email)?.name} value={false} />
                 </div>
                 <div className='mt-4 mb-6'>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Responsable</label>

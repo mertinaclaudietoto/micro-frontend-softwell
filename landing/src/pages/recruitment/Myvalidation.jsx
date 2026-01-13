@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { url_recrutement, textbackground } from "../../data/data";
 import { useState } from "react";
 import { Sidebar } from "../../components";
+import StepStat from "./StepStat";
 export default function MyValidation(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
@@ -15,6 +16,8 @@ export default function MyValidation(){
     const nbrSize=10;
     const [nbrligne ,setNbrLigne]=useState(0)
     const [numpage,setNumpage]=useState(1);
+    const [showStep,setShowStep]=useState(false); 
+    const [post,setPost]=useState(null);
     const pagination =(value)=>{
         setNumpage(
         value < 1
@@ -47,6 +50,7 @@ export default function MyValidation(){
 
       return(
         <>
+        { showStep ? <StepStat  value={post} close={setShowStep} />:  
         <div class="flex h-screen ">
             <Sidebar/>
             <main class="flex-1 ">    
@@ -107,11 +111,16 @@ export default function MyValidation(){
                                         }
                                         <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.numberOfCandidates}</span></td>
                                         <td className="px-6 py-4">
-                                             <Link to={`/postulants/${value.id}/${value.postId}`}>
+                                             {/* <Link to={`/postulants/${value.id}/${value.postId}`}>
                                                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>
                                                 {value.nbrpostulant}
                                                 </span>
-                                            </Link>
+                                            </Link> */}
+                                            <button onClick={()=>{setPost(value);  setShowStep(true); }}>
+                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>
+                                                {value.nbrpostulant}
+                                                </span>
+                                            </button>
                                         </td>
                                     </tr>
                                     </>
@@ -123,6 +132,7 @@ export default function MyValidation(){
                 </div>
             </main>
         </div>
+        }
         
         </>
     )

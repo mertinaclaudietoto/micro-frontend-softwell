@@ -41,6 +41,7 @@ import MyValidation from './pages/recruitment/Myvalidation';
 import ListCandidate from './pages/recruitment/ListCandidate';
 import NoteCandidate from './pages/recruitment/NoteCandidate';
 import CVCandidateGeneral from './pages/manager/sous/CVCandidateGeneral';
+import StatManager from './pages/recruitment/StepStat';
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -144,10 +145,6 @@ function App() {
         <Route path="/crud-steprecruitment" element={ <StepRecruitment /> } />
 
 
-        
-
-        
-
         {/* <Route path="/test" element={ <CardCriterien /> } /> */}
         <Route path="/allrequest" element={ <AllRequeste /> } />
         <Route path="/myrequest" element={ <MyRequeste /> } />
@@ -157,8 +154,11 @@ function App() {
 
 
         <Route path="/listecandidate" element={ <ListCandidate /> } />
-        <Route path="/infocandidate/:id/:idrequest/:idpost" element={<CVCandidate />} />
+        <Route path="/infocandidate/:id/:idrequest/:idpost/:rang" element={<CVCandidate />} />
         <Route path="/infocandidateGenerala/:id" element={<CVCandidateGeneral />} />
+
+        <Route path="/stat-manager/:idrequest" element={<StatManager />} />
+
         <Route path="/postulants/:id/:idpost" element={ <ProtectedRoute><NoteCandidate /> </ProtectedRoute>} />
 
 
