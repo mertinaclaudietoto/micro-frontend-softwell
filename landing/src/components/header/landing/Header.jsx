@@ -29,10 +29,8 @@ const Header = () => {
       const data = await getData(
           url_recrutement + `company/info`
       );
-      console.log(data);
       if(data.data!=null){
         setCompany( data.data);
-        console.log(data);
       }
   };
   useEffect(() => {
@@ -71,7 +69,7 @@ const Header = () => {
                   <RenderMenuHorizontal menus={menus} defaultActiveItem={"Discover"} tailwinddefault={"block px-3 py-2 text-gray-700 hover:text-gray-900"} tailwindActif={"border-b-2 border-gray-700"}/>
                   <button class="w-full bg-gray-300 text-white px-6 py-2 rounded-full mt-2  hover:text-gray-900" onClick={()=>{setShowLogin(true)}}>Connexion</button>
                     <button class="w-full bg-softbleu text-white px-6 py-2 rounded-full mt-2 hover:bg-softbleushade-12" onClick={()=>{registration()}}>
-                        Sign in
+                        Inscription
                     </button>
               </div>
             </div>

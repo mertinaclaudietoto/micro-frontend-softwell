@@ -561,6 +561,8 @@ export const usersprofile = [
 export const url ="http://localhost:5172/api/";
 export const url_recrutement ="http://localhost:5118/api/";
 export const url_recrutement_image ="http://localhost:5118/uploads/";
+export const url_sendemail ="http://localhost:5025/api/";
+
 // export const url ="http://151.80.218.41:1010/api/";
 // export const url_recrutement ="http://151.80.218.41:5050/api/";
 // export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";
@@ -1180,7 +1182,10 @@ export   const  datasidebar =
                 {label :"Demande",icone : "fas fa-file-alt",actif:false,link:"/myrequest",subItems:null,acces:"demandepost"},
                 {label :"Mes Validation",icone : " fas fa-check-circle ",actif:false,link:"/myvalidation",subItems:null,acces:"validepost"},
                 {label :"Tout les demandes",icone : "fas fa-folder-open",actif:false,link:"/allrequest",subItems:null,acces:"alldemande"},
+                {label :"Liste des candidats inscrits",icone : "fa fa-address-book",actif:false,link:"/listecandidate",subItems:null,acces:"alldemande"},
+                {label :"Liste models email",icone : "fa fa-paper-plane",actif:false,link:"/email",subItems:null,acces:"alldemande"},
                 {label :"info generale",icone : "fas fa-clipboard-check",actif:false,link:"#",acces:"infoselectionrecruitment",
+              
                     subItems:[
                         {label :"Certification",actif:false,link:"/crud-certification"},
                         {label :"Diplome",actif:false,link:"/crud-diplome"},
@@ -1193,7 +1198,6 @@ export   const  datasidebar =
                         {label :"Localisation",actif:false,link:"/crud-localisation_candidate"},
                         {label :"Universitee",actif:false,link:"/crud-university"},
                         {label :"Etaps Recrutement",actif:false,link:"/crud-steprecruitment"},
-
                     ]
                 },
             ],

@@ -1,15 +1,12 @@
 import { useState,useEffect,useRef } from "react";
-import {  HiOutlineMap,HiOutlineXMark,HiOutlineEnvelope, HiOutlinePhone} from "react-icons/hi2";
-import RenderMenuHorizontal from "../../components/card/RendermenuHorizontal";
-import { diplome, infocandidate, localisation, typeExperience, url_recrutement, url_recrutement_image } from "../../data/data";
-import { diffDate } from "../../function/Date";
-import axios from "axios";
+import { HiOutlinePhone} from "react-icons/hi2";
+import { url_recrutement, url_recrutement_image } from "../../data/data";
 import { uploadCompressedImage } from "../../function/uplaodimage";
 import { getData, send } from "../../function/Axios";
 import Select from "../../function/selectSimple";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Registration(){
-
     const [data, setData] = useState({
     photo:null,
     name: null,
@@ -49,7 +46,6 @@ export default function Registration(){
             setListGenre(datalistThemes.data)
     }
     const handlerGenre =(opt) =>{
-        console.log(opt)
         handlerVariable("idGenre", opt.id,setData);
         // handlerVariable("nameTheme", opt.name,setPrice)
     }
@@ -63,7 +59,6 @@ export default function Registration(){
             setListLocalisation(datalistThemes.data)
     }
     const handlerLocalisation =(opt) =>{
-        console.log(opt)
         handlerVariable("idLocalisation", opt.id,setData);
         // handlerVariable("nameTheme", opt.name,setPrice)
     }
@@ -92,11 +87,12 @@ export default function Registration(){
             setListSoftSkill(datalistThemes.data)
     }
     const handlerSoftSkill =(opt) =>{
-        console.log(opt)
-        handlerChangeTableInfocandidate("candidatesoftskill",{
-            idSoftSkill:opt.id,
-            name:opt.name
-        },null);
+        if(opt!=null){
+            handlerChangeTableInfocandidate("candidatesoftskill",{
+                idSoftSkill:opt.id,
+                name:opt.name
+            },null);
+        }
     }
     ///education 
     const [education,setEducation] =useState({});
@@ -121,12 +117,15 @@ export default function Registration(){
             setListDiplome(datalistThemes.data)
     }
     const handlerDiplome =(opt) =>{
-        console.log(opt)
-        setEducation(previous => ({
-            ...previous,
-            idDiplome: opt.id,
-            nameDiplome: opt.name
-         }));
+        
+        if(opt!=null){
+            setEducation(previous => ({
+                ...previous,
+                idDiplome: opt.id,
+                nameDiplome: opt.name
+            }));
+        }
+       
     }
         //university
     const [listUniversity,setListUniversity]=useState([]);
@@ -138,12 +137,14 @@ export default function Registration(){
             setListUniversity(datalistThemes.data)
     }
     const handlerUniversity =(opt) =>{
-        console.log(opt)
-        setEducation(previous => ({
-            ...previous,
-            IdUniversity: opt.id,
-            nameUniversity: opt.name
-         }));
+        
+        if(opt!=null){
+            setEducation(previous => ({
+                ...previous,
+                IdUniversity: opt.id,
+                nameUniversity: opt.name
+            }));
+        }
     }
     ///type experience 
     const [experience,setExperiences] =useState({
@@ -176,12 +177,14 @@ export default function Registration(){
          }));
     }
     const handlerExperience =(opt) =>{
-        console.log(opt)
-        setExperiences(previous => ({
-            ...previous,
-            IdTypeExperience: opt.id,
-            name: opt.name
-         }));
+        
+        if(opt!=null){
+            setExperiences(previous => ({
+                ...previous,
+                IdTypeExperience: opt.id,
+                name: opt.name
+            }));
+        }
     }
     //language
     const [listLanguage,setListLanguage]=useState([]);
@@ -193,11 +196,14 @@ export default function Registration(){
            setListLanguage(datalistThemes.data)
     }
     const handlerLanguage =(opt) =>{
-        console.log(opt)
-        handlerChangeTableInfocandidate("candidateLanguages",{
-            idLanguage:opt.id,
-            name:opt.name
-        },null);
+        
+        if(opt!=null){
+            handlerChangeTableInfocandidate("candidateLanguages",{
+                idLanguage:opt.id,
+                name:opt.name
+            },null);
+        }
+       
     }
      //certification
     const [listCertification,setCertification]=useState([]);
@@ -209,25 +215,24 @@ export default function Registration(){
            setCertification(datalistThemes.data)
     }
     const handlerCertification =(opt) =>{
-        console.log(opt)
-         handlerChangeTableInfocandidate("certificationCandidates",{
-            idCertification:opt.id,
-            name:opt.name
-        },null);
+        
+        if(opt!=null){
+            handlerChangeTableInfocandidate("certificationCandidates",{
+                idCertification:opt.id,
+                name:opt.name
+            },null);
+        }
+       
     }
     const save = async ()=>{
         console.log(data);
         const value = await send(data,url_recrutement + "candidate")
-        // console.log(value)
         if (value == true) {
             // toast.success("Données insérées avec succès !");
             window.location.replace("/logincandidate");
-            close(false);
         } else {
-            // toast.error("Problème serveur, réessayez plus tard !");
+            toast.error("Problème serveur, réessayez plus tard !");
         }
-
-
     }
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
@@ -267,14 +272,6 @@ export default function Registration(){
         getListExperience();
         getListLanguage();
         getListCertification();
-        // const handleScroll = () => {
-        //   const scrollTop = window.scrollY;
-        //   const docHeight = document.body.scrollHeight - window.innerHeight;
-        //   const scrolled = (scrollTop / docHeight) * 100;
-        //   setScrollPercentage(scrolled);
-        // };
-        // window.addEventListener("scroll", handleScroll);
-        // return () => window.removeEventListener("scroll", handleScroll);
       }, []);
 
     return (
@@ -285,7 +282,8 @@ export default function Registration(){
             </div>
             <p class="text-sm text-gray-600 flex items-center justify-center">
                 Est-ce que tu as un compte ?  <b className="text-white"> x </b>
-                <a href="#" class="text-or hover:font-bold  font-semibold">Connecte-toi</a>
+                <a href="/candidate" class="text-or hover:font-bold  font-semibold">Connecte-toi</a>
+
             </p>
         <div>
             <div class="grid grid-cols-1 mt-6">
@@ -296,7 +294,7 @@ export default function Registration(){
                             onClick={handleClick}
                         >
                             {data.photo ? (
-                                <img src={url_recrutement_image+"uploads/"+data.photo} className="rounded-full w-full h-full object-cover" />
+                                <img src={url_recrutement_image+data.photo} className="rounded-full w-full h-full object-cover" />
                             ) : (
                                 <span className="text-white">+</span>
                             )}
@@ -317,7 +315,7 @@ export default function Registration(){
                             <label className="block text-sm font-medium text-gray-700 mb-2">Nom</label>
                             <input 
                                 type="text" 
-                                placeholder="Entrer votre nom" 
+                                placeholder="nom" 
                                 className="input_singup"
                                 onChange={(event) => handlerVariable("name", event.target.value,setData)}
                             />
@@ -326,7 +324,7 @@ export default function Registration(){
                             <label className="block text-sm font-medium text-gray-700 mb-2">Prenom</label>
                             <input 
                                 type="text" 
-                                placeholder="Entrer votre prenom" 
+                                placeholder="prenom" 
                                 className="input_singup"
                                 onChange={(event) => handlerVariable("FirstName", event.target.value,setData)}
                             />
@@ -337,7 +335,7 @@ export default function Registration(){
                             <label className="block text-sm font-medium text-gray-700 mb-2">Login</label>
                             <input 
                                 type="text" 
-                                placeholder="Entrer votre nom" 
+                                placeholder="login" 
                                 className="input_singup"
                                 onChange={(event) => handlerVariable("login", event.target.value,setData)}
                             />
@@ -346,7 +344,7 @@ export default function Registration(){
                             <label className="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                             <input 
                                 type="text" 
-                                placeholder="Entrer votre prenom" 
+                                placeholder="mots de passe" 
                                 className="input_singup"
                                 onChange={(event) => handlerVariable("password", event.target.value,setData)}
                             />
@@ -373,11 +371,11 @@ export default function Registration(){
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2  sm:mt-8 gap-4 my-2">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
                             <div class="relative">
                                 <input 
                                     type="email" 
-                                    placeholder="votre email" 
+                                    placeholder="e-mail" 
                                     class="input_singup"
                                     onChange={(event) => handlerVariable("email", event.target.value,setData)}
                                 />
@@ -459,7 +457,7 @@ export default function Registration(){
                     {/* language */}
                     <div class="border-t border-gray-200 mt-8">
                         <div class="flex items-center justify-between mb-4 mt-2">
-                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Language</h3>
+                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Langue</h3>
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
                             <div>
@@ -504,30 +502,6 @@ export default function Registration(){
                             </div>
                         </div>  
                     </div>
-                    {/* certification */}
-                     {/* <div class="border-t border-gray-200 mt-8">
-                        <div class="flex items-center justify-between mb-4 mt-2">
-                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Language</h3>
-                        </div>
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
-                            <div>
-                                <Select onChange={handlerLanguage} placeholder="...." options={listLanguage}/>
-                            </div>
-                            <div>   
-                                <div class="flex flex-wrap gap-2">
-                                    {data.candidatesoftskill.map((value,index)=>(
-                                        <button className="card-text-rounded-gray" onClick={()=>handlerChangeTableInfocandidate("certificationCandidates",null,index)}>
-                                            {value.name} 
-                                            <span className="ml-2">
-                                                    <i className="fa-solid fa-xmark text-gray-500"></i>
-                                            </span>
-                                        </button>
-                                    ))
-                                    }
-                                </div>
-                            </div>
-                        </div>  
-                    </div> */}
                     <div className="mt-8">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Descrivez-vous</label>
                         <textarea 
@@ -545,13 +519,9 @@ export default function Registration(){
             <div class="grid grid-cols-1">
                 <div class="pt-6 border-t border-gray-200 ">
                     <div className="bg-gray-50 rounded-lg p-6 my-4">
-                        <div class="flex items-center justify-between mb-4 ">
+                        <div class=" flex items-center justify-between mb-4 ">
                             <h3 class="text-lg font-bold text-gray-900">Education</h3>
-                            {/* <button class="text-or hover:text-orange-600 font-semibold text-sm flex items-center gap-1">
-                                <i class="fas fa-plus"></i>
-                                Ajouter
-                            </button> */}
-                            <div class="flex items-center justify-end gap-3 mt-2">
+                            <div class="hidden md:block flex items-center justify-end gap-3 mt-2">
                                 <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>(deleteAddEducation())}>
                                     Annuler
                                 </button>
@@ -593,8 +563,17 @@ export default function Registration(){
                                 onChange={(event)=>{handlerVariable("Description",event.target.value,setEducation)}}
                             ></textarea>
                         </div>
+                        <div class="block pt-2 md:hidden flex items-center justify-end gap-3 mt-2">
+                            <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>(deleteAddEducation())}>
+                                Annuler
+                            </button>
+                            <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium"
+                                onClick={()=>handlerChangeTableInfocandidate("education",education,null)}>
+                                Ajouter
+                            </button>
+                        </div>
                     </div>
-                    <h5 className="text-or   font-bold text-sm my-2">Liste de vos Diplomes</h5>
+                    <h5 className="text-or   font-bold text-sm my-2">Diplomes</h5>
                     {data.education.map((value,index)=>(
                         <div index={index} class="mt-4 bg-gray-50 rounded-lg p-4 relative">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -603,18 +582,15 @@ export default function Registration(){
                                     <p class="font-medium text-gray-600">{value.nameDiplome}</p>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-gray-500 mb-1">College / University</p>
+                                    <p class="text-xs text-gray-500 mb-1">College / Université</p>
                                     <p class="font-medium text-gray-600">{value.nameUniversity}</p>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-gray-500 mb-1">Graduation Year</p>
+                                    <p class="text-xs text-gray-500 mb-1">Année de remise de diplôme</p>
                                     <p class="font-medium text-gray-600">{value.Year}</p>
                                 </div>
                             </div>
                             <div class="absolute top-4 right-4 flex gap-2">
-                                {/* <button class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100" >
-                                    <i class="fas fa-pen text-gray-600 text-xs"></i>
-                                </button> */}
                                 <button class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100"  onClick={()=>handlerChangeTableInfocandidate("education",education,index)}>
                                     <i class="fas fa-trash text-gray-600 text-xs"></i>
                                 </button>
@@ -631,7 +607,7 @@ export default function Registration(){
                     <div className="bg-gray-50 rounded-lg p-6 my-4">
                         <div class="flex items-center justify-between py-4">
                             <h3 class="text-lg font-bold text-gray-900">Experience</h3>
-                            <div class="flex items-center justify-end gap-3">
+                            <div class="hidden md:block flex items-center justify-end gap-3">
                                 <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{initExperience}}>
                                     Annuler
                                 </button>
@@ -654,7 +630,7 @@ export default function Registration(){
                                 />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Votre Poste</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Poste</label>
                                 <input 
                                     type="text" 
                                     value={experience.Poste}
@@ -665,7 +641,7 @@ export default function Registration(){
                             </div>
                             
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Date debut</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Debut</label>
                                 <div class="relative">
                                     <input 
                                         type="date" 
@@ -677,7 +653,7 @@ export default function Registration(){
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Date Fin</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Fin</label>
                                 <div class="relative">
                                     <input 
                                         type="date" 
@@ -692,7 +668,7 @@ export default function Registration(){
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Type d'experience</label>
                                 <div class="relative">
-                                    <Select onChange={handlerExperience} placeholder={experience.name} options={listExperience}/>
+                                    <Select onChange={handlerExperience} placeholder={experience.name} options={listExperience} value={false}/>
                                 </div>
                             </div>
                         </div>
@@ -704,6 +680,15 @@ export default function Registration(){
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent resize-none"
                                 onChange={(event)=>{ handlerVariable("Description",event.target.value,setExperiences)}}
                             ></textarea>
+                        </div>
+                        <div class="block pt-2 md:hidden flex items-center justify-end gap-3 mt-2">
+                            <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>(deleteAddEducation())}>
+                                Annuler
+                            </button>
+                            <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium"
+                                onClick={()=>handlerChangeTableInfocandidate("experience",experience,null)}>
+                                Ajouter
+                            </button>
                         </div>
                     </div>
                     <label class="text-or   font-bold text-sm my-2">Liste de vos  experience</label>

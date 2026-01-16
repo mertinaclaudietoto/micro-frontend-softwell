@@ -115,7 +115,6 @@ export default function UserProfile(){
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Image</th>
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Matricule</th>
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase ">Nom et prenom</th>
-                                    <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Post</th>
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Role</th>
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase"></th>
                                     {/* Password  <i className={visible ? "fas fa-eye-slash" : "fas fa-eye"}></i> */}

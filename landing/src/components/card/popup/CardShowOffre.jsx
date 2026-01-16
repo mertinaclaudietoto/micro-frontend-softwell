@@ -97,13 +97,13 @@ export default function CardShowOffre({idpost,id,close}){
                         </div>
                     </div>
                     ) : null}
-                      {value?.languages?.length > 0 ? (
+                     {value?.languages?.length > 0 ? (
                     <div className="py-2">
                         <p className="label-formulaire">
                             Langue 
                         </p>
                         <div className="flex flex-wrap gap-2">
-                        {value.diplomes.map((cert, index) => (
+                        {value.languages.map((cert, index) => (
                             <span
                             key={index}
                             className="px-3 py-1 bg-gray-100 text-xs rounded-full"

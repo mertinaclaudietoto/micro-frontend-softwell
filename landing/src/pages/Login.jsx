@@ -21,7 +21,7 @@ export default function Login({closePopup}){
     const submit = async () => {
         try {
             const response = await _login(login, url + "employ/login");
-            // console.log(response.data.data)
+            console.log(response.data.data)
             if(response.data.success==false){
                 setText("Login ou Mot de passe incorrecte")
             }

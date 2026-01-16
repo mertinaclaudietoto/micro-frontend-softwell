@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import { infocandidate } from "../../../data/candidate";
 import { getAge,dateToLetters, diffDate } from "../../../function/Date";
 import { Sidebar } from "../../../components";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { textbackground, textmandatory, url_recrutement, url_recrutement_image } from "../../../data/data";
 import { getData } from "../../../function/Axios";
 // modifi
@@ -10,7 +10,6 @@ export default function CVCandidateGeneral(){
     const [experience ,setExperience]=useState('1');
     const [note ,setNote]=useState(null);
     const { id ,idrequest,idpost} = useParams();
-    console.log({id,idrequest})
     const [data, setData] = useState({
     photo:null,
     name: null,
@@ -35,11 +34,11 @@ export default function CVCandidateGeneral(){
         const datalistThemes =  await getData(
             url_recrutement + `candidate/`+id
         );
+        console.log(datalistThemes.data);
         if(datalistThemes.data!=null){
             console.log(datalistThemes.data);
             setData(datalistThemes.data)
         }
-        
     }
     useEffect(() => {
         getInfoCandidate();
@@ -64,13 +63,12 @@ export default function CVCandidateGeneral(){
                                     </div>
                                 </div>
                                 <div class="bg-white p-6 ">
-                                
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <p class=" text-sm-gray col-span-2">{data.name} {data.firstName}</p>
-                                        <p class="text-sm-gray col-span-2">{data.email}</p>
-                                        <p class="text-sm-gray">{data.localisationName}</p>
-                                        <p class="text-sm-gray">tel:  {data.tel}</p>
-                                        <p class="text-sm-gray">age:  {getAge(data.birthDate)}</p>
+                                        <p class="text-sm-gray col-span-2">email : {data.email}</p>
+                                        <p class="text-sm-gray">localisation : {data.localisationName}</p>
+                                        <p class="text-sm-gray">tel :  {data.tel}</p>
+                                        <p class="text-sm-gray">age :  {getAge(data.birthDate)}</p>
                                         <p class="text-sm-gray"></p>
                                         <p class="text-sm-gray col-span-2">{data.description}</p>
                                     </div>
@@ -79,33 +77,25 @@ export default function CVCandidateGeneral(){
                                     <div class="mt-6 bg-white  overflow-hidden">
                                         <div class="p-6 space-y-4 ">
                                             {data.experience
-                                            .filter(item => item.type === experience)
                                             .map((exp, index) => (
                                                 <div key={index} className="border-l-4 border-softbleu pl-4 py-2">
-                                                    <div className="grid grid-cols-4">
+                                                    <div className="grid grid-cols-2">
                                                         <div>
-                                                            <div className="text-xs text-gray-500 mb-1">{dateToLetters(exp.dateDebut)} -- {dateToLetters(exp.dateFin)} </div>
-                                                            <div className="text-lg font-bold text-gray-800 mb-2">{diffDate(exp.dateDebut,exp.dateFin)}</div>
+                                                            <div className="text-xs text-gray-500 mb-1">{dateToLetters(exp.DateDebut)} à {dateToLetters(exp.DateFin)} </div>
+                                                            <div className="text-lg font-bold text-gray-800 mb-2">{diffDate(exp.DateDebut,exp.DateFin)}</div>
                                                         </div>
                                                         <div>
                                                             <div className="mb-2">
-                                                                <span className="text-xs text-gray-500">{exp.entreprise}</span>
-                                                                <p className="text-sm font-medium text-gray-800">
-                                                                    {exp.poste}
-                                                                </p>
-                                                            </div>
-                                                        
-                                                        </div>
-
-                                                        <div className="col-span-2">
-                                                            <div>
-                                                            
-                                                                <p className="text-gray-700">
-                                                                    {exp.description}
-                                                                </p>
+                                                                <div className="text-lg  text-gray-800 mb-2">{exp.Entreprise}  {exp.Poste} </div>
                                                             </div>
                                                         </div>
-
+                                                    </div>
+                                                    <div className="">
+                                                        <div>
+                                                            <p className="text-gray-500 text-sm">
+                                                                {exp.Description}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             ))}
@@ -114,7 +104,10 @@ export default function CVCandidateGeneral(){
                                 </div>
                             </div>
                         </div>
-                        <div className="w-1/3" >
+                        <div className="relative w-1/3" >
+                            <Link to="/listecandidate" className="btn-neutre-gray absolute top-2 right-2 "  title="Suivant">
+                                retour
+                            </Link>
                             <div class="bg-white m-2 p-6 border-bottom">
                                 <div class="grid grid-cols-1  gap-6">
                                     <p class="text-sm-gray">Certifications</p>

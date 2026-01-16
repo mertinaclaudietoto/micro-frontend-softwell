@@ -5,22 +5,20 @@ import { Link } from "react-router-dom";
 import { url_recrutement, textbackground } from "../../data/data";
 import { useState } from "react";
 import { Sidebar } from "../../components";
-import { useParams } from "react-router-dom";
 
 export default function StepStat({value,close}){
     // TODO:delete and update
-    const { idrequest} = value.id;
+    // console.log(value);
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
     const [data,setData]=useState([]); 
-    const [post,setPost]=useState([]); 
     const loadData = useCallback(async () => {
         const data = await getData(
             url_recrutement + `vstatstep/${value.id}/${sessionStorage.getItem("userRole")}`
         );
+        console.log(data.data);
         setData( data.data);
-        console.log(data);
-    }, []); // dépendances de loadData
+    }, []); 
     useEffect(() => {
             loadData();
         }, [loadData]);
@@ -51,9 +49,9 @@ export default function StepStat({value,close}){
                         <table class="w-full">
                             <thead class="bg-gray-50 border-b border-gray-200">
                                  <tr>
-                                    <th class="tr-thead w-8">#</th>
                                     <th class="tr-thead">Post</th>
                                     <th class="tr-thead">Date demande</th>
+                                    <th class="tr-thead">Date de clôture</th>
                                     <th class="tr-thead">Status</th>
                                     <th class="tr-thead">Volue</th>
                                     <th class="tr-thead">Postulants</th>
@@ -61,9 +59,8 @@ export default function StepStat({value,close}){
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 <tr index={1} className={value.StatusId==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
-                                        <td class="px-6 py-4 text-sm text-gray-500">{value.id}</td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.nomPost}</td>
-                                        
+                                        <td class="px-6 py-4 text-sm text-gray-500">{value.requestDate.split('T')[0]}</td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.requestDate.split('T')[0]}</td>
                                         {value.statusId ==null ?
                                             <>
@@ -71,13 +68,14 @@ export default function StepStat({value,close}){
                                             value.statusId==1 ? (
                                                 <>
                                                     <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>validée</span></td> 
-                                                   
                                                 </>
                                             ):
                                             value.statusId== 2 ? 
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[1]}`}>refusée</span></td>: 
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium `}></span></td>
                                         }
+                                        <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium  ${textbackground[6]}`}>{value.numberOfCandidates}</span></td>
+                                        <td className="px-6 py-4 justify-center items-center"><span class={`inline-flex  items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{value.nbrpostulant}</span></td>
                                     </tr>
                             </tbody>
                         </table>
@@ -88,7 +86,7 @@ export default function StepStat({value,close}){
                                 {/* Stats Grid */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {data.map((stat, index) => (
-                                <Link to={`/postulants/${value.id}/${stat.postId}/${stat.stepId}/${stat.rang}`}>
+                                <Link to={`/postulants/${stat.requestId}/${value.postId}/${stat.stepId}/${stat.rang}/${stat.email}`}>
                                     <div
                                     key={index}
                                     className={`${textbackground[index]} rounded-lg p-6 relative overflow-hidden`}

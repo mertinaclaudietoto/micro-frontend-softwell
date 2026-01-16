@@ -1,5 +1,4 @@
 import { useState } from "react";
-import IconeWithDescription from "../../icone/IconeWithDescription";
 import { CardShowOffre } from "../popup";
 
 export default function CardOffreSmallCandidate({value,k}){
@@ -9,7 +8,7 @@ export default function CardOffreSmallCandidate({value,k}){
         {/* border border-gray-300 */}
             <button onClick={()=>{setShowDetaille(true)}} key={k} class="border border-gray-300 rounded-xl p-4 mb-4 hover:shadow-lg transition-shadow cursor-pointer">
                 <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 bg-softbleu rounded-lg flex items-center justify-center text-white flex-shrink-0">
+                    <div class=" hidden sm:block w-10 h-10 bg-softbleu rounded-lg flex items-center justify-center text-white flex-shrink-0">
                         {/* <i class="fas fa-slack text-white text-xl"></i> */}
                         {value.requestId}
                     </div>
@@ -23,11 +22,7 @@ export default function CardOffreSmallCandidate({value,k}){
                         </div>
                     </div>
                 </div>
-                {/* <div className="flex flex-row items-end justify-end pt-4 ">
-                    <IconeWithDescription></IconeWithDescription>
-                    <IconeWithDescription></IconeWithDescription>
-                    <IconeWithDescription></IconeWithDescription>
-                </div> */}
+               
             </button>
             {showDetaille  ?<CardShowOffre idpost={value.idPost} id={value.requestId} close={setShowDetaille}/> : null}
         </>

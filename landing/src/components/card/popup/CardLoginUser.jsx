@@ -4,6 +4,7 @@ import { _login } from "../../../function/Axios";
 import { useState } from "react";
 
 export default function CardLoginUser({closePopup}){
+    const errorText="Login ou mot de passe incorrect";
     const navigate = useNavigate();
     const [text,setText]=useState("");
     const close =()=>{
@@ -24,7 +25,7 @@ export default function CardLoginUser({closePopup}){
             const response = await _login(login, url_recrutement + "candidate/login");
             console.log(response.data.data)
             if(response.data.success==false){
-                setText("Login ou Mot de passe incorrecte")
+                setText(errorText);
             }
             if (response.data.data.token) {
                 sessionStorage.setItem("token", response.data.data.token);
@@ -33,15 +34,9 @@ export default function CardLoginUser({closePopup}){
                 sessionStorage.setItem("userId", response.data.data.id);
                 navigate("/candidate-availableposte");
             }
-            // if (response.data.data.access) {
-            //     sessionStorage.setItem("access", response.data.data.access);
-              
-            // }
-            // console.log("merci ty");
-            
         } catch (error) {
-            setText("Login ou Mot de passe incorrecte")
-            console.error("Erreur login:", error);
+              setText(errorText);
+              console.error("Erreur login:", error);
         }
     };
    
@@ -49,13 +44,11 @@ export default function CardLoginUser({closePopup}){
         <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white w-100 p-10 rounded-xl">
                 <div class="flex flex-col items-center">
-                    <div class="w-32 h-32 rounded-full flex items-center justify-center mb-4 cursor-pointer hover:bg-orange-600 transition-colors">
+                    <div class="w-32 h-32 rounded-full flex items-center justify-center mb-4 cursor-pointer hover:bg-softbleu transition-colors">
                         <img src="login.svg"/>
                     </div>
                 </div>
-                {/* <p className="text-gray-600 text-sm flex justify-center items-center ">
-                    login
-                </p> */}
+                <p className="text-red-500 text-center text-sm  ">{text}</p>
                 <div className='my-2'>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Login</label>
                     <input 

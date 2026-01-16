@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 // import { infocandidate } from "../../../data/candidate";
 import { getAge,dateToLetters, diffDate } from "../../../function/Date";
-import { Sidebar } from "../../../components";
+import { ChoixModelEmail, Sidebar } from "../../../components";
 import { useParams } from "react-router-dom";
 import { textbackground, textmandatory, url_recrutement, url_recrutement_image } from "../../../data/data";
 import { getData, update } from "../../../function/Axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 // modifi
 export default function CVCandidate(){
     const [experience ,setExperience]=useState('1');
+    const [showSendEmail ,setShowEmail]=useState(false);
+
     const [note ,setNote]=useState(null);
-    const { id ,idrequest,idpost,rang} = useParams();
-    console.log({id,idrequest})
+    const { id ,idrequest,idpost,rang,idstep,email} = useParams();
     const [data, setData] = useState({
     photo:null,
     name: null,
@@ -34,13 +36,11 @@ export default function CVCandidate(){
     experience: [],
     certificationCandidates: []
     });
-    
     const getNote = async ()=>{
         const datalistThemes =  await getData(
             url_recrutement + `notecandidate/getById?idcandidat=${id}&&idrequest=${idrequest}`
         );
         if(datalistThemes.data!=null){
-            console.log(datalistThemes.data);
             setNote(datalistThemes.data)
         }
     }
@@ -48,31 +48,32 @@ export default function CVCandidate(){
         const datalistThemes =  await getData(
             url_recrutement + `candidate/post?id=`+id+`&&idpost=`+idpost
         );
-        console.log(  url_recrutement + `candidate/post?id=`+id+`&&idpost=`+idpost)
         if(datalistThemes.data!=null){
-            console.log(datalistThemes.data);
             setData(datalistThemes.data)
         }
-        
     }
     const refusée =async ()=>{
         const data =  await update(
             url_recrutement + `candidate/refused?id=`+id
         );
-         if (data == true) {
+        if (data == true) {
             toast.success("Données insérées avec succès !");
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
         }
     }
     const validée =async ()=>{
-       const data =  await update(
-            url_recrutement + `candidate/nextstep?id=`+id+`&range=`+rang
-        );
-         if (data == true) {
-            toast.success("Données insérées avec succès !");
-        } else {
-            toast.error("Problème serveur, réessayez plus tard !");
+        if(email==1){
+            setShowEmail(true);
+        }else{
+            const data =  await getData(
+                url_recrutement + `recruitmentcandidate/nextstep?id=`+id+`&range=`+rang
+            );
+            if (data == true) {
+                toast.success("Données insérées avec succès !");
+            } else {
+                toast.error("Problème serveur, réessayez plus tard !");
+            }
         }
     }
     useEffect(() => {
@@ -80,6 +81,11 @@ export default function CVCandidate(){
         getNote();
     },[])
     return(
+        <>
+        {showSendEmail ==true ?
+        <>
+            <ChoixModelEmail close={setShowEmail} id={id}  rang={rang} email={data.email}/>
+        </>: 
         <div class="flex h-screen ">
         <Sidebar/>
         <main class="flex-1 "> 
@@ -93,16 +99,37 @@ export default function CVCandidate(){
                                         <img src={url_recrutement_image+data.photo} 
                                             alt="Kate Prokopchuk" 
                                             class="w-32 h-32 rounded-full object-cover mb-4"/>
-                                        <div class="flex items-center space-x-3">
-                                            <div className="flex space-x-2">
-                                                <button className="btn-neutre-gray" onClick={()=>refusée()} title="Précédent">
-                                                    refusée
-                                                </button>
-                                                <button className="btn-neutre-gray" onClick={()=>validée()} title="Suivant">
-                                                   étape suivante
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <table class="w-full">
+                                            <thead class="bg-gray-50 border-b border-gray-200">
+                                                <tr>
+                                                    <th class="tr-thead">Obligatoire</th>
+                                                    <th class="tr-thead">Souhaiter</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                                {note!=null ?
+                                                    <>
+                                                    <tr>
+                                                        <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[2]}`}>{note.totalCandidatRequired}/{note.totalPostRequired}</span></td>
+                                                        <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{note.totalCandidatWish}/{note.totalPostWish}</span></td>
+                                                    </tr>
+                                                    </>
+                                                    :null
+                                                }
+                                                <tr className="p-2">
+                                                    <td className="pt-2">
+                                                        <button className="btn-neutre-gray" onClick={()=>refusée()} title="Précédent">
+                                                            refusée
+                                                        </button>
+                                                    </td>
+                                                    <td className="pt-2">
+                                                        <button className="btn-neutre-gray" onClick={()=>validée()} title="Suivant">
+                                                            étape suivante
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="bg-white p-6 ">
@@ -114,60 +141,31 @@ export default function CVCandidate(){
                                         <p class="text-sm-gray">age:  {getAge(data.birthDate)}</p>
                                         <p class="text-sm-gray"></p>
                                         <p class="text-sm-gray col-span-2">{data.description}</p>
-                                        <p class="text-sm-gray col-span-2">
-                                            <table class="w-full">
-                                                <thead class="bg-gray-50 border-b border-gray-200">
-                                                    <tr>
-                                                        <th class="tr-thead">Obligatoire</th>
-                                                        <th class="tr-thead">Souhaiter</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="bg-white divide-y divide-gray-200">
-                                                    {note!=null ?
-                                                        <>
-                                                        <tr >
-                                                            <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[2]}`}>{note.totalCandidatRequired}/{note.totalPostRequired}</span></td>
-                                                            <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{note.totalCandidatWish}/{note.totalPostWish}</span></td>
-                                                        </tr>
-                                                        </>
-                                                        :null
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </p>
                                     </div>
                                 </div>
                                 <div class="md:col-span-2 border-top">
                                     <div class="mt-6 bg-white  overflow-hidden">
                                         <div class="p-6 space-y-4 ">
                                             {data.experience
-                                            .filter(item => item.type === experience)
                                             .map((exp, index) => (
                                                 <div key={index} className="border-l-4 border-softbleu pl-4 py-2">
-                                                    <div className="grid grid-cols-4">
+                                                    <div className="grid grid-cols-2">
                                                         <div>
-                                                            <div className="text-xs text-gray-500 mb-1">{dateToLetters(exp.dateDebut)} -- {dateToLetters(exp.dateFin)} </div>
-                                                            <div className="text-lg font-bold text-gray-800 mb-2">{diffDate(exp.dateDebut,exp.dateFin)}</div>
+                                                            <div className="text-xs text-gray-500 mb-1">{dateToLetters(exp.DateDebut)} à {dateToLetters(exp.DateFin)} </div>
+                                                            <div className="text-lg font-bold text-gray-800 mb-2">{diffDate(exp.DateDebut,exp.DateFin)}</div>
                                                         </div>
                                                         <div>
                                                             <div className="mb-2">
-                                                                <span className="text-xs text-gray-500">{exp.entreprise}</span>
-                                                                <p className="text-sm font-medium text-gray-800">
-                                                                    {exp.poste}
-                                                                </p>
-                                                            </div>
-                                                        
-                                                        </div>
-
-                                                        <div className="col-span-2">
-                                                            <div>
-                                                            
-                                                                <p className="text-gray-700">
-                                                                    {exp.description}
-                                                                </p>
+                                                                <div className="text-lg  text-gray-800 mb-2">{exp.Entreprise}  {exp.Poste} </div>
                                                             </div>
                                                         </div>
-
+                                                    </div>
+                                                    <div className="">
+                                                        <div>
+                                                            <p className="text-gray-500 text-sm">
+                                                                {exp.Description}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             ))}
@@ -176,13 +174,16 @@ export default function CVCandidate(){
                                 </div>
                             </div>
                         </div>
-                        <div className="w-1/3" >
+                        <div className="w-1/3 relative" >
+                            <Link to={`/postulants/${idrequest}/${idpost}/${idstep}/${rang}/${email}`} className="btn-neutre-gray absolute top-2 right-2 "  title="Suivant">
+                                retour
+                            </Link>
                             <div class="bg-white m-2 p-6 border-bottom">
                                 <div class="grid grid-cols-1  gap-6">
                                     <p class="text-sm-gray">Diplomes</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidatediplomes.map((value,index)=>(
-                                             value.idCandidat!=null ? 
+                                             value.candidatId!=null ? 
                                             <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[value.MandatoryId!=null ? value.MandatoryId:0 ]}`}>{value.name}</span>
                                             :null
                                         ))}
@@ -249,6 +250,9 @@ export default function CVCandidate(){
             </div>
         </main>
         </div>
+        }
+       </>
+       
 
     );
 }

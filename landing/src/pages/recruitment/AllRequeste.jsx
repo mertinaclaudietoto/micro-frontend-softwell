@@ -63,8 +63,6 @@ export default function AllRequeste(){
     useEffect(() => {
             loadData();
         }, [loadData]);
-
-
       return(
         <>
         { showStep ? <StepStat  value={post} close={setShowStep} />:  
@@ -79,7 +77,6 @@ export default function AllRequeste(){
                                     <h2 class="text-xl font-semibold text-gray-800">Liste Des demandes
                                         {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                                     </h2>
-                                
                                     <div class="flex items-center space-x-3">
                                     
                                         <div className="flex space-x-2">

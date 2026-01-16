@@ -5,12 +5,12 @@ import RenderMenuHorizontal from '../../card/RendermenuHorizontal';
 import { HiChatBubbleBottomCenterText,HiBell,HiMiniUser } from "react-icons/hi2";
 import CardChangePassWord from '../../card/popup/CardChangePassWord';
 import CardNotification from '../../card/popup/CardNotification';
-
-import LogOut from '../../../function/Deconnexion';
+import { useNavigate } from "react-router-dom";
 import { url_recrutement } from '../../../data/data';
 import { getData } from '../../../function/Axios';
 export default function Header () {
   const [infoCompany,setCompany]=useState(null);
+  const navigate = useNavigate();
   const loadData =async () => {
       const data = await getData(
           url_recrutement + `company/info`
@@ -24,15 +24,18 @@ export default function Header () {
   useEffect(() => {
           loadData();
       }, []);
-        
+  const LogOut =()=>{
+      // localStorage.removeItem("token");
+      localStorage.clear();
+      navigate("/candidate");
+  }
   const menus = [
-    {item:"Postes disponible",link:"/candidate-availableposte"},
-    {item:"Vos candidature",link:"/candidate-application"},
+    {item:"Emplois",link:"/candidate-availableposte"},
+    {item:"Candidatures",link:"/candidate-application"},
     {item:"Profile",link:"/candidate-profile"},
   ];
   const [changePasseWord,setChangePasseWord]=useState(false);
   const [showNotification,setShowNotification]=useState(false);
-
   return (
   <>
     <header class="py-4 border-b border-gray-200">
@@ -46,9 +49,8 @@ export default function Header () {
           </nav>
           <div class="flex items-center gap-3 md:gap-4 md:pr-8">
               <button class="text-gray-600 hover:text-blue-600" onClick={()=>{setShowNotification(true)}}><HiBell></HiBell></button>
-              <button class="text-gray-600 hover:text-blue-600"  onClick={()=>{setChangePasseWord(true)}}
-              ><HiMiniUser></HiMiniUser></button>
-              <span class="hidden md:inline text-sm text-gray-700" onClick={()=>{LogOut()}}>Déconnexion</span>
+              <button class="text-gray-600 hover:text-blue-600"  onClick={()=>{setChangePasseWord(true)}}><HiMiniUser></HiMiniUser></button>
+              <button class="hidden md:inline text-sm text-gray-700" onClick={()=>{LogOut()}}>Déconnexion</button>
           </div>
       </div>
             {/* mobile nav bar */}

@@ -107,7 +107,7 @@ export default function ListCandidate(){
                                         <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{getAge(value.birthDate)}</span></td>
                                         <td class="px-6 py-4 text-sm text-gray-500">
                                             <button onClick={()=>
-                                                     window.location.replace(`/infocandidate/${value.id}`)
+                                                     window.location.replace(`/infocandidateGenerale/${value.id}`)
                                             }>
                                             ⋮
                                         </button>

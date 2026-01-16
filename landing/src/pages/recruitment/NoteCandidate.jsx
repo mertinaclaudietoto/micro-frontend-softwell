@@ -12,11 +12,11 @@ import { getAge } from "../../function/Date";
 import { useNavigate } from "react-router-dom";
 export default function NoteCandidate(){
     const navigate = useNavigate();
-    const { id,idpost ,idstep} = useParams();
+    const { idrequest,idpost ,idstep,rang,email} = useParams();
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
-    const [nameE,setNameE]=useState("notecandidate");
+    const nameE="notecandidate";
     const [data,setData]=useState([]); 
     const nbrSize=10;
     const [nbrligne ,setNbrLigne]=useState(0)
@@ -31,11 +31,9 @@ export default function NoteCandidate(){
         );
     }
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
-            url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}&idrequest=${id}&stepId=${idstep}`
+            url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}&idrequest=${idrequest}&stepId=${idstep}`
         );
-        console.log( url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}&idrequest=${id}&stepId=${idstep}`);
         setData( data.data);
         console.log(data.data);
     }, [numpage, nameE]); // dépendances de loadData
@@ -85,16 +83,14 @@ export default function NoteCandidate(){
                                     <th class="tr-thead">Obligatoire</th>
                                     <th class="tr-thead">Souhaiter</th>
                                     {/* <th class="tr-thead">CV</th> */}
-                                    <th class="tr-thead">CV Post</th>
+                                    <th class="tr-thead">CV</th>
                                 </tr>
                             </thead>
   
                             <tbody class="bg-white divide-y divide-gray-200">
                                 {data.map((value,index)=>(
                                     <>
-                                    
                                     <tr index={index}
-                                    
                                      className={value.StatusId==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td className="px-6 py-4 text-sm text-gray-500">
                                             <img
@@ -118,25 +114,12 @@ export default function NoteCandidate(){
                                         </td> */}
                                         <td className="px-6 py-4">
                                             <button
-                                                onClick={() => navigate(`/infocandidate/${value.candidateId}/${value.requestId}/${idpost}`)}
+                                                onClick={() => navigate(`/infocandidate/${value.candidateId}/${idrequest}/${idpost}/${rang}/${idstep}/${email}`)}
                                                 className="text-gray-500 hover:text-gray-700"
                                             >
                                                 <i class="fa-regular fa-file"></i>
                                             </button>
                                         </td>
-                                      
-
-
-                                        {/* <button onClick={()=>{setUpValue(value)}}>
-                                            ⋮
-                                        </button> */}
-                                         {/* {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
-                                            <td class="px-6 py-4 text-sm text-gray-500">
-                                                <button onClick={()=>{setUpValue(value)}}>
-                                                        ⋮
-                                                </button>
-                                            </td>
-                                        )} */}
                                     </tr>
                                     </>
                                 ))}
@@ -147,7 +130,6 @@ export default function NoteCandidate(){
                 </div>
             </main>
         </div>
-        
         </>
     )
 }
