@@ -510,6 +510,8 @@ export const accessinfo ={
   { icone: "fas fa-file-alt",access:"demandepost", name: "Demande recrutement", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-check-circle",access:"validepost", name: "Les demande que j'ai validee", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-folder-open",access:"alldemande", name: "Tout les demande de recrutement", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa fa-address-book",access:"listcandidat", name: "Liste des candidats inscrits", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa fa-paper-plane",access:"modelemails", name: "Liste models email", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-clipboard-check",access:"infoselectionrecruitment", name: "Information pour les recrutements", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-building",access:"infoentreprise", name: "Information generale de l'entreprise", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
 ]
@@ -1183,7 +1185,7 @@ export   const  datasidebar =
                 {label :"Demande",icone : "fas fa-file-alt",actif:false,link:"/myrequest",subItems:null,acces:"demandepost"},
                 {label :"Mes Validation",icone : " fas fa-check-circle ",actif:false,link:"/myvalidation",subItems:null,acces:"validepost"},
                 {label :"Tout les demandes",icone : "fas fa-folder-open",actif:false,link:"/allrequest",subItems:null,acces:"alldemande"},
-                {label :"Liste des candidats inscrits",icone : "fa fa-address-book",actif:false,link:"/listecandidate",subItems:null,acces:"alldemande"},
+                {label :"Liste des candidats inscrits",icone : "fa fa-address-book",actif:false,link:"/listecandidate",subItems:null,acces:"listcandidat"},
                 {label :"Liste models email",icone : "fa fa-paper-plane",actif:false,link:"/email",subItems:null,acces:"alldemande"},
                 {label :"info generale",icone : "fas fa-clipboard-check",actif:false,link:"#",acces:"infoselectionrecruitment",
               

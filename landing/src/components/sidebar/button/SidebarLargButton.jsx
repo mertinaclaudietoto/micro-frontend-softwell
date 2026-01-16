@@ -5,7 +5,7 @@ export default function SidebarLargButton({ link, icone, label, actif, subItems 
   const acces = sessionStorage.getItem("access");
   // console.log(label);
   const accesObj = JSON.parse(acces);
-  // console.log(accesObj);
+  console.log(accesObj);
   // const accesObj = {
   //   "infoentreprise": {
   //     "lecture": true,
@@ -97,9 +97,20 @@ export default function SidebarLargButton({ link, icone, label, actif, subItems 
   //     "ajout": true,
   //     "suppression": true,
   //     "modification": true
+  //   },
+  //    "listcandidat": {
+  //     "lecture": true,
+  //     "ajout": true,
+  //     "suppression": true,
+  //     "modification": true
+  //   },
+  //   "modelemails": {
+  //     "lecture": true,
+  //     "ajout": true,
+  //     "suppression": true,
+  //     "modification": true
   //   }
   // };
-
   const [isOpen, setIsOpen] = useState(false);
   if (subItems) {
     return (<>{ (accesObj[accesValue]?.lecture ?? false) === true ? (

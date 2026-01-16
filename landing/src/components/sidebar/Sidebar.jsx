@@ -81,7 +81,6 @@ export default function Sidebar(){
                                     {pages.parametre.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                 </div>
                             </div>
-
                             {/* pub */}
                             {/* <CardPub/> */}
                             <div class="flex-1"></div>
