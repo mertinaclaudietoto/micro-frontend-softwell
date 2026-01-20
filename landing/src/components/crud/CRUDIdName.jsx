@@ -1,8 +1,7 @@
 
 import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
-import { Link } from "react-router-dom";
-import { CardAddTrainer, Filter,Sidebar ,CardAddTraining, CardUpTrainer} from "..";
+import { Sidebar } from "..";
 import { url_recrutement, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";

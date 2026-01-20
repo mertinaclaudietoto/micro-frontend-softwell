@@ -2,7 +2,7 @@
 import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
-import { CardAddTraining, Filter,Sidebar,CardWish } from "../../components";
+import {  Sidebar,CardWish } from "../../components";
 import { url, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
@@ -20,6 +20,7 @@ export default function Wish1(){
     const [manageTraining,setManageTraining]=useState(null);
     const [seeTrainingListe,setSeeTrainingListe]=useState(false);
     const showTraining=(value)=>{
+        console.log("kdokodkeodkeo")
         setManageTraining(value)
     }
     const nbrSize=10;
@@ -66,32 +67,32 @@ export default function Wish1(){
 
       return(
         <>
-            {closeAddTraining?  <CardAddTraining close={setCloseAddTraining}  />:
+         {/* <CardAddTraining close={setCloseAddTraining}  /> */}
+            {closeAddTraining? <></> :
              <>
                 <div class="flex h-screen ">
                     <Sidebar/>
-                    
                     <main class="flex-1 ">    
                         <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
                             <div className=" max-w-7xl mx-auto bg-white p-10 ">
                                 {/* filtre */}
                                 <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                                     <div class="flex items-center justify-between">
-                                        <h2 class="text-xl font-semibold text-gray-800">Liste Souhait en attente
+                                        <h2 class="text-xl font-semibold text-gray-800">Liste des souhaits en attente
                                             <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                                         </h2>
                                         
                                         <div class="flex items-center space-x-3">
                                             <div className="flex space-x-2">
                                                 <button class="btn-neutre-gray" onClick={()=>{setSeeTrainingListe(false)}}>
-                                                     ⋮
+                                                     <i class="fa-solid fa-list text-gray-400"></i>
                                                 </button>
                                                 <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
-                                                    total
+                                                    <i class="fa-solid fa-plus"></i>
                                                 </button>
                                                 {accesObj && (accesObj?.wish?.suppression == null || accesObj?.wish?.suppression == undefined)  ? null : (
                                                     <button class="btn-neutre-gray" onClick={()=>{setClose(true)}}>
-                                                        souhait
+                                                        fair un souhait
                                                     </button>
                                                 )}
                                                 {/* <button class="btn-neutre-gray" onClick={()=>{setCloseAddTraining(true)}}>
@@ -178,6 +179,7 @@ export default function Wish1(){
                         </div>
                     </main>
                 </div>
+               
              </> }
         
         {close ? <CardWish close={setClose}/> :<></>}

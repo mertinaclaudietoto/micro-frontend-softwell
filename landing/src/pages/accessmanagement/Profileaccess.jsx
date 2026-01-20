@@ -1,10 +1,10 @@
 
 import { listProfile, textbackground, url, widthClasses } from "../../data/data"
-import {Pagination,Filter,Sidebar} from "../../components"
+import {Sidebar} from "../../components"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getData } from "../../function/Axios";
-import Setaccess from "./Setaccess";
+import Setaccess from "./SetAccess";
 export default function ProfileAccess(){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);

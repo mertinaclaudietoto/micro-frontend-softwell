@@ -254,7 +254,7 @@ export default function CardAddSession({close,idvalidation}){
                         </div>
                         <div className="mt-8">
                         <div id="tasksList" class="">
-                            <label className="block text-sm font-bold text-gray-700 mb-2">List formateur avec prix </label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">List des sessions</label>
                               <table class="w-full">
                                 <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>

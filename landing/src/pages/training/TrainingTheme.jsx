@@ -1,9 +1,9 @@
 
 import { useEffect,useCallback } from "react";
-import {  listsmallformation, url } from "../../data/data"
-import {Filter,Sidebar,CardSmallTraining, CardDemandeTraining,CardAddTheme,CardUpdateTheme} from "../../components"
+import {Sidebar,CardSmallTraining, CardDemandeTraining,CardAddTheme,CardUpdateTheme} from "../../components"
 import { useState } from "react"
 import { getData } from "../../function/Axios";
+import { url } from "../../data/data";
 export default function TrainingTheme(){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);

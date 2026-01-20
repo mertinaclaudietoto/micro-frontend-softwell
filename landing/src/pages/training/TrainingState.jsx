@@ -18,7 +18,6 @@ export default function TrainingState({value}){
     const [themes,setThemes]=useState(null); 
     const [listSession,setSession]=useState([]); 
 
-
     const getParticipant = async ()=>{
             const data = await getData(url + `v_participant_validate/getparticipant?id=${value.id}`);
             if(data.data!=null){

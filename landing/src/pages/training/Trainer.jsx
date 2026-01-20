@@ -2,7 +2,7 @@
 import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
-import { CardAddTrainer, Filter,Sidebar ,CardAddTraining, CardUpTrainer} from "../../components";
+import { CardAddTrainer, Sidebar , CardUpTrainer} from "../../components";
 import { url, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
@@ -19,7 +19,6 @@ export default function Trainer(){
     const [seeTrainingListe,setSeeTrainingListe]=useState(false);
     const [seeUp,setUp]=useState(false);
     const upTrainer=(value)=>{
-
         setUp(true);
         setManageTraining(value)
     }
@@ -128,8 +127,8 @@ export default function Trainer(){
                                     <th class="tr-thead">Organisme</th>
                                     <th class="tr-thead">Email</th>
                                     <th class="tr-thead">Tel</th>
-                                    <th class="tr-thead">En activiter</th>
-                                    {/* <th class="tr-thead"></th> */}
+                                    <th class="tr-thead">En activité</th>
+                                    <th class="tr-thead w-8"></th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -148,7 +147,7 @@ export default function Trainer(){
                                          {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
                                             <td class="px-6 py-4 text-sm text-gray-500">
                                                 <button onClick={()=>{upTrainer(value)}}>
-                                                        ⋮
+                                                        <i class="fa-solid fa-pen text-gray-400"></i>
                                                 </button>
                                             </td>
                                         )}

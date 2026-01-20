@@ -6,8 +6,8 @@ import { getData, send } from "../../../function/Axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatMoney } from "../../../function/utils";
-
-export default function CardAddTraining({close}){
+///ajout session 
+export default function TrainingSessionCardList({close}){
     const [matricule,setMatricule]=useState(null);
     const [listTheme ,setListTheme]=useState([]);
     const [listParticipant ,setListParticipant]=useState([]);
@@ -100,41 +100,6 @@ export default function CardAddTraining({close}){
         });
     };
 
-    // const handlerListThemeTrainer=  (name, value, index = null) => {
-    //     console.log(value)
-    //     setValue((previous) => {
-    //         const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
-    //         if (index !== null) {
-    //             const newArray = currentArray.filter((_, i) => i !== index);
-    //             return {
-    //                 ...previous,
-    //                 [name]: newArray,
-    //             };
-    //         }
-    //      return {
-    //             ...previous,
-    //             [name]: [...currentArray, value],
-    //         };
-    //     });
-    //     setPrice({
-    //     id: 0,
-    //     idtrainer: 0,
-    //     idtheme: 0,
-    //     idunit: 0,
-    //     unitprice: 0,
-    //     maxpersonne: 0,
-    //     description: "",
-    //     nameTheme: "",
-    //     nameTrainer: "",
-    //     nif: "",
-    //     stat: "",
-    //     tel: "",
-    //     email: "",
-    //     active: 3,
-    //     nameActive: "",
-    //     nameunit: ""
-    // });
-    // };
     useEffect(() => {
             getListThemes();
         }, []);

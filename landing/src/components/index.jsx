@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-export * from "./table";
 export * from "./step";
 export * from "./sidebar";
 export * from "./header";

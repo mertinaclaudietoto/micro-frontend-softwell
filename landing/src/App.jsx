@@ -14,20 +14,18 @@ import {
   Statistique,
   DashboardManager,
   CriterienStaff,
-  Request,
+  TrainingRequeste,
   ProfileAccess,
   Setaccess,
   UserProfile,
   TrainingTheme,
-  InprogressTraining,
   Trainer,
   TrainingState,
   Wish,
-  Validation,
+  TrainingValidate,
   Login,
   ProtectedRoute,
 } from "./pages";
-import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 import StepRecruitment from './pages/recruitment/StepRecruitment';
@@ -113,7 +111,7 @@ function App() {
         {/* <Route path="/notification" element={<CardNotification/>}></Route> */}
         <Route path="/addpost" element={<CriterienStaff/>}></Route>
         <Route path="/manager-dasboard" element={<DashboardManager/>}></Route>
-        <Route path="/manager-listrequeste" element={<Request/>}></Route>
+        <Route path="/manager-listrequeste" element={<TrainingRequeste/>}></Route>
        
         <Route path="/rh-dasboard" element={<DashboardRh/>}></Route>
         <Route path="/rh-statistique" element={<Statistique/>}></Route>
@@ -124,10 +122,10 @@ function App() {
         <Route path="/access-user" element={<ProtectedRoute> <UserProfile/> </ProtectedRoute>}></Route>
         <Route path="/training-theme" element={<ProtectedRoute> <TrainingTheme/> </ProtectedRoute>}></Route>
 
-        {/* <Route path="/training-inprogress" element={<InprogressTraining/>}></Route> */}
+
         <Route path="/training-trainer" element={<ProtectedRoute><Trainer/></ProtectedRoute>}></Route>
         <Route path="/training-wish" element={<ProtectedRoute><Wish/> </ProtectedRoute>}></Route>
-        <Route path="/training-validation" element={ <ProtectedRoute><Validation/></ProtectedRoute>}></Route>
+        <Route path="/training-validation" element={ <ProtectedRoute><TrainingValidate/></ProtectedRoute>}></Route>
         <Route path="/training-state/:id" element={ <ProtectedRoute><TrainingState /> </ProtectedRoute>} />
         <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} /> } />
         <Route path="/crud-localisation" element={ <CRUDIdName key={2} entityName={"localisation"} Name={"Localisation"} /> } />

@@ -2,16 +2,15 @@
 import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
-import { CardAddTrainer, Filter,Sidebar,CardAddTraining } from "../../components";
+import {  TrainingSessionCardList,Sidebar } from "../../components";
 import { url, textbackground, getcolorstate } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
 import TrainingState from "./TrainingState";
-export default function Validation(){
+export default function TrainingValidate(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-
     const [data,setData]=useState([]); 
     const [valueState ,setValueState]=useState("");
     const [search ,setSearch]=useState("");
@@ -72,7 +71,8 @@ export default function Validation(){
 
       return(
         <>
-        {closeAddTraining ? <CardAddTrainer close={setCloseAddTraining}  /> :  seeTrainingListe  ? <TrainingState  value={valueState} />:<>
+        {/* ajout formation */}
+        {closeAddTraining ? <TrainingSessionCardList close={setCloseAddTraining}  /> :  seeTrainingListe  ? <TrainingState  value={valueState} />:<>
             <div class="flex h-screen ">
                 <Sidebar/>
                 <main class="flex-1 ">    
@@ -81,7 +81,7 @@ export default function Validation(){
                             {/* filtre */}
                             <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                                 <div class="flex items-center justify-between">
-                                    <h2 class="text-xl font-semibold text-gray-800">Liste Formation validee
+                                    <h2 class="text-xl font-semibold text-gray-800">Liste des formations validées
                                         <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                                     </h2>
                                     
@@ -110,6 +110,9 @@ export default function Validation(){
                                                     validation
                                                 </button>
                                             )}
+                                             <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setCloseAddTraining(true)}}>
+                                                    validation
+                                            </button>
                                            
 
                                             <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
@@ -161,7 +164,8 @@ export default function Validation(){
                                                     </button>
                                                 )} */}
                                                 <button  onClick={()=>showTraining(value)}>
-                                                        ⋮
+                                                        
+                                                         <i className="fas fa-file-alt text-gray-400"></i>
                                                 </button>
                                             </td>
                                         </tr>
