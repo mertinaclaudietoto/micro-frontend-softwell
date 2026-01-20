@@ -26,6 +26,7 @@ import {
   Validation,
   Login,
   ProtectedRoute,
+  Presence
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
@@ -160,6 +161,8 @@ function App() {
         <Route path="/postulants/:idrequest/:idpost/:idstep/:rang/:email" element={ <ProtectedRoute><NoteCandidate /> </ProtectedRoute>} />
         {/* gestion email */}
         <Route path="/email" element={ <EmailModel/>   } />
+        <Route path="/presence/:idsessionDay/:formation/:daysession" element={ <Presence/>   } />
+
       </Routes>
     </>
   )

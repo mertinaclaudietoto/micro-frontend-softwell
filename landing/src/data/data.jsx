@@ -560,16 +560,15 @@ export const usersprofile = [
   { login: "henry", photo: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=300&h=300&fit=crop", role: "USER", departement: "HR", status: "Recruiter", password: "henry123" },
  
 ];
-// export const url ="http://localhost:5172/api/";
-// export const url_recrutement ="http://localhost:5118/api/";
-// export const url_recrutement_image ="http://localhost:5118/uploads/";
-// export const url_sendemail ="http://localhost:5025/api/";
+export const url ="http://localhost:5172/api/";
+export const url_recrutement ="http://localhost:5118/api/";
+export const url_recrutement_image ="http://localhost:5118/uploads/";
+export const url_sendemail ="http://localhost:5025/api/";
 
-export const url ="http://151.80.218.41:1010/api/";
-export const url_sendemail ="http://151.80.218.41:1012/api/";
-export const url_recrutement ="http://151.80.218.41:5050/api/";
-export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";
-
+// export const url ="http://151.80.218.41:1010/api/";
+// export const url_sendemail ="http://151.80.218.41:1012/api/";
+// export const url_recrutement ="http://151.80.218.41:5050/api/";
+// export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";
 
 
 export const themeM = {

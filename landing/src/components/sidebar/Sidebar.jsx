@@ -51,15 +51,7 @@ export default function Sidebar(){
                             </button>
                         </div>
 
-                        {/* <div class="p-4 border-b border-gray-100 space-y-1">
-                            <button class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-50 text-left">
-                                <div class="flex items-center gap-3 text-gray-700">
-                                    <i class="fas fa-bell"></i>
-                                    <span>Notifications</span>
-                                </div>
-                                <span class="text-sm font-medium text-gray-500">15+</span>
-                            </button>
-                        </div> */}
+
 
                         <div class="flex-1 overflow-y-auto">
                             <div class="p-4">

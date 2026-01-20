@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { infocandidate, listeformateur, listsmallformation, textbackground, trainingListToBeValidated, usersprofile ,getcolorstate, participantTraining, url} from "../../data/data";
-import { getAge,dateToLetters,  diffDate1 } from "../../function/Date";
+import { getAge,dateToLetters,  diffDate1, diffDate } from "../../function/Date";
 import {  CardAddSession, Sidebar, TextState,CardSmallTraining } from "../../components";
 import CardSession from "../../components/card/training/CardSession";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getData } from "../../function/Axios";
 import { formatDate } from "../../function/utils";
+
 export default function TrainingState({value}){
     console.log("trainer state ",value)
     const acces = sessionStorage.getItem("access");
@@ -17,8 +18,6 @@ export default function TrainingState({value}){
     const [participant,setParticipant]=useState([]); 
     const [themes,setThemes]=useState(null); 
     const [listSession,setSession]=useState([]); 
-
-
     const getParticipant = async ()=>{
             const data = await getData(url + `v_participant_validate/getparticipant?id=${value.id}`);
             if(data.data!=null){
@@ -26,7 +25,7 @@ export default function TrainingState({value}){
             }   
         }
      const getListSession = async ()=>{
-            const data = await getData(url + `session/list?id=${value.id}`);
+            const data = await getData(url + `session/list/${value.id}`);
             if(data.data!=null){
                 console.log("liste ,,,",data.data);
                 setSession(data.data);
@@ -38,6 +37,7 @@ export default function TrainingState({value}){
             setThemes(data.data);
         }   
     }
+    const [showLink,setShowLink]=useState();
     useEffect(()=>{
         getListSession();
         getTheme()
@@ -45,50 +45,78 @@ export default function TrainingState({value}){
     },[])
     return(
         <>
-        { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession>
+        { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession> 
+        // showLink ?
+        // <div className="background_transparent_popup">
+        //     <div class="grid grid-cols-1 bg-white w-100 p-10 rounded-xl">
+        //         <div class="flex flex-col items-center">
+        //             <div class="w-32 h-32 rounded-full flex items-center justify-center mb-4 cursor-pointer hover:bg-softbleu transition-colors">
+        //                 <img src="login.svg"/>
+        //             </div>
+        //         </div>
+        //         <p className="text-red-500 text-center text-sm  ">{text}</p>
+        //         <div className='my-2'>
+        //             <label class="block text-sm font-medium text-gray-700 mb-2">Login</label>
+        //             <input 
+        //                 type="text" 
+        //                 placeholder={login.login} 
+        //                 class="input_formulaire"
+        //                 onChange={(event)=>{handlerVariable("login",event.target.value,setLogin)}}
+        //             />
+        //         </div>
+        //         <div className='my-2'>
+        //             <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
+        //             <input 
+        //                 type="password" 
+        //                 class="input_formulaire"
+        //                 placeholder={login.password}
+        //                 onChange={(event)=>{handlerVariable("password",event.target.value,setLogin)}}
+        //             />
+        //         </div>
+        //         <p className="text-softbleu text-sm  flex justify-center items-center ">
+        //             vous n'avez pas de compte inscrivez-vous
+        //         </p>
+        //         <div class="flex items-center justify-end gap-3 mt-3">
+        //             <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close(false)}}>
+        //                 Annuler
+        //             </button>
+        //             <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium" onClick={()=>submit()}>
+        //                 Connexion
+        //             </button>
+        //         </div>
+        //     </div>
+        // </div>
         :<>
          <div class="flex">
             <Sidebar/>
             <main class="flex-1 ">  
                 <div class=" md:p-8 bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
-                    <div className="flex bg-white">
-                        <div className="flex-1 w-2/3 border-rigth ">
-                            {/* <div class="flex items-start gap-3 p-8">
-                                    <div class={`w-12 h-12 bg-softbleutini-12 rounded-lg flex items-center justify-center text-white font-bold`}>
-                                            {value.id}
-                                    </div>
-                                    <div class="flex-1 min-w-0 w-100 justify-center items-center">
-                                        <div className="grid grid-cols-2  ">
-                                            <div>
-                                                    <h4 className="font-bold text-gray-900 mb-2 text-lg">{value?.themeName}</h4>
-                                                    <p className="text-sm text-gray-600 mb-3">
-                                                            {value?.description || "Description non disponible"} <br />
-                                                            Formé par&nbsp;
-                                                            <button
-                                                                className="text-blue-600 text-sm font-semibold underline hover:text-blue-800"
-                                                                onClick={() => setShowTrainer(true)}
-                                                            >
-                                                                {value?.trainerName}
-                                                            </button>
-                                                    </p>
-                                            </div>
-                                            <div>
-                                                <div className="flex flex-col justify-between mt-4 md:mt-0 md:ml-4 w-full md:w-1/4 text-right">
-                                                    <p className="text-xs text-gray-500">Admin: {value?.adminName} {value?.adminFirstname}</p>
-                                                    <p className="text-xs text-gray-500">Date: {new Date(value?.date).toLocaleDateString()}</p>
-                                                    <p className={`text-xs font-semibold ${value?.statu === 1 ? "text-green-600" : "text-red-600"}`}>
-                                                    {value?.statu === 1 ? "Actif" : "Inactif"}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div> 
+                    <div className=" max-w-7xl mx-auto p-10 flex bg-white">
+                        <div className="flex-1  border-rigth ">
+                            {/* filtre */}
+                            <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-xl font-semibold text-gray-800">Liste des sessions pour cette formation
+                                        {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
+                                    </h2>
                                     
-
-                                        <TextState text={""} cssCard={"card-text-s-blue"} icone={info.type} />
-                            </div> */}
-                            <table class="w-full  ">
+                                    <div class="flex items-center space-x-3">
+                                        <div className="flex space-x-2">
+                                            <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAddsession(true)}}>
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                            <button className="btn-neutre-gray" >
+                                            <i className="fas fa-arrow-left"></i>
+                                            </button>
+                                            <button className="btn-neutre-gray" >
+                                                <i className="fas fa-arrow-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* filtre */}
+                            <table class="w-full pt-2 ">
                                 <thead class="bg-gray-100 border-b border-gray-200">
                                     <tr>
                                         <th class="tr-thead text-xl font-bold">{value?.id}</th>
@@ -99,80 +127,58 @@ export default function TrainingState({value}){
                             </table>
                             <div className="grid grid-cols-1 p-8 justify-center items-center ">
                                 <div class="overflow-x-auto  mt-2 ">
-                                    <h3 class="font-semibold text-gray-800 mb-1">Listes session</h3>
-                                    <table class="w-full">
-                                        <thead class="bg-gray-50 border-b border-gray-200">
-                                            <tr>
-                                                <th class="tr-thead ">#</th>
-                                                <th class="tr-thead ">Utilisateur</th>
-                                                <th class="tr-thead">Date</th>
-                                                <th class="tr-thead">Nombre session</th>
-                                                <th class="tr-thead">Nombre Participant</th>
-                                                <th class="tr-thead"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                            {listSession.map((value,index)=>(
-                                                <tr index={index} className="hover:bg-gray-50">
-                                                    <td class="px-6 py-4 text-sm text-gray-500">
-                                                        {/* <img
-                                                                src={value.photo}
-                                                                className="w-10 h-10 rounded-lg"
-                                                                alt={value.login}
-                                                            /> */}
-                                                        <div class="text-sm font-medium text-gray-900">{value.id}</div>
-                                                    </td>
-                                                    <td class="px-6 py-4">
-                                                        <div class="text-sm font-medium text-gray-900">{value.name} {value.firstName}</div>
-                                                        <div><span  className="label-formulaire" >matricule: {value.matricule} </span> </div>
-                                                    </td>
-                                                    <td class="px-6 py-4">
-                                                        <div class="text-sm font-medium text-gray-900">
-                                                            <span class={`inline-flex items-center px-2.5 py-0.5 rounded text-md font-medium ${textbackground[index]} mb-1`}>{formatDate(value.dateStart) }  {formatDate(value.dateEnd) }</span>
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-6 py-4">
-                                                        <div class="text-sm font-medium text-gray-900">{value.nbrDay}</div>
-                                                    </td>
-                                                    <td class="px-6 py-4">
-                                                        <div class="text-sm font-medium text-gray-900">{value.nbrParticipant}</div>
-                                                    </td>
-                                                    <td class="px-6 py-4 text-sm text-gray-500">
-                                                        ⋮
+                                    {/* <h3 class="font-semibold text-gray-800 mb-1">Listes session</h3> */}
+                                    {listSession.map((valueL, index) => (
+                                        <div key={index} className="w-full py-4">
+                                            <div className="grid grid-cols-5 mb-2 px-4 justify-end items-end bg-blue-50 ">
+                                                <div className="text-md font-bold text-blue-800">{valueL.Datestart?.split("T")[0]}</div>
+                                                <div className="text-md font-bold text-blue-800">{valueL.Dateend?.split("T")[0]}</div>
+                                                <div className="text-blue-800">
+                                                    {diffDate(valueL.Datestart?.split("T")[0],valueL.Dateend?.split("T")[0])}
+                                                </div>
+                                                <div className="text-blue-800">
+                                                    voir participants
+                                                </div>
+                                             <div className="flex justify-end items-end text-blue-800">
+                                                <i className="fa-solid fa-pen"></i>
+                                            </div>
+
+                                            </div>
+
+                                            <table className="w-full">
+                                            <thead className="bg-gray-50 border-b border-gray-200">
+                                                <tr>
+                                                <th className="tr-thead">Jours</th>
+                                                <th className="tr-thead">Debut matin</th>
+                                                <th className="tr-thead">Fin matin</th>
+                                                <th className="tr-thead">Debut soir</th>
+                                                <th className="tr-thead">Fin soir</th>
+                                                <th className="tr-thead"></th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody className="bg-white divide-y divide-gray-200">
+                                                {valueL.sessionday.map((v, idx) => (
+                                                <tr key={idx} className="hover:bg-gray-50">
+                                                    <td className="px-6 py-4 text-sm text-gray-900">{v.Date?.split("T")[0]}</td>
+                                                    <td className="px-6 py-4 text-sm text-gray-900">{v.Heurstartmoring}</td>
+                                                    <td className="px-6 py-4 text-sm text-gray-900">{v.Heurendmoring}</td>
+                                                    <td className="px-6 py-4 text-sm text-gray-900">{v.Heurstartaftern}</td>
+                                                    <td className="px-6 py-4 text-sm text-gray-900">{v.Heurendaftern}</td>
+
+                                                    <td className="px-6 py-4 text-sm text-gray-500">
+                                                        <Link to={`/presence/${btoa(v.id|value.themeName|v.Date)}`}>
+                                                            <i className="fas fa-file-alt"/>
+                                                        </Link>
                                                     </td>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                                ))}
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    ))}
                                 </div>  
                             </div>
-                        </div>
-                        <div className="w-1/3" >
-                            <div class=" mx-2 px-6">
-                                <div class="space-y-3 relative">
-                                    <div class="absolute top-5 right-5 ">
-                                        {accesObj && (accesObj?.validation?.ajout == null || accesObj?.validation?.ajout == undefined)  ? null : (
-                                            <button class={"card-text-s-blue"} onClick={()=>{setShowAddsession(true)}}>
-                                                <span>{"ajouter session"}</span>
-                                                <i className={`fa-solid fa-plus icone-size-s`}></i>
-                                            </button>
-                                        )}
-                                    </div>
-                                   <div class=" min-h-screen">
-                                        <div class=" max-w-md mx-auto min-h-screen">
-                                            <div class="px-6 py-8">
-                                                <CardSession title={"Convocation"} image={"convocation.svg"} state={true} description={"La convocation est envoyée."} datedebut={"01-12-2025 8:30"} datefin={"01-12-2025 12:30"}/>
-                                                {/*  */}
-                                                <CardSession title={"Session"} image={"trainingsession.svg"} state={true} description={"premiere formation lieu ankadidramami salle 1"} datedebut={"01-12-2025 8:30"} datefin={"01-12-2025 12:30"}/>
-                                                {/* <CardSession title={"Session"} index={3} image={"trainingsession.svg"} state={false} description={"premiere formation lieu ankadidramami salle 1"} datedebut={"01-12-2025 8:30 12:30"} datefin={"01-12-2025 8:30 12:30"}/> */}
-                                                <CardSession title={"Test formateur"} index={4} image={"testQcm.svg"} state={false} description={"premiere formation lieu ankadidramami salle 1"} datedebut={"01-12-2025 8:30 12:30"} datefin={"01-12-2025 8:30 12:30"}/>
-                                                <CardSession title={"Test participant"} index={5} image={"testQcm.svg"} state={false} description={"premiere formation lieu ankadidramami salle 1"} datedebut={"01-12-2025 8:30 12:30"} datefin={"01-12-2025 8:30 12:30"}/> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        
                         </div>
                     </div>
                 </div>
