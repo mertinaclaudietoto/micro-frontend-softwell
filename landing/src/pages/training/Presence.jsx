@@ -1,42 +1,62 @@
 import React,{ useEffect, useState } from "react";
 import { accessinfo, listProfile, url, widthClasses } from "../../data/data";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 // import { handlerVariable } from "../../function/utils";
 import { IconeAccess, Sidebar } from "../../components";
 import { getData,  update } from "../../function/Axios";
-export default function Presence({idSessionDay,formation,daysession}){
+import { dateToLetters } from "../../function/Date";
+export default function Presence(){
     const [info ,setAccessinfo]=useState(
         accessinfo
     );
+    const { encryptParametres } = useParams();
+    const decoded = atob(encryptParametres);
+    const dataValue = decoded.split("|");
+    console.log(dataValue);
     const [data,setData]=useState([]);
     const getParticipants = async () => {
         const data = await getData(
-            url + `presence/${idSessionDay}`
+            url + `presence/${dataValue[0]}`
         );
         setData( data.data);;
+        console.log(data.data)
     };
-    const updateAccess = (key1, key2, value) => {
-        setData(prev => ({
-            ...prev,
-            [key1]: {
-                ...prev[key1],
-                [key2]: value
-            }
-        }));
+    const updateAccess = (index, key, value) => {
+        setData(prev => {
+            const newData = [...prev];        
+            newData[index] = {                
+            ...newData[index],
+            [key]: value                      
+            };
+            return newData;
+        });
     };
+
     const submit = async ()=>{
-      const data = await update(data,
-            url + `presence`
-        );
+        if(dataValue[3]=="true"){
+            const value = await update(data,
+                url + `presence`
+            );
+            if (value == true) {
+            window.location.reload();
+            toast.success("Données enregistrées avec succès !");
+            
+        } else {
+            toast.error("Problème serveur, réessayez plus tard !");
+        }
+        }else{     
+            toast.error("Vous n'avez pas le droit de faire une modification!");
+        }
+    
     }
     useEffect(() => {
          getParticipants()
      }, []);
     return(<>
     <div class="flex h-screen ">
-        <Sidebar/> 
         <main class="flex-1 ">   
             <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto">
                 <div class="flex gap-6 max-w-7xl mx-auto border border-gray-200">
@@ -45,9 +65,9 @@ export default function Presence({idSessionDay,formation,daysession}){
                         <div class=" p-6">
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <h1 class="text-xl font-semibold text-gray-900">Liste de presence ou formation  <b className="text-softbleu">{formation}</b></h1>
+                                    <p class=" font-semibold text-gray-900">Liste de presence ou formation  <b className="text-softbleu">{dataValue[1]}</b>  {dateToLetters(dataValue[2])}</p>
                                     <button class="bg-softbleutini-12 hover:bg-softbleushade-12 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={()=>submit()}>
-                                       {daysession} 
+                                       Enregistrer
                                     </button>
                                 </div>
                             </div>
@@ -55,56 +75,45 @@ export default function Presence({idSessionDay,formation,daysession}){
                         
                         <div class="p-6 border-t border-gray-200">
                             <div class="overflow-x-auto relative">
-                                <table class="w-full h-screen overflow-y-auto ">
-                                    <thead>
+                                <table class="w-full  overflow-y-auto ">
+                                    <thead className="py-3"> 
                                         <tr class="border-b border-gray-200">
-                                            <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Participants </th>
-                                            <th class="flex flex-col text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">
-                                                <span>{morningStart}</span>
-                                                <span>{morningEnd}</span>
+                                            <th class="text-left  text-xs font-semibold text-gray-600 uppercase">Participants </th>
+                                            <th class="text-left  text-xs font-semibold text-gray-600 uppercase"></th>
+                                            <th class="text-center  px-4 text-xs font-semibold text-gray-600 uppercase w-8">
+                                                <span>Matin</span>
                                             </th>
-                                            <th class="flex flex-col text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">
-                                                <span>{eveningStart}</span>
-                                                <span>{eveningEnd}</span>
+                                            <th class="text-center px-4 text-xs font-semibold text-gray-600 uppercase w-8">
+                                                <span>Soir</span>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-100">
-                                    {info.listpage.map((value, index) => (
-                                            <React.Fragment key={index}>
-                                                {/* Ligne principale de la page */}
-                                                <tr className="group bg-gray-50 ">
-                                                    <td colSpan={100} className="py-4 px-4 col-span-100">
-                                                        <div className="flex items-center gap-2 text-sm font-medium text-gray-900">
-                                                        <i className={value.icone} />
-                                                        {value.name}
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                {/* Lignes des fonctions si elles existent */}
-                                                {value.listfunction?.map((func, idx) => (
-                                                    <tr key={idx}>
-                                                        <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.name} {func.firstname} </td>
-                                                        <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.email} </td>
-                                                        <td  className="py-4 px-4 text-center">
-                                                             <input
-                                                                type="checkbox"
-                                                                className="w-4 h-4 text-blue-600 rounded border-gray-300"
-                                                                checked={ data && data[value.access] ? data[value.access][func.name] : false }
-                                                                onChange={(event) => updateAccess(value.access, "morning", event.target.checked)}
-                                                            />
-                                                        </td>
-                                                        <td  className="py-4 px-4 text-center">
-                                                             <input
-                                                                type="checkbox"
-                                                                className="w-4 h-4 text-blue-600 rounded border-gray-300"
-                                                                checked={ data && data[value.access] ? data[value.access][func.name] : false }
-                                                                onChange={(event) => updateAccess(value.access, "evening", event.target.checked)}
-                                                            />
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </React.Fragment>
+                                    {data.map((value, index) => (
+                                        <tr key={index} >
+                                            <td className="pl-10  py-5 text-sm text-gray-700">
+                                                {value.Name} {value.Firstname}
+                                            </td>
+                                            <td className="pl-10 py-5 text-sm text-gray-700">
+                                                {value.Email}
+                                            </td>
+                                            <td className="text-center py-5 w-8">
+                                                <input
+                                                type="checkbox"
+                                                className="w-4 h-4 text-blue-600 rounded border-gray-300"
+                                                checked={value.Morning === 1}
+                                                onChange={() => updateAccess(index, "Morning", value.Morning ==1 ?0:1)}
+                                                />
+                                            </td>
+                                            <td className="text-center py-5  w-8">
+                                                <input
+                                                type="checkbox"
+                                                className="w-4 h-4 text-blue-600 rounded border-gray-300"
+                                                checked={value.Evening === 1}
+                                                onChange={() => updateAccess(index, "Evening", value.Evening ==1 ?0:1)}
+                                                />
+                                            </td>
+                                        </tr>
                                         ))}
                                     </tbody>
                                 </table>

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { infocandidate, listeformateur, listsmallformation, textbackground, trainingListToBeValidated, usersprofile ,getcolorstate, participantTraining, url} from "../../data/data";
-import { getAge,dateToLetters,  diffDate1, diffDate } from "../../function/Date";
-import {  CardAddSession, Sidebar, TextState,CardSmallTraining } from "../../components";
-import CardSession from "../../components/card/training/CardSession";
-import { Link, useParams } from "react-router-dom";
-import { getData } from "../../function/Axios";
-import { formatDate } from "../../function/utils";
+import { listsmallformation ,url, url_front} from "../../data/data";
+import {  dateToLetters, diffDate } from "../../function/Date";
+import {  CardAddSession, Sidebar } from "../../components";
+import { deleteId,getData } from "../../function/Axios";
+import CardUpdateSession from "../../components/card/popup/CardUpdateSession";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CardForwardLink from "../../components/card/popup/CardForwardLink";
 
 export default function TrainingState({value}){
     console.log("trainer state ",value)
@@ -13,6 +14,8 @@ export default function TrainingState({value}){
     const accesObj = JSON.parse(acces);
     const [showTrainer,setShowTrainer]=useState(false);
     const [showAddsession,setShowAddsession]=useState(false);
+    const [showUpdatesession,setShowUpdatesession]=useState(false);
+
     const [info,setInfo]=useState( listsmallformation[0])
     const [detailleTheme,setDetailleTheme]=useState()
     const [participant,setParticipant]=useState([]); 
@@ -37,56 +40,37 @@ export default function TrainingState({value}){
             setThemes(data.data);
         }   
     }
+
+    const deleteSession = async (idSessionDelete)=>{
+        console.log()
+        const value = await deleteId(url + `session/${idSessionDelete}`);
+        if (value == true) {
+            toast.success("Données supprimées avec succès !");
+            getListSession();
+        } else {
+            toast.error("Problème serveur, réessayez plus tard !");
+        }
+    }
+
     const [showLink,setShowLink]=useState();
+    const [parametres,setParametres]=useState(null);
+    const [daysession,setDaysession]=useState(null);
+    const [updateValue,setUpdateValue]=useState(null);
+    const UpValue=(value) =>{
+        setUpdateValue(value);
+        setShowUpdatesession(true);
+    }
     useEffect(()=>{
         getListSession();
         getTheme()
         getParticipant()
-    },[])
+    },[showUpdatesession,showAddsession])
+
     return(
         <>
-        { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession> 
-        // showLink ?
-        // <div className="background_transparent_popup">
-        //     <div class="grid grid-cols-1 bg-white w-100 p-10 rounded-xl">
-        //         <div class="flex flex-col items-center">
-        //             <div class="w-32 h-32 rounded-full flex items-center justify-center mb-4 cursor-pointer hover:bg-softbleu transition-colors">
-        //                 <img src="login.svg"/>
-        //             </div>
-        //         </div>
-        //         <p className="text-red-500 text-center text-sm  ">{text}</p>
-        //         <div className='my-2'>
-        //             <label class="block text-sm font-medium text-gray-700 mb-2">Login</label>
-        //             <input 
-        //                 type="text" 
-        //                 placeholder={login.login} 
-        //                 class="input_formulaire"
-        //                 onChange={(event)=>{handlerVariable("login",event.target.value,setLogin)}}
-        //             />
-        //         </div>
-        //         <div className='my-2'>
-        //             <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
-        //             <input 
-        //                 type="password" 
-        //                 class="input_formulaire"
-        //                 placeholder={login.password}
-        //                 onChange={(event)=>{handlerVariable("password",event.target.value,setLogin)}}
-        //             />
-        //         </div>
-        //         <p className="text-softbleu text-sm  flex justify-center items-center ">
-        //             vous n'avez pas de compte inscrivez-vous
-        //         </p>
-        //         <div class="flex items-center justify-end gap-3 mt-3">
-        //             <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close(false)}}>
-        //                 Annuler
-        //             </button>
-        //             <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium" onClick={()=>submit()}>
-        //                 Connexion
-        //             </button>
-        //         </div>
-        //     </div>
-        // </div>
-        :<>
+        { showLink ? <CardForwardLink _url={url_front} endpoint={"precense"} closePopup={setShowLink}  parametres={parametres} daysession={daysession} title={`Partagez le lien afin de valider la présence du ${dateToLetters(daysession)}`}/> :<></>}
+        { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession>    
+        : showUpdatesession ? <CardUpdateSession  upValue={updateValue} close={setShowUpdatesession} />  :<>
          <div class="flex">
             <Sidebar/>
             <main class="flex-1 ">  
@@ -105,12 +89,12 @@ export default function TrainingState({value}){
                                             <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAddsession(true)}}>
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
-                                            <button className="btn-neutre-gray" >
+                                            {/* <button className="btn-neutre-gray" >
                                             <i className="fas fa-arrow-left"></i>
                                             </button>
                                             <button className="btn-neutre-gray" >
                                                 <i className="fas fa-arrow-right"></i>
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
                                 </div>
@@ -139,10 +123,14 @@ export default function TrainingState({value}){
                                                 <div className="text-blue-800">
                                                     voir participants
                                                 </div>
-                                             <div className="flex justify-end items-end text-blue-800">
-                                                <i className="fa-solid fa-pen"></i>
-                                            </div>
-
+                                                <div className="flex justify-between items-end text-blue-800 gap-2">
+                                                    <button onClick={()=>{UpValue(valueL)}}>
+                                                        <i className="fa-solid fa-pen text-blue-800"></i>
+                                                    </button>
+                                                    <button onClick={()=>{deleteSession(valueL.Id)}}>
+                                                            <i className="fa-solid fa-trash text-blue-800"></i>
+                                                    </button>
+                                                </div>
                                             </div>
 
                                             <table className="w-full">
@@ -167,9 +155,9 @@ export default function TrainingState({value}){
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.Heurendaftern}</td>
 
                                                     <td className="px-6 py-4 text-sm text-gray-500">
-                                                        <Link to={`/presence/${btoa(v.id|value.themeName|v.Date)}`}>
+                                                        <button className="" onClick={()=>{ setShowLink(true),setParametres(v.Id+"|"+value.themeName+"|"+v.Date),setDaysession(v.Date?.split("T")[0])}}>
                                                             <i className="fas fa-file-alt"/>
-                                                        </Link>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                                 ))}

@@ -26,7 +26,9 @@ import {
   Validation,
   Login,
   ProtectedRoute,
-  Presence
+  Presence,
+  Question,
+  TestPostFormationTrainer
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
@@ -44,6 +46,7 @@ import CVCandidateGeneral from './pages/manager/sous/CVCandidateGeneral';
 import StatManager from './pages/recruitment/StepStat';
 import AddNewModelEmail from './components/email/AddNewModelEmail';
 import EmailModel from './pages/email/EmailModel';
+
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
   const [isOpen, setIsOpen] = useState(true); // "light" ou "dark"
@@ -161,7 +164,11 @@ function App() {
         <Route path="/postulants/:idrequest/:idpost/:idstep/:rang/:email" element={ <ProtectedRoute><NoteCandidate /> </ProtectedRoute>} />
         {/* gestion email */}
         <Route path="/email" element={ <EmailModel/>   } />
-        <Route path="/presence/:idsessionDay/:formation/:daysession" element={ <Presence/>   } />
+        <Route path="/presence/:encryptParametres" element={ <Presence/>   } />
+        <Route path="/questionnaire/:encryptParametres" element={ <Question/>   } />
+        <Route path="/test-postformation-f/:encryptParametres" element={ <TestPostFormationTrainer/>   } />
+
+
 
       </Routes>
     </>

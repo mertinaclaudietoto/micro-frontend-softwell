@@ -45,6 +45,16 @@ export const deletev = async (datasend, url) => {
     return false;     // échec
   }
 };
+export const deleteId = async ( url) => {
+  try {
+    const response = await axios.delete(url);
+    console.log("Réponse de l'API :", response.data);
+    return true;      // succès
+  } catch (error) {
+    console.error("Erreur :", error.response ? error.response.data : error.message);
+    return false;     // échec
+  }
+};
 
 export const getData = async (url) =>{
     try {

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { listeformateur, listsmallformation, url } from "../../../data/data";
+import { listeformateur, listsmallformation, url, url_front } from "../../../data/data";
 import SearchableSelect from "../../../function/select";
 import Select from "../../../function/selectSimple";
 import { Sidebar } from "../../sidebar";
 import { getData, send, update } from "../../../function/Axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CardForwardLink from "../popup/CardForwardLink";
 export default function CardUpTrainer({close,id,listThemes}){
-    console.log("update")
     const [value, setValue] = useState({
                     id: 0,
                     name: "",
@@ -38,6 +38,7 @@ export default function CardUpTrainer({close,id,listThemes}){
                 handlerVariable("Trainerthemes",valuex.vTrainerThemes,setValue)
                 console.log(valuex.v)
         }
+        console.log(datalistThemes.data)
     }
     const [listUnits,setListUnits]=useState([])
     const [price ,setPrice ]=useState({
@@ -81,7 +82,6 @@ export default function CardUpTrainer({close,id,listThemes}){
         }));
     };
     const handlerListThemeTrainer=  (name, tabev, index = null) => {
-
         setValue((previous) => {
             const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
             if (index !== null) {
@@ -120,6 +120,13 @@ export default function CardUpTrainer({close,id,listThemes}){
             getListUnit();
             getValue();
         }, []);
+    const [showLink,setShowLink]=useState(false);
+    const [parametres,setParametres]=useState(null);
+    const handlerQuestionnaire = (value)=>{
+        console.log(value);
+        setShowLink(true);
+        setParametres(value.id+"|"+value.nameTheme+"|"+value.nameTrainer);
+    }
     const submit = async ()=>{
         // console.log(value)
         const data = await update(value,url + "trainer")
@@ -132,6 +139,8 @@ export default function CardUpTrainer({close,id,listThemes}){
         }
     }
     return (
+        <>
+        {showLink ? <CardForwardLink _url={url_front} endpoint={"questionnaire"}  closePopup={setShowLink}  parametres={parametres}  title={"Partagez le lien  pour les questionnaire de cette formateur"}/> : <></>}
         <div class="flex h-screen  "> 
             <Sidebar></Sidebar>
             <main class="flex-1 bg-white ">    
@@ -240,19 +249,19 @@ export default function CardUpTrainer({close,id,listThemes}){
                                 </button>
                             </div>
                             <div>
-                                    <label class="label-formulaire mt-2 mb-2">description</label>
-                                    <textarea 
-                                        required
-                                        placeholder={""} 
-                                        rows="1"
-                                        class="input_singup "
-                                        onChange={(event)=>{handlerVariable("description",event.target.value,setPrice)}}
-                                    ></textarea>
+                                <label class="label-formulaire mt-2 mb-2">description</label>
+                                <textarea 
+                                    required
+                                    placeholder={""} 
+                                    rows="1"
+                                    class="input_singup "
+                                    onChange={(event)=>{handlerVariable("description",event.target.value,setPrice)}}
+                                ></textarea>
                                 </div>
                             </div>
                             {/* max-h-30 overflow-y-auto */}
                             <div id="tasksList" class="space-y-4 ">
-                                 <table class="w-full">
+                                 <table class="w-full" k={2}>
                                  <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>
                                         <th class="tr-thead ">Theme</th>
@@ -260,6 +269,7 @@ export default function CardUpTrainer({close,id,listThemes}){
                                         <th class="tr-thead w-8">prix unitaire</th>
                                         <th class="tr-thead w-8">max personne</th>
                                         <th class="tr-thead w-80">description</th>
+                                        <th class="tr-thead ">questionnaire</th>
                                         <th class="tr-thead "></th>
                                     </tr>
                                 </thead>
@@ -272,8 +282,13 @@ export default function CardUpTrainer({close,id,listThemes}){
                                         <td class="px-6 py-4">{v.maxpersonne}</td>
                                         <td class="px-6 py-4">{v.description}</td>
                                         <td>
+                                            <button  onClick={() => {handlerQuestionnaire(v)}} class="btn-neutre-gray">
+                                                 <i class="fa-solid fa-clipboard-question"></i>
+                                            </button>
+                                        </td>
+                                        <td>
                                             <button  onClick={() => {handlerListThemeTrainer("Trainerthemes",price,k)}} class="btn-neutre-gray">
-                                                <i class="fa-regular fa-trash-can"></i>
+                                                <i class="fa-solid fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -294,5 +309,6 @@ export default function CardUpTrainer({close,id,listThemes}){
             </main>
             
         </div>
+        </>
     );
 }
