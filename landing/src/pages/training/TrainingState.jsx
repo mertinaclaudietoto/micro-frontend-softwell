@@ -7,17 +7,17 @@ import CardUpdateSession from "../../components/card/popup/CardUpdateSession";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardForwardLink from "../../components/card/popup/CardForwardLink";
+import ListParticipantInFormation from "./ListParticipantInFormation";
 
-export default function TrainingState({value}){
+export default function TrainingState({value,close}){
     console.log("trainer state ",value)
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-    const [showTrainer,setShowTrainer]=useState(false);
+    
     const [showAddsession,setShowAddsession]=useState(false);
     const [showUpdatesession,setShowUpdatesession]=useState(false);
 
-    const [info,setInfo]=useState( listsmallformation[0])
-    const [detailleTheme,setDetailleTheme]=useState()
+
     const [participant,setParticipant]=useState([]); 
     const [themes,setThemes]=useState(null); 
     const [listSession,setSession]=useState([]); 
@@ -53,6 +53,8 @@ export default function TrainingState({value}){
     }
 
     const [showLink,setShowLink]=useState();
+    const [showParticipants,setShowParticipants]=useState(false);
+
     const [parametres,setParametres]=useState(null);
     const [daysession,setDaysession]=useState(null);
     const [updateValue,setUpdateValue]=useState(null);
@@ -70,7 +72,9 @@ export default function TrainingState({value}){
         <>
         { showLink ? <CardForwardLink _url={url_front} endpoint={"precense"} closePopup={setShowLink}  parametres={parametres} daysession={daysession} title={`Partagez le lien afin de valider la présence du ${dateToLetters(daysession)}`}/> :<></>}
         { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession>    
-        : showUpdatesession ? <CardUpdateSession  upValue={updateValue} close={setShowUpdatesession} />  :<>
+        : showUpdatesession ? <CardUpdateSession  upValue={updateValue} close={setShowUpdatesession} />  :
+        showParticipants ? <ListParticipantInFormation value={value} close={setShowParticipants} /> :
+        <>
          <div class="flex">
             <Sidebar/>
             <main class="flex-1 ">  
@@ -106,6 +110,8 @@ export default function TrainingState({value}){
                                         <th class="tr-thead text-xl font-bold">{value?.id}</th>
                                         <th class="tr-thead text-xl">{value?.themeName}</th>
                                         <th class="tr-thead text-xl">{value?.adminName} {value?.adminFirstname}</th>
+                                        <th className="text-softbleu" onClick={()=>{setShowParticipants(true)}}>Participant</th>
+                                        <th  className="text-softbleu" onClick={()=>close(false)}>Retour</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -153,9 +159,12 @@ export default function TrainingState({value}){
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.Heurendmoring}</td>
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.Heurstartaftern}</td>
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.Heurendaftern}</td>
-
+                                                    {/* lien pour faire la presence */}
                                                     <td className="px-6 py-4 text-sm text-gray-500">
-                                                        <button className="" onClick={()=>{ setShowLink(true),setParametres(v.Id+"|"+value.themeName+"|"+v.Date),setDaysession(v.Date?.split("T")[0])}}>
+                                                        <button className="" onClick={()=>{ 
+                                                            setShowLink(true),
+                                                            setParametres(v.Id+"|"+value.themeName+"|"+v.Date),
+                                                            setDaysession(v.Date?.split("T")[0])}}>
                                                             <i className="fas fa-file-alt"/>
                                                         </button>
                                                     </td>

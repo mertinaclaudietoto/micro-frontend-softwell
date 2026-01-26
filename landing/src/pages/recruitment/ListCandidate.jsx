@@ -2,7 +2,7 @@
 import { useEffect,useCallback } from "react";
 import { getData, update } from "../../function/Axios";
 import { Link } from "react-router-dom";
-import { url_recrutement, textbackground } from "../../data/data";
+import { url_recrutement, textbackground, url_recrutement_image } from "../../data/data";
 import { useState } from "react";
 import { Sidebar } from "../../components";
 import { toast } from "react-toastify";
@@ -97,7 +97,7 @@ export default function ListCandidate(){
                                     <tr index={index} className={value.StatusId==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td className="px-6 py-4 text-sm text-gray-500">
                                             <img
-                                                src={`http://localhost:5118/uploads/${value.photo}`}
+                                                src={`${url_recrutement_image}${value.photo}`}
                                                 alt="photo candidat"
                                                 className="h-10 w-10 rounded-full object-cover"
                                             />

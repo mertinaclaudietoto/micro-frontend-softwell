@@ -566,7 +566,8 @@ export const url_recrutement_image ="http://localhost:5118/uploads/";
 export const url_sendemail ="http://localhost:5025/api/";
 export const url_front="http://localhost:3001/"
 
-// export const url ="http://151.80.218.41:1010/api/";
+// export const url_front="http://151.80.218.41:1011/"
+// export const url ="http://151.80.218.41:1013/api/";
 // export const url_sendemail ="http://151.80.218.41:1012/api/";
 // export const url_recrutement ="http://151.80.218.41:5050/api/";
 // export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";

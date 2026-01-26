@@ -7,22 +7,23 @@ import "react-toastify/dist/ReactToastify.css";
 // import { handlerVariable } from "../../function/utils";
 import { IconeAccess, Sidebar } from "../../components";
 import { getData,  update } from "../../function/Axios";
-import { dateToLetters } from "../../function/Date";
-export default function TestPostFormationTrainer(){
+
+export default function ResponsePostFormationTrainer(){
     const { encryptParametres } = useParams();
     const decoded = atob(encryptParametres);
     const dataValue = decoded.split("|");
-  
+    console.log(dataValue);
+
     const [data,setData]=useState([]);
-  
+
     const getDataifExiste = async ()=>{
         const data = await getData(
             url + `questionnaire/${dataValue[0]}`
         );
         setData(data.data);
-        console.log(data.data)
+        console.log(url + `questionnaire/${dataValue[0]}`)
     }
-  
+
   
     const submit = async ()=>{
         console.log(data)
@@ -88,7 +89,7 @@ export default function TestPostFormationTrainer(){
                                         <td className="w-8" > 
                                         </td>
                                     </tr>
-                                    {value.choicequestion?.map((func, idx) => (
+                                    {/* {value.choicequestion?.map((func, idx) => (
                                         <tr key={idx}>
                                             <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.choice}</td>
                                             <td>
@@ -100,7 +101,22 @@ export default function TestPostFormationTrainer(){
                                                 />
                                             </td>
                                         </tr>
+                                    ))} */}
+                                    {value.choicequestion?.map((func, idx) => (
+                                    <tr key={idx}>
+                                        <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.choice}</td>
+                                        <td>
+                                        <input
+                                            type={value.ismultiple === 0 ? "radio" : "checkbox"}
+                                            name={value.ismultiple === 0 ? `qcm-${index}` : undefined} // même groupe pour radio
+                                            className="btn-neutre-gray"
+                                            checked={func.checked} // controlled input
+                                            onChange={(event) => choiceQcm(index, idx, event.target.checked)}
+                                        />
+                                        </td>
+                                    </tr>
                                     ))}
+
                                 </React.Fragment>
                             ))}
                             </tbody>

@@ -14,7 +14,8 @@ export default function Question(){
     const { encryptParametres } = useParams();
     const decoded = atob(encryptParametres);
     const dataValue = decoded.split("|");
-    console.log(dataValue);
+    
+
     const [question,setQuestion]=useState({
         Idtrainer_theme:dataValue[0],
         question:null,
@@ -33,6 +34,7 @@ export default function Question(){
     };
     const [data,setData]=useState([]);
     const handlerAddData =() =>{
+        console.log(question);
         setData((previous) => [
             ...previous,
             question
@@ -49,7 +51,6 @@ export default function Question(){
             url + `questionnaire/${dataValue[0]}`
         );
         setData(data.data);
-        console.log(data.data)
     }
     const handlerAddChoice = () => {
         setQuestion((previous) => ({
@@ -79,7 +80,6 @@ export default function Question(){
         {id:0,name:"choix unique"},
         {id:1,name:"choix multiple"},
     ]
-
     const submit = async ()=>{
         console.log(data)
         if(dataValue[3]=="true"){
@@ -116,10 +116,19 @@ export default function Question(){
                             </div>
                         </div>
                         <div class="p-6 border-t border-gray-200">
-                                <div className="relative bg-gray-50 p-2 mb-4 rounded">
-                                    <button onClick={() => {handlerAddData()}} class="absolute top-1 right-1 btn-neutre-gray">
-                                            <i class="fa-regular fa-plus"></i>
-                                    </button>
+                                <div className="bg-gray-50 p-2 mb-4 rounded">
+                                    <div className="flex  justify-end items-end">
+                                        <button 
+                                            onClick={() => {
+                                            handlerAddData();
+                                            console.log("djeijdejdeid");
+                                            }}  
+                                            className="btn-neutre-gray hover:bg-softbleutini-11"
+                                        >
+                                            <i className="fa-regular fa-plus"></i> 
+                                        </button>
+                                    </div>
+
                                     <div className="flex gap-2">
                                         <div className="w-2/3">
                                             <label class="label-formulaire mt-2 mb-2">Question</label>
@@ -148,7 +157,7 @@ export default function Question(){
                                                 placeholder={choix.Choice} 
                                                 rows="1"
                                                 class="input_singup "
-                                                onChange={(event)=>{handlerVariable("Choice",event.target.value,setChoix)}}
+                                                onChange={(event)=>{handlerVariable("choice",event.target.value,setChoix)}}
                                             ></textarea>
                                         </div>
                                         <div>
@@ -174,15 +183,15 @@ export default function Question(){
                                     <div id="tasksList" class="space-y-4 ">
                                         <table class="w-full">
                                             <thead class="bg-gray-50 border-b border-gray-200">
-                                                <tr>
+                                                <tr key="choix">
                                                     <th class="tr-thead ">Choix</th>
                                                     <th class="tr-thead">point</th>
                                                     <th class="tr-thead w-8"></th>
                                                 </tr>
                                             </thead>
                                             {question.choicequestion.map((v,k)=>(
-                                                <tr index={k}>
-                                                    <td class="px-6 py-4">{v.Choice}</td>
+                                                <tr index={k} >
+                                                    <td class="px-6 py-4">{v.choice}</td>
                                                     <td class="px-6 py-4">{v.point}</td>
                                                     <td>
                                                         <button  onClick={() => {deleteChoice(k)}} class="btn-neutre-gray">
@@ -198,7 +207,7 @@ export default function Question(){
                                     <tbody class="divide-y divide-gray-100">
                                     {data.map((value, index) => (
                                         <React.Fragment key={index}>
-                                            <tr className="group bg-gray-50 ">
+                                            <tr key={index} className="group bg-gray-50 ">
                                                 <td colSpan={100} className="py-4 px-4 col-span-100">
                                                     {value.question}
                                                 </td>

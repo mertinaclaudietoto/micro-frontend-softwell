@@ -72,7 +72,7 @@ export default function Validation(){
 
       return(
         <>
-        {closeAddTraining ? <CardAddTrainer close={setCloseAddTraining}  /> :  seeTrainingListe  ? <TrainingState  value={valueState} />:<>
+        {closeAddTraining ? <CardAddTrainer close={setCloseAddTraining}  /> :  seeTrainingListe  ? <TrainingState  close={setSeeTrainingListe} value={valueState} />:<>
             <div class="flex h-screen ">
                 <Sidebar/>
                 <main class="flex-1 ">    
@@ -81,7 +81,7 @@ export default function Validation(){
                             {/* filtre */}
                             <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                                 <div class="flex items-center justify-between">
-                                    <h2 class="text-xl font-semibold text-gray-800">Liste Formation validee
+                                    <h2 class="text-xl font-semibold text-gray-800">Liste des formations validées
                                         <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                                     </h2>
                                     
@@ -161,7 +161,7 @@ export default function Validation(){
                                                     </button>
                                                 )} */}
                                                 <button  onClick={()=>showTraining(value)}>
-                                                        ⋮
+                                                        <i className="fas fa-file-alt text-gray-400"></i>
                                                 </button>
                                             </td>
                                         </tr>

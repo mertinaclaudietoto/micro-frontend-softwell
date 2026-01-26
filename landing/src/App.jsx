@@ -28,7 +28,7 @@ import {
   ProtectedRoute,
   Presence,
   Question,
-  TestPostFormationTrainer
+  ResponsePostFormationTrainer
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
@@ -166,7 +166,8 @@ function App() {
         <Route path="/email" element={ <EmailModel/>   } />
         <Route path="/presence/:encryptParametres" element={ <Presence/>   } />
         <Route path="/questionnaire/:encryptParametres" element={ <Question/>   } />
-        <Route path="/test-postformation-f/:encryptParametres" element={ <TestPostFormationTrainer/>   } />
+        {/* Test de post-formation : questions élaborées par le formateur */}
+        <Route path="/test-postformation-f/:encryptParametres" element={ <ResponsePostFormationTrainer/>   } />
 
 
 
