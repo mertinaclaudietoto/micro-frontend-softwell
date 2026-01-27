@@ -24,7 +24,9 @@ export default function ListParticipantInFormation({value,close}){
             }   
         }
     const [showLink,setShowLink]=useState();
+    const [endpoint,setEndpoint]=useState(null);
     const [parametres,setParametres]=useState(null);
+
     const [daysession,setDaysession]=useState(null);
     useEffect(()=>{
      
@@ -33,7 +35,7 @@ export default function ListParticipantInFormation({value,close}){
 
     return(
         <>
-        { showLink ? <CardForwardLink _url={url_front} endpoint={"test-postformation-f"} closePopup={setShowLink}  parametres={parametres}  title={`Partagez le lien afin de permettre à ce participant de répondre aux questions de post-formation.`}/> :<></>}
+        { showLink ? <CardForwardLink _url={url_front} endpoint={endpoint} closePopup={setShowLink}  parametres={parametres}  title={`Partagez le lien afin de permettre à ce participant de répondre aux questions de post-formation.`}/> :<></>}
         <>
          <div class="flex">
             <Sidebar/>
@@ -82,32 +84,43 @@ export default function ListParticipantInFormation({value,close}){
                                                     <th className="tr-thead">Prenoms</th>
                                                     <th className="tr-thead">presence <i class="fa-solid fa-sun"></i></th>
                                                     <th className="tr-thead">presence <i class="fa-solid fa-cloud-sun"></i></th>
-                                                    <th className="tr-thead"></th>
+                                                    <th className="tr-thead">Note</th>
+                                                    <th className="tr-thead">Q Formateur</th>
+                                                    <th className="tr-thead">Q Entreprise</th>
                                                 </tr>
                                             </thead>
-
                                             <tbody className="bg-white divide-y divide-gray-200">
                                               {participant.map((v, index) => (
                                                 <tr key={index} className="hover:bg-gray-50">
                                                     <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{v.matricule}</span></td>
-                                                    
                                                     <td className="px-6 py-4 text-sm text-gray-900">
                                                          <img
                                                             src={`${url_recrutement_image}${v.photo}`}
                                                             alt="photo candidat"
                                                             className="h-10 w-10 rounded-full object-cover"
                                                         />
-
                                                     </td>
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.name} {console.log(v)}</td>
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.firstname}</td>
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.pmorning} / {v.cmorning}</td>
                                                     <td className="px-6 py-4 text-sm text-gray-900">{v.pevening} / {v.cevening}</td>
+                                                    <td className="px-6 py-4 text-sm text-gray-900">{v.note} / {v.total}</td>
+
                                                     {/* Lien permettant aux participants de répondre aux questions de post-formation. */}
                                                     <td className="px-6 py-4 text-sm text-gray-500">
                                                         <button className="" onClick={()=>{ 
                                                             setShowLink(true),
-                                                            setParametres(value.id+"|"+value.themeName+"|"+value.trainerName)
+                                                            setParametres(value.id+"|"+value.themeName+"|"+value.trainerName+"|"+v.idparticipant),
+                                                            setEndpoint("test-postformation-f")
+                                                            }}>
+                                                            <i class="fa-solid fa-clipboard-question"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-sm text-gray-500">
+                                                        <button className="" onClick={()=>{ 
+                                                            setShowLink(true),
+                                                            setParametres(value.id+"|"+value.themeName+"|"+value.trainerName+"|"+v.idparticipant),
+                                                            setEndpoint("test-postformation-e")
                                                             }}>
                                                             <i class="fa-solid fa-clipboard-question"></i>
                                                         </button>

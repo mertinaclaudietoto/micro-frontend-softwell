@@ -1175,6 +1175,8 @@ export   const  datasidebar =
                     {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/training-trainer",subItems:null,acces:"trainer"},
                     {label :"Souhaite",icone : "fa-solid fa-layer-group",actif:false,link:"/training-wish",subItems:null,acces:"wish"},
                     {label :"Formation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null,acces:"validation"},
+                    {label :"Question post formation",icone : "fa-solid fa-clipboard-question",actif:false,link:"/question-post-formation-entreprise",subItems:null,acces:"validation"},
+
                 ],
             parametre:[
                 {label :"Profile",icone : "fa-solid fa-user",actif:false,link:"/access-profile",subItems:null,acces:"profile"},

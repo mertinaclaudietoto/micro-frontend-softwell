@@ -28,7 +28,9 @@ import {
   ProtectedRoute,
   Presence,
   Question,
-  ResponsePostFormationTrainer
+  ResponsePostFormationTrainer,
+  QuestionE,
+  ResponsePostFormationEntreprise
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
@@ -168,7 +170,9 @@ function App() {
         <Route path="/questionnaire/:encryptParametres" element={ <Question/>   } />
         {/* Test de post-formation : questions élaborées par le formateur */}
         <Route path="/test-postformation-f/:encryptParametres" element={ <ResponsePostFormationTrainer/>   } />
+        <Route path="/test-postformation-e/:encryptParametres" element={ <ResponsePostFormationEntreprise/>   } />
 
+        <Route path="/question-post-formation-entreprise" element={ <QuestionE/>   } />
 
 
       </Routes>

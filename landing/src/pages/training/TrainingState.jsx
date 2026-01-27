@@ -70,7 +70,7 @@ export default function TrainingState({value,close}){
 
     return(
         <>
-        { showLink ? <CardForwardLink _url={url_front} endpoint={"precense"} closePopup={setShowLink}  parametres={parametres} daysession={daysession} title={`Partagez le lien afin de valider la présence du ${dateToLetters(daysession)}`}/> :<></>}
+        { showLink ? <CardForwardLink _url={url_front} endpoint={"presence"} closePopup={setShowLink}  parametres={parametres} daysession={daysession} title={`Partagez le lien afin de valider la présence du ${dateToLetters(daysession)}`}/> :<></>}
         { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession>    
         : showUpdatesession ? <CardUpdateSession  upValue={updateValue} close={setShowUpdatesession} />  :
         showParticipants ? <ListParticipantInFormation value={value} close={setShowParticipants} /> :

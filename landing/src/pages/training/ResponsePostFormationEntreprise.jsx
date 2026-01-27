@@ -7,8 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 // import { handlerVariable } from "../../function/utils";
 import { IconeAccess, Sidebar } from "../../components";
 import { getData,  send,  update } from "../../function/Axios";
-
-export default function ResponsePostFormationTrainer(){
+export default function ResponsePostFormationEntreprise(){
     const { encryptParametres } = useParams();
     const decoded = atob(encryptParametres);
     const dataValue = decoded.split("|");
@@ -19,55 +18,34 @@ export default function ResponsePostFormationTrainer(){
     const [data,setData]=useState([]);
 
     const getDataifExiste = async ()=>{
+        // question a repondre
         const data = await getData(
-            url + `questionnaire/${dataValue[0]}`
+            url + `questionnaire/saveorupdate-question-entreprise`
         );
-        setData(data.data);
+        setData(JSON.parse(data.data.questionlist));
+        // reponse
         const dataResponce = await getData(
-            url + `response-question/getbyid?idtrainingValidate=${dataValue[0]}&idemploy=${dataValue[3]}&idtypequestion=1`
+            url + `response-question/getbyid?idtrainingValidate=${dataValue[0]}&idemploy=${dataValue[3]}&idtypequestion=2`
         )
         if(dataResponce.data!=null){
             setHasAlreadyAResponce(true);
-            // console.log(dataResponce.data);
-            // console.log(JSON.parse(dataResponce.data.responce));
             setData(JSON.parse(dataResponce.data.responce));
         }
     }
-    const calculeNote = () => {
-        let note = 0;
-        data.forEach((question) => {
-            question.choicequestion.forEach((choice) => {
-            if (choice.checked) {
-                note += choice.point;
-            }
-            });
-        });
-        return note;
-    };
-
-     const calculeTotal= () => {
-        let note = 0;
-        data.forEach((question) => {
-            question.choicequestion.forEach((choice) => {
-            note += choice.point;
-            });
-        });
-        return note;
-    };
+  
   
     const submit = async ()=>{
         console.log("responce");
         console.log(data);
         console.log(dataValue);
-        console.log(calculeTotal());
         const valueSave={
             idtrainingValidate:Number(dataValue[0]) ,
             idemploy: Number(dataValue[3]),
-            idtypequestion:1,
-            note:calculeNote(),
+            idtypequestion:2,
+            note:0,
             date:new Date(),
             responce:JSON.stringify(data),
-            total:calculeTotal(),
+            total:0,
         }
         // console.log(valueSave);
         if(dataValue[4]=="true" && hasAlreadyAResponce==false){
@@ -88,18 +66,25 @@ export default function ResponsePostFormationTrainer(){
         setData(prev =>
             prev.map((question, i) => {
             if (i !== index1) return question;
-            return {
-                ...question,
-                choicequestion: question.ismultiple==1  ? question.choicequestion.map((choice, j) =>
-                j === index2
-                    ? { ...choice, checked: checkedValue }
-                    : choice
-                ) : question.choicequestion.map((choice, j) =>
-                j === index2
-                    ? { ...choice, checked: true }
-                    : { ...choice, checked: false }
-                ) 
-            };
+            if(question.ismultiple=="text"){
+                return {
+                    ...question,
+                    response:checkedValue ///ou text responce
+                }
+            }else{
+                return {
+                    ...question,
+                    choicequestion: question.ismultiple==1  ? question.choicequestion.map((choice, j) =>
+                    j === index2
+                        ? { ...choice, checked: checkedValue }
+                        : choice
+                    ) : question.choicequestion.map((choice, j) =>
+                    j === index2
+                        ? { ...choice, checked: true }
+                        : { ...choice, checked: false }
+                    ) 
+                };
+            }
             })
         );
         console.log(data);
@@ -136,12 +121,24 @@ export default function ResponsePostFormationTrainer(){
                                         <td className="w-8" > 
                                         </td>
                                     </tr>
-                                    {value.choicequestion?.map((func, idx) => (
+                                    {value.ismultiple=="text" ?
+                                        <tr key={"t"+index}>     
+                                            <td className="col-span-2  p-5">
+                                                <textarea
+                                                    type={value.ismultiple}
+                                                    className="btn-neutre-gray w-full "
+                                                    // defaultChecked={func["checked"]}
+                                                    onChange={(event) =>choiceQcm(index,0,event.target.value)}
+                                                />
+                                            </td>
+                                        </tr>
+                                     :
+                                    value.choicequestion?.map((func, idx) => (
                                         <tr key={idx}>
-                                            <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.choice}</td>
+                                            <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.choice} {console.log(value)}</td>
                                             <td>
                                                 <input
-                                                    type={value.ismultiple === 0 ? "radio" : "checkbox"}
+                                                    type={value.ismultiple}
                                                     className="btn-neutre-gray"
                                                     // defaultChecked={func["checked"]}
                                                     checked={!!func.checked}
@@ -150,6 +147,7 @@ export default function ResponsePostFormationTrainer(){
                                             </td>
                                         </tr>
                                     ))}
+                                   
 
                                 </React.Fragment>
                             ))}

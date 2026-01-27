@@ -15,7 +15,6 @@ export default function CardForwardLink({_url,endpoint,closePopup,parametres,tit
     ];
 
     const url = `${_url}${endpoint}/${btoa(parametres+"|"+isModif)}`;
-    
 
     const handleCopy = async () => {
         try {

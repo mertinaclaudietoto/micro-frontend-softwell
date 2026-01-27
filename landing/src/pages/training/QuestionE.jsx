@@ -9,15 +9,9 @@ import { IconeAccess, Sidebar } from "../../components";
 import { getData,  update } from "../../function/Axios";
 import { dateToLetters } from "../../function/Date";
 import Select from "../../function/selectSimple";
-export default function Question(){
-    
-    const { encryptParametres } = useParams();
-    const decoded = atob(encryptParametres);
-    const dataValue = decoded.split("|");
-    
-
+export default function QuestionE(){
+   
     const [question,setQuestion]=useState({
-        Idtrainer_theme:dataValue[0],
         question:null,
         ismultiple:0,
         choicequestion:[],
@@ -26,6 +20,8 @@ export default function Question(){
         choice:null,
         point:null,
     })
+    const [id,setId]=useState(null);
+    
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
             ...previous,
@@ -40,26 +36,31 @@ export default function Question(){
             question
         ]);
         setQuestion({
-            Idtrainer_theme:dataValue[0],
             question:null,
             choicequestion:[],
         });
-
     }
     const getDataifExiste = async ()=>{
         const data = await getData(
-            url + `questionnaire/${dataValue[0]}`
+            url + `questionnaire/saveorupdate-question-entreprise`
         );
-        setData(data.data);
+        if(data.data!=null){
+            setId(data.data.id)
+            setData(JSON.parse(data.data.questionlist) );
+        }
     }
     const handlerAddChoice = () => {
-        setQuestion((previous) => ({
-            ...previous,
-            choicequestion: [
-                ...(previous.choicequestion || []), // s'assure que c'est un tableau
-                choix
-            ]
-        }));
+        if(question.ismultiple!="text"){
+            setQuestion((previous) => ({
+                ...previous,
+                choicequestion: [
+                    ...(previous.choicequestion || []), // s'assure que c'est un tableau
+                    choix
+                ]
+            }));
+        }else{
+           toast.error("Les réponses libres ne peuvent pas avoir de choix !");
+        }
     };
     // suppression choix
     const deleteChoice = (index) => {
@@ -77,23 +78,23 @@ export default function Question(){
         } 
     }
     const listeChoix =[
-        {id:0,name:"choix unique"},
-        {id:1,name:"choix multiple"},
+        {id:"radio",name:"choix unique"},
+        {id:"checkbox",name:"choix multiple"},
+        {id: "text", name: "réponse libre"},
     ]
     const submit = async ()=>{
-        console.log(data)
-        if(dataValue[3]=="true"){
-            const value = await update(data,
-                url + `questionnaire`
-            );
-            if (value == true) {
+        const  valueSend = {
+            id:id,
+            questionlist:JSON.stringify(data)
+        }
+        const value = await update(valueSend,
+            url + `questionnaire/saveorupdate-question-entreprise`
+        );
+        if (value == true) {
             window.location.reload();
             toast.success("Données enregistrées avec succès !");
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
-        }
-        }else{     
-            toast.error("Vous n'avez pas le droit de faire une modification!");
         }
     }
     useEffect(() => {
@@ -101,6 +102,7 @@ export default function Question(){
      }, []);
     return(<>
     <div class="flex h-screen ">
+        <Sidebar/>
         <main class="flex-1 ">   
             <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto">
                 <div class="flex gap-6 max-w-7xl mx-auto border border-gray-200">
@@ -108,7 +110,7 @@ export default function Question(){
                         <div class=" p-6">
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <p class=" font-semibold text-gray-900">Questionnaire d’évaluation post-formation en  <b className="text-softbleu">{dataValue[1]}</b>, animé par l'organisme   <b className="text-softbleu">{dataValue[2]}</b> .</p>
+                                    <p class=" font-semibold text-gray-900">Questionnaire d’évaluation post-formation pour l'entreprise  .</p>
                                     <button class="bg-softbleutini-12 hover:bg-softbleushade-12 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={()=>submit()}>
                                        Enregistrer
                                     </button>
@@ -146,8 +148,6 @@ export default function Question(){
                                             </div>
                                            
                                         </div>
-                                           
-
                                     </div>
                                       <div className="flex  justify-between gap-2 ">
                                         <div className="col-span-3 w-1/2">
@@ -160,20 +160,7 @@ export default function Question(){
                                                 onChange={(event)=>{handlerVariable("choice",event.target.value,setChoix)}}
                                             ></textarea>
                                         </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">Point</label>
-                                            <div class="relative ">
-                                                <input 
-                                                    type="number" 
-                                                    class="input_singup"
-                                                    placeholder={choix.point}
-                                                    min="0"                  // force positif
-                                                    step="0.01"
-                                                    onChange={(event) => handlerVariable("point", event.target.value,setChoix)}
-                                                />
-                                                {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
-                                            </div>
-                                        </div>
+                                     
                                         <div className="flex justify-center items-center">
                                             <button onClick={() => {handlerAddChoice()}} class="btn-neutre-gray">
                                                     <i class="fa-regular fa-plus"></i>
@@ -192,7 +179,6 @@ export default function Question(){
                                             {question.choicequestion.map((v,k)=>(
                                                 <tr index={k} >
                                                     <td class="px-6 py-4">{v.choice}</td>
-                                                    <td class="px-6 py-4">{v.point}</td>
                                                     <td>
                                                         <button  onClick={() => {deleteChoice(k)}} class="btn-neutre-gray">
                                                             <i class="fa-regular fa-trash-can"></i>

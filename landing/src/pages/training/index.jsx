@@ -7,7 +7,10 @@ export { default as Validation } from "./Validation";
 export { default as Presence } from "./Presence";
 export { default as Question } from "./Question";
 export { default as ResponsePostFormationTrainer } from "./ResponsePostFormationTrainer";
+export { default as ResponsePostFormationEntreprise } from "./ResponsePostFormationEntreprise";
 export { default as ListParticipantInFormation } from "./ListParticipantInFormation";
+export { default as QuestionE } from "./QuestionE";
+
 
 
 
