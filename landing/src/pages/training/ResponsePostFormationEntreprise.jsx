@@ -35,9 +35,9 @@ export default function ResponsePostFormationEntreprise(){
   
   
     const submit = async ()=>{
-        console.log("responce");
-        console.log(data);
-        console.log(dataValue);
+        // console.log("responce");
+        // console.log(data);
+        // console.log(dataValue);
         const valueSave={
             idtrainingValidate:Number(dataValue[0]) ,
             idemploy: Number(dataValue[3]),
@@ -47,7 +47,7 @@ export default function ResponsePostFormationEntreprise(){
             responce:JSON.stringify(data),
             total:0,
         }
-        // console.log(valueSave);
+        console.log(valueSave);
         if(dataValue[4]=="true" && hasAlreadyAResponce==false){
             const value = await send(valueSave,
                 url + `response-question`
@@ -74,7 +74,7 @@ export default function ResponsePostFormationEntreprise(){
             }else{
                 return {
                     ...question,
-                    choicequestion: question.ismultiple==1  ? question.choicequestion.map((choice, j) =>
+                    choicequestion: question.ismultiple=="checkbox"  ? question.choicequestion.map((choice, j) =>
                     j === index2
                         ? { ...choice, checked: checkedValue }
                         : choice
@@ -87,7 +87,7 @@ export default function ResponsePostFormationEntreprise(){
             }
             })
         );
-        console.log(data);
+        // console.log(data);
     };
     useEffect(()=>{},[data])
     useEffect(() => {
@@ -126,6 +126,7 @@ export default function ResponsePostFormationEntreprise(){
                                             <td className="col-span-2  p-5">
                                                 <textarea
                                                     type={value.ismultiple}
+                                                    value={value.response}
                                                     className="btn-neutre-gray w-full "
                                                     // defaultChecked={func["checked"]}
                                                     onChange={(event) =>choiceQcm(index,0,event.target.value)}
@@ -135,7 +136,7 @@ export default function ResponsePostFormationEntreprise(){
                                      :
                                     value.choicequestion?.map((func, idx) => (
                                         <tr key={idx}>
-                                            <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.choice} {console.log(value)}</td>
+                                            <td className="py-4 px-4 pl-10 text-sm text-gray-700">{func.choice} </td>
                                             <td>
                                                 <input
                                                     type={value.ismultiple}
