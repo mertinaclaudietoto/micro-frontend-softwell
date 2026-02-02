@@ -14,10 +14,9 @@ import { url_recrutement_image, url_sendemail } from "../../data/data";
 import { send, update } from "../../function/Axios";
 export default function UpdateModelEmail({close,value}) {
     console.log(value?.content);
-   if (typeof value?.content === "string") {
-  value.content = JSON.parse(value.content);
-}
-
+  if (typeof value?.content === "string") {
+    value.content = JSON.parse(value.content);
+  }
   const [data, setData] = useState(value);
   
   const editorRef = useRef(null);

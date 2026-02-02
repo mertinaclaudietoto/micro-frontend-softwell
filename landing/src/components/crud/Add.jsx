@@ -5,10 +5,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { url_recrutement } from "../../data/data";
 export default function Add({close,entityName}){
-    console.log("update")
+   
     const [value, setValue] = useState({
-                    Id: null,
-                    Name: "",
+                    name: "",
                 });
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
@@ -55,7 +54,7 @@ export default function Add({close,entityName}){
                     <input 
                         type="text" 
                         placeholder={`name: ${value.name}`}
-                        onChange={(event)=>{handlerVariable("Name",event.target.value,setValue)}}
+                        onChange={(event)=>{handlerVariable("name",event.target.value,setValue)}}
                         class="input_formulaire"
                     />
                 </div>

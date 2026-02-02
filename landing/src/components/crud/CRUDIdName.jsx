@@ -8,7 +8,7 @@ import { useState } from "react";
 import Select from "../../function/selectSimple";
 import Add from "./Add";
 import Update from "./Update";
-export default function CRUDIdName({entityName,Name}){
+export default function CRUDIdName({entityName,Name,urlApplication}){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
@@ -36,9 +36,9 @@ export default function CRUDIdName({entityName,Name}){
     }
     
     const loadData = useCallback(async () => {
-        console.log(nameE)
+        console.log( urlApplication + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`)
         const data = await getData(
-            url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
+            urlApplication + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
         );
         setData( data.data);
         console.log(data);

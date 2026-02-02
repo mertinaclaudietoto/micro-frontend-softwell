@@ -22,7 +22,8 @@ export default function ResponsePostFormationTrainer(){
         const data = await getData(
             url + `questionnaire/${dataValue[0]}`
         );
-        setData(data.data);
+        setData(JSON.parse(data.data.questionlist));
+    
         const dataResponce = await getData(
             url + `response-question/getbyid?idtrainingValidate=${dataValue[0]}&idemploy=${dataValue[3]}&idtypequestion=1`
         )
@@ -38,7 +39,7 @@ export default function ResponsePostFormationTrainer(){
         data.forEach((question) => {
             question.choicequestion.forEach((choice) => {
             if (choice.checked) {
-                note += choice.point;
+                note += Number(choice.point);
             }
             });
         });
@@ -49,7 +50,7 @@ export default function ResponsePostFormationTrainer(){
         let note = 0;
         data.forEach((question) => {
             question.choicequestion.forEach((choice) => {
-            note += choice.point;
+            note += Number(choice.point);
             });
         });
         return note;

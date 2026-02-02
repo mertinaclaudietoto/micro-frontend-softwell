@@ -17,7 +17,6 @@ export default function Question(){
     
 
     const [question,setQuestion]=useState({
-        Idtrainer_theme:dataValue[0],
         question:null,
         ismultiple:0,
         choicequestion:[],
@@ -40,17 +39,18 @@ export default function Question(){
             question
         ]);
         setQuestion({
-            Idtrainer_theme:dataValue[0],
             question:null,
             choicequestion:[],
         });
 
     }
+    const [Id,setId]=useState(null);
     const getDataifExiste = async ()=>{
         const data = await getData(
             url + `questionnaire/${dataValue[0]}`
         );
-        setData(data.data);
+        setId(data.data.Id);
+        setData(JSON.parse(data.data.questionlist));
     }
     const handlerAddChoice = () => {
         setQuestion((previous) => ({
@@ -82,8 +82,13 @@ export default function Question(){
     ]
     const submit = async ()=>{
         console.log(data)
+        const valueData ={
+                Id:Id,
+             Idtrainer_theme:dataValue[0],
+             questionlist:JSON.stringify(data)
+        }
         if(dataValue[3]=="true"){
-            const value = await update(data,
+            const value = await update(valueData,
                 url + `questionnaire`
             );
             if (value == true) {

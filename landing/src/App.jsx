@@ -48,6 +48,7 @@ import CVCandidateGeneral from './pages/manager/sous/CVCandidateGeneral';
 import StatManager from './pages/recruitment/StepStat';
 import AddNewModelEmail from './components/email/AddNewModelEmail';
 import EmailModel from './pages/email/EmailModel';
+import { url_recrutement } from './data/data';
 
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
@@ -129,26 +130,26 @@ function App() {
         <Route path="/access-set" element={<ProtectedRoute> <Setaccess/> </ProtectedRoute>}></Route>
         <Route path="/access-user" element={<ProtectedRoute> <UserProfile/> </ProtectedRoute>}></Route>
         <Route path="/training-theme" element={<ProtectedRoute> <TrainingTheme/> </ProtectedRoute>}></Route>
-
         {/* <Route path="/training-inprogress" element={<InprogressTraining/>}></Route> */}
         <Route path="/training-trainer" element={<ProtectedRoute><Trainer/></ProtectedRoute>}></Route>
         <Route path="/training-wish" element={<ProtectedRoute><Wish/> </ProtectedRoute>}></Route>
         <Route path="/training-validation" element={ <ProtectedRoute><Validation/></ProtectedRoute>}></Route>
         <Route path="/training-state/:id" element={ <ProtectedRoute><TrainingState /> </ProtectedRoute>} />
-        <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} /> } />
-        <Route path="/crud-localisation" element={ <CRUDIdName key={2} entityName={"localisation"} Name={"Localisation"} /> } />
-        <Route path="/crud-yearofexperience" element={ <CRUDIdName key={3} entityName={"yearsofexperience"} Name={"Annee d'experience"} /> } />
-        <Route path="/crud-certification" element={ <CRUDIdName key={4} entityName={"certification"} Name={"Certification"} /> } />
-        <Route path="/crud-diplome" element={ <CRUDIdName key={5} entityName={"diplome"} Name={"Diplome"} /> } />
-        <Route path="/crud-hardskill" element={ <CRUDIdName key={6} entityName={"hardSkill"} Name={"Hard Skill"} /> } />
-        <Route path="/crud-Language" element={ <CRUDIdName key={7} entityName={"language"} Name={"Hard Skill"} /> } />
-        <Route path="/crud-mandatory" element={ <CRUDIdName key={8} entityName={"mandatory"} Name={"Obligatoire Status"} /> } />
-        <Route path="/crud-softskill" element={ <CRUDIdName key={9} entityName={"softskill"} Name={"Soft Skill"} /> } />
-        <Route path="/crud-contrat" element={ <CRUDIdName key={10} entityName={"typecontrat"} Name={"Type Contrat"} /> } />
-        <Route path="/crud-genre" element={ <CRUDIdName key={11} entityName={"genre"} Name={"Genre"} /> } />
-        <Route path="/crud-localisation_candidate" element={ <CRUDIdName key={12} entityName={"localisation_candidate"} Name={"Localisation des candidates"} /> } />
-        <Route path="/crud-university" element={ <CRUDIdName key={13} entityName={"university"} Name={"Etablisement d'origine"} /> } />
-        <Route path="/crud-typeexperience" element={ <CRUDIdName key={14} entityName={"typeexperience"} Name={"Type d'experience "} /> } />
+
+        <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} urlApplication={url_recrutement} /> } />
+        <Route path="/crud-localisation" element={ <CRUDIdName key={2} entityName={"localisation"} Name={"Localisation"} urlApplication={url_recrutement} /> } />
+        <Route path="/crud-yearofexperience" element={ <CRUDIdName key={3} entityName={"yearsofexperience"} Name={"Annee d'experience"}  urlApplication={url_recrutement}/> } />
+        <Route path="/crud-certification" element={ <CRUDIdName key={4} entityName={"certification"} Name={"Certification"} urlApplication={url_recrutement} /> } />
+        <Route path="/crud-diplome" element={ <CRUDIdName key={5} entityName={"diplome"} Name={"Diplome"}  urlApplication={url_recrutement}/> } />
+        <Route path="/crud-hardskill" element={ <CRUDIdName key={6} entityName={"hardSkill"} Name={"Hard Skill"} urlApplication={url_recrutement} /> } />
+        <Route path="/crud-Language" element={ <CRUDIdName key={7} entityName={"language"} Name={"Hard Skill"}  urlApplication={url_recrutement}/> } />
+        <Route path="/crud-mandatory" element={ <CRUDIdName key={8} entityName={"mandatory"} Name={"Obligatoire Status"} urlApplication={url_recrutement}/> } />
+        <Route path="/crud-softskill" element={ <CRUDIdName key={9} entityName={"softskill"} Name={"Soft Skill"} urlApplication={url_recrutement}/> } />
+        <Route path="/crud-contrat" element={ <CRUDIdName key={10} entityName={"typecontrat"} Name={"Type Contrat"} urlApplication={url_recrutement}/> } />
+        <Route path="/crud-genre" element={ <CRUDIdName key={11} entityName={"genre"} Name={"Genre"} urlApplication={url_recrutement}/> } />
+        <Route path="/crud-localisation_candidate" element={ <CRUDIdName key={12} entityName={"localisation_candidate"} Name={"Localisation des candidates"} urlApplication={url_recrutement}/> } />
+        <Route path="/crud-university" element={ <CRUDIdName key={13} entityName={"university"} Name={"Etablisement d'origine"} urlApplication={url_recrutement} /> } />
+        <Route path="/crud-typeexperience" element={ <CRUDIdName key={14} entityName={"typeexperience"} Name={"Type d'experience "}  urlApplication={url_recrutement}/> } />
        
         <Route path="/crud-steprecruitment" element={ <StepRecruitment /> } />
 
