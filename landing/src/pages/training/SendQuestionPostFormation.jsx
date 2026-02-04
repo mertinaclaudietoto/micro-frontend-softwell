@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { textbackground, url, url_front, url_recrutement_image, url_sendemail} from "../../data/data";
-import {  dateToLetters, diffDate } from "../../function/Date";
-import {  CardAddSession, Sidebar } from "../../components";
+import { textbackground, url,  url_recrutement_image, url_sendemail} from "../../data/data";
+import {  Sidebar } from "../../components";
 import { getData, send } from "../../function/Axios";
-import CardUpdateSession from "../../components/card/popup/CardUpdateSession";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CardForwardLink from "../../components/card/popup/CardForwardLink";
 import SeeModelEmail from "../../components/email/SeeModelEmail";
-import { generateEditorJsFromSessions, generateEditorJsFromSessionsCustomised } from "../../function/email-format";
+import {  generateEditorJsForModelingPostFormationEmail } from "../../function/email-format";
 import UpdateModelEmailSendConvocation from "../../components/email/training/UpdateModelEmailSendConvocation";
-
-export default function SendConvocation({value,close,lastParticipant}){
+ 
+export default function SendQuestionPostFormation({value,close,lastParticipant,_url}){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
     const [participant,setParticipant]=useState(lastParticipant); 
@@ -21,7 +18,6 @@ export default function SendConvocation({value,close,lastParticipant}){
     const [showLink,setShowLink]=useState();
     const [seeValue,setSeeValue]=useState();
     const [listemail,setListEmail]=useState([]);
-
     const getParticipantDayPresence = async (modelConvocation)=>{
             const data = await getData(url + `v_participant_validate/participants-session-presence/${value.id}`);
             if(data.data!=null){
@@ -31,11 +27,11 @@ export default function SendConvocation({value,close,lastParticipant}){
     }
     //l'id convocation sera toujours 1 
     const getModelEmail = async ()=>{
-            const data = await getData(url_sendemail + `model_with_parameteres/getById?id=1`);
-            if(data.data!=null){
-                setModelConvocation(data.data);
-                getParticipantDayPresence(data.data);
-            }   
+        const data = await getData(url_sendemail + `model_with_parameteres/getById?id=2`);
+        if(data.data!=null){
+            setModelConvocation(data.data);
+            getParticipantDayPresence(data.data);
+        }   
     }
     const changeModelEmailForThisConvocation = async (modelConvocation)=>{
             console.log("validation deidjeidjeijde");
@@ -76,12 +72,13 @@ export default function SendConvocation({value,close,lastParticipant}){
                     idtraining_validate: value.id,
                     date: new Date(),
                     checked:true,
-                    content: generateEditorJsFromSessionsCustomised(
-                            participantDayPresenceData.filter(
-                                (session) => session.idparticipant === p.idparticipant
-                            ),
+                    content: generateEditorJsForModelingPostFormationEmail(
                             value.themeName,
-                      typeof modelConvocation.content =="string"?  JSON.parse(modelConvocation.content) : modelConvocation.content
+                    ///linkQuestionEntreprise
+                            `${_url}${"test-postformation-e"}/${btoa(value.id+"|"+value.themeName+"|"+value.trainerName+"|"+p.idparticipant+"|"+true)}`,
+                    ///linkQuestionFormateur
+                            `${_url}${"test-postformation-f"}/${btoa(value.id+"|"+value.themeName+"|"+value.trainerName+"|"+p.idparticipant+"|"+true)}`,
+                            typeof modelConvocation.content =="string"?  JSON.parse(modelConvocation.content) : modelConvocation.content
                     ),
                 }));
             console.log("set email .....")
@@ -94,16 +91,16 @@ export default function SendConvocation({value,close,lastParticipant}){
     const submit = async ()=>{
         const toastId = toast.loading("Envoi en cours...");
         const sendData = listemail.map((p) => p.checked==true?({
-            email:p.email,
-            idparticipant: p.idparticipant,
-            idtraining_validate: value.id,
-            idmodel_with_parameter:1,
-            date: new Date(),
-            content: JSON.stringify(p.content),
-        }) :<></>)
+                email:p.email,
+                idparticipant: p.idparticipant,
+                idtraining_validate: value.id,
+                idmodel_with_parameter:2,
+                date: new Date(),
+                content: JSON.stringify(p.content),
+            }) :<></>)
         const formatModel = {
             listemail:sendData,
-            name:"Convocation"
+            name:"Email post formation"
         }
         const data = await send(formatModel,url_sendemail + "sendemail/send-convocation")
         // console.log(value)
@@ -138,7 +135,7 @@ export default function SendConvocation({value,close,lastParticipant}){
                 <div class=" md:p-8 bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
                     <div className=" max-w-7xl mx-auto p-10 flex bg-white">
                         <div className="flex-1  border-rigth ">
-                            <h2 class="text-xl font-semibold text-gray-800 py-2">Envois Convocation
+                            <h2 class="text-xl font-semibold text-gray-800 py-2">Envois Question Post formation
                             </h2>
                             <table class="w-full pt-2 ">
                                 <thead class="bg-gray-100 border-b border-gray-200">

@@ -8,15 +8,15 @@ import List from "@editorjs/list";
 import ImageTool from "@editorjs/image";
 import Quote from "@editorjs/quote";
 import CodeTool from "@editorjs/code";
-import { Sidebar } from "../sidebar";
-import { uploadCompressedImage } from "../../function/uplaodimage";
-import { url_recrutement_image, url_sendemail } from "../../data/data";
-import { send, update } from "../../function/Axios";
-import Delimiter from '@editorjs/delimiter';
-export default function SeeModelEmail({close,setData,data, changeValueAfterUpdate }) {
- 
 
+import { uploadCompressedImage } from "../../../function/uplaodimage";
+import {  url_recrutement, url_sendemail } from "../../../data/data";
+import { send, update } from "../../../function/Axios";
+import Delimiter from '@editorjs/delimiter';
+import { data } from "react-router-dom";
+export default function UpdateModelEmail({close,value }) {
     const editorRef = useRef(null);
+    const [data,setData]=useState(value);
     const handleUpload = async (file) => {
             try {
                 const fileName = await uploadCompressedImage(file);
@@ -27,7 +27,14 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
             }
     };
     const save = async()=>{
-        changeValueAfterUpdate();
+        const value = await update({ ...data, content: JSON.stringify(data.content) }, url_sendemail + "model_with_parameteres");
+          if (value == true) {
+              toast.success("Données modifiées avec succès !");
+              window.location.replace("/training-modelemail");
+              // close(false);
+          } else {
+              toast.error("Problème serveur, réessayez plus tard !");
+        }
         close(false);
     }
   const handlerVariable = (name, value,setFunction) => {
@@ -40,7 +47,13 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
      const editor = new EditorJS({
         holder: "editorjs",
         placeholder: "Titre de l'email",
-        data: data.content,
+        data: data.content
+          ? JSON.parse(data.content)
+          : {
+              time: Date.now(),
+              blocks: [],
+              version: "2.28.2"
+        },
         tools: {
           header: Header,
           paragraph: {
@@ -63,7 +76,7 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
                 return {
                   success: 1,
                   file: {
-                    url: url_recrutement_image + uploadedFileName, // chaîne de caractères, pas objet
+                    url: url_recrutement + uploadedFileName, // chaîne de caractères, pas objet
                   },
                 };
               },
@@ -94,12 +107,13 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
     };
   }, []);
   return (
-    <div class="background_transparent_popup p-10">
-        <div className="max-w-7xl mx-auto m-10 bg-white p-10 h-screen  overflow-y-auto">
+    
+    <div class="background_transparent_popup p-10 ">
+        <div className="max-w-10xl mx-auto m-10 bg-white p-10 h-screen  overflow-y-auto">
             {/* filtre */}
-            <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold text-gray-800">Construire votre model d'email
+            <div class="p-4 mb-2 bg-white border-b border-gray-200 sticky top-0 z-50 pink ">
+                <div class="flex items-center justify-between gap-2">
+                    <h2 class="text-xl font-semibold text-gray-800">Construire votre model de {data.name}
                         {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                     </h2>
                     <div class="flex items-center space-x-3">
@@ -113,6 +127,9 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
                         </div>
                     </div>
                 </div>
+                
+                <div className="py-2" dangerouslySetInnerHTML={{ __html: data.parameter_hint }} />
+
             </div>
            
             <div  className="max-w-18xl border-1 border-gray-200  bg-white py-10 text-left break-words" >

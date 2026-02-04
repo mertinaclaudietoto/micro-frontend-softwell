@@ -10,6 +10,15 @@ export { default as ResponsePostFormationTrainer } from "./ResponsePostFormation
 export { default as ResponsePostFormationEntreprise } from "./ResponsePostFormationEntreprise";
 export { default as ListParticipantInFormation } from "./ListParticipantInFormation";
 export { default as QuestionE } from "./QuestionE";
+export { default as ModelEmail } from "./ModelEmail";
+export { default as SendQuestionPostFormation } from "./SendQuestionPostFormation";
+export { default as SendEmailCertification  } from "./SendEmailCertification";
+
+
+
+
+
+
 
 
 

@@ -30,7 +30,8 @@ import {
   Question,
   ResponsePostFormationTrainer,
   QuestionE,
-  ResponsePostFormationEntreprise
+  ResponsePostFormationEntreprise,
+  ModelEmail
 } from "./pages";
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
@@ -135,6 +136,7 @@ function App() {
         <Route path="/training-wish" element={<ProtectedRoute><Wish/> </ProtectedRoute>}></Route>
         <Route path="/training-validation" element={ <ProtectedRoute><Validation/></ProtectedRoute>}></Route>
         <Route path="/training-state/:id" element={ <ProtectedRoute><TrainingState /> </ProtectedRoute>} />
+        <Route path="/training-modelemail" element={ <ProtectedRoute><ModelEmail /> </ProtectedRoute>} />
 
         <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} urlApplication={url_recrutement} /> } />
         <Route path="/crud-localisation" element={ <CRUDIdName key={2} entityName={"localisation"} Name={"Localisation"} urlApplication={url_recrutement} /> } />

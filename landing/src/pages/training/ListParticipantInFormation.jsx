@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { textbackground, url, url_front, url_recrutement_image} from "../../data/data";
+import { textbackground, url, url_front, url_recrutement_image, url_sendemail} from "../../data/data";
 import {  dateToLetters, diffDate } from "../../function/Date";
 import {  CardAddSession, Sidebar } from "../../components";
 import { getData } from "../../function/Axios";
@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardForwardLink from "../../components/card/popup/CardForwardLink";
 import SendConvocation from "./SendConvocation";
+import SendQuestionPostFormation from "./SendQuestionPostFormation";
+import { SendEmailCertification } from ".";
 
 export default function ListParticipantInFormation({value,close}){
    
@@ -16,24 +18,43 @@ export default function ListParticipantInFormation({value,close}){
 
     const [participant,setParticipant]=useState([]); 
     const getParticipant = async ()=>{
-            console.log("dejijdejdie");
-            console.log(value);
-            console.log(url + `v_participant_validate/participants-formation/${value.id}`);
-            const data = await getData(url + `v_participant_validate/participants-formation/${value.id}`);
-            if(data.data!=null){
-                setParticipant(data.data);
-            }   
-        }
+        const data = await getData(url + `v_participant_validate/participants-formation/${value.id}`);
+        if(data.data!=null){
+            setParticipant(data.data);
+        }   
+    }
+    const [nbrSendedEmail,setNbrSendedEmail]=useState([]); 
+    const getTotalSend = async ()=>{
+        const data = await getData(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate${value.id}`);
+        if(data.data!=null){
+            setNbrSendedEmail(data.data);
+        }   
+    }
     const [showLink,setShowLink]=useState();
     const [endpoint,setEndpoint]=useState(null);
     const [parametres,setParametres]=useState(null);
-
     const [seeSendConvocation,setSeeSendConvocation]=useState(false);
-
-
+    const [seeSendLinkAfterTraining,setSendLinkAfterTraining]=useState(false);
+    const [seeSendCertification,setSeeSendCertification]=useState(false);
     const [daysession,setDaysession]=useState(null);
+    const seeEmail =(index)=>{
+            switch(index){
+                case 1:
+                    setSeeSendConvocation(true);
+                    return ;
+                case 2:
+                    setSendLinkAfterTraining(true);
+                    return ;
+                case 3:
+                    setSeeSendCertification(true);
+                    return ;
+                default:
+                    return false;
+            }
+    }
+
     useEffect(()=>{
-     
+        getTotalSend()
         getParticipant()
     },[])
 
@@ -41,7 +62,9 @@ export default function ListParticipantInFormation({value,close}){
         <>
         { showLink ? <CardForwardLink _url={url_front} endpoint={endpoint} closePopup={setShowLink}  parametres={parametres}  title={`Partagez le lien afin de permettre à ce participant de répondre aux questions de post-formation.`}/> :<></>}
         <>
-        {seeSendConvocation ? <SendConvocation value={value} lastParticipant={participant} close={setSeeSendConvocation}/> :
+        {seeSendConvocation ? <SendConvocation value={value} lastParticipant={participant} close={setSeeSendConvocation}/>  :
+        seeSendLinkAfterTraining ? <SendQuestionPostFormation value={value} close={setSendLinkAfterTraining} lastParticipant={participant}  _url={url_front} /> :
+        seeSendCertification ? <SendEmailCertification  value={value} close={setSeeSendCertification} lastParticipant={participant}/> :
             <div class="flex z-10">
             <Sidebar/>
             <main class="flex-1 ">  
@@ -65,19 +88,14 @@ export default function ListParticipantInFormation({value,close}){
                             <table class="max-w-7xl mx-auto py-10 ">
                                 <thead class="">
                                     <tr>
-                                        <th class="tr-thead text-xl">
-                                            <span onClick={()=>{
-                                                setSeeSendConvocation(true);
-                                            }}
-                                            class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>3/4  Convocation</span> 
-                                        </th>
-                                        <th class="tr-thead text-xl">
-                                            <span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>3/4  Test post formation</span>
-                                        </th>
-                                         <th class="tr-thead text-xl">
-                                            <span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>3/4  Certification</span> 
-                                        </th>
-                                        
+                                        {nbrSendedEmail.map((value,index)=>(
+                                             <th class="tr-thead text-xl" key={index}>
+                                                <span onClick={()=>{
+                                                    seeEmail(true);
+                                                }}
+                                                class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{value.emailenvoi}/{participant.length}  {value.name}</span> 
+                                            </th>
+                                        )) }
                                     </tr>
                                 </thead>
                             </table>

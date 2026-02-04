@@ -8,15 +8,14 @@ import List from "@editorjs/list";
 import ImageTool from "@editorjs/image";
 import Quote from "@editorjs/quote";
 import CodeTool from "@editorjs/code";
-import { Sidebar } from "../sidebar";
-import { uploadCompressedImage } from "../../function/uplaodimage";
-import { url_recrutement_image, url_sendemail } from "../../data/data";
-import { send, update } from "../../function/Axios";
-import Delimiter from '@editorjs/delimiter';
-export default function SeeModelEmail({close,setData,data, changeValueAfterUpdate }) {
- 
 
+import { uploadCompressedImage } from "../../../function/uplaodimage";
+
+import {  url_recrutement, url_recrutement_image, url_sendemail } from "../../../data/data";
+import Delimiter from '@editorjs/delimiter';
+export default function UpdateModelEmailSendConvocation({close,value,changeModelEmailForThisConvocation }) {
     const editorRef = useRef(null);
+    const [data,setData]=useState(value);
     const handleUpload = async (file) => {
             try {
                 const fileName = await uploadCompressedImage(file);
@@ -26,8 +25,8 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
                 console.error(err.message);
             }
     };
-    const save = async()=>{
-        changeValueAfterUpdate();
+    const save = async()=>{  
+        changeModelEmailForThisConvocation(data);
         close(false);
     }
   const handlerVariable = (name, value,setFunction) => {
@@ -36,11 +35,19 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
             [name]: value,
         }));
   };
+  const [isHiddenInfo,setIsHiddenInfo]=useState(false);
+
   useEffect(() => {
      const editor = new EditorJS({
         holder: "editorjs",
         placeholder: "Titre de l'email",
-        data: data.content,
+        data: data.content 
+          ? typeof data.content =="string" ? JSON.parse(data.content) : data.content
+          : {
+              time: Date.now(),
+              blocks: [],
+              version: "2.28.2"
+        },
         tools: {
           header: Header,
           paragraph: {
@@ -76,7 +83,6 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
           handlerVariable("content", savedData,setData);
         },
       });
-    console.log(editor);
     editorRef.current = editor;
    return () => {
       const destroyEditor = async () => {
@@ -94,12 +100,16 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
     };
   }, []);
   return (
-    <div class="background_transparent_popup p-10">
-        <div className="max-w-7xl mx-auto m-10 bg-white p-10 h-screen  overflow-y-auto">
+    
+    <div class="background_transparent_popup p-10 ">
+        <div className="max-w-10xl mx-auto m-10 bg-white p-10 h-screen  overflow-y-auto">
             {/* filtre */}
-            <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold text-gray-800">Construire votre model d'email
+            <div class="p-4 mb-2 bg-white border-b border-gray-200 sticky top-0 z-50 pink ">
+                <div class="flex items-center justify-between gap-2">
+                    <h2 class=" flex gap-2 text-xl font-semibold text-gray-800">Construire votre model de {data.name} 
+                        <button className="flex justify-center items-center bg-red-300 w-10 h-10 rounded-full " onClick={()=>(setIsHiddenInfo(!isHiddenInfo))}>
+                            <i class="fa-solid fa-info"></i>
+                        </button>
                         {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                     </h2>
                     <div class="flex items-center space-x-3">
@@ -113,6 +123,14 @@ export default function SeeModelEmail({close,setData,data, changeValueAfterUpdat
                         </div>
                     </div>
                 </div>
+                <div className={`w-200 py-2 text-red-400 ${isHiddenInfo==true ? "hidden": ""}`}>
+                    Vous devez modifier le modèle d’e-mail général avant de modifier les e-mails individuels,
+
+                    car les modèles individuels que vous avez modifiés précédemment ne seront pas pris en compte.
+                </div>
+                
+                <div className="py-2" dangerouslySetInnerHTML={{ __html: data.parameter_hint }} />
+
             </div>
            
             <div  className="max-w-18xl border-1 border-gray-200  bg-white py-10 text-left break-words" >

@@ -3,7 +3,7 @@ import { url_front } from "../../../data/data";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "../../../function/selectSimple";
-import { dateToLetters } from "../../../function/Date";
+
 
 export default function CardForwardLink({_url,endpoint,closePopup,parametres,title}){
     const close =()=>{

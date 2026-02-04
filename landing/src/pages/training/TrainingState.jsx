@@ -10,13 +10,11 @@ import CardForwardLink from "../../components/card/popup/CardForwardLink";
 import ListParticipantInFormation from "./ListParticipantInFormation";
 
 export default function TrainingState({value,close}){
-    console.log("trainer state ",value)
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
     
     const [showAddsession,setShowAddsession]=useState(false);
     const [showUpdatesession,setShowUpdatesession]=useState(false);
-
 
     const [participant,setParticipant]=useState([]); 
     const [themes,setThemes]=useState(null); 

@@ -69,7 +69,6 @@ export default function Validation(){
     useEffect(() => {
             loadData();
         }, [loadData]);
-
       return(
         <>
         {closeAddTraining ? <CardAddTrainer close={setCloseAddTraining}  /> :  seeTrainingListe  ? <TrainingState  close={setSeeTrainingListe} value={valueState} />:<>
