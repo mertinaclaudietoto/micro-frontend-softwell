@@ -418,6 +418,10 @@ export const couleurs700 = {
   pink: "bg-pink-700",
   rose: "bg-rose-700",
 };
+
+export const betweenBackground = (index)=>{
+    return textbackground[index%16];
+}
 export const textbackground = { 
   0: "bg-purple-100 text-purple-800",
   1: "bg-red-100 text-red-800",
@@ -442,8 +446,18 @@ export const textmandatory = {
   2: "bg-green-100 text-green-800",
   0: "bg-gray-100 text-gray-800",
 };
-
-
+export const COLORS = [
+  "#8884d8", // violet
+  "#82ca9d", // vert
+  "#ffc658", // jaune
+  "#ff8042", // orange
+  "#0088FE", // bleu
+  "#00C49F", // turquoise
+  "#FFBB28", // or
+  "#FF4444", // rouge
+  "#A28FD0", // lavande
+  "#4CAF50"  // vert foncé
+];
 
 export const profileSummaryCards = [
   { icone: "fas fa-user-tie", name: "Manager", nbr: 12, color: "blue" },
@@ -1177,8 +1191,11 @@ export   const  datasidebar =
                     {label :"Formation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null,acces:"validation"},
                     {label :"Question post formation",icone : "fa-solid fa-clipboard-question",actif:false,link:"/question-post-formation-entreprise",subItems:null,acces:"validation"},
                     {label :"Models Email",icone : "fa fa-paper-plane",actif:false,link:"/training-modelemail",subItems:null,acces:"validation"},
-
-
+                    {label :"Statistique",icone : "fa-solid fa-chart-simple",actif:false,link:"#",acces:"infoselectionrecruitment",
+                      subItems:[
+                          {label :"Cout",actif:false,link:"/stat-cost"},
+                      ]
+                    },
                 ],
             parametre:[
                 {label :"Profile",icone : "fa-solid fa-user",actif:false,link:"/access-profile",subItems:null,acces:"profile"},
@@ -1193,7 +1210,6 @@ export   const  datasidebar =
                 {label :"Liste des candidats inscrits",icone : "fa fa-address-book",actif:false,link:"/listecandidate",subItems:null,acces:"listcandidat"},
                 {label :"Model Email",icone : "fa fa-paper-plane",actif:false,link:"/email",subItems:null,acces:"alldemande"},
                 {label :"info generale",icone : "fas fa-clipboard-check",actif:false,link:"#",acces:"infoselectionrecruitment",
-              
                     subItems:[
                         {label :"Certification",actif:false,link:"/crud-certification"},
                         {label :"Diplome",actif:false,link:"/crud-diplome"},

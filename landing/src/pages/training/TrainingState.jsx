@@ -8,13 +8,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardForwardLink from "../../components/card/popup/CardForwardLink";
 import ListParticipantInFormation from "./ListParticipantInFormation";
+import { Invoice } from ".";
 
 export default function TrainingState({value,close}){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-    
     const [showAddsession,setShowAddsession]=useState(false);
     const [showUpdatesession,setShowUpdatesession]=useState(false);
+    const [showInvoice,setShowInvoice]=useState(false);
 
     const [participant,setParticipant]=useState([]); 
     const [themes,setThemes]=useState(null); 
@@ -69,9 +70,11 @@ export default function TrainingState({value,close}){
     return(
         <>
         { showLink ? <CardForwardLink _url={url_front} endpoint={"presence"} closePopup={setShowLink}  parametres={parametres} daysession={daysession} title={`Partagez le lien afin de valider la présence du ${dateToLetters(daysession)}`}/> :<></>}
-        { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession>    
-        : showUpdatesession ? <CardUpdateSession  upValue={updateValue} close={setShowUpdatesession} />  :
+        { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? 
+        <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession>   : 
+        showUpdatesession ? <CardUpdateSession  upValue={updateValue} close={setShowUpdatesession} />  :
         showParticipants ? <ListParticipantInFormation value={value} close={setShowParticipants} /> :
+        showInvoice ? <Invoice value={value} close={setShowInvoice}/> :
         <>
          <div class="flex">
             <Sidebar/>
@@ -108,6 +111,7 @@ export default function TrainingState({value,close}){
                                         <th class="tr-thead text-xl font-bold">{value?.id}</th>
                                         <th class="tr-thead text-xl">{value?.themeName}</th>
                                         <th class="tr-thead text-xl">{value?.adminName} {value?.adminFirstname}</th>
+                                        <th class="text-softbleu" onClick={()=>{setShowInvoice(true)}}>Facture</th>
                                         <th className="text-softbleu" onClick={()=>{setShowParticipants(true)}}>Participant</th>
                                         <th  className="text-softbleu" onClick={()=>close(false)}>Retour</th>
                                     </tr>

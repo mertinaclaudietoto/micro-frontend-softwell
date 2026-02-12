@@ -143,7 +143,7 @@ export default function CardAddSession({close,idvalidation}){
         }
     }
     return (
-        <div class="flex h-screen  "> 
+        <div class="flex h-screen"> 
             <Sidebar></Sidebar>
             <main class="flex-1 bg-white ">    
                 <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">

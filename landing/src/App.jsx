@@ -50,6 +50,7 @@ import StatManager from './pages/recruitment/StepStat';
 import AddNewModelEmail from './components/email/AddNewModelEmail';
 import EmailModel from './pages/email/EmailModel';
 import { url_recrutement } from './data/data';
+import Cost from './pages/training/statistique/Cost';
 
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
@@ -176,6 +177,8 @@ function App() {
         <Route path="/test-postformation-e/:encryptParametres" element={ <ResponsePostFormationEntreprise/>   } />
 
         <Route path="/question-post-formation-entreprise" element={ <QuestionE/>   } />
+        <Route path="/stat-cost" element={ <Cost/>   } />
+
 
 
       </Routes>

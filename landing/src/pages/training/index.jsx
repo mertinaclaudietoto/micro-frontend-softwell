@@ -13,6 +13,8 @@ export { default as QuestionE } from "./QuestionE";
 export { default as ModelEmail } from "./ModelEmail";
 export { default as SendQuestionPostFormation } from "./SendQuestionPostFormation";
 export { default as SendEmailCertification  } from "./SendEmailCertification";
+export { default as Invoice  } from "./Invoice";
+
 
 
 

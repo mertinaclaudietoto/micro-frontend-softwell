@@ -8,6 +8,7 @@ import { useState } from "react";
 import Select from "../../function/selectSimple";
 import Add from "./Add";
 import Update from "./Update";
+
 export default function CRUDIdName({entityName,Name,urlApplication}){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");

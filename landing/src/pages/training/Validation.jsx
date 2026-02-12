@@ -1,8 +1,19 @@
 
+/**
+ * Page  Liste
+ *
+ * Description courte : ce que fait le composant.
+ *
+ * @component
+ * @param {object} props - Les props du composant
+ * @param {string} props.title - Titre affiché
+ * @param {boolean} [props.isActive=false] - Indique si le composant est actif
+ * @returns {JSX.Element} Composant React à afficher
+ */
+
 import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
-import { Link } from "react-router-dom";
-import { CardAddTrainer, Filter,Sidebar,CardAddTraining } from "../../components";
+import { CardAddTrainer,Sidebar} from "../../components";
 import { url, textbackground, getcolorstate } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
@@ -17,7 +28,6 @@ export default function Validation(){
     const [search ,setSearch]=useState("");
     const [listTheme ,setListTheme]=useState([]);
     const [idtheme ,setIdteme]=useState(null);
-    const [manageTraining,setManageTraining]=useState(null);
     const [seeTrainingListe,setSeeTrainingListe]=useState(false);
     const showTraining=(value)=>{
         setSeeTrainingListe(true);
