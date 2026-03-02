@@ -9,8 +9,7 @@ import { deletev, getData,  update } from "../../../function/Axios";
 import Select from "../../../function/selectSimple";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function UpdatePost({close,id}){
-    console.log("deijdeijdie")
+export default function UpdatePost({close,id,valueUp}){
     const [value, setValue] = useState({
         nom: "Développeur Full Stack",
         goals: "Développer et maintenir des applications web performantes",
@@ -24,24 +23,24 @@ export default function UpdatePost({close,id}){
         diplomes: [],
         certifications: [],
 });
-    const [nameLocalisation,setNameLocalisation] =useState(null);
-    const [nameContrat,setContrat] =useState(null);
-    const handlerChangeTable = (name, value, index = null) => {
-        setValue((previous) => {
-            const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
-            if (index !== null) {
-                const newArray = currentArray.filter((_, i) => i !== index);
-                return {
-                    ...previous,
-                    [name]: newArray,
-                };
-            }
-         return {
+const [nameLocalisation,setNameLocalisation] =useState(null);
+const [nameContrat,setContrat] =useState(null);
+const handlerChangeTable = (name, value, index = null) => {
+    setValue((previous) => {
+        const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
+        if (index !== null) {
+            const newArray = currentArray.filter((_, i) => i !== index);
+            return {
                 ...previous,
-                [name]: [...currentArray, value],
+                [name]: newArray,
             };
-        });
-    };
+        }
+        return {
+            ...previous,
+            [name]: [...currentArray, value],
+        };
+    });
+};
 
      const [listYearOfexperience,setListYearOfexperience]=useState([])
     const getYearOfexperience = async ()=>{
@@ -271,8 +270,20 @@ export default function UpdatePost({close,id}){
             toast.error("Problème serveur, réessayez plus tard !");
         }
     }
-    
-     useEffect(() => {
+    const [listPoste,setListPoste]=useState();
+    const getListPoste = async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `tpostes`
+        );
+        if(datalistThemes.data!=null)
+            setListPoste(datalistThemes.data)
+    }
+    const handlerListPost =(opt) =>{
+        if(opt !=null){
+            handlerVariable("idpostsage", opt.id,setValue);
+        }
+    }
+    useEffect(() => {
         getListContrat();
         getListLocalisation();
         getListMandatory();
@@ -282,7 +293,9 @@ export default function UpdatePost({close,id}){
         getListLanguage();
         getListCertification();
         getPostById();
-        }, []);
+        getListPoste();
+
+    }, []);
     return (
         <>
         <div class="fixed z-100 inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center">
@@ -305,6 +318,15 @@ export default function UpdatePost({close,id}){
 
                 <div class="space-y-6">
 
+                    <div class="my-2">
+                        <div class="w-100">
+                            <label className="label-formulaire mt-2 mb-1">Post sage</label>
+                            <Select options={listPoste} placeholder={
+                                                            listPoste?.find(p => p.idPoste === valueUp.idpostsage)?.Intitule || ""
+                                                        } 
+                                    onChange={handlerListPost} nameIteme="intitule"  value={false}/>
+                        </div>
+                    </div>
                 <div className="my-2">
                     <label className=" label-formulaire">Nom</label>
                     <input 
@@ -339,11 +361,11 @@ export default function UpdatePost({close,id}){
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2 mb-8">
                     <div>
                         <label className="label-formulaire mt-2 mb-1">Contrat</label>
-                        <Select options={listContrat} onChange={handlerContrat}  placeholder={nameLocalisation?.name}/>
+                        <Select options={listContrat} onChange={handlerContrat}  placeholder={ nameContrat?.name }/>
                     </div>
                     <div>
                         <label className=" mt-2 mb-1 label-formulaire">Localisation</label>
-                        <Select options={listLocalisation} onChange={handlerLocalisation} placeholder={nameContrat?.name} />
+                        <Select options={listLocalisation} onChange={handlerLocalisation} placeholder={nameLocalisation?.name} />
                     </div>
                 </div>
                 <label className="label-formulaire mt-2 mb-1">Anne d'experience entre </label>

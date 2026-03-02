@@ -11,12 +11,10 @@ export default function Wish1(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-
     const [data,setData]=useState([]); 
     const [dataGroup,setDataGroup]=useState([]); 
     const [close,setClose]=useState(false); 
     const [closeAddTraining,setCloseAddTraining]=useState(false); 
-   
     const [manageTraining,setManageTraining]=useState(null);
     const [seeTrainingListe,setSeeTrainingListe]=useState(false);
     const showTraining=(value)=>{
@@ -35,15 +33,13 @@ export default function Wish1(){
         );
         console.log("page",nbrligne,Math.ceil(nbrligne / nbrSize))
     }
-    
-
     const loadData = useCallback(async () => {
         // console.log(idtheme)
         const data = await getData(
             url + `v_wish/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
         );
         setData( data.data);;
-    }, [numpage]); // dépendances de loadData
+    }, [numpage,closeAddTraining,seeTrainingListe]); // dépendances de loadData
 
     const getNbrLigne = async ()=>{
         const data = await getData(url + `v_wish/count`);
@@ -62,8 +58,6 @@ export default function Wish1(){
     useEffect(() => {
             loadData();
         }, [loadData]);
-
-
       return(
         <>
             {closeAddTraining?  <CardAddTraining close={setCloseAddTraining}  />:
@@ -89,16 +83,18 @@ export default function Wish1(){
                                                 <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
                                                     total
                                                 </button>
-                                                {accesObj && (accesObj?.wish?.suppression == null || accesObj?.wish?.suppression == undefined)  ? null : (
+                                                {accesObj && (accesObj?.wish?.faire_un_souhait == null || accesObj?.wish?.faire_un_souhait == undefined)  ? null : (
                                                     <button class="btn-neutre-gray" onClick={()=>{setClose(true)}}>
-                                                        souhait
+                                                        Faire une souhait
                                                     </button>
                                                 )}
-                                                {/* <button class="btn-neutre-gray" onClick={()=>{setCloseAddTraining(true)}}>
-                                                    validation
-                                                </button> */}
+                                                {accesObj && (accesObj?.wish?.validation_formation == null || accesObj?.wish?.validation_formation == undefined)  ? null : (
+                                                    <button class="btn-neutre-gray" onClick={()=>{setCloseAddTraining(true)}}>
+                                                        Validation d'une formation
+                                                    </button>
+                                                )}
                                                 <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
-                                                <i className="fas fa-arrow-left"></i>
+                                                    <i className="fas fa-arrow-left"></i>
                                                 </button>
                                                 <button className="btn-neutre-gray" onClick={()=>pagination(numpage+1)} title="Suivant">
                                                     <i className="fas fa-arrow-right"></i>
@@ -114,8 +110,8 @@ export default function Wish1(){
                                     <table class="w-full">
                                         <thead class="bg-gray-50 border-b border-gray-200">
                                             <tr>
-                                                <th class="tr-thead">Theme</th>
-                                                <th class="tr-thead">Nombre Souhaiter</th>
+                                                <th class="tr-thead">Thème</th>
+                                                <th class="tr-thead flex justify-center items-center">Nombre souhaits</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -124,7 +120,7 @@ export default function Wish1(){
                                                 <>
                                                 <tr index={index} className={value.active==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                                     <td class="px-6 py-4 text-sm text-gray-500">{value.nameTheme}</td>
-                                                    <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.nbr} </span>
+                                                    <td class="px-6 py-4 flex justify-center items-center"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.nbr} </span>
                                                     </td>
                                                     <td class="px-6 py-4 text-sm text-gray-500">
                                                         <button onClick={()=>{showTraining(value)}}>

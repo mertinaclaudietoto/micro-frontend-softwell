@@ -25,9 +25,12 @@ export default function ListParticipantInFormation({value,close}){
     }
     const [nbrSendedEmail,setNbrSendedEmail]=useState([]); 
     const getTotalSend = async ()=>{
-        const data = await getData(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate${value.id}`);
+        const data = await getData(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate=${value.id}`);
+        console.log(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate=${value.id}`);
         if(data.data!=null){
             setNbrSendedEmail(data.data);
+            console.log("validation .....")
+            console.log(data.data);
         }   
     }
     const [showLink,setShowLink]=useState();
@@ -38,6 +41,7 @@ export default function ListParticipantInFormation({value,close}){
     const [seeSendCertification,setSeeSendCertification]=useState(false);
     const [daysession,setDaysession]=useState(null);
     const seeEmail =(index)=>{
+        console.log(":deuhdeuhduehduehude "+index)
             switch(index){
                 case 1:
                     setSeeSendConvocation(true);
@@ -85,23 +89,25 @@ export default function ListParticipantInFormation({value,close}){
                                 </thead>
                             </table>
                             <div className="pt-2">
-                            <table class="max-w-7xl mx-auto py-10 ">
-                                <thead class="">
-                                    <tr>
-                                        {nbrSendedEmail.map((value,index)=>(
-                                             <th class="tr-thead text-xl" key={index}>
-                                                <span onClick={()=>{
-                                                    seeEmail(true);
-                                                }}
-                                                class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{value.emailenvoi}/{participant.length}  {value.name}</span> 
-                                            </th>
-                                        )) }
-                                    </tr>
-                                </thead>
-                            </table>
+                                {/* correction de cette partie */}
+                                { 
+                                    accesObj && (accesObj?.validation?.envois_email_session == null || accesObj?.validation?.envois_email_session == undefined) ?<></>:
+                                    <table class="max-w-7xl mx-auto py-10 ">
+                                        <thead class="">
+                                            <tr>
+                                                {nbrSendedEmail.map((value,index)=>(
+                                                    <th class="tr-thead text-xl" key={index}>
+                                                        <button onClick={()=>{
+                                                            seeEmail(index+1);
+                                                        }}
+                                                        class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{value.emailenvoi}/{participant.length}  {value.name}</button> 
+                                                    </th>
+                                                )) }
+                                            </tr>
+                                        </thead>
+                                    </table> 
+                                }
                             </div>
-                            
-                          
                             <div className="grid grid-cols-1 px-8 justify-center items-center ">
                                 <div class="overflow-x-auto  mt-2 ">
                                     {/* <h3 class="font-semibold text-gray-800 mb-1">Listes session</h3> */}

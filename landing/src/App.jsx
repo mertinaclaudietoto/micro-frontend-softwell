@@ -13,7 +13,6 @@ import {
   ListRequeste,
   Statistique,
   DashboardManager,
-  CriterienStaff,
   Request,
   ProfileAccess,
   Setaccess,
@@ -33,6 +32,7 @@ import {
   ResponsePostFormationEntreprise,
   ModelEmail
 } from "./pages";
+import CriterienStaff from './pages/recruitment/CriterienStaff';
 import {CardLogin, Tablesearch} from "./components"
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "./ThemeSwitcher";
@@ -51,6 +51,14 @@ import AddNewModelEmail from './components/email/AddNewModelEmail';
 import EmailModel from './pages/email/EmailModel';
 import { url_recrutement } from './data/data';
 import Cost from './pages/training/statistique/Cost';
+import Budget from './pages/training/statistique/Budget';
+import Status from './pages/training/statistique/Status';
+import CandidateStat from './pages/recruitment/statistique/CandidateStat';
+import PosteSagePai from './pages/recruitment/Postesagepai';
+import PlateformeRegistration from './pages/candidate/PlateformeRegistration';
+import PlateformeApply from './pages/candidate/PlateformeApply';
+import PostStat from './pages/recruitment/statistique/PostStat';
+import CVCandidateGeneralLink from './pages/manager/sous/CVCandidateGeneralLink';
 
 function App() {
   const [theme, setTheme] = useState("light"); // "light" ou "dark"
@@ -140,6 +148,7 @@ function App() {
         <Route path="/training-modelemail" element={ <ProtectedRoute><ModelEmail /> </ProtectedRoute>} />
 
         <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} urlApplication={url_recrutement} /> } />
+        <Route path="/crud-plateforme" element={ <CRUDIdName key={1} entityName={"plateforme"} Name={"Plateforme"} urlApplication={url_recrutement} /> } />
         <Route path="/crud-localisation" element={ <CRUDIdName key={2} entityName={"localisation"} Name={"Localisation"} urlApplication={url_recrutement} /> } />
         <Route path="/crud-yearofexperience" element={ <CRUDIdName key={3} entityName={"yearsofexperience"} Name={"Annee d'experience"}  urlApplication={url_recrutement}/> } />
         <Route path="/crud-certification" element={ <CRUDIdName key={4} entityName={"certification"} Name={"Certification"} urlApplication={url_recrutement} /> } />
@@ -166,8 +175,9 @@ function App() {
         <Route path="/infocandidate/:id/:idrequest/:idpost/:rang/:idstep/:email" element={<CVCandidate />} />
         <Route path="/infocandidateGenerale/:id" element={<CVCandidateGeneral />} />
 
+        <Route path="/infocandidateGeneralelink/:encryptParametres" element={<CVCandidateGeneralLink />} />
         <Route path="/stat-manager/:idrequest" element={<StatManager />} />
-        <Route path="/postulants/:idrequest/:idpost/:idstep/:rang/:email" element={ <ProtectedRoute><NoteCandidate /> </ProtectedRoute>} />
+        {/* <Route path="/postulants/:idrequest/:idpost/:idstep/:rang/:email" element={ <ProtectedRoute><NoteCandidate /> </ProtectedRoute>} /> */}
         {/* gestion email */}
         <Route path="/email" element={ <EmailModel/>   } />
         <Route path="/presence/:encryptParametres" element={ <Presence/>   } />
@@ -178,6 +188,18 @@ function App() {
 
         <Route path="/question-post-formation-entreprise" element={ <QuestionE/>   } />
         <Route path="/stat-cost" element={ <Cost/>   } />
+        <Route path="/stat-budget" element={ <Budget/>   } />
+        <Route path="/stat-status" element={ <Status/>   } />
+        {/* statistique  recruitement */}
+        <Route path="/stat-candidate" element={ <CandidateStat/>   } />
+        <Route path="/stat-post" element={ <PostStat/>   } />
+
+
+        <Route path="/rh-postsagepai" element={ <PosteSagePai/>   } />
+
+        {/* lien recrutement par plateforme */}
+        <Route path="/apply-registration/:encryptParametres" element={ <PlateformeRegistration/>   } />
+        <Route path="/apply-by-plateforme/:encryptParametres" element={ <PlateformeApply/>   } />
 
 
 

@@ -34,7 +34,6 @@ export default function CardWish({close}){
                     )
         }
     }
-
     const getListThemes = async ()=>{
             const datalistThemes =  await getData(
                 url + `training-themes`
@@ -53,11 +52,11 @@ export default function CardWish({close}){
         const allowed = ["Id", "Idtheme", "IdWisher", "Idbeneficiary", "active", "date"];
 
         const cleaned = listWish.map(w =>
-        Object.fromEntries(
-            Object.entries(w).filter(([key]) => allowed.includes(key))
-        )
+            Object.fromEntries(
+                Object.entries(w).filter(([key]) => allowed.includes(key))
+            )
         );
-        console.log(cleaned);
+
         const value = await send(listWish,url + "wish")
         if (value == true) {
             toast.success("Données insérées avec succès !");
@@ -77,7 +76,7 @@ export default function CardWish({close}){
         <>
         <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white  p-10 rounded-card  relative min-w-md">
-                <h3 className="font-semibold text-gray-700">Souhait formation</h3>
+                <h3 className="font-semibold text-gray-700">Faire une souhait</h3>
                 <div class="absolute top-6 right-6">
                     <span class="text-gray-800 text-lg font-semibold">
                     <button class="" onClick={()=>(close(false))}>
@@ -112,6 +111,7 @@ export default function CardWish({close}){
                                     <tr>
                                         <th class="tr-thead ">Matricule</th>
                                         <th class="tr-thead">Nom</th>
+                                        <th class="tr-thead ">Prenom</th>
                                         <th class="tr-thead "></th>
                                     </tr>
                                 </thead>

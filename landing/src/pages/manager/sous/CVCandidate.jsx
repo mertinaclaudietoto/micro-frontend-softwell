@@ -9,12 +9,11 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 // modifi
-export default function CVCandidate(){
+export default function CVCandidate({id ,idrequest,idpost,rang,idstep,email,close}){
     const [experience ,setExperience]=useState('1');
     const [showSendEmail ,setShowEmail]=useState(false);
-
     const [note ,setNote]=useState(null);
-    const { id ,idrequest,idpost,rang,idstep,email} = useParams();
+    // const { id ,idrequest,idpost,rang,idstep,email} = useParams();
     const [data, setData] = useState({
     photo:null,
     name: null,
@@ -58,6 +57,7 @@ export default function CVCandidate(){
         );
         if (data == true) {
             toast.success("Données insérées avec succès !");
+            close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
         }
@@ -175,9 +175,12 @@ export default function CVCandidate(){
                             </div>
                         </div>
                         <div className="w-1/3 relative" >
-                            <Link to={`/postulants/${idrequest}/${idpost}/${idstep}/${rang}/${email}`} className="btn-neutre-gray absolute top-2 right-2 "  title="Suivant">
-                                retour
-                            </Link>
+                            {/* <Link to={`/postulants/${idrequest}/${idpost}/${idstep}/${rang}/${email}`} className="btn-neutre-gray absolute top-2 right-2 "  title="Suivant">
+                               
+                            </Link> */}
+                            <button className="btn-neutre-gray absolute top-2 right-2 " onClick={close(false)}>
+                                 retour
+                            </button>
                             <div class="bg-white m-2 p-6 border-bottom">
                                 <div class="grid grid-cols-1  gap-6">
                                     <p class="text-sm-gray">Diplomes</p>

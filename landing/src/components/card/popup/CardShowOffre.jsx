@@ -1,4 +1,4 @@
-import { url_recrutement } from "../../../data/data";
+import { url_front, url_recrutement } from "../../../data/data";
 import { _login, getData, send } from "../../../function/Axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -14,7 +14,9 @@ export default function CardShowOffre({idpost,id,close}){
     const recruitmentCandidate = {
         id: null,                                
         postId: idpost,     
-        RequestId:id,                         
+        RequestId:id,    
+        idplateforme:1,
+        link:url_front+"infocandidateGeneralelink/"+btoa(sessionStorage.getItem("userId")),                     
         candidatId: sessionStorage.getItem("userId")
             ? parseInt(sessionStorage.getItem("userId"), 10)
             : null,                               // int
@@ -158,13 +160,6 @@ export default function CardShowOffre({idpost,id,close}){
                             Postuler
                         </button>
                     </div>
-                  
-                
-                {/* <div className="flex flex-row items-end justify-end pt-4 ">
-                    <IconeWithDescription></IconeWithDescription>
-                    <IconeWithDescription></IconeWithDescription>
-                    <IconeWithDescription></IconeWithDescription>
-                </div> */}
             </div>
         </div>
     )

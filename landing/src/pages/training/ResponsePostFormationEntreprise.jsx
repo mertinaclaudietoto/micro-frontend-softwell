@@ -2,7 +2,6 @@ import React,{ useEffect, useState } from "react";
 import { accessinfo, listProfile, url, widthClasses } from "../../data/data";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
 // import { handlerVariable } from "../../function/utils";
 import { IconeAccess, Sidebar } from "../../components";

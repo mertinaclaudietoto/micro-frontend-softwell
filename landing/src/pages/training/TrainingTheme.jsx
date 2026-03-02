@@ -1,16 +1,14 @@
 
 import { useEffect,useCallback } from "react";
-import {  listsmallformation, url } from "../../data/data"
+import {  url } from "../../data/data"
 import {Filter,Sidebar,CardSmallTraining, CardDemandeTraining,CardAddTheme,CardUpdateTheme} from "../../components"
 import { useState } from "react"
 import { getData } from "../../function/Axios";
 export default function TrainingTheme(){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-
     const [close ,setClose]=useState(false);
     const [closeUpdate ,setCloseUpdate]=useState(false);
-
     const [valueUpdate ,setValueUpdate]=useState(null);
     const [search ,setSearch]=useState("");
     const [dataList,setData]=useState([]); //listsmallformation
@@ -68,7 +66,6 @@ export default function TrainingTheme(){
                                     <h2 class="text-xl font-semibold text-gray-800">Liste Themes
                                         <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                                     </h2>
-                                    
                                     <div class="flex items-center space-x-3">
                                         <div class="relative">
                                             <input type="text" placeholder="Search" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>setSearch(event.target.value)}/>
@@ -80,7 +77,6 @@ export default function TrainingTheme(){
                                             </button>
                                         
                                         </div>
-                                    
                                     
                                         <div className="flex space-x-2">
                                            {accesObj && (accesObj?.theme?.ajout == null || accesObj?.theme?.ajout == undefined) ? null : (
@@ -105,9 +101,7 @@ export default function TrainingTheme(){
                             <div class="overflow-x-auto  mt-2">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4  my-auto overflow-y-auto mx-auto bg-white p-2 ">
                                {dataList.map((value, index) => {
-                                
                                     const isModifiable = accesObj && (accesObj?.theme?.modification == null || accesObj?.theme?.modification == undefined) 
-
                                     return (
                                         <button
                                             key={index}

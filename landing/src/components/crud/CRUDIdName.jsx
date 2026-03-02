@@ -13,7 +13,7 @@ export default function CRUDIdName({entityName,Name,urlApplication}){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
-    const [nameE,setNameE]=useState(entityName);
+    const nameE=entityName;
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
     const [showUpdate ,setShowUpdate]=useState(false);
@@ -90,7 +90,6 @@ export default function CRUDIdName({entityName,Name,urlApplication}){
                                         <button onClick={()=>sendsearch()} >
                                             <span class="absolute right-3 top-2.5 text-xs text-gray-400 border border-gray-300 px-1.5 py-0.5 rounded">⌘K</span>
                                         </button>
-                                    
                                     </div>
                                     <div className="flex space-x-2">
                                         {/* {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (

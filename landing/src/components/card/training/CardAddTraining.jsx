@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatMoney } from "../../../function/utils";
 
+//ajout un formation a validee
 export default function CardAddTraining({close}){
     const [matricule,setMatricule]=useState(null);
     const [listTheme ,setListTheme]=useState([]);
@@ -142,7 +143,7 @@ export default function CardAddTraining({close}){
         const data = await send(value,url + "training-validate")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Formation validée avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -219,8 +220,7 @@ export default function CardAddTraining({close}){
                             </table>
                         </div>
                         <div id="tasksList" class="">
-                                <label className="block text-sm font-bold text-gray-700 mb-2">List Participant</label>
-
+                                <label className="block text-sm font-bold text-gray-700 mb-2">Liste des participants ayant fait une demande</label>
                                 <table class="w-full">
                                  <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>

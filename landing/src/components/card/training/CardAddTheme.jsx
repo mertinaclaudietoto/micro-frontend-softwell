@@ -4,37 +4,41 @@ import { TextState } from "../../state";
 import { getData, send } from "../../../function/Axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Select from "../../../function/selectSimple";
 
 export default function CardAddTheme({close}){
     const [theme,setTheme]=useState(themeM);
     const [trainingType,setTrainingType]=useState(trainingTypes);
     const [skill,setSkill]=useState("");
     const handlerChangeTable = (name, value, index = null) => {
-    setTheme((previous) => {
-        const currentString = previous[name] || "";
-        let currentArray = currentString
-            .split(",")
-            .map(s => s.trim())
-            .filter(s => s !== "");
-        if (index !== null) {
-            const newArray = currentArray.filter((_, i) => i !== index);
+        setTheme((previous) => {
+            const currentString = previous[name] || "";
+            let currentArray = currentString
+                .split(",")
+                .map(s => s.trim())
+                .filter(s => s !== "");
+            if (index !== null) {
+                const newArray = currentArray.filter((_, i) => i !== index);
 
+                return {
+                    ...previous,
+                    [name]: newArray.join(","),
+                };
+            }
+            const newArray = [...currentArray, value];
             return {
                 ...previous,
                 [name]: newArray.join(","),
             };
-        }
-        const newArray = [...currentArray, value];
-        return {
-            ...previous,
-            [name]: newArray.join(","),
-        };
-    });
+        });
 
         setSkill("");
     };
-
+    const handlerSelectTrainingType = (opt) => {
+        if (opt !== null) {
+            handlerVariable("idtypetraining", opt.id, setTheme);
+        }
+    };
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
             ...previous,
@@ -43,7 +47,6 @@ export default function CardAddTheme({close}){
     };
     const submit = async ()=>{
         const value = await send(theme,url + "training-themes")
-        console.log(value)
         if (value == true) {
             toast.success("Données insérées avec succès !");
             close(false);
@@ -52,11 +55,11 @@ export default function CardAddTheme({close}){
         }
     }
     useEffect(() => {
-    const loadData = async () => {
-        const data = await getData(url + "training-types");
-        if(data.data!=null)
-            setTrainingType(data.data);
-    };
+        const loadData = async () => {
+            const data = await getData(url + "training-types");
+            if(data.data!=null)
+                setTrainingType(data.data);
+        };
         loadData();
     }, []);
     const [index,setIndex]=useState(1);
@@ -92,14 +95,7 @@ export default function CardAddTheme({close}){
                     </div>
                 </div>
                 <label class="label-formulaire mt-4 mb-2">Type formation</label>
-                <div className="grid grid-cols-3 gap-3 mb-4">
-                    {trainingType.map((v,id)=>(
-                         <button index={id} class={"card-text-s-blue hover:bg-black-100"} onClick={()=>handlerVariable("idtypetraining",v.id,setTheme)}>
-                            <i className={`${v.icone} icone-size-s`}></i>
-                            <span>{v.name}</span>
-                        </button>
-                    ))}
-                </div>
+                <Select options={trainingType}  placeholder="type du formation " onChange={handlerSelectTrainingType} value={false} />
                 {/* why  */}
                 <div className="my-2">
                     <label class="label-formulaire">Qu’attendons-nous de cette formation ?</label>

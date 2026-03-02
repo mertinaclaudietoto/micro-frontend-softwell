@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 // SearchableSelect.jsx
 // Composant React (Tailwind) : select filtrable à chaque lettre
 
-export default function Select({ options = [], placeholder = "Rechercher...", onChange ,css , value= true}) {
+export default function Select({ options = [], placeholder = "Rechercher...", onChange ,css , value= true,nameIteme="name"}) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
@@ -11,7 +11,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
   const inputRef = useRef(null);
   const listRef = useRef(null);
   const filtered = options.filter((opt) =>
-    opt.name.toLowerCase().includes(query.trim().toLowerCase())
+    opt[nameIteme].toLowerCase().includes(query.trim().toLowerCase())
   );
   useEffect(() => {
     // reset highlight when filtered changes
@@ -71,7 +71,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
 
   function selectOption(opt) {
     setSelected(opt);
-    setQuery(opt.name);
+    setQuery(opt[nameIteme]);
     setOpen(false);
     if (onChange) onChange(opt);
   }
@@ -146,7 +146,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
                   />
                 )}
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">{opt.name}</span>
+                  <span className="text-sm font-medium">{opt[nameIteme]}</span>
                   {opt.sub && (
                     <span className="text-xs text-gray-500">{opt.sub}</span>
                   )}

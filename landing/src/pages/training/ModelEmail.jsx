@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function ModelEmail(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
-    // const accesObj = JSON.parse(acces);
+    const accesObj = JSON.parse(acces);
     const nameE="model_with_parameteres";
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
@@ -121,13 +121,19 @@ export default function ModelEmail(){
                                     <tr index={index} className={value.active==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.id}</span></td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.name}</td>
-                                        <td className="px-6 py-4 ">
+                                        {accesObj && (accesObj?.validation?.ajout_facture_session == null || accesObj?.validation?.ajout_facture_session == undefined) ?
+                                        <></>
+                                            :
+                                            <td className="px-6 py-4 ">
                                             <span
                                                 onClick={() =>  modification(value)}   // adapte selon ton code
                                             >
                                                 <i className="fas fa-edit text-gray-400"></i>
                                             </span>
-                                        </td>
+                                            </td>
+
+                                        }
+                                        
                                      
                                     </tr>
                                     </>

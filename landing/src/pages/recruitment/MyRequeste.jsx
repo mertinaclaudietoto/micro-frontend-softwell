@@ -83,7 +83,7 @@ export default function MyRequeste(){
                                     <thead class="bg-gray-50 border-b border-gray-200">
                                         <tr>
                                             <th class="tr-thead w-8">#</th>
-                                            <th class="tr-thead">Nom</th>
+                                            <th class="tr-thead">Nom des offres</th>
                                             <th class="tr-thead">Date demande</th>
                                             <th class="tr-thead">Date Changement Status</th>
                                             <th class="tr-thead">Status</th>

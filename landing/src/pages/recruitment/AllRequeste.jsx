@@ -8,6 +8,8 @@ import { Sidebar } from "../../components";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StepStat from "./StepStat";
+import AddTimeRecruitment from "../../components/card/criterien/AddTimeRecruitment";
+import CardForwardLinkPostulation from "../../components/card/popup/CardForwardLinkPostulation";
 export default function AllRequeste(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
@@ -19,8 +21,7 @@ export default function AllRequeste(){
     const nbrSize=10;
     const [nbrligne ,setNbrLigne]=useState(0)
     const [numpage,setNumpage]=useState(1);
-    
-
+    const [showDate,setShowDate ]=useState(false);
     const pagination =(value)=>{
         setNumpage(
         value < 1
@@ -30,14 +31,10 @@ export default function AllRequeste(){
             : value
         );
     }
-
-
     const changeState = async (value,id)=>{
-        // console.log(value)
         value.statusSetByUserId=sessionStorage.getItem("userId");
         value.statusId=id;
         value.statusSetDate= new Date().toISOString().split('T')[0];
-        console.log(value);
         const data = await update(value,url_recrutement + "recruitment_request")
         // console.log(value)
         if (data == true) {
@@ -50,7 +47,6 @@ export default function AllRequeste(){
         }
     }
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
         );
@@ -60,12 +56,26 @@ export default function AllRequeste(){
     const sendsearch = async()=>{
         setNumpage(1);
     }
+    const [upDateRecruitement,setUpDateRecruitement ] =useState(null);
+    const changeDateRecruitement = (value) =>{
+        setUpDateRecruitement(value);
+        setShowDate(true);
+    }
+    // lien de recrutement 
+    const [getLinkRecrutement,setGetLinkRecrutement] = useState(false);
+    const [paramIdRequestAndIdpost ,setParamIdRequestionAndIdpost] = useState(false);
+    const showLinkRecrutementPop = (idrequest,idpost)=>{
+        setGetLinkRecrutement(true);
+        setParamIdRequestionAndIdpost(idrequest+"|"+idpost);
+    }   
     useEffect(() => {
             loadData();
-        }, [loadData]);
+    }, [loadData]);
       return(
         <>
-        { showStep ? <StepStat  value={post} close={setShowStep} />:  
+        { showDate ? <AddTimeRecruitment valueUp={upDateRecruitement} close={setShowDate} /> : <></>}
+        { getLinkRecrutement ?  <CardForwardLinkPostulation closePopup={setGetLinkRecrutement} parametres={paramIdRequestAndIdpost} /> : <></>}
+        {   showStep ? <StepStat  value={post} close={setShowStep} />:  
             <div class="flex h-screen ">
                 <Sidebar/>
                 <main class="flex-1 ">    
@@ -99,9 +109,13 @@ export default function AllRequeste(){
                                         <th class="tr-thead">Post</th>
                                         <th class="tr-thead">Date demande</th>
                                         <th class="tr-thead">Date Changement Status</th>
+                                        <th class="tr-thead">Date de l'offre</th>
+                                        <th class="tr-thead"></th>
                                         <th class="tr-thead">Status</th>
-                                        <th class="tr-thead">Volue</th>
+                                        <th class="tr-thead">Value</th>
                                         <th class="tr-thead">Postulants</th>
+                                        <th class="tr-thead">Lien</th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -113,6 +127,14 @@ export default function AllRequeste(){
                                             
                                             <td class="px-6 py-4 text-sm text-gray-500">{value.requestDate.split('T')[0]}</td>
                                             <td class="px-6 py-4 text-sm text-gray-500">{value.statusSetDate?.split('T')[0]}</td>
+                                            {/* showpop */}
+                                            <td class="px-6 py-4 text-sm text-gray-500">{ value.datestart?.split('T')[0] }   {value.dateend?.split('T')[0]}  </td>
+                                            <td class="px-6 py-4 text-sm text-gray-500">
+                                                <button className="btn-neutre-gray" onClick={()=>changeDateRecruitement(value)}>
+                                                        <i class="fa-solid fa-pen text-gray-400"></i>
+                                                </button>
+                                            </td>
+
                                             {value.statusId ==null ?
                                                 <>
                                                     <td class="px-6 py-4"><button
@@ -128,15 +150,15 @@ export default function AllRequeste(){
                                             }
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.numberOfCandidates}</span></td>
                                             <td className="px-6 py-4">
-                                                {/* <Link to={`/postulants/${value.id}/${value.postId}`}>
-                                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>
-                                                    {value.nbrpostulant}
-                                                    </span>
-                                                </Link> */}
                                                 <button onClick={()=>{setPost(value);  setShowStep(true); }}>
                                                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>
                                                     {value.nbrpostulant}
                                                     </span>
+                                                </button>
+                                            </td>
+                                             <td className="px-6 py-4" >
+                                                <button className="btn-neutre-gray" onClick={()=>{showLinkRecrutementPop(value.requesterId,value.postId) }}>
+                                                    <i class="fa-solid fa-link text-gray-400"></i>
                                                 </button>
                                             </td>
                                         </tr>

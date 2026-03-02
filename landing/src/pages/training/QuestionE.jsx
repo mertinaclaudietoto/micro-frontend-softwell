@@ -10,7 +10,8 @@ import { getData,  update } from "../../function/Axios";
 import { dateToLetters } from "../../function/Date";
 import Select from "../../function/selectSimple";
 export default function QuestionE(){
-   
+   const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
     const [question,setQuestion]=useState({
         question:null,
         ismultiple:0,
@@ -82,21 +83,40 @@ export default function QuestionE(){
         {id:"checkbox",name:"choix multiple"},
         {id: "text", name: "réponse libre"},
     ]
-    const submit = async ()=>{
-        const  valueSend = {
-            id:id,
-            questionlist:JSON.stringify(data)
-        }
-        const value = await update(valueSend,
+    const submit = async () => {
+    const valueSend = {
+        id: id,
+        questionlist: JSON.stringify(data)
+    };
+
+    // Vérification des droits d'accès
+    if (
+        accesObj &&
+        (accesObj?.question?.modification === null ||
+         accesObj?.question?.modification === undefined)
+    ) {
+        toast.error("Problème d'accée ,vous n'avez pas le droit de modifiée  !");
+        return;
+    }
+
+    try {
+        const value = await update(
+            valueSend,
             url + `questionnaire/saveorupdate-question-entreprise`
         );
-        if (value == true) {
+
+        if (value === true) {
             window.location.reload();
             toast.success("Données enregistrées avec succès !");
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
         }
+    } catch (error) {
+        console.error(error);
+        toast.error("Erreur lors de l'envoi !");
     }
+};
+
     useEffect(() => {
         getDataifExiste();
      }, []);

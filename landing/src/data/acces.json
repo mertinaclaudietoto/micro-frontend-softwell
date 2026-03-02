@@ -1,4 +1,52 @@
-{
+UPDATE roles
+SET access = '{
+   "statistique": {
+    "lecture": true,
+  },
+  "question": {
+    "lecture": true,
+    "modification": true,
+  },
+  "modele_mail": {
+    "lecture": true,
+    "modification": true,
+  },
+  "infoentreprise": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "infoselectionrecruitment": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "alldemande": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "validepost": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "demandepost": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "post": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
   "theme": {
     "lecture": true,
     "ajout": true,
@@ -13,15 +61,16 @@
   },
   "wish": {
     "lecture": true,
-    "ajout": true,
-    "suppression": true,
-    "modification": true
+    "faire_un_souhait": true,
+    "validation_formation": true,
   },
   "validation": {
     "lecture": true,
-    "ajout": true,
-    "suppression": true,
-    "modification": true
+    "ajout_session": true,
+    "modification_session": true,
+    "suppression_session": true,
+    "ajout_facture_session": true,
+    "envois_email_session": true,
   },
   "profile": {
     "lecture": true,
@@ -34,5 +83,39 @@
     "ajout": true,
     "suppression": true,
     "modification": true
+  },
+  "criterien": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "requete": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "mdasboard": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "listcandidat": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
+  },
+  "modelemails": {
+    "lecture": true,
+    "ajout": true,
+    "suppression": true,
+    "modification": true
   }
-}
+}'
+WHERE id = 1;
+
+
+

@@ -97,6 +97,26 @@ export const diffDate = (date1, date2) => {
     return `${years} an(s) et ${months} mois`;
 };
 
+export const diffDateStartEnd = (s, e) => {
+    const toDate = (str) => {
+        if (typeof str !== "string") return null;
+
+        const d = new Date(str);
+        return isNaN(d.getTime()) ? null : d;
+    };
+    const d1 = toDate(s);
+    const d2 = toDate(e);
+    if (!d1 || !d2) return null;
+
+    // différence en millisecondes
+    const diffTime = d2.getTime() - d1.getTime();
+
+    // conversion en jours
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    return diffDays;
+};
+
 export const diffDate1 = (date1) => {
     // Convertir "DD-MM-YYYY" en "YYYY-MM-DD"
     const toISO = (str) => {

@@ -3,38 +3,39 @@ import {   themeM, usersprofile ,url,trainingTypes} from "../../../data/data";
 import { TextState } from "../../state";
 import { deletev, getData, send, update } from "../../../function/Axios";
 import { toast } from "react-toastify";
+import BudgetTheme from "./BudgetTheme";
 import "react-toastify/dist/ReactToastify.css";
+import Select from "../../../function/selectSimple";
 
 
 export default function CardUpdateTheme({close,value}){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-
+    const [seeHistorique ,setSeeHistorique]=useState(false);
     const [theme,setTheme]=useState(value!=null ? value:themeM);
     const [trainingType,setTrainingType]=useState(trainingTypes);
     const [skill,setSkill]=useState("");
     const handlerChangeTable = (name, value, index = null) => {
-    setTheme((previous) => {
-        const currentString = previous[name] || "";
-        let currentArray = currentString
-            .split(",")
-            .map(s => s.trim())
-            .filter(s => s !== "");
-        if (index !== null) {
-            const newArray = currentArray.filter((_, i) => i !== index);
+        setTheme((previous) => {
+            const currentString = previous[name] || "";
+            let currentArray = currentString
+                .split(",")
+                .map(s => s.trim())
+                .filter(s => s !== "");
+            if (index !== null) {
+                const newArray = currentArray.filter((_, i) => i !== index);
 
+                return {
+                    ...previous,
+                    [name]: newArray.join(","),
+                };
+            }
+            const newArray = [...currentArray, value];
             return {
                 ...previous,
                 [name]: newArray.join(","),
             };
-        }
-        const newArray = [...currentArray, value];
-        return {
-            ...previous,
-            [name]: newArray.join(","),
-        };
-    });
-
+        });
         setSkill("");
     };
 
@@ -56,7 +57,7 @@ export default function CardUpdateTheme({close,value}){
             toast.error("Problème serveur, réessayez plus tard !");
         }
     }
-     const del = async ()=>{
+    const del = async ()=>{
         const value = await deletev(theme,url + "training-themes")
         console.log(value)
         if (value == true) {
@@ -67,6 +68,11 @@ export default function CardUpdateTheme({close,value}){
             toast.error("Problème serveur où il ne peut pas être supprimé!");
         }
     }
+    const handlerSelectTrainingType = (opt) => {
+        if (opt !== null) {
+            handlerVariable("idtypetraining", opt.id, setTheme);
+        }
+    };
     useEffect(() => {
     const loadData = async () => {
         const data = await getData(url + "training-types");
@@ -76,18 +82,30 @@ export default function CardUpdateTheme({close,value}){
         loadData();
     }, []);
     return(
-        <div className="background_transparent_popup">
+        <>
+            {seeHistorique ? <BudgetTheme  value={value} close={setSeeHistorique}/>: 
+            <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white  p-10 rounded-card w-120 relative">
-                <h3>Modifer un themes</h3>
+                <div className="flex " >
+                        <h3>Modifier un thème</h3>
+                </div>
+                <div class="absolute top-6 right-15">
+                    <span class="text-gray-800 text-lg font-semibold">
+                    <button className="btn-neutre" onClick={()=>{setSeeHistorique(true)}}>
+                                <i class="fa-solid fa-piggy-bank"></i>
+                    </button></span>
+                </div>
+
                 <div class="absolute top-6 right-6">
                     <span class="text-gray-800 text-lg font-semibold">
                     <button class="" onClick={()=>(close(false))}>
                         <i class="fa-solid fa-xmark"></i>
                     </button></span>
                 </div>
+
                 <div class="flex flex-col items-center">
                     <div class="w-32 h-32   rounded-full flex items-center justify-center mb-4 cursor-pointer  transition-colors">
-                       <img src="demandeformation.svg"/>
+                        <img src="demandeformation.svg"/>
                     </div>
                 </div>
                 {/* nom formation */}
@@ -105,14 +123,15 @@ export default function CardUpdateTheme({close,value}){
                     </div>
                 </div>
                 <label class="label-formulaire mt-4 mb-2">Type formation</label>
-                <div className="grid grid-cols-3 gap-3 mb-4">
+                <Select options={trainingType}  placeholder="type du formation " onChange={handlerSelectTrainingType} value={false} />
+                {/* <div className="grid grid-cols-3 gap-3 mb-4">
                     {trainingType.map((v,id)=>(
-                         <button index={id} class={"card-text-s-blue hover:bg-black-100"} onClick={()=>handlerVariable("idtypetraining",v.id,setTheme)}>
+                            <button index={id} class={"card-text-s-blue hover:bg-black-100"} onClick={()=>handlerVariable("idtypetraining",v.id,setTheme)}>
                             <i className={`${v.icone} icone-size-s`}></i>
                             <span>{v.name}</span>
                         </button>
                     ))}
-                </div>
+                </div> */}
                 {/* why  */}
                 <div className="my-2">
                     <label class="label-formulaire">Qu’attendons-nous de cette formation ?</label>
@@ -134,7 +153,7 @@ export default function CardUpdateTheme({close,value}){
                                         Ajouter
                                     </button>
                                 </label>
-                               
+                                
                             </div>
                             <div className='grid grid-cols-1 gap-4 mb-4'>
                                 <div>
@@ -167,7 +186,7 @@ export default function CardUpdateTheme({close,value}){
                 </div>
                 <div class="flex items-center justify-end gap-3 mt-2">
                     {accesObj && (accesObj?.theme?.suppression == null || accesObj?.theme?.suppression == undefined)  ? null : (
-                       <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{del()}}>
+                        <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{del()}}>
                             Supprimer
                         </button>
                     )}
@@ -177,6 +196,9 @@ export default function CardUpdateTheme({close,value}){
                 </div>
                 </> 
             </div>
-    </div>
+                </div>
+            }
+        </>
+      
     );
 }

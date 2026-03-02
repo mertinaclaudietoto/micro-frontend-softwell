@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { url_recrutement, textbackground } from "../../data/data";
 import { useState } from "react";
 import { Sidebar } from "../../components";
+import NoteCandidate from "./NoteCandidate";
 
 export default function StepStat({value,close}){
-    // TODO:delete and update
-    // console.log(value);
+    const [showNote,setShowNote]=useState(false);
     const acces = sessionStorage.getItem("access");
     // const accesObj = JSON.parse(acces);
     const [data,setData]=useState([]); 
@@ -22,7 +22,12 @@ export default function StepStat({value,close}){
     useEffect(() => {
             loadData();
         }, [loadData]);
+    const [valueNotecandidat,setValueNoteCandidat]=useState(false);
       return(
+        <>
+        {showNote ?
+            <NoteCandidate close={setShowNote}  idrequest={valueNotecandidat?.requestId} idpost={value?.postId} idstep={valueNotecandidat?.stepId} rang={valueNotecandidat?.rang}  email={valueNotecandidat?.email}  />
+         : 
         <>
         <div class="flex h-screen ">
             <Sidebar/>
@@ -86,7 +91,10 @@ export default function StepStat({value,close}){
                                 {/* Stats Grid */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {data.map((stat, index) => (
-                                <Link to={`/postulants/${stat.requestId}/${value.postId}/${stat.stepId}/${stat.rang}/${stat.email}`}>
+                                <button onClick={()=>{
+                                    setValueNoteCandidat(stat);
+                                    setShowNote(true);
+                                        }} >
                                     <div
                                     key={index}
                                     className={`${textbackground[index]} rounded-lg p-6 relative overflow-hidden`}
@@ -105,7 +113,7 @@ export default function StepStat({value,close}){
                                             )} */}
                                         </div>
                                     </div>
-                                </Link> 
+                                </button> 
                                 ))}
                             </div>
                             </div>
@@ -116,5 +124,8 @@ export default function StepStat({value,close}){
         </div>
         
         </>
+        }
+      
+    </>
     )
 }

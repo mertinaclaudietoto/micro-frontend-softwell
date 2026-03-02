@@ -78,7 +78,7 @@ export default function CriterienStaff(){
                 {/* filtre */}
                 <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-semibold text-gray-800">Liste Post
+                        <h2 class="text-xl font-semibold text-gray-800">Liste Offre d'emplois
                             <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                         </h2>
                         
@@ -171,7 +171,7 @@ export default function CriterienStaff(){
             </div>
         </main>
          {showAdd ? <AddPost key={1} close={setShowAdd} /> : <></>}
-         {showUpdate ? <UpdatePost key={2}  close={setShowUpdate}  id={upValue.id} /> : <></>}
+         {showUpdate ? <UpdatePost key={2}  close={setShowUpdate}  id={upValue.id} valueUp={upValue} /> : <></>}
         {showRequest ? <RequestCandidat key={3} close={setShowRequest}  valueUp={demandeValue}/> :<></>}
     </div>
     </>

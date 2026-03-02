@@ -1,12 +1,18 @@
 import { useState,useEffect,useRef } from "react";
 import { HiOutlinePhone} from "react-icons/hi2";
-import { url_recrutement, url_recrutement_image } from "../../data/data";
+import { url, url_recrutement, url_recrutement_image } from "../../data/data";
 import { uploadCompressedImage } from "../../function/uplaodimage";
-import { getData, send } from "../../function/Axios";
+import { _login, getData, send } from "../../function/Axios";
 import Select from "../../function/selectSimple";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function Registration(){
+import { useParams } from "react-router-dom";
+
+export default function PlateformeRegistration(){
+    const { encryptParametres } = useParams();
+    const decoded = atob(encryptParametres);
+    // idrequest [0],idpost [1] idplateforme [2]
+    const dataValue = decoded.split("|");
     const [data, setData] = useState({
         photo:null,
         name: null,
@@ -222,13 +228,49 @@ export default function Registration(){
                 name:opt.name
             },null);
         }
-       
     }
+    const buildInfoCandidat = ( idcandidate)=>{
+        const recruitmentCandidate = {
+                    id: null,                                
+                    postId: dataValue[1],     
+                    RequestId:dataValue[0],  
+                    idplateforme : dataValue[2]     ,                  
+                    candidatId: idcandidate,                               // int
+                    stepRecruitmentId: 1,                     // int?
+                    applicationDate: new Date().toISOString().split('T')[0] // yyyy-MM-dd
+                };
+        return recruitmentCandidate;
+    }
+    const LoginAndPostulation = async (login,password) => {
+        try {
+            const response = await _login({
+                login:login,
+                password:password
+            }, url_recrutement + "candidate/login");
+            // console.log(response.data.data)
+            // if(response.data.success==false){
+            //     setText("Login ou Mot de passe incorrecte")
+            // }
+            if(response.data.data.id !=null){
+                const data = await send(buildInfoCandidat(response.data.data.id),url_recrutement + "recruitmentcandidate")
+                if (data == true) {
+                    toast.success("Votre candidature a été envoyée");
+                    close(false);
+                } else {
+                    toast.error("Problème serveur, réessayez plus tard !");
+                }
+            }
+        } catch (error) {
+            // setText("Login ou Mot de passe incorrecte")
+            console.error("Erreur login:", error);
+        }
+    };
     const save = async ()=>{
         const value = await send(data,url_recrutement + "candidate")
         if (value == true) {
+            LoginAndPostulation(data.login,data.password);
             // toast.success("Données insérées avec succès !");
-            window.location.replace("/logincandidate");
+            // window.location.replace("/logincandidate");
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
         }

@@ -514,9 +514,25 @@ export const accessinfo ={
   listpage : [
   { icone: "fa-solid fa-palette",access:"theme" ,name: "Themes", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fa-solid fa-chalkboard-user",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fa-solid fa-layer-groupr",access:"wish", name: "Souhait", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fa-solid fa-circle-check",access:"validation", name: "Formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-calendar-alt",access:"session", name: "Session formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-layer-groupr",access:"wish", name: "Souhait", listfunction: [
+    { name: "lecture", boolean: [false] },
+    { name: "faire_un_souhait", boolean: [false] },
+    // { name: "suppression", boolean: [false] },
+    // { name: "modification", boolean: [false] },
+    { name: "validation_formation", boolean: [false] }] },
+
+  { icone: "fa-solid fa-circle-check",access:"validation", name: "Gestion des formations", listfunction: [
+    { name: "lecture", boolean: [false] },
+    { name: "ajout_session", boolean: [false] },
+    { name: "modification_session", boolean: [false] },
+    { name: "suppression_session", boolean: [false] },
+    { name: "ajout_facture_session", boolean: [false] },
+    { name: "envois_email_session", boolean: [false] },
+      ] },
+  { icone: "fas fa-calendar-alt",access:"question", name: "Question Post formation ", listfunction: [{ name: "lecture", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-calendar-alt",access:"modele_mail", name: "Model Email ", listfunction: [{ name: "lecture", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-calendar-alt",access:"statistique", name: "Statistique", listfunction: 
+    [{ name: "lecture", boolean: [false] }, ] },
   { icone: "fa-solid fa-user",access:"profile", name: "Profile", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fa-solid fa-users",access:"compte", name: "Compte", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   // recruitment
@@ -586,7 +602,6 @@ export const url_front="http://localhost:3001/"
 // export const url_recrutement ="http://151.80.218.41:5050/api/";
 // export const url_recrutement_image ="http://151.80.218.41:5050/uploads/";
 
-
 export const themeM = {
   name: "...........................",
   description: ".........................",
@@ -600,8 +615,6 @@ export const trainingTypes = [
   { id: 2, name: 'externe', icone: 'fa-solid fa-globe' },
   { id: 3, name: 'auto-formation', icone: 'fa-solid fa-user-graduate' }
 ];
-
-
 export const newformation=
    {
     id: null,
@@ -1189,11 +1202,13 @@ export   const  datasidebar =
                     {label :"Formateur",icone : "fa-solid fa-chalkboard-user",actif:false,link:"/training-trainer",subItems:null,acces:"trainer"},
                     {label :"Souhaite",icone : "fa-solid fa-layer-group",actif:false,link:"/training-wish",subItems:null,acces:"wish"},
                     {label :"Formation",icone : "fa-solid fa-circle-check",actif:false,link:"/training-validation",subItems:null,acces:"validation"},
-                    {label :"Question post formation",icone : "fa-solid fa-clipboard-question",actif:false,link:"/question-post-formation-entreprise",subItems:null,acces:"validation"},
-                    {label :"Models Email",icone : "fa fa-paper-plane",actif:false,link:"/training-modelemail",subItems:null,acces:"validation"},
-                    {label :"Statistique",icone : "fa-solid fa-chart-simple",actif:false,link:"#",acces:"infoselectionrecruitment",
+                    {label :"Question post formation",icone : "fa-solid fa-clipboard-question",actif:false,link:"/question-post-formation-entreprise",subItems:null,acces:"question"},
+                    {label :"Models Email",icone : "fa fa-paper-plane",actif:false,link:"/training-modelemail",subItems:null,acces:"model_mail"},
+                    {label :"Statistique",icone : "fa-solid fa-chart-simple",actif:false,link:"#",acces:"statistique",
                       subItems:[
-                          {label :"Cout",actif:false,link:"/stat-cost"},
+                          {label :"Cout",actif:false,link:"/stat-cost",acces:"infoselectionrecruitment"},
+                          {label :"Budget",actif:false,link:"/stat-budget"},
+                          {label :"Status",actif:false,link:"/stat-status"},
                       ]
                     },
                 ],
@@ -1203,12 +1218,19 @@ export   const  datasidebar =
                 {label :"Compte",icone : "fa-solid fa-users",actif:false,link:"/access-user",subItems:null,acces:"compte"},
             ],
             recrutement:[
-                {label :"Post",icone : "fas fa-briefcase",actif:false,link:"/addpost",subItems:null,acces:"post"},
+                {label :"Post sage pai",icone : "fas fa-briefcase",actif:false,link:"/rh-postsagepai",subItems:null,acces:"post"},
+                {label :"Offres",icone : "fa-solid fa-business-time",actif:false,link:"/addpost",subItems:null,acces:"post"},
                 {label :"Demande",icone : "fas fa-file-alt",actif:false,link:"/myrequest",subItems:null,acces:"demandepost"},
                 {label :"Mes Validation",icone : " fas fa-check-circle ",actif:false,link:"/myvalidation",subItems:null,acces:"validepost"},
                 {label :"Tout les demandes",icone : "fas fa-folder-open",actif:false,link:"/allrequest",subItems:null,acces:"alldemande"},
                 {label :"Liste des candidats inscrits",icone : "fa fa-address-book",actif:false,link:"/listecandidate",subItems:null,acces:"listcandidat"},
                 {label :"Model Email",icone : "fa fa-paper-plane",actif:false,link:"/email",subItems:null,acces:"alldemande"},
+                {label :"Statistique",icone : "fa-solid fa-chart-simple",actif:false,link:"#",acces:"statistique",
+                    subItems:[
+                        {label :"Candidates",actif:false,link:"/stat-candidate",acces:"infoselectionrecruitment"},
+                        {label :"Post",actif:false,link:"/stat-post",acces:"infoselectionrecruitment"},
+                    ]
+                },
                 {label :"info generale",icone : "fas fa-clipboard-check",actif:false,link:"#",acces:"infoselectionrecruitment",
                     subItems:[
                         {label :"Certification",actif:false,link:"/crud-certification"},
@@ -1222,6 +1244,7 @@ export   const  datasidebar =
                         {label :"Localisation",actif:false,link:"/crud-localisation_candidate"},
                         {label :"Universitee",actif:false,link:"/crud-university"},
                         {label :"Etaps Recrutement",actif:false,link:"/crud-steprecruitment"},
+                        {label :"Plateforme",actif:false,link:"/crud-plateforme"},
                     ]
                 },
             ],

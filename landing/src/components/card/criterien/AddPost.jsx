@@ -22,7 +22,7 @@ export default function AddPost({close}){
         languages: [],
         diplomes: [],
         certifications: [],
-});
+    });
     const handlerChangeTable = (name, value, index = null) => {
         setValue((previous) => {
             const currentArray = Array.isArray(previous[name]) ? previous[name] : [];
@@ -39,7 +39,19 @@ export default function AddPost({close}){
             };
         });
     };
-
+    const [listPoste,setListPoste]=useState();
+    const getListPoste = async ()=>{
+        const datalistThemes =  await getData(
+            url_recrutement + `tpostes`
+        );
+        if(datalistThemes.data!=null)
+            setListPoste(datalistThemes.data)
+    }
+    const handlerListPost =(opt) =>{
+        if(opt !=null){
+            handlerVariable("idpostsage", opt.id,setValue);
+        }
+    }
     const [listContrat,setListContrat]=useState([])
     const getListContrat = async ()=>{
         const datalistThemes =  await getData(
@@ -57,12 +69,10 @@ export default function AddPost({close}){
             setListYearOfexperience(datalistThemes.data)
     }
      const handlerYearLeft =(opt) =>{
-        console.log(opt)
         handlerVariable("idYearLeft", opt.id,setValue);
         // handlerVariable("nameTheme", opt.name,setPrice)
     }
     const handlerYearRight =(opt) =>{
-        console.log(opt)
         handlerVariable("idYearRight", opt.id,setValue);
         // handlerVariable("nameTheme", opt.name,setPrice)
     }
@@ -103,14 +113,17 @@ export default function AddPost({close}){
     }
 
     const handlerDiplome =(opt) =>{
-        console.log(opt)
-        handlerVariable("idDiplome", opt.id,setValueDiplome);
-        handlerVariable("nameDiplome", opt.name,setValueDiplome);
+        if(opt!=null){
+            handlerVariable("idDiplome", opt.id,setValueDiplome);
+            handlerVariable("nameDiplome", opt.name,setValueDiplome);
+        }
+       
     }
     const handlerMandatoryD =(opt) =>{
-        console.log(opt)
-        handlerVariable("idMandatory", opt.id,setValueDiplome);
-        handlerVariable("nameMandatory", opt.name,setValueDiplome);
+        if(opt!=null){
+            handlerVariable("idMandatory", opt.id,setValueDiplome);
+            handlerVariable("nameMandatory", opt.name,setValueDiplome);
+        } 
     }
     //soft skill 
     const [listSoftSkill,setListSoftSkill ]=useState([])
@@ -129,14 +142,17 @@ export default function AddPost({close}){
       nameM:"",
     })
      const handlerSoftSkill =(opt) =>{
-        console.log(opt)
-        handlerVariable("idSoftSkill", opt.id,setValueSoftSkill);
-        handlerVariable("nameS", opt.name,setValueSoftSkill);
+        if(opt!=null){
+            handlerVariable("idSoftSkill", opt.id,setValueSoftSkill);
+            handlerVariable("nameS", opt.name,setValueSoftSkill);
+        }
     }
     const handlerMandatoryS=(opt) =>{
-        console.log(opt)
-        handlerVariable("idMandatory", opt.id,setValueSoftSkill);
-        handlerVariable("nameM", opt.name,setValueSoftSkill);
+        if(opt!=null){
+            handlerVariable("idMandatory", opt.id,setValueSoftSkill);
+            handlerVariable("nameM", opt.name,setValueSoftSkill);
+        }
+        
     }
     ///hard skill
     const [listHardSkill ,setListHardSkill ]=useState([])
@@ -179,14 +195,17 @@ export default function AddPost({close}){
       nameM:"",
     })
     const handlerLanguage =(opt) =>{
-        console.log(opt)
-        handlerVariable("idLanguage", opt.id,setValueLanguage);
-        handlerVariable("nameS", opt.name,setValueLanguage);
+        if(opt!=null){
+            handlerVariable("idLanguage", opt.id,setValueLanguage);
+            handlerVariable("nameS", opt.name,setValueLanguage);
+        }
+       
     }
     const handlerMandatoryL=(opt) =>{
-        console.log(opt)
-        handlerVariable("idMandatory", opt.id,setValueLanguage);
-        handlerVariable("nameM", opt.name,setValueLanguage);
+        if(opt!=null){
+            handlerVariable("idMandatory", opt.id,setValueLanguage);
+            handlerVariable("nameM", opt.name,setValueLanguage);
+        }
     }
 
     ///certification 
@@ -242,7 +261,7 @@ export default function AddPost({close}){
             toast.error("Problème serveur, réessayez plus tard !");
         }
     }
-     useEffect(() => {
+    useEffect(() => {
         getListContrat();
         getListLocalisation();
         getListMandatory();
@@ -252,6 +271,7 @@ export default function AddPost({close}){
         getListLanguage();
         getListCertification();
         getYearOfexperience();
+        getListPoste();
         }, []);
     return (
         <>
@@ -259,8 +279,6 @@ export default function AddPost({close}){
                
         <div className="h-[900px] overflow-y-auto">
             <div className=" flex justify-center items-center p-8   ">
-               
-
                 <div class=" relative w-full max-w-3xl bg-white rounded-xl shadow-lg p-8">
                      <button
                     onClick={() => close()}
@@ -274,9 +292,14 @@ export default function AddPost({close}){
                 </h2>
 
                 <div class="space-y-6">
-
+                <div class="my-2">
+                    <div class="w-100">
+                        <label className="label-formulaire mt-2 mb-1">Post sage</label>
+                        <Select options={listPoste} placeholder="..." onChange={handlerListPost} nameIteme="intitule"  value={false}/>
+                    </div>
+                </div>
                 <div className="my-2">
-                    <label className=" label-formulaire">Nom</label>
+                    <label className=" label-formulaire">Titre de l'offre</label>
                     <input 
                         type="text" 
                         placeholder="Entrer votre nom" 
@@ -309,11 +332,11 @@ export default function AddPost({close}){
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2 mb-8">
                     <div>
                         <label className="label-formulaire mt-2 mb-1">Contrat</label>
-                        <Select options={listContrat} onChange={handlerContrat} />
+                        <Select options={listContrat} placeholder="CDI" onChange={handlerContrat} />
                     </div>
                     <div>
                         <label className=" mt-2 mb-1 label-formulaire">Localisation</label>
-                        <Select options={listLocalisation} onChange={handlerLocalisation} />
+                        <Select options={listLocalisation} placeholder="..." onChange={handlerLocalisation} />
                     </div>
                 </div>
                 <label className="label-formulaire mt-2 mb-1">Anne d'experience entre </label>

@@ -65,6 +65,16 @@ export default function RequestCandidat({close,valueUp}){
                         class="input_formulaire"
                     />
                 </div>
+                <div className="my-2">
+                    <label className="label-formulaire mt-2">Motif</label>
+                    <textarea
+                        type="text" 
+                        placeholder="Entrer votre nom" 
+                        className="input_singup text-gray-400"
+                        value={value.goals}
+                        onChange={(event) => handlerVariable("motifRecrutement", event.target.value,setValue)}
+                    />
+                </div>
                 <div class="flex items-center justify-end gap-3">
                     <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close(false)}}>
                         Annuler

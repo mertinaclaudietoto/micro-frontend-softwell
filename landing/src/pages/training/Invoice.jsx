@@ -18,7 +18,6 @@ export default function Invoice({value,close}){
     const getListInvoice = async ()=>{
             const data = await getData(url + `invoice/${value.id}`);
             if(data.data!=null){
-                console.log(data.data);
                 setData(data.data);
             }   
         }
@@ -28,7 +27,7 @@ export default function Invoice({value,close}){
                 console.log("liste ,,,",data.data);
                 setSession(data.data);
             }   
-        }
+    }
     useEffect(()=>{
         getListSession();
         getListInvoice()

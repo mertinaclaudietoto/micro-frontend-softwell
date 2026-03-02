@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { listeformateur, listsmallformation, url, url_front } from "../../../data/data";
+import {  url, url_front } from "../../../data/data";
 import SearchableSelect from "../../../function/select";
 import Select from "../../../function/selectSimple";
 import { Sidebar } from "../../sidebar";
@@ -7,7 +7,7 @@ import { getData, send, update } from "../../../function/Axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardForwardLink from "../popup/CardForwardLink";
-export default function CardUpTrainer({close,id,listThemes}){
+export default function CardUpTrainer({close,id,listThemes,accesObj}){
     const [value, setValue] = useState({
                     id: 0,
                     name: "",
@@ -299,9 +299,11 @@ export default function CardUpTrainer({close,id,listThemes}){
                                 <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{close(false)}}>
                                     Annuler
                                 </button>
-                                <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium"  onClick={()=>submit()}>
-                                    Enregistrer
-                                </button>
+                                 {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
+                                    <button class="px-6 py-2 bg-softbleu hover:bg-softbleushade-12 text-white rounded-lg font-medium"  onClick={()=>submit()}>
+                                        Enregistrer
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>

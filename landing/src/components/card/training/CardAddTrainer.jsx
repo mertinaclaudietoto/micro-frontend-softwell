@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { listeformateur, listsmallformation, url } from "../../../data/data";
+import {  url } from "../../../data/data";
 import SearchableSelect from "../../../function/select";
 import Select from "../../../function/selectSimple";
 import { Sidebar } from "../../sidebar";
@@ -75,25 +75,24 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                 [name]: [...currentArray, value],
             };
         });
-
         setPrice({
-        id: 0,
-        idtrainer: 0,
-        idtheme: 0,
-        idunit: 0,
-        unitprice: 0,
-        maxpersonne: 0,
-        description: "",
-        nameTheme: "",
-        nameTrainer: "",
-        nif: "",
-        stat: "",
-        tel: "",
-        email: "",
-        active: 3,
-        nameActive: "",
-        nameunit: ""
-    });
+            id: 0,
+            idtrainer: 0,
+            idtheme: 0,
+            idunit: 0,
+            unitprice: 0,
+            maxpersonne: 0,
+            description: "",
+            nameTheme: "",
+            nameTrainer: "",
+            nif: "",
+            stat: "",
+            tel: "",
+            email: "",
+            active: 3,
+            nameActive: "",
+            nameunit: ""
+        });
     };
     useEffect(() => {
             getListUnit();
@@ -116,7 +115,6 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                     <div className="max-w-7xl mx-auto bg-white p-10">
                         <div className="">
                         <h3 className="font-bold">Formateur &nbsp;&nbsp; {value.name}</h3>
-                
                         <div className="my-2">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Nom</label>
                             <input 
@@ -191,7 +189,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                             class="input_singup"
                                             min="0"                  // force positif
                                             step="0.01"
-                                            placeholder={value.nif}
+                                            // placeholder={value.nif}
                                             onChange={(event) => handlerVariable("unitprice", event.target.value,setPrice)}
                                         />
                                         {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
@@ -206,7 +204,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                             min="0"                  // force positif
                                             step="0.01"
                                             class="input_singup"
-                                            placeholder={value.nif}
+                                            // placeholder={value.nif}
                                             onChange={(event) => handlerVariable("maxpersonne", event.target.value,setPrice)}
                                         />
                                         {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}

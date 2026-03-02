@@ -70,16 +70,17 @@ export default function TrainingState({value,close}){
     return(
         <>
         { showLink ? <CardForwardLink _url={url_front} endpoint={"presence"} closePopup={setShowLink}  parametres={parametres} daysession={daysession} title={`Partagez le lien afin de valider la présence du ${dateToLetters(daysession)}`}/> :<></>}
-        { accesObj && (accesObj?.session?.ajout == null || accesObj?.session?.ajout == undefined) && showAddsession ? 
+        { accesObj && (accesObj?.validation?.ajout_session != null || accesObj?.validation?.ajout_session != undefined) && showAddsession ? 
         <CardAddSession  close={setShowAddsession} idvalidation={value.id} ></CardAddSession>   : 
+        accesObj && (accesObj?.validation?.modification_session != null || accesObj?.validation?.modification_session != undefined) &&
         showUpdatesession ? <CardUpdateSession  upValue={updateValue} close={setShowUpdatesession} />  :
         showParticipants ? <ListParticipantInFormation value={value} close={setShowParticipants} /> :
-        showInvoice ? <Invoice value={value} close={setShowInvoice}/> :
+        accesObj && (accesObj?.validation?.ajout_facture_session != null || accesObj?.validation?.ajout_facture_session != undefined) && showInvoice ? <Invoice value={value} close={setShowInvoice}/> :
         <>
          <div class="flex">
             <Sidebar/>
             <main class="flex-1 ">  
-                <div class=" md:p-8 bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
+                <div class=" md:p-8 bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-1 md:p-6">
                     <div className=" max-w-7xl mx-auto p-10 flex bg-white">
                         <div className="flex-1  border-rigth ">
                             {/* filtre */}

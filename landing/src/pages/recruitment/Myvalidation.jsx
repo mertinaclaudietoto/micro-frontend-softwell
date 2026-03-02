@@ -34,14 +34,13 @@ export default function MyValidation(){
             url_recrutement + `${nameE}/getByIdAdmin?pageNumber=${numpage}&pageSize=${nbrSize}&id=${sessionStorage.getItem("userId")}`
         );
         setData( data.data);
-        console.log(data);
+        // console.log(data);
     }, [numpage, search,nameE]); // dépendances de loadData
 
   
     const sendsearch = async()=>{
         setNumpage(1);
     }
- 
 
     useEffect(() => {
             loadData();
@@ -83,11 +82,13 @@ export default function MyValidation(){
                             <thead class="bg-gray-50 border-b border-gray-200">
                                 <tr>
                                     <th class="tr-thead w-8">#</th>
-                                    <th class="tr-thead">Nom</th>
+                                    <th class="tr-thead">Nom des offres</th>
                                     <th class="tr-thead">Date demande</th>
                                     <th class="tr-thead">Date Changement Status</th>
+                                    <th class="tr-thead">Date de l'offre</th>
                                     <th class="tr-thead">Status</th>
                                     <th class="tr-thead">Volue</th>
+                                    
                                     <th class="tr-thead">Postulants</th>
                                 </tr>
                             </thead>
@@ -97,9 +98,11 @@ export default function MyValidation(){
                                     <tr index={index} className={value.StatusId==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.id}</td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.nomPost}</td>
-                                        
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.requestDate.split('T')[0]}</td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.statusSetDate?.split('T')[0]}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">{ value.datestart?.split('T')[0] }   {value.dateend?.split('T')[0]}</td>
+
+
                                         {value.statusId ==null ?
                                             <>
                                             </> :
