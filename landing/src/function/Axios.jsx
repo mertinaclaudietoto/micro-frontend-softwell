@@ -2,7 +2,12 @@ import axios from 'axios';
 
 export const send = async (datasend, url) => {
   try {
-    const response = await axios.post(url, datasend);
+    const response = await axios.post(url, datasend,{
+        headers: {
+            "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json" // optionnel mais recommandé
+        }
+    });
     console.log("Réponse de l'API :", response.data);
     return true;      // succès
   } catch (error) {
@@ -13,7 +18,12 @@ export const send = async (datasend, url) => {
 
 export const _login = async (datasend, url) => {
   try {
-    const response = await axios.post(url, datasend);
+    const response = await axios.post(url, datasend,{
+        headers: {
+            "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json" // optionnel mais recommandé
+        }
+    });
     return response;      // succès
   } catch (error) {
     console.error("Erreur :", error.response ? error.response.data : error.message);
@@ -22,7 +32,12 @@ export const _login = async (datasend, url) => {
 };
 export const update = async (datasend, url) => {
   try {
-    const response = await axios.put(url, datasend);
+    const response = await axios.put(url, datasend,{
+        headers: {
+            "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json" // optionnel mais recommandé
+        }
+    });
     console.log("Réponse de l'API :", response.data);
     return true;      // succès
   } catch (error) {
@@ -32,7 +47,12 @@ export const update = async (datasend, url) => {
 };
 export const updateWithId = async (url) => {
   try {
-    const response = await axios.put(url);
+    const response = await axios.put(url, null, {
+    headers: {
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json"
+    }
+  });
     console.log("Réponse de l'API :", response.data);
     return true;      // succès
   } catch (error) {
@@ -46,7 +66,8 @@ export const deletev = async (datasend, url) => {
     const response = await axios.delete(url, {
       data: datasend,              // <-- mettre les données ici
       headers: {
-        'Content-Type': 'application/json'
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json"
       }
     });
     console.log("Réponse de l'API :", response.data);
@@ -60,7 +81,8 @@ export const deleteWithId = async ( url) => {
   try {
     const response = await axios.delete(url, {
       headers: {
-        'Content-Type': 'application/json'
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json"
       }
     });
     console.log("Réponse de l'API :", response.data);
@@ -72,7 +94,12 @@ export const deleteWithId = async ( url) => {
 };
 export const deleteId = async ( url) => {
   try {
-    const response = await axios.delete(url);
+    const response = await axios.delete(url ,null, {
+    headers: {
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json"
+    }
+  });
     console.log("Réponse de l'API :", response.data);
     return true;      // succès
   } catch (error) {
@@ -83,7 +110,12 @@ export const deleteId = async ( url) => {
 
 export const getData = async (url) =>{
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+        headers: {
+            "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        }
+      });
         // console.log("Réponse de l'API :", response.data);
         return response.data;
     } catch (error) {
@@ -96,7 +128,11 @@ export const exportPdfExcel = async ( url) =>{
  try {
         const response = await axios.get(
                 url,
-                { responseType: "blob" } // ⚠️ très important
+                { responseType: "blob", headers: {
+                  "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+                  "Content-Type": "application/json" // optionnel pour GET
+              } }// ⚠️ très important
+                
             );
          const url_temps = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
@@ -117,7 +153,12 @@ export const exportPdfExcel = async ( url) =>{
 
 export const getDataWithObjectParametre = async (datasend, url) => {
   try {
-    const response = await axios.post(url, datasend);
+    const response = await axios.post(url, datasend,{
+        headers: {
+            "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json" // optionnel mais recommandé
+        }
+    });
     return response.data;      // succès
   } catch (error) {
     console.error("Erreur :", error.response ? error.response.data : error.message);

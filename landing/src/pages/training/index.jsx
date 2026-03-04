@@ -1,4 +1,4 @@
-export { default as TrainingTheme } from "./TrainingTheme";
+export { default as Theme } from "./Theme";
 export { default as InprogressTraining } from "./InprogressTraining";
 export { default as Trainer } from "./Trainer";
 export { default as TrainingState } from "./TrainingState";

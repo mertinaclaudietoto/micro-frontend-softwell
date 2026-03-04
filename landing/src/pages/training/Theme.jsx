@@ -4,7 +4,7 @@ import {  url } from "../../data/data"
 import {Filter,Sidebar,CardSmallTraining, CardDemandeTraining,CardAddTheme,CardUpdateTheme} from "../../components"
 import { useState } from "react"
 import { getData } from "../../function/Axios";
-export default function TrainingTheme(){
+export default function Theme(){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
     const [close ,setClose]=useState(false);

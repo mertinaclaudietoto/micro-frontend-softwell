@@ -8,64 +8,64 @@ import RequestCandidat from "../../components/card/criterien/RequestCandidat";
 
 
 export default function CriterienStaff(){
-     const acces = sessionStorage.getItem("access");
-        // const accesObj = JSON.parse(acces);
-        const [nameE,setNameE]=useState("vpost");
-        const [data,setData]=useState([]); 
-        const [search ,setSearch]=useState("");
-        const [showUpdate ,setShowUpdate]=useState(false);
-        const [showAdd ,setShowAdd]=useState(false);
-        const [showRequest ,setShowRequest]=useState(false);
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
+    const [nameE,setNameE]=useState("vpost");
+    const [data,setData]=useState([]); 
+    const [search ,setSearch]=useState("");
+    const [showUpdate ,setShowUpdate]=useState(false);
+    const [showAdd ,setShowAdd]=useState(false);
+    const [showRequest ,setShowRequest]=useState(false);
 
-        const [upValue ,setUpValue]=useState(null);
-        const [demandeValue ,setDemandeValue]=useState(null);
+    const [upValue ,setUpValue]=useState(null);
+    const [demandeValue ,setDemandeValue]=useState(null);
 
-        const nbrSize=10;
-        const [nbrligne ,setNbrLigne]=useState(0)
-        const [numpage,setNumpage]=useState(1);
+    const nbrSize=10;
+    const [nbrligne ,setNbrLigne]=useState(0)
+    const [numpage,setNumpage]=useState(1);
 
-        const modification = (value)=>{
-                setUpValue(value);
-                setShowUpdate(true);
-        }
-        const requeste =(value)=>{
-            setDemandeValue(value);
-            setShowRequest(true);
-        }
-        const pagination =(value)=>{
-            setNumpage(
-            value < 1
-                ? 1
-                : value > Math.ceil(nbrligne / nbrSize)
-                ? Math.ceil(nbrligne / nbrSize)
-                : value
-            );
-        }
-        const loadData = useCallback(async () => {
-            console.log(nameE)
-            const data = await getData(
-                url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
-            );
-            setData( data.data);
-            console.log(data);
-        }, [numpage, search,nameE]); // dépendances de loadData
-    
-        const getNbrLigne = async ()=>{
-            const data = await getData(url_recrutement + `${nameE}/count`);
-            if(data.data!=null)
-                setNbrLigne(data.data);
-            
-        }
-        const sendsearch = async()=>{
-            setNumpage(1);
-        }
-        useEffect(() => {
-                getNbrLigne();
-            }, []);
-    
-        useEffect(() => {
-                loadData();
-            }, [loadData]);
+    const modification = (value)=>{
+            setUpValue(value);
+            setShowUpdate(true);
+    }
+    const requeste =(value)=>{
+        setDemandeValue(value);
+        setShowRequest(true);
+    }
+    const pagination =(value)=>{
+        setNumpage(
+        value < 1
+            ? 1
+            : value > Math.ceil(nbrligne / nbrSize)
+            ? Math.ceil(nbrligne / nbrSize)
+            : value
+        );
+    }
+    const loadData = useCallback(async () => {
+        console.log(nameE)
+        const data = await getData(
+            url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
+        );
+        setData( data.data);
+        console.log(data);
+    }, [numpage, search,nameE]); // dépendances de loadData
+
+    const getNbrLigne = async ()=>{
+        const data = await getData(url_recrutement + `${nameE}/count`);
+        if(data.data!=null)
+            setNbrLigne(data.data);
+        
+    }
+    const sendsearch = async()=>{
+        setNumpage(1);
+    }
+    useEffect(() => {
+            getNbrLigne();
+        }, []);
+
+    useEffect(() => {
+            loadData();
+        }, [loadData]);
     
     return(
     <>
@@ -94,14 +94,11 @@ export default function CriterienStaff(){
                             
                             </div>
                             <div className="flex space-x-2">
-                                {/* {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (
-                                    <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                )} */}
+                                {accesObj && (accesObj?.post?.ajout == null || accesObj?.post?.ajout === undefined) ? null : (
                                     <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAdd(true)}}>
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
+                                )} 
                                 <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                 <i className="fas fa-arrow-left"></i>
                                 </button>
@@ -137,30 +134,22 @@ export default function CriterienStaff(){
                                     <td class="px-6 py-4 text-sm text-gray-500">{value.nomContrat}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{value.nomLocalisation}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{value.salary}</td>
-                                    <td className="px-6 py-4 ">
-                                        <button
-                                            onClick={() =>  modification(value)}   // adapte selon ton code
-                                        >
-                                            {/* <i className="fas fa-edit text-gray-400"></i> */}
-                                            <i class="fa-regular fa-pen-to-square text-gray-400"></i>
-                                        </button>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                    <button
-                                    onClick={() =>  requeste(value)}
-                                    class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>Faire une demande</button></td>
-
-
-                                    {/* <button onClick={()=>{setUpValue(value)}}>
-                                        ⋮
-                                    </button> */}
-                                        {/* {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
-                                        <td class="px-6 py-4 text-sm text-gray-500">
-                                            <button onClick={()=>{setUpValue(value)}}>
-                                                    ⋮
+                                    {accesObj && (accesObj?.post?.modification == null || accesObj?.post?.modification === undefined) ? null : (
+                                        <td className="px-6 py-4 ">
+                                            <button
+                                                onClick={() =>  modification(value)}   // adapte selon ton code
+                                            >
+                                                <i class="fa-regular fa-pen-to-square text-gray-400"></i>
                                             </button>
                                         </td>
-                                    )} */}
+                                    )}
+                                    {accesObj && (accesObj?.post?.demande_de_souhait == null || accesObj?.post?.demande_de_souhait === undefined) ? null : (
+                                        <td class="px-6 py-4">
+                                            <button
+                                            onClick={() =>  requeste(value)}
+                                            class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>Faire une demande</button>
+                                        </td>
+                                    )}
                                 </tr>
                                 </>
                             ))}

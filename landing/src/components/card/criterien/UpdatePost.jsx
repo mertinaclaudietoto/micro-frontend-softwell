@@ -313,7 +313,7 @@ const handlerChangeTable = (name, value, index = null) => {
                 <i className="fas fa-times text-xl"></i>
                 </button>
                 <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-                    Modifiee post
+                    Modification 
                 </h2>
 
                 <div class="space-y-6">

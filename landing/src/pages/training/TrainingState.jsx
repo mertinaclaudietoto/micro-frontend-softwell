@@ -112,7 +112,9 @@ export default function TrainingState({value,close}){
                                         <th class="tr-thead text-xl font-bold">{value?.id}</th>
                                         <th class="tr-thead text-xl">{value?.themeName}</th>
                                         <th class="tr-thead text-xl">{value?.adminName} {value?.adminFirstname}</th>
-                                        <th class="text-softbleu" onClick={()=>{setShowInvoice(true)}}>Facture</th>
+                                        {accesObj && (accesObj?.validation?.ajout_facture_session == null || accesObj?.validation?.ajout_facture_session=== undefined) ? null : (
+                                            <th class="text-softbleu" onClick={()=>{setShowInvoice(true)}}>Facture</th>
+                                        )}
                                         <th className="text-softbleu" onClick={()=>{setShowParticipants(true)}}>Participant</th>
                                         <th  className="text-softbleu" onClick={()=>close(false)}>Retour</th>
                                     </tr>
@@ -133,12 +135,17 @@ export default function TrainingState({value,close}){
                                                     voir participants
                                                 </div>
                                                 <div className="flex justify-between items-end text-blue-800 gap-2">
-                                                    <button onClick={()=>{UpValue(valueL)}}>
-                                                        <i className="fa-solid fa-pen text-blue-800"></i>
-                                                    </button>
-                                                    <button onClick={()=>{deleteSession(valueL.Id)}}>
-                                                            <i className="fa-solid fa-trash text-blue-800"></i>
-                                                    </button>
+                                                    
+                                                    {accesObj && (accesObj?.validation?.modification_session == null || accesObj?.validation?.modification_session=== undefined) ? null : (
+                                                        <button onClick={()=>{UpValue(valueL)}}>
+                                                            <i className="fa-solid fa-pen text-blue-800"></i>
+                                                        </button>
+                                                    )}
+                                                    {accesObj && (accesObj?.validation?.suppression_session == null || accesObj?.validation?.suppression_session=== undefined) ? null : (
+                                                        <button onClick={()=>{deleteSession(valueL.Id)}}>
+                                                                <i className="fa-solid fa-trash text-blue-800"></i>
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </div>
 

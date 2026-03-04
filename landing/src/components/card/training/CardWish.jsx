@@ -8,10 +8,18 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function CardWish({close}){
     const [idtheme,setIdtheme]=useState(null);
+    const [idTypeWish,setIdTypeWish]=useState(null);
     const [matricule,setMatricule]=useState(null);
     const [listWish,setListWish]=useState([])
     const [listTheme ,setListTheme]=useState([]);
-
+    const [listTypeWish ,setListTypeWish]=useState([]);
+    const getListTypeWish = async ()=>{
+            const data =  await getData(
+                url + `wish_type`
+            );
+            if(data.data!=null)
+                setListTypeWish(data.data)
+    }
     const addNewWish=(value,index=null)=>{
         if(idtheme!=null){
             setListWish((previous) => {
@@ -22,6 +30,7 @@ export default function CardWish({close}){
                         return [...previous, {
                             Id: null,
                             Idtheme: idtheme,
+                            idwish_type: idTypeWish,
                             IdWisher: 1,
                             Idbeneficiary: value.id,
                             matricule: value.matricule,
@@ -68,8 +77,15 @@ export default function CardWish({close}){
     const handler=(opt)=>{
         setIdtheme(opt.id)
     }
+   
+    const handlerTypeWish=(opt)=>{
+        if(opt!=null){
+            setIdTypeWish(opt.id);
+        }
+    }
     useEffect(() => {
         getListThemes();
+        getListTypeWish();
      }, []);
     return(
 
@@ -91,6 +107,8 @@ export default function CardWish({close}){
                 {/* nom formation */}
                 <label class="label-formulaire">Choisisez votre formation</label>
                 <Select options={listTheme} onChange={handler}/>
+                <label class="label-formulaire">type de souhait</label>
+                <Select options={listTypeWish} onChange={handlerTypeWish}/>
                 <label class="label-formulaire mt-8">Choisisez les participant</label>
                 <div className="flex gap-2">
                     <input 

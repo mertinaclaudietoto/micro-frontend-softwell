@@ -8,8 +8,8 @@ import { formatMoney } from "../../../function/utils";
 
 
 export default function BudgetTheme({close,value}){
-    // const acces = sessionStorage.getItem("access");
-    // const accesObj = JSON.parse(acces);
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
     console.log(value);
     const [budget,setBudget]=useState({
         idtheme :value.id,
@@ -56,6 +56,10 @@ export default function BudgetTheme({close,value}){
     useEffect(() => {
         loadData();
     }, []);
+    const isCanAddBudget = accesObj  && (accesObj?.budget?.ajout == null || accesObj?.budget?.ajout == undefined) 
+    const isCanUpdateBudget = accesObj  && (accesObj?.budget?.modification == null || accesObj?.budget?.modification == undefined) 
+
+
     return(
         <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white  p-10 rounded-card w-120 relative">
@@ -90,9 +94,12 @@ export default function BudgetTheme({close,value}){
                             onChange={(event)=>{handlerVariable("montant",event.target.value,setBudget)}}
                             required
                         />
-                        <button class="btn-neutre" onClick={()=> submit()}>
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
+                        {isCanAddBudget!=true ?
+                            <button class="btn-neutre" onClick={()=> submit()}>
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                         : <></>
+                        }
                     </div>
                 </div>
                 <div class="overflow-x-auto  mt-2">
@@ -120,9 +127,11 @@ export default function BudgetTheme({close,value}){
                                             />
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-500">
-                                        <button onClick={()=>{updateMontant(value)}}>
-                                            <i class="fa-solid fa-pen"></i>
-                                        </button>
+                                        {isCanUpdateBudget!=true ?
+                                            <button onClick={()=>{updateMontant(value)}}>
+                                                <i class="fa-solid fa-pen"></i>
+                                            </button> : <></>
+                                        } 
                                     </td>
                                 </tr>
                                 </>

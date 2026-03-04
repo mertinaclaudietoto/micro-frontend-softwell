@@ -10,7 +10,7 @@ import { getData,  update } from "../../function/Axios";
 import { dateToLetters } from "../../function/Date";
 import Select from "../../function/selectSimple";
 export default function QuestionE(){
-   const acces = sessionStorage.getItem("access");
+    const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
     const [question,setQuestion]=useState({
         question:null,
@@ -131,9 +131,12 @@ export default function QuestionE(){
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <p class=" font-semibold text-gray-900">Questionnaire d’évaluation post-formation pour l'entreprise  .</p>
-                                    <button class="bg-softbleutini-12 hover:bg-softbleushade-12 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={()=>submit()}>
-                                       Enregistrer
-                                    </button>
+                                    {accesObj && (accesObj?.question?.modification == null || accesObj?.question?.modification === undefined) ? null : (
+                                        <button class="bg-softbleutini-12 hover:bg-softbleushade-12 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={()=>submit()}>
+                                        Enregistrer
+                                        </button>
+                                    )}
+
                                 </div>
                             </div>
                         </div>

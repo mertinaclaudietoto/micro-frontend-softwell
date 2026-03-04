@@ -12,6 +12,7 @@ export default function Trainer(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
+    console.log(accesObj)
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
     const [listTheme ,setListTheme]=useState([]);
@@ -144,9 +145,16 @@ export default function Trainer(){
                                     <th class="tr-thead">Organisme</th>
                                     <th class="tr-thead">Email</th>
                                     <th class="tr-thead">Tel</th>
-                                    <th class="tr-thead">En activité</th>
-                                    <th class="tr-thead">Détails</th>
-                                    <th class="tr-thead">Suppression</th>
+                                     {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
+                                        <th class="tr-thead">En activité</th>
+                                    )}
+                                    {accesObj && (accesObj?.trainer?.voir_detaille == null || accesObj?.trainer?.voir_detaille === undefined) ? null : (
+                                        <th class="tr-thead">Détails</th>
+                                    )}
+                                    {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (
+                                        <th class="tr-thead">Suppression</th>
+                                    )}
+                                    
                                     {/* <th class="tr-thead"></th> */}
                                 </tr>
                             </thead>
@@ -161,21 +169,26 @@ export default function Trainer(){
                                         </td>
                                         <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.email}</span></td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.tel}</td>
-                                    
-                                        <td className="px-6 py-4">
-                                            <button
-                                                className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800"
-                                                onClick={() => diffActifTrainer(value)}
-                                            >
-                                                {value.nameActive}
-                                            </button>
-                                        </td>                                        
-                                        <td class=" px-6 py-4 text-sm text-gray-500">
-                                            <button onClick={()=>{upTrainer(value)}}>
-                                                    {/* ⋮ */}
-                                                <i class="text-gray-500 fas fa-file-alt"></i>     
-                                            </button>
-                                        </td>
+                                        {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
+                                            <td className="px-6 py-4">
+                                                <button
+                                                    className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800"
+                                                    onClick={() => diffActifTrainer(value)}
+                                                >
+                                                    {value.nameActive}
+                                                </button>
+                                            </td>
+                                        )}  
+
+                                        {accesObj && (accesObj?.trainer?.voir_detaille == null || accesObj?.trainer?.voir_detaille === undefined) ? null : (
+                                            <td class=" px-6 py-4 text-sm text-gray-500">
+                                                
+                                                <button onClick={()=>{upTrainer(value)}}>
+                                                    
+                                                    <i class="text-gray-500 fas fa-file-alt"> </i>     
+                                                </button>
+                                            </td>
+                                        )}
                                         
                                         {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (
                                             <td className="flex p-5 justify-center items-center">

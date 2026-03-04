@@ -3,8 +3,7 @@ import { update ,deletev } from "../../function/Axios";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { url_recrutement } from "../../data/data";
-export default function Update({close,valueUp,entityName}){
+export default function Update({close,valueUp,entityName,urlApplication}){
     const [value, setValue] = useState({
                     id:valueUp.id ,
                     name: valueUp.name,
@@ -17,7 +16,7 @@ export default function Update({close,valueUp,entityName}){
     };
     const submit = async ()=>{
         // console.log(value)
-        const data = await update(value,url_recrutement + entityName)
+        const data = await update(value,urlApplication + entityName)
         // console.log(value)
         if (data == true) {
             // toast.success("Données insérées avec succès !");
@@ -29,7 +28,7 @@ export default function Update({close,valueUp,entityName}){
     }
      const deleteV = async ()=>{
         // console.log(value)
-        const data = await deletev(value,url_recrutement + entityName)
+        const data = await deletev(value,urlApplication + entityName)
         // console.log(value)
         if (data == true) {
             // toast.success("Données insérées avec succès !");

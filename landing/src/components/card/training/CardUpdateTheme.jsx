@@ -38,7 +38,7 @@ export default function CardUpdateTheme({close,value}){
         });
         setSkill("");
     };
-
+   
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
             ...previous,
@@ -81,20 +81,26 @@ export default function CardUpdateTheme({close,value}){
     };
         loadData();
     }, []);
+
+    const isCanSeeBudget = accesObj  && (accesObj?.budget?.lecture == null || accesObj?.budget?.lecture == undefined) 
+  
     return(
         <>
-            {seeHistorique ? <BudgetTheme  value={value} close={setSeeHistorique}/>: 
+            {isCanSeeBudget!=true &&  seeHistorique ? <BudgetTheme  value={value} close={setSeeHistorique}/>: 
             <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white  p-10 rounded-card w-120 relative">
                 <div className="flex " >
                         <h3>Modifier un thème</h3>
                 </div>
-                <div class="absolute top-6 right-15">
-                    <span class="text-gray-800 text-lg font-semibold">
-                    <button className="btn-neutre" onClick={()=>{setSeeHistorique(true)}}>
-                                <i class="fa-solid fa-piggy-bank"></i>
-                    </button></span>
-                </div>
+                {isCanSeeBudget!=true  ?
+                    <div class="absolute top-6 right-15">
+                        <span class="text-gray-800 text-lg font-semibold">
+                        <button className="btn-neutre" onClick={()=>{setSeeHistorique(true)}}>
+                                    <i class="fa-solid fa-piggy-bank"></i>
+                        </button></span>
+                    </div> : <></>
+                }
+               
 
                 <div class="absolute top-6 right-6">
                     <span class="text-gray-800 text-lg font-semibold">

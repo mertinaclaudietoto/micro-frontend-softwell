@@ -1,12 +1,13 @@
 
 import { useEffect,useCallback } from "react";
-import { getData } from "../../function/Axios";
+import { deletev, getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
 import { CardAddTraining, Filter,Sidebar,CardWish } from "../../components";
 import { url, textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Wish1(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
@@ -50,6 +51,15 @@ export default function Wish1(){
         const data = await getData(url + `v_wish/pagination-groupbytheme?pageNumber=${numpage}&pageSize=${nbrSize}`);
         if(data.data!=null)
             setDataGroup(data.data);
+    }
+    const deleteV = async (value)=>{
+            const data = await deletev(value,url+"wish")
+            if (data == true) {
+                // toast.success("Données insérées avec succès !");
+                window.location.reload();
+            } else {
+                toast.error("Problème serveur, réessayez plus tard !");
+            }
     }
     useEffect(() => {
             getGroupBy()
@@ -136,6 +146,7 @@ export default function Wish1(){
                                     <table class="w-full">
                                     <thead class="bg-gray-50 border-b border-gray-200">
                                         <tr>
+                                            <th class="tr-thead">Type de souhait</th>
                                             <th class="tr-thead">Theme</th>
                                             <th class="tr-thead">Beneficiaire</th>
                                             <th class="tr-thead">Souhaiteur</th>
@@ -146,6 +157,7 @@ export default function Wish1(){
                                         {data.map((value,index)=>(
                                             <>
                                             <tr index={index} className={value.active==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
+                                                <td class="px-6 py-4 text-sm text-gray-500">{value.nametypewish}</td>
                                                 <td class="px-6 py-4 text-sm text-gray-500">{value.nametheme}</td>
                                                 <td class="px-6 py-4">
                                                     <div class="text-sm font-medium text-gray-900">{value.wisherName}&nbsp;&nbsp;{value.wisherFirstname} </div>
@@ -155,9 +167,10 @@ export default function Wish1(){
                                                     <div class="text-xs text-gray-500">matricule: {value.beneficiaryMatricule}</div>
                                                 </td>
                                                 
-                                                <td class="px-6 py-4 text-sm text-gray-500">
-                                                    <button onClick={()=>{showTraining(value)}}>
-                                                            ⋮
+                                                
+                                                <td class="px-6 py-4 text-sm flex  justify-center items-center text-gray-500" >
+                                                    <button onClick={()=>{deleteV(value)}}>
+                                                        <i class="fa-regular fa-trash-can"></i>                                                            
                                                     </button>
                                                 </td>
                                             </tr>

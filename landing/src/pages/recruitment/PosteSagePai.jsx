@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function PosteSagePai(){
-     const acces = sessionStorage.getItem("access");
-    // const accesObj = JSON.parse(acces);
+    const acces = sessionStorage.getItem("access");
+    const accesObj = JSON.parse(acces);
     const nameE="tpostes";
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
@@ -37,13 +37,17 @@ export default function PosteSagePai(){
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
         );
         setData( data.data);
-        console.log(data);
+        console.log( url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`);
     }, [numpage, search,nameE]); // dépendances de loadData
     
     const getNbrLigne = async ()=>{
         const data = await getData(url_recrutement + `${nameE}/count`);
-        if(data.data!=null)
+        if(data.data!=null){
             setNbrLigne(data.data);
+            console.log(data.data);
+        }
+            
+        
         
     }
     const sendsearch = async()=>{
@@ -59,6 +63,7 @@ export default function PosteSagePai(){
     
     return(
     <>
+
     {/* {showAdd ? <Add  close={setShowAdd}   entityName={nameE}   />  :<></> } */}
     <div class="flex h-screen">
         <Sidebar/>
@@ -68,7 +73,7 @@ export default function PosteSagePai(){
                 {/* filtre */}
                 <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-semibold text-gray-800">Liste Offre de l'entreprise dans sage pai
+                        <h2 class="text-xl font-semibold text-gray-800">Liste des postes de l'entreprise dans sage pai
                             <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                         </h2>
                         
@@ -84,14 +89,12 @@ export default function PosteSagePai(){
                             
                             </div>
                             <div className="flex space-x-2">
-                                {/* {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (
-                                    <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                )} */}
-                                    <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{actuallisationINfoSagepai()}}>
-                                        actuallisation
-                                    </button>
+                                    {accesObj && (accesObj?.theme?.ajout == null || accesObj?.theme?.ajout == undefined) ? null : (
+                                        <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{actuallisationINfoSagepai()}}>
+                                            actuallisation
+                                        </button>
+                                    )}
+                                    
                                 <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                     <i className="fas fa-arrow-left"></i>
                                 </button>

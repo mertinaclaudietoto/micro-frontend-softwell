@@ -3,16 +3,17 @@ import { useEffect,useCallback } from "react";
 import { getData } from "../../function/Axios";
 import { Link } from "react-router-dom";
 import { CardAddTrainer, Filter,Sidebar ,CardAddTraining, CardUpTrainer} from "..";
-import { url_recrutement, textbackground } from "../../data/data";
+import { textbackground } from "../../data/data";
 import { useState } from "react";
 import Select from "../../function/selectSimple";
 import Add from "./Add";
 import Update from "./Update";
 
-export default function CRUDIdName({entityName,Name,urlApplication}){
+export default function CRUDIdName({entityName,Name,urlApplication,nameAccess}){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
-    // const accesObj = JSON.parse(acces);
+    const accesObj = JSON.parse(acces);
+
     const nameE=entityName;
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
@@ -46,7 +47,7 @@ export default function CRUDIdName({entityName,Name,urlApplication}){
     }, [numpage, search,nameE]); // dépendances de loadData
 
     const getNbrLigne = async ()=>{
-        const data = await getData(url_recrutement + `${nameE}/count`);
+        const data = await getData(urlApplication + `${nameE}/count`);
         if(data.data!=null)
             setNbrLigne(data.data);
         
@@ -61,13 +62,20 @@ export default function CRUDIdName({entityName,Name,urlApplication}){
     useEffect(() => {
             loadData();
         }, [loadData]);
-
-
       return(
         <>
         
-        {showAdd ? <Add  close={setShowAdd}   entityName={nameE}   />  :<></> }
-        {showUpdate  ? <Update close={setShowUpdate} valueUp={upValue}  entityName={nameE} /> : <></>}
+                                       
+        { !(
+            accesObj &&
+            (accesObj?.[nameAccess]?.ajout === null ||
+            accesObj?.[nameAccess]?.ajout === undefined)
+            ) && showAdd ? <Add  close={setShowAdd} urlApplication={urlApplication}   entityName={nameE}   />  :<></> }
+        {!(
+            accesObj &&
+            (accesObj?.[nameAccess]?.modification === null ||
+            accesObj?.[nameAccess]?.modification === undefined)
+            ) && showUpdate  ? <Update close={setShowUpdate} urlApplication={urlApplication}  valueUp={upValue}  entityName={nameE} /> : <></>}
 
         <div class="flex h-screen ">
             <Sidebar/>
@@ -92,14 +100,16 @@ export default function CRUDIdName({entityName,Name,urlApplication}){
                                         </button>
                                     </div>
                                     <div className="flex space-x-2">
-                                        {/* {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (
-                                            <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
-                                                <i class="fa-solid fa-plus"></i>
-                                            </button>
-                                        )} */}
-                                         <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAdd(true)}}>
-                                                <i class="fa-solid fa-plus"></i>
-                                            </button>
+                                        {(
+                                            accesObj &&
+                                            (accesObj?.[nameAccess]?.ajout === null ||
+                                            accesObj?.[nameAccess]?.ajout === undefined)
+                                            ) ? null : (
+                                                <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAdd(true)}}>
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </button>
+                                            )
+                                        }
                                         <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
                                         <i className="fas fa-arrow-left"></i>
                                         </button>
@@ -117,7 +127,8 @@ export default function CRUDIdName({entityName,Name,urlApplication}){
                                 <tr>
                                     <th class="tr-thead w-8">#</th>
                                     <th class="tr-thead">Nom</th>
-                                    <th class="tr-thead"></th>
+                                    <th class="tr-thead">Modification</th>
+                                    <th class="tr-thead">Suppression</th>
                                     {/* <th class="tr-thead"></th> */}
                                 </tr>
                             </thead>
@@ -127,28 +138,36 @@ export default function CRUDIdName({entityName,Name,urlApplication}){
                                     <tr index={index} className={value.active==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.id}</span></td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.name}</td>
-                                        <td className="px-6 py-4 ">
-                                            <span
-                                                // className="inline-flex items-center justify-center px-2.5 py-1 rounded
-                                                //         text-xs font-medium bg-green-100 text-green-800
-                                                //         cursor-pointer hover:bg-green-200 transition"
-                                                // title="Modifier"
-                                                onClick={() =>  modification(value)}   // adapte selon ton code
-                                            >
-                                                <i className="fas fa-edit text-gray-400"></i>
-                                            </span>
+                                        {(
+                                            accesObj &&
+                                            (accesObj?.[nameAccess]?.modification === null ||
+                                            accesObj?.[nameAccess]?.modification === undefined)
+                                            ) ? null : 
+                                            <td className="px-6 py-4 ">
+                                                <span
+                                                    // className="inline-flex items-center justify-center px-2.5 py-1 rounded
+                                                    //         text-xs font-medium bg-green-100 text-green-800
+                                                    //         cursor-pointer hover:bg-green-200 transition"
+                                                    // title="Modifier"
+                                                    onClick={() =>  modification(value)}   // adapte selon ton code
+                                                >
+                                                    <i className="fas fa-edit text-gray-400"></i>
+                                                </span>
                                             </td>
-
-                                        {/* <button onClick={()=>{setUpValue(value)}}>
-                                            ⋮
-                                        </button> */}
-                                         {/* {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
-                                            <td class="px-6 py-4 text-sm text-gray-500">
-                                                <button onClick={()=>{setUpValue(value)}}>
-                                                        ⋮
-                                                </button>
+                                        }
+                                        {(
+                                            accesObj &&
+                                            (accesObj?.[nameAccess]?.suppression === null ||
+                                            accesObj?.[nameAccess]?.suppression === undefined)
+                                            ) ? null : 
+                                            <td className="px-6 py-4 ">
+                                                <span
+                                                    onClick={() =>  modification(value)}   // adapte selon ton code
+                                                >
+                                                    <i className="fas fa-edit text-gray-400"></i>
+                                                </span>
                                             </td>
-                                        )} */}
+                                        }
                                     </tr>
                                     </>
                                 ))}

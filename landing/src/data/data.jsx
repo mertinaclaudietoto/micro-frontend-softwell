@@ -513,17 +513,19 @@ export const accessinfo ={
   percentage:30,
   listpage : [
   { icone: "fa-solid fa-palette",access:"theme" ,name: "Themes", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fa-solid fa-chalkboard-user",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-piggy-bank",access:"budget" ,name: "Budget de formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-chalkboard-user",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] },{ name: "voir_detaille", boolean: [false] }] },
   { icone: "fa-solid fa-layer-groupr",access:"wish", name: "Souhait", listfunction: [
     { name: "lecture", boolean: [false] },
     { name: "faire_un_souhait", boolean: [false] },
-    // { name: "suppression", boolean: [false] },
+    { name: "suppression_souhait", boolean: [false] },
     // { name: "modification", boolean: [false] },
     { name: "validation_formation", boolean: [false] }] },
 
   { icone: "fa-solid fa-circle-check",access:"validation", name: "Gestion des formations", listfunction: [
     { name: "lecture", boolean: [false] },
     { name: "ajout_session", boolean: [false] },
+    { name: "voir_liste_sessions", boolean: [false] },
     { name: "modification_session", boolean: [false] },
     { name: "suppression_session", boolean: [false] },
     { name: "ajout_facture_session", boolean: [false] },
@@ -533,17 +535,45 @@ export const accessinfo ={
   { icone: "fas fa-calendar-alt",access:"modele_mail", name: "Model Email ", listfunction: [{ name: "lecture", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-calendar-alt",access:"statistique", name: "Statistique", listfunction: 
     [{ name: "lecture", boolean: [false] }, ] },
+  { icone: "fas fa-calendar-alt",access:"infog_formation", name: "Info G formation", listfunction: 
+    [{ name: "lecture", boolean: [false] },
+    { name: "suppression", boolean: [false] },
+    { name: "modification", boolean: [false] },
+    { name: "ajout", boolean: [false] },
+   ] },
   { icone: "fa-solid fa-user",access:"profile", name: "Profile", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fa-solid fa-users",access:"compte", name: "Compte", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   // recruitment
-  { icone: "fas fa-briefcase",access:"post", name: "Post", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-briefcase",access:"post", name: "Post", listfunction: [
+    { name: "lecture", boolean: [false] },
+    { name: "ajout", boolean: [false] },
+    { name: "suppression", boolean: [false] },
+    { name: "modification", boolean: [false] },
+    { name: "demande_de_souhait", boolean: [false] },
+     ] },
   { icone: "fas fa-file-alt",access:"demandepost", name: "Demande recrutement", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fas fa-check-circle",access:"validepost", name: "Les demande que j'ai validee", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-folder-open",access:"alldemande", name: "Tout les demande de recrutement", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-folder-open",access:"alldemande", name: "Tout les demande de recrutement", listfunction: [
+    { name: "lecture", boolean: [false] },
+    { name: "ajout", boolean: [false] },
+    { name: "suppression", boolean: [false] },
+    { name: "modification", boolean: [false] },
+    { name: "modification_date_recrutement", boolean: [false] },
+    { name: "validation_demande_d_offre", boolean: [false] },
+    { name: "voir_liste_postulants", boolean: [false] },
+
+    
+
+  ] },
   { icone: "fa fa-address-book",access:"listcandidat", name: "Liste des candidats inscrits", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
   { icone: "fa fa-paper-plane",access:"modelemails", name: "Liste models email", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa fa-paper-plane",access:"statistiquerecrutememt", name: "Statistique de recrutement", listfunction: [{ name: "lecture", boolean: [false] }] },
   { icone: "fas fa-clipboard-check",access:"infoselectionrecruitment", name: "Information pour les recrutements", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fas fa-building",access:"infoentreprise", name: "Information generale de l'entreprise", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fas fa-building",access:"infoentreprise", name: "Information generale de l'entreprise", listfunction: [
+    { name: "lecture", boolean: [false] },
+    { name: "ajout", boolean: [false] },
+    { name: "suppression", boolean: [false] },
+    { name: "modification", boolean: [false] }] },
 ]
 }
 
@@ -1211,6 +1241,11 @@ export   const  datasidebar =
                           {label :"Status",actif:false,link:"/stat-status"},
                       ]
                     },
+                    {label :"info generale",icone : "fas fa-clipboard-check",actif:false,link:"#",acces:"infog_formation",
+                      subItems:[
+                          {label :"Type de souhait ",actif:false,link:"/crud-wishtype"},
+                      ]
+                  },
                 ],
             parametre:[
                 {label :"Profile",icone : "fa-solid fa-user",actif:false,link:"/access-profile",subItems:null,acces:"profile"},
@@ -1218,17 +1253,17 @@ export   const  datasidebar =
                 {label :"Compte",icone : "fa-solid fa-users",actif:false,link:"/access-user",subItems:null,acces:"compte"},
             ],
             recrutement:[
-                {label :"Post sage pai",icone : "fas fa-briefcase",actif:false,link:"/rh-postsagepai",subItems:null,acces:"post"},
-                {label :"Offres",icone : "fa-solid fa-business-time",actif:false,link:"/addpost",subItems:null,acces:"post"},
+                {label :"Post sage pai",icone : "fas fa-briefcase",actif:false,link:"/rh-postsagepai",subItems:null,acces:"postesagepai"},
+                {label :"Offres",icone : "fa-solid fa-business-time",actif:false,link:"/addpost",subItems:null,acces:"post"}, 
                 {label :"Demande",icone : "fas fa-file-alt",actif:false,link:"/myrequest",subItems:null,acces:"demandepost"},
                 {label :"Mes Validation",icone : " fas fa-check-circle ",actif:false,link:"/myvalidation",subItems:null,acces:"validepost"},
                 {label :"Tout les demandes",icone : "fas fa-folder-open",actif:false,link:"/allrequest",subItems:null,acces:"alldemande"},
                 {label :"Liste des candidats inscrits",icone : "fa fa-address-book",actif:false,link:"/listecandidate",subItems:null,acces:"listcandidat"},
-                {label :"Model Email",icone : "fa fa-paper-plane",actif:false,link:"/email",subItems:null,acces:"alldemande"},
-                {label :"Statistique",icone : "fa-solid fa-chart-simple",actif:false,link:"#",acces:"statistique",
+                {label :"Model Email",icone : "fa fa-paper-plane",actif:false,link:"/email",subItems:null,acces:"modelemails"},
+                {label :"Statistique",icone : "fa-solid fa-chart-simple",actif:false,link:"#",acces:"statistiquerecrutememt",
                     subItems:[
-                        {label :"Candidates",actif:false,link:"/stat-candidate",acces:"infoselectionrecruitment"},
-                        {label :"Post",actif:false,link:"/stat-post",acces:"infoselectionrecruitment"},
+                        {label :"Candidates",actif:false,link:"/stat-candidate",acces:""},
+                        {label :"Post",actif:false,link:"/stat-post",acces:""},
                     ]
                 },
                 {label :"info generale",icone : "fas fa-clipboard-check",actif:false,link:"#",acces:"infoselectionrecruitment",

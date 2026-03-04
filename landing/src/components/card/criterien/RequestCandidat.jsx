@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { url_recrutement } from "../../../data/data";
 export default function RequestCandidat({close,valueUp}){
-    console.log(valueUp);
     const [value, setValue] = useState(
         {
     postId: valueUp.id,                     // number, obligatoire

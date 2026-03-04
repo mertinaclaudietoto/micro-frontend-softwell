@@ -3,8 +3,7 @@ import { send } from "../../function/Axios";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { url_recrutement } from "../../data/data";
-export default function Add({close,entityName}){
+export default function Add({close,entityName,urlApplication}){
    
     const [value, setValue] = useState({
                     name: "",
@@ -17,7 +16,7 @@ export default function Add({close,entityName}){
     };
     const submit = async ()=>{
         // console.log(value)
-        const data = await send(value,url_recrutement + entityName)
+        const data = await send(value,urlApplication + entityName)
         // console.log(value)
         if (data == true) {
             // toast.success("Données insérées avec succès !");

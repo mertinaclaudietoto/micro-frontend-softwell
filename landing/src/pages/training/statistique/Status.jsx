@@ -46,14 +46,13 @@ export default function Status(){
                                {/* validation */}
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                                     {statusTraining.map((value,index)=>(
-                                        <div class="bg-gray-50 rounded-xl p-6" key={index}>
+                                        <div class={`bg-gray-50 rounded-xl p-6  ${betweenBackground(index)}`}  key={index}>
                                             <div class="flex items-center justify-between mb-2">
-                                                <span class="text-2xl font-bold text-gray-900">{value.count}</span>
+                                                <span class= {`text-2xl font-bold text-gray-900 ${betweenBackground(index)}`} >{value.count}</span>
                                                 {/* <i class="w-5 h-5 text-blue-600 fas fa-check-circle"></i> */}
                                             </div>
                                             <p class={`text-sm text-gray-500 `}>
                                                 <span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${betweenBackground(index)}`}> {value.statusName}</span>
-                                               
                                             </p>
                                         </div>
                                     ))}

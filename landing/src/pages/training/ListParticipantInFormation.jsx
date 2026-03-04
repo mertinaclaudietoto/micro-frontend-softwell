@@ -26,7 +26,7 @@ export default function ListParticipantInFormation({value,close}){
     const [nbrSendedEmail,setNbrSendedEmail]=useState([]); 
     const getTotalSend = async ()=>{
         const data = await getData(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate=${value.id}`);
-        console.log(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate=${value.id}`);
+        // console.log(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate=${value.id}`);
         if(data.data!=null){
             setNbrSendedEmail(data.data);
             console.log("validation .....")
@@ -41,7 +41,6 @@ export default function ListParticipantInFormation({value,close}){
     const [seeSendCertification,setSeeSendCertification]=useState(false);
     const [daysession,setDaysession]=useState(null);
     const seeEmail =(index)=>{
-        console.log(":deuhdeuhduehduehude "+index)
             switch(index){
                 case 1:
                     setSeeSendConvocation(true);
@@ -56,7 +55,13 @@ export default function ListParticipantInFormation({value,close}){
                     return false;
             }
     }
-
+    
+    const getNbrEmailSended = (idmodelEmail)=>{
+        const result = nbrSendedEmail.find(
+            element => element.idmodelwithparameter == idmodelEmail
+        )?.emailenvoi ?? 0;
+        return result;
+    }
     useEffect(()=>{
         getTotalSend()
         getParticipant()
@@ -95,14 +100,19 @@ export default function ListParticipantInFormation({value,close}){
                                     <table class="max-w-7xl mx-auto py-10 ">
                                         <thead class="">
                                             <tr>
-                                                {nbrSendedEmail.map((value,index)=>(
-                                                    <th class="tr-thead text-xl" key={index}>
-                                                        <button onClick={()=>{
-                                                            seeEmail(index+1);
-                                                        }}
-                                                        class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>{value.emailenvoi}/{participant.length}  {value.name}</button> 
+                                                    <th class="tr-thead text-xl" key='1'>
+                                                        <button onClick={()=>{seeEmail(1);}} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>
+                                                            {getNbrEmailSended(1)}/{participant.length}  Convocation</button> 
                                                     </th>
-                                                )) }
+                                                    <th class="tr-thead text-xl" key='2'>
+                                                        <button onClick={()=>{seeEmail(2);}} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>
+                                                            {getNbrEmailSended(2)}/{participant.length} Questions post-formation</button> 
+                                                    </th>
+                                                    <th class="tr-thead text-xl" key='3'>
+                                                        <button onClick={()=>{seeEmail(3);}} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>
+                                                            {getNbrEmailSended(3)}/{participant.length} envois Certification </button> 
+                                                    </th>
+                                                
                                             </tr>
                                         </thead>
                                     </table> 

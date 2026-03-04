@@ -19,6 +19,7 @@ import { useState } from "react";
 import Select from "../../function/selectSimple";
 import TrainingState from "./TrainingState";
 export default function Validation(){
+    // voir_liste_sessions
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
@@ -132,7 +133,9 @@ export default function Validation(){
                                         <th class="tr-thead">Theme</th>
                                         <th class="tr-thead">Formateur</th>
                                         <th class="tr-thead">status</th>
-                                        <th class="tr-thead"></th>
+                                        {accesObj && (accesObj?.validation?.voir_liste_sessions == null || accesObj?.validation?.voir_liste_sessions=== undefined) ? null : (
+                                            <th class="tr-thead">Détails</th>
+                                        )}
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -151,16 +154,14 @@ export default function Validation(){
                                                 <div class="text-xs text-gray-500">nif: {value.nif} stat: {value.stat}</div>
                                             </td>
                                             <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getcolorstate(value.statu)}`}>{value.nameStatus }</span></td>
-                                            <td class="px-6 py-4 text-sm text-gray-500">
-                                                {/* {accesObj && (accesObj?.session?.lecture == null || accesObj?.session?.lecture == undefined)  ? null : (
+                                            {accesObj && (accesObj?.validation?.voir_liste_sessions == null || accesObj?.validation?.voir_liste_sessions=== undefined) ? null : (
+                                                <td class="px-6 py-4 text-sm text-gray-500">
                                                     <button  onClick={()=>showTraining(value)}>
-                                                        ⋮
+                                                            <i className="fas fa-file-alt text-gray-400"></i>
                                                     </button>
-                                                )} */}
-                                                <button  onClick={()=>showTraining(value)}>
-                                                        <i className="fas fa-file-alt text-gray-400"></i>
-                                                </button>
-                                            </td>
+                                                </td>
+                                            )}
+                                        
                                         </tr>
                                         </>
                                     ))}

@@ -4,9 +4,11 @@ import SidebarLargButton from "./button/SidebarLargButton";
 import CardPub from "./card/CardPub";
 import SidebarShortButton from "./button/SidebarShortButton";
 import { datasidebar } from "../../data/data";
+import useLogout from "../../function/Logout";
 export default function Sidebar(){
     const [isOpen ,setIsOpen]=useState(false);
     const pages =datasidebar;
+    const logout = useLogout();
     return (
         <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll "> 
         <div class="bg-white-200  h-screen ">
@@ -32,10 +34,6 @@ export default function Sidebar(){
                     <div class="w-full h-px bg-gray-200 my-1"></div>
                         {pages.infoentreprise.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
                         {pages.parametre.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
-
-
-
-                    
                 </aside>
                 ) : (
                     <aside class="w-80 bg-white  flex flex-col border-r border-gray-200">
@@ -80,15 +78,9 @@ export default function Sidebar(){
                         </div>
                         {/* compte */}
                         <div class="p-4 border-t border-gray-100">
-                            <button class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-gray-50 text-left">
-                                <div class="flex items-center gap-3">
-                                    <img src="https://i.pravatar.cc/100?img=8" alt="Brooklyn" class="w-10 h-10 rounded-full"/>
-                                    <div>
-                                        <div class="font-medium text-gray-900">Brooklyn</div>
-                                        <div class="text-sm text-gray-500">Essai Pro</div>
-                                    </div>
-                                </div>
-                                <i class="fas fa-chevron-up text-gray-400"></i>
+                            <button className={`card-icone-text  text-gray-600 hover:bg-gray-50`} onClick={logout}>
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <span className="text-base">Déconnexion</span>
                             </button>
                         </div>
                     </aside>

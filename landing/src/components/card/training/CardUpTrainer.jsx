@@ -269,8 +269,12 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
                                         <th class="tr-thead w-8">prix unitaire</th>
                                         <th class="tr-thead w-8">max personne</th>
                                         <th class="tr-thead w-80">description</th>
-                                        <th class="tr-thead ">questionnaire</th>
-                                        <th class="tr-thead "></th>
+                                        {accesObj && (accesObj?.trainer?.partage_du_lien_du_questionnaire_de_lorganisme == null || accesObj?.trainer?.partage_du_lien_du_questionnaire_de_lorganisme === undefined) ? null : (
+                                            <th class="tr-thead ">questionnaire</th>
+                                        )}
+                                        {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
+                                            <th class="tr-thead ">Suppression</th>
+                                        )}
                                     </tr>
                                 </thead>
                                  
@@ -281,16 +285,20 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
                                         <td class="px-6 py-4">{v.unitprice}</td>
                                         <td class="px-6 py-4">{v.maxpersonne}</td>
                                         <td class="px-6 py-4">{v.description}</td>
-                                        <td>
-                                            <button  onClick={() => {handlerQuestionnaire(v)}} class="btn-neutre-gray">
-                                                 <i class="fa-solid fa-clipboard-question"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button  onClick={() => {handlerListThemeTrainer("Trainerthemes",price,k)}} class="btn-neutre-gray">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </td>
+                                        {accesObj && (accesObj?.trainer?.partage_du_lien_du_questionnaire_de_lorganisme == null || accesObj?.trainer?.partage_du_lien_du_questionnaire_de_lorganisme === undefined) ? null : (
+                                            <td>
+                                                <button  onClick={() => {handlerQuestionnaire(v)}} class="btn-neutre-gray">
+                                                    <i class="fa-solid fa-clipboard-question"></i>
+                                                </button>
+                                            </td>
+                                        )}
+                                        {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
+                                            <td>
+                                                <button  onClick={() => {handlerListThemeTrainer("Trainerthemes",price,k)}} class="btn-neutre-gray">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        )}
                                     </tr>
                                 ))}
                                 </table>

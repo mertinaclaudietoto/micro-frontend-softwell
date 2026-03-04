@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function EmailModel(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
-    // const accesObj = JSON.parse(acces);
+    const accesObj = JSON.parse(acces);
     const [nameE,setNameE]=useState("modelemail");
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
@@ -96,16 +96,13 @@ export default function EmailModel(){
                                     
                                     </div>
                                     <div className="flex space-x-2">
-                                        {/* {accesObj && (accesObj?.trainer?.suppression == null || accesObj?.trainer?.suppression === undefined) ? null : (
-                                            <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setSeeTrainingListe(true)}}>
+                                        {accesObj && (accesObj?.modelemails?.ajout == null || accesObj?.modelemails?.ajout === undefined) ? null : (
+                                            <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAdd(true)}}>
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
-                                        )} */}
-                                         <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAdd(true)}}>
-                                                <i class="fa-solid fa-plus"></i>
-                                            </button>
+                                        )}
                                         <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
-                                        <i className="fas fa-arrow-left"></i>
+                                            <i className="fas fa-arrow-left"></i>
                                         </button>
                                         <button className="btn-neutre-gray" onClick={()=>pagination(numpage+1)} title="Suivant">
                                             <i className="fas fa-arrow-right"></i>
@@ -131,16 +128,20 @@ export default function EmailModel(){
                                     <tr index={index} className={value.active==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
                                         <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.id}</span></td>
                                         <td class="px-6 py-4 text-sm text-gray-500">{value.name}</td>
-                                        <td className="px-6 py-4 ">
-                                            <span
-                                                onClick={() =>  modification(value)}   // adapte selon ton code
-                                            >
-                                                <i className="fas fa-edit text-gray-400"></i>
-                                            </span>
-                                        </td>
-                                        <td onClick={() =>  _delete(value)} >
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </td>
+                                        {accesObj && (accesObj?.modelemails?.modification == null || accesObj?.modelemails?.modification === undefined) ? null : (
+                                            <td className="px-6 py-4 ">
+                                                <span
+                                                    onClick={() =>  modification(value)}   // adapte selon ton code
+                                                >
+                                                    <i className="fas fa-edit text-gray-400"></i>
+                                                </span>
+                                            </td>
+                                        )}
+                                        {accesObj && (accesObj?.modelemails?.suppression == null || accesObj?.modelemails?.suppression === undefined) ? null : (
+                                            <td onClick={() =>  _delete(value)} >
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </td>
+                                        )}
                                     </tr>
                                     </>
                                 ))}

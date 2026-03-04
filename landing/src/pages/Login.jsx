@@ -29,14 +29,12 @@ export default function Login({closePopup}){
                 sessionStorage.setItem("token", response.data.data.token);
             }
             if (response.data.data.id) {
-                // console.log(response.data.data);
                 sessionStorage.setItem("userId", response.data.data.id);
                 sessionStorage.setItem("userRole", response.data.data.idrole);
             }
              if (response.data.data.access) {
                 sessionStorage.setItem("access", response.data.data.access);
-                // console.log(response.data.data.access)
-                navigate("/training-theme");
+                navigate("/accueil");
             }
         } catch (error) {
             setText("Login ou Mot de passe incorrecte")
