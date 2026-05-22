@@ -2,8 +2,10 @@ import React,{useEffect, useState,useCallback} from "react";
 import { textbackground, url, usersprofile } from "../../data/data";
 import { Sidebar,Filter } from "../../components";
 import CardAdduserapk from "../../components/card/popup/CardAdduserapk";
-import { getData } from "../../function/Axios";
+import { deletev, getData } from "../../function/Axios";
 import Select from "../../function/selectSimple";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function UserProfile(){
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
@@ -29,7 +31,7 @@ export default function UserProfile(){
         );
         setData( data.data);;
         console.log(data.data)
-    }, [numpage, search,idrole]); // dépendances de loadData
+    }, [numpage, search,idrole,addCompte]); // dépendances de loadData
 
     const pagination =(value)=>{
         setNumpage(
@@ -50,6 +52,16 @@ export default function UserProfile(){
     const sendsearch = async()=>{
         setNumpage(1);
     }
+    const deleteV = async (value)=>{
+        const data = await deletev(value,url + 'employ')
+        if (data == true) {
+            // toast.success("Données insérées avec succès !");
+            close(false);
+            window.location.reload();
+        } else {
+           toast.error("Impossible de supprimer ce profil car des données y sont rattachées.");
+        }
+    }
     useEffect(()=>{
         getNbrLigne()
         getListRole();
@@ -67,7 +79,7 @@ export default function UserProfile(){
                     {/* filtre */}
                     <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-xl font-semibold text-gray-800">Liste Organisme
+                            <h2 class="text-xl font-semibold text-gray-800">Liste Comptes
                                 <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                             </h2>
                             
@@ -145,10 +157,15 @@ export default function UserProfile(){
                                             <td className=" py-4 px-4 pl-10 text-sm text-gray-700">
                                                 <span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.nameRole}</span>
                                             </td>
+                                            {/* <td className="text-left py-4 px-4 pl-10 text-sm text-gray-700 lowercase">
+                                                <button type="button" className="text-blue-500 text-xs underline" onClick={() => setVisible(!visible)}>
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>
+                                            </td>  */}
                                             <td className="text-left py-4 px-4 pl-10 text-sm text-gray-700 lowercase">
-                                            <button type="button" className="text-blue-500 text-xs underline" onClick={() => setVisible(!visible)}>
-                                                 <i class="fa-solid fa-pen"></i>
-                                            </button>
+                                                <button type="button" className="text-blue-500 text-xs underline" onClick={() => deleteV(value)}>
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
                                             </td> 
                                         </tr>
                                     </React.Fragment>

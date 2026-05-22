@@ -26,11 +26,9 @@ export default function ListParticipantInFormation({value,close}){
     const [nbrSendedEmail,setNbrSendedEmail]=useState([]); 
     const getTotalSend = async ()=>{
         const data = await getData(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate=${value.id}`);
-        // console.log(url_sendemail + `v_nbr_emailsended_formation/getById?idtraining_validate=${value.id}`);
+        
         if(data.data!=null){
             setNbrSendedEmail(data.data);
-            console.log("validation .....")
-            console.log(data.data);
         }   
     }
     const [showLink,setShowLink]=useState();

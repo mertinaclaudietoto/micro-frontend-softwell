@@ -39,19 +39,16 @@ export default function StepRecruitment(){
     const getRules = async ()=>{
         const data = await getData(url + `roles`);
         if(data.data!=null){
-console.log(data.data);
             setRules(data.data); 
         }
             
     }
     
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
         );
         setData( data.data);
-        console.log(data);
     }, [numpage, search,nameE]); // dépendances de loadData
 
     const getNbrLigne = async ()=>{

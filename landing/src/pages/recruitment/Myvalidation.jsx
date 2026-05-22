@@ -29,7 +29,6 @@ export default function MyValidation(){
     }
     
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
             url_recrutement + `${nameE}/getByIdAdmin?pageNumber=${numpage}&pageSize=${nbrSize}&id=${sessionStorage.getItem("userId")}`
         );

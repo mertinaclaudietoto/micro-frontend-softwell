@@ -15,14 +15,12 @@ export default function Presence(){
     const { encryptParametres } = useParams();
     const decoded = atob(encryptParametres);
     const dataValue = decoded.split("|");
-    console.log(dataValue);
     const [data,setData]=useState([]);
     const getParticipants = async () => {
         const data = await getData(
             url + `presence/${dataValue[0]}`
         );
         setData( data.data);;
-        console.log(data.data)
     };
     const updateAccess = (index, key, value) => {
         setData(prev => {

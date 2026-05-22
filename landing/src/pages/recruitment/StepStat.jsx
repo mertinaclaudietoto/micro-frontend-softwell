@@ -16,7 +16,6 @@ export default function StepStat({value,close}){
         const data = await getData(
             url_recrutement + `vstatstep/${value.id}/${sessionStorage.getItem("userRole")}`
         );
-        console.log(data.data);
         setData( data.data);
     }, []); 
     useEffect(() => {

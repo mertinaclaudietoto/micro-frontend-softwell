@@ -24,7 +24,6 @@ export default function Invoice({value,close}){
     const getListSession = async ()=>{
             const data = await getData(url + `session/list/${value.id}`);
             if(data.data!=null){
-                console.log("liste ,,,",data.data);
                 setSession(data.data);
             }   
     }

@@ -51,7 +51,6 @@ export default function AllRequeste(){
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
         );
         setData( data.data);
-        console.log(data);
     }, [numpage, nameE]); // dépendances de loadData
     const sendsearch = async()=>{
         setNumpage(1);

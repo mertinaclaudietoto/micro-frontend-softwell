@@ -26,12 +26,10 @@ export default function StatRh(){
         );
     }
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
             url_recrutement + `${nameE}/getByIdRequester?pageNumber=${numpage}&pageSize=${nbrSize}&id=${sessionStorage.getItem("userId")}`
         );
         setData( data.data);
-        console.log(data);
     }, [numpage, search,nameE]); // dépendances de loadData
 
   

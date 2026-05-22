@@ -46,7 +46,7 @@ export default function ResponsePostFormationEntreprise(){
             responce:JSON.stringify(data),
             total:0,
         }
-        console.log(valueSave);
+       
         if(dataValue[4]=="true" && hasAlreadyAResponce==false){
             const value = await send(valueSave,
                 url + `response-question`

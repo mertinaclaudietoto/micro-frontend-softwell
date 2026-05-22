@@ -12,6 +12,8 @@ import { generateEditorJsFromSessions, generateEditorJsFromSessionsCustomised } 
 import UpdateModelEmailSendConvocation from "../../components/email/training/UpdateModelEmailSendConvocation";
 
 export default function SendConvocation({value,close,lastParticipant}){
+    console.log({value,close,lastParticipant})
+    console.log("sendconvoodeodjeojdejde")
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
     const [participant,setParticipant]=useState(lastParticipant); 
@@ -21,7 +23,6 @@ export default function SendConvocation({value,close,lastParticipant}){
     const [showLink,setShowLink]=useState();
     const [seeValue,setSeeValue]=useState();
     const [listemail,setListEmail]=useState([]);
-
     const getParticipantDayPresence = async (modelConvocation)=>{
             const data = await getData(url + `v_participant_validate/participants-session-presence/${value.id}`);
             if(data.data!=null){
@@ -32,14 +33,14 @@ export default function SendConvocation({value,close,lastParticipant}){
     //l'id convocation sera toujours 1 
     const getModelEmail = async ()=>{
             const data = await getData(url_sendemail + `model_with_parameteres/getById?id=1`);
+            console.log(data);
+            console.log(url_sendemail + `model_with_parameteres/getById?id=1`);
             if(data.data!=null){
                 setModelConvocation(data.data);
                 getParticipantDayPresence(data.data);
             }   
     }
     const changeModelEmailForThisConvocation = async (modelConvocation)=>{
-            console.log("validation deidjeidjeijde");
-            console.log(modelConvocation);
             setModelConvocation(modelConvocation);
             setEmailTosends(participantDayPresence,modelConvocation);
     }
@@ -63,9 +64,34 @@ export default function SendConvocation({value,close,lastParticipant}){
             )
         );
     }
+    const parseModelContent = (content) => {
+        if (!content) {
+            return null;
+        }
+
+        if (typeof content !== "string") {
+            return content;
+        }
+
+        try {
+            return JSON.parse(content);
+        } catch (error) {
+            console.error("Model convocation content invalide", error);
+            return null;
+        }
+    };
+
     const setEmailTosends = (participantDayPresenceData,modelConvocation) => {
-        if(modelConvocation!=null){
-            var table = participant.map((p) => ({
+        if(modelConvocation!=null && modelConvocation.content){
+            const customisedModel = parseModelContent(modelConvocation.content);
+            const hasCustomisedBlocks = Array.isArray(customisedModel?.blocks);
+
+            var table = participant.map((p) => {
+                const participantSessions = participantDayPresenceData.filter(
+                    (session) => session.idparticipant === p.idparticipant
+                );
+
+                return {
                     id:p.idparticipant,
                     matricule:p.matricule,
                     photo:p.photo,
@@ -76,14 +102,18 @@ export default function SendConvocation({value,close,lastParticipant}){
                     idtraining_validate: value.id,
                     date: new Date(),
                     checked:true,
-                    content: generateEditorJsFromSessionsCustomised(
-                            participantDayPresenceData.filter(
-                                (session) => session.idparticipant === p.idparticipant
+                    content: hasCustomisedBlocks
+                        ? generateEditorJsFromSessionsCustomised(
+                                participantSessions,
+                                value.themeName,
+                                customisedModel
+                            )
+                        : generateEditorJsFromSessions(
+                                participantSessions,
+                                value.themeName
                             ),
-                            value.themeName,
-                      typeof modelConvocation.content =="string"?  JSON.parse(modelConvocation.content) : modelConvocation.content
-                    ),
-                }));
+                };
+            });
             console.log("set email .....")
             console.log(table);
             setListEmail(

@@ -31,7 +31,6 @@ export default function QuestionE(){
     };
     const [data,setData]=useState([]);
     const handlerAddData =() =>{
-        console.log(question);
         setData((previous) => [
             ...previous,
             question
@@ -112,7 +111,6 @@ export default function QuestionE(){
             toast.error("Problème serveur, réessayez plus tard !");
         }
     } catch (error) {
-        console.error(error);
         toast.error("Erreur lors de l'envoi !");
     }
 };
@@ -146,7 +144,7 @@ export default function QuestionE(){
                                         <button 
                                             onClick={() => {
                                             handlerAddData();
-                                            console.log("djeijdejdeid");
+                                            
                                             }}  
                                             className="btn-neutre-gray hover:bg-softbleutini-11"
                                         >
@@ -183,6 +181,21 @@ export default function QuestionE(){
                                                 onChange={(event)=>{handlerVariable("choice",event.target.value,setChoix)}}
                                             ></textarea>
                                         </div>
+                                        <div className="col-span-3 w-1/2">
+                                            <label className="label-formulaire mt-2 mb-1">Point</label>
+                                            <input
+                                                required
+                                                type="number"
+                                                min="0"
+                                                step="1"
+                                                placeholder={choix.Choice}
+                                                class="input_singup"
+                                                onChange={(event) => {
+                                                    const value = Math.max(0, event.target.value);
+                                                    handlerVariable("point", value, setChoix);
+                                                }}
+                                            />
+                                        </div>
                                      
                                         <div className="flex justify-center items-center">
                                             <button onClick={() => {handlerAddChoice()}} class="btn-neutre-gray">
@@ -202,6 +215,8 @@ export default function QuestionE(){
                                             {question.choicequestion.map((v,k)=>(
                                                 <tr index={k} >
                                                     <td class="px-6 py-4">{v.choice}</td>
+                                                    <td class="px-6 py-4">{v.point}</td>
+
                                                     <td>
                                                         <button  onClick={() => {deleteChoice(k)}} class="btn-neutre-gray">
                                                             <i class="fa-regular fa-trash-can"></i>

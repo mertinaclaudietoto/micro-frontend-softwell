@@ -40,12 +40,10 @@ export default function ModelEmail(){
         );
     }
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
             url_sendemail + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
         );
         setData( data.data);
-        console.log(data);
     }, [numpage, search,nameE]); // dépendances de loadData
     const getNbrLigne = async ()=>{
         const data = await getData(url_sendemail + `${nameE}/count`);

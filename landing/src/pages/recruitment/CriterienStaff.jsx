@@ -42,12 +42,10 @@ export default function CriterienStaff(){
         );
     }
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
         );
         setData( data.data);
-        console.log(data);
     }, [numpage, search,nameE]); // dépendances de loadData
 
     const getNbrLigne = async ()=>{

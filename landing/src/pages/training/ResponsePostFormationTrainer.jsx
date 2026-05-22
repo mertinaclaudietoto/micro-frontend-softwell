@@ -29,8 +29,7 @@ export default function ResponsePostFormationTrainer(){
         )
         if(dataResponce.data!=null){
             setHasAlreadyAResponce(true);
-            // console.log(dataResponce.data);
-            // console.log(JSON.parse(dataResponce.data.responce));
+           
             setData(JSON.parse(dataResponce.data.responce));
         }
     }

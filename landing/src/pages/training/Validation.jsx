@@ -50,7 +50,6 @@ export default function Validation(){
         const data = await getData(
             url + `v_training_validate/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}${idtheme ? '&idtheme=' + encodeURIComponent(idtheme.id) : ''}`
         );
-        console.log(data.data)
         setData( data.data);;
     }, [numpage, search,idtheme]); // dépendances de loadData
 
@@ -64,7 +63,7 @@ export default function Validation(){
             url + `training-status`
         );
         if(datalistThemes.data!=null){
-            console.log(datalistThemes.data)
+           
             setListTheme(datalistThemes.data)
         }
     }

@@ -32,7 +32,7 @@ export default function Wish1(){
             ? Math.ceil(nbrligne / nbrSize)
             : value
         );
-        console.log("page",nbrligne,Math.ceil(nbrligne / nbrSize))
+        // console.log("page",nbrligne,Math.ceil(nbrligne / nbrSize))
     }
     const loadData = useCallback(async () => {
         // console.log(idtheme)

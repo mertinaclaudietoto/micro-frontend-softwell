@@ -30,12 +30,10 @@ export default function ListCandidate(){
 
     
     const loadData = useCallback(async () => {
-        console.log(nameE)
         const data = await getData(
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
         );
         setData( data.data);
-        console.log(data);
     }, [numpage, nameE]); // dépendances de loadData
 
   
@@ -62,7 +60,7 @@ export default function ListCandidate(){
                         {/* filtre */}
                         <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                             <div class="flex items-center justify-between">
-                                <h2 class="text-xl font-semibold text-gray-800">Liste Des demandes
+                                <h2 class="text-xl font-semibold text-gray-800">Liste des candidates sur le plateforme 
                                     {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                                 </h2>
                                 

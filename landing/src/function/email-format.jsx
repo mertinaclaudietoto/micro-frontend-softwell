@@ -126,6 +126,15 @@ export const generateEditorJsFromSessionsCustomised = (
   nomformation,
   customisedModel
 ) => {
+  // Contrôle null pour éviter l'erreur "can't access property blocks"
+  if (!customisedModel || !customisedModel.blocks) {
+    return {
+      time: Date.now(),
+      version: "2.28.2",
+      blocks: []
+    };
+  }
+
   //les valeurs avec les paramettrent modifier
   const blocks = [];
   // Helper pour formater la date

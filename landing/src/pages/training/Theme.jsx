@@ -31,7 +31,7 @@ export default function Theme(){
         if (data.data != null){
             
             setData( data.data);;
-            console.log(data.data)
+          
         } 
     }, [numpage, search]); // dépendances de loadData
 

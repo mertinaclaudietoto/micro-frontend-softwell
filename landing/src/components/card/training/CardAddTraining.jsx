@@ -136,12 +136,14 @@ export default function CardAddTraining({close}){
     //     nameunit: ""
     // });
     // };
+    // validation_formation
     useEffect(() => {
             getListThemes();
         }, []);
     const submit = async ()=>{
         const data = await send(value,url + "training-validate")
-        // console.log(value)
+        
+        console.log(value)
         if (data == true) {
             toast.success("Formation validée avec succès !");
             close(false);

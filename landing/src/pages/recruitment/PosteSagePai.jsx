@@ -37,18 +37,13 @@ export default function PosteSagePai(){
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`
         );
         setData( data.data);
-        console.log( url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}`);
     }, [numpage, search,nameE]); // dépendances de loadData
     
     const getNbrLigne = async ()=>{
         const data = await getData(url_recrutement + `${nameE}/count`);
         if(data.data!=null){
             setNbrLigne(data.data);
-            console.log(data.data);
         }
-            
-        
-        
     }
     const sendsearch = async()=>{
         setNumpage(1);

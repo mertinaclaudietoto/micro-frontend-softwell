@@ -29,7 +29,7 @@ export default function TrainingState({value,close}){
      const getListSession = async ()=>{
             const data = await getData(url + `session/list/${value.id}`);
             if(data.data!=null){
-                console.log("liste ,,,",data.data);
+               
                 setSession(data.data);
             }   
         }
@@ -41,7 +41,7 @@ export default function TrainingState({value,close}){
     }
 
     const deleteSession = async (idSessionDelete)=>{
-        console.log()
+        
         const value = await deleteId(url + `session/${idSessionDelete}`);
         if (value == true) {
             toast.success("Données supprimées avec succès !");

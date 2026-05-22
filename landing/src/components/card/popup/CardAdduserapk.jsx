@@ -22,8 +22,9 @@ export default function CardAdduserapk({close,listRole}){
         const data =  await getData(
             url + `employ/getby?matricule=${matricule}`
         );
+        // console.log( url + `employ/getby?matricule=${matricule}`)
         setUser(data.data)
-        console.log(data.data)
+        // console.log(data.data)
     }   
     const handlerVariable = (name, value,setFunction) => {
         setFunction((previous) => ({
@@ -35,7 +36,6 @@ export default function CardAdduserapk({close,listRole}){
         handlerVariable("idrole",opt.id.toString(),setUser)
     }
     const submit = async ()=>{
-        console.log(user)
         const data = await send(user,url + "employ/registration")
         // console.log(value)
         if (data == true) {

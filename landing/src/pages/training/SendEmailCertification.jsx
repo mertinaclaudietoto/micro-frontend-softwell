@@ -34,8 +34,7 @@ export default function SendEmailCertification({value,close,lastParticipant}){
         }   
     }
     const changeModelEmailForThisConvocation = async (modelConvocation)=>{
-            console.log("validation deidjeidjeijde");
-            console.log(modelConvocation);
+            
             setModelConvocation(modelConvocation);
             setEmailTosends(participantDayPresence,modelConvocation);
     }
@@ -80,8 +79,7 @@ export default function SendEmailCertification({value,close,lastParticipant}){
                             typeof modelConvocation.content =="string"?  JSON.parse(modelConvocation.content) : modelConvocation.content
                     ),
                 }));
-            console.log("set email .....")
-            console.log(table);
+           
             setListEmail(
                 table
             );

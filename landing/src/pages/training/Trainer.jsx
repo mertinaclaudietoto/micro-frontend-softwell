@@ -12,7 +12,7 @@ export default function Trainer(){
     // TODO:delete and update
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-    console.log(accesObj)
+   
     const [data,setData]=useState([]); 
     const [search ,setSearch]=useState("");
     const [listTheme ,setListTheme]=useState([]);
@@ -26,8 +26,8 @@ export default function Trainer(){
     }
     const deleteTrainer= async (value)=>{
         setManageTraining(value)
-        const data = await deleteWithId(url + `trainer/${value.id}`)
-        // console.log(value)
+        const data = await deleteWithId(url + `trainer/${value.idtrainer}`)
+        
         if (data == true) {
             toast.success("Données supprimées avec succès !");
             loadData();

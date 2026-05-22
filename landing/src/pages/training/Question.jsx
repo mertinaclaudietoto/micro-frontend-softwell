@@ -33,7 +33,6 @@ export default function Question(){
     };
     const [data,setData]=useState([]);
     const handlerAddData =() =>{
-        console.log(question);
         setData((previous) => [
             ...previous,
             question
@@ -81,7 +80,6 @@ export default function Question(){
         {id:1,name:"choix multiple"},
     ]
     const submit = async ()=>{
-        console.log(data)
         const valueData ={
                 Id:Id,
              Idtrainer_theme:dataValue[0],
@@ -126,7 +124,7 @@ export default function Question(){
                                         <button 
                                             onClick={() => {
                                             handlerAddData();
-                                            console.log("djeijdejdeid");
+                                         
                                             }}  
                                             className="btn-neutre-gray hover:bg-softbleutini-11"
                                         >
