@@ -48,7 +48,7 @@ export default function CardAddTheme({close}){
     const submit = async ()=>{
         const value = await send(theme,url + "training-themes")
         if (value == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -66,7 +66,7 @@ export default function CardAddTheme({close}){
     return(
         <div className="background_transparent_popup">
             <div class="grid grid-cols-1 bg-white  p-10 rounded-card w-120 relative">
-                <h3>Ajout d'un nouveau theme</h3>
+                <h3>Ajout d'un nouveau thème</h3>
                 <div class="absolute top-6 right-6">
                     <span class="text-gray-800 text-lg font-semibold">
                     <button class="" onClick={()=>(close(false))}>
@@ -95,7 +95,7 @@ export default function CardAddTheme({close}){
                     </div>
                 </div>
                 <label class="label-formulaire mt-4 mb-2">Type formation</label>
-                <Select options={trainingType}  placeholder="type du formation " onChange={handlerSelectTrainingType} value={false} />
+                <Select options={trainingType}  placeholder="Type de formation " onChange={handlerSelectTrainingType} value={false} />
                 {/* why  */}
                 <div className="my-2">
                     <label class="label-formulaire">Qu’attendons-nous de cette formation ?</label>
@@ -123,7 +123,7 @@ export default function CardAddTheme({close}){
                                 <div>
                                     <input 
                                         type="text" 
-                                        placeholder="Enter compétences" 
+                                        placeholder="Saisir les compétences" 
                                         class="input_singup"
                                         onChange={(event)=>{setSkill(event.target.value)}}
                                         

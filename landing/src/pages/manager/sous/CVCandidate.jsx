@@ -56,7 +56,7 @@ export default function CVCandidate({id ,idrequest,idpost,rang,idstep,email,clos
             url_recrutement + `candidate/refused?id=`+id
         );
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -70,7 +70,7 @@ export default function CVCandidate({id ,idrequest,idpost,rang,idstep,email,clos
                 url_recrutement + `recruitmentcandidate/nextstep?id=`+id+`&range=`+rang
             );
             if (data == true) {
-                toast.success("Données insérées avec succès !");
+                toast.success("Données enregistrées avec succès !");
             } else {
                 toast.error("Problème serveur, réessayez plus tard !");
             }
@@ -208,7 +208,7 @@ export default function CVCandidate({id ,idrequest,idpost,rang,idstep,email,clos
                                             :null
                                         ))}
                                     </div>
-                                    <p class="text-sm-gray">Hard skills</p>
+                                    <p class="text-sm-gray">Compétences techniques</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidatehardskill.map((value,index)=>(
                                             value.idCandidat!=null ? 
@@ -216,7 +216,7 @@ export default function CVCandidate({id ,idrequest,idpost,rang,idstep,email,clos
                                             : null
                                         ))}
                                     </div>
-                                    <p class="text-sm-gray">Soft skills</p>
+                                    <p class="text-sm-gray">Compétences comportementales</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidatesoftskill.map((value,index)=>(
                                             value.idCandidat!=null ? 

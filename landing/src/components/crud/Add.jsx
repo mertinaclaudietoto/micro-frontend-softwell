@@ -19,7 +19,7 @@ export default function Add({close,entityName,urlApplication}){
         const data = await send(value,urlApplication + entityName)
         // console.log(value)
         if (data == true) {
-            // toast.success("Données insérées avec succès !");
+            // toast.success("Données enregistrées avec succès !");
             close(false);
             window.location.reload();
 

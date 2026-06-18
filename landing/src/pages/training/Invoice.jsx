@@ -45,7 +45,7 @@ export default function Invoice({value,close}){
                             {/* filtre */}
                             <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                                 <div class="flex items-center justify-between">
-                                    <h2 class="text-xl font-semibold text-gray-800">Facture du formation
+                                    <h2 class="text-xl font-semibold text-gray-800">Facture de la formation
                                         {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                                     </h2>
                                     
@@ -77,7 +77,7 @@ export default function Invoice({value,close}){
                                         <thead className="bg-gray-50 border-b border-gray-200">
                                             <tr>
                                                 <th className="tr-thead">Designation</th>
-                                                <th className="tr-thead">prix unitaire</th>
+                                                <th className="tr-thead">Prix unitaire</th>
                                                 <th className="tr-thead">quantitee</th>
                                                 <th className="tr-thead">prix total</th>
                                             </tr>

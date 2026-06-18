@@ -103,7 +103,7 @@ export default function SendEmailCertification({value,close,lastParticipant}){
         // console.log(value)
         if (data == true) {
             toast.update(toastId, {
-                render: "Email envoyées avec succès !",
+                render: "E-mails envoyés avec succès !",
                 type: "success",
                 isLoading: false,
                 autoClose: 3000,
@@ -132,7 +132,7 @@ export default function SendEmailCertification({value,close,lastParticipant}){
                 <div class=" md:p-8 bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
                     <div className=" max-w-7xl mx-auto p-10 flex bg-white">
                         <div className="flex-1  border-rigth ">
-                            <h2 class="text-xl font-semibold text-gray-800 py-2">Envois Email
+                            <h2 class="text-xl font-semibold text-gray-800 py-2">Envoi d'e-mail
                             </h2>
                             <table class="w-full pt-2 ">
                                 <thead class="bg-gray-100 border-b border-gray-200">
@@ -142,7 +142,7 @@ export default function SendEmailCertification({value,close,lastParticipant}){
                                         <th class="tr-thead text-xl">{value?.adminName} {value?.adminFirstname}</th>
                                         <th class="text-softbleu"
                                             onClick={()=>setShowUpdateModelforThisEmail(true)}
-                                         >Model email</th>
+                                         >Modèle e-mail</th>
                                         <th  className="text-softbleu" onClick={()=>close(false)}>Retour</th>
                                     </tr>
                                 </thead>
@@ -158,8 +158,8 @@ export default function SendEmailCertification({value,close,lastParticipant}){
                                                     <th className="tr-thead">Matricule</th>
                                                     <th className="tr-thead">Photo</th>
                                                     <th className="tr-thead">Nom</th>
-                                                    <th className="tr-thead">Prenoms</th>
-                                                    <th className="tr-thead">Adress e-mail</th>
+                                                    <th className="tr-thead">Prénoms</th>
+                                                    <th className="tr-thead">Adresse e-mail</th>
                                                     <th className="tr-thead">Model</th>
                                                     <th class="text-softbleu"  >
                                                         <button onClick={()=>{submit()}} >Envoyer</button>

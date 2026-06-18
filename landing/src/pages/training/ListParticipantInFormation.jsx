@@ -78,7 +78,7 @@ export default function ListParticipantInFormation({value,close}){
                 <div class=" md:p-8 bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
                     <div className=" max-w-7xl mx-auto p-10 flex bg-white">
                         <div className="flex-1  border-rigth ">
-                            <h2 class="text-xl font-semibold text-gray-800">Liste des participants du formation
+                            <h2 class="text-xl font-semibold text-gray-800">Liste des participants de la formation
                             </h2>
                            
                             <table class="w-full pt-2 ">
@@ -108,7 +108,7 @@ export default function ListParticipantInFormation({value,close}){
                                                     </th>
                                                     <th class="tr-thead text-xl" key='3'>
                                                         <button onClick={()=>{seeEmail(3);}} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[6]}`}>
-                                                            {getNbrEmailSended(3)}/{participant.length} envois Certification </button> 
+                                                            {getNbrEmailSended(3)}/{participant.length} envoi de certification </button> 
                                                     </th>
                                                 
                                             </tr>
@@ -127,12 +127,12 @@ export default function ListParticipantInFormation({value,close}){
                                                     <th className="tr-thead">Matricule</th>
                                                     <th className="tr-thead">Photo</th>
                                                     <th className="tr-thead">Nom</th>
-                                                    <th className="tr-thead">Prenoms</th>
+                                                    <th className="tr-thead">Prénoms</th>
                                                     <th className="tr-thead">presence <i class="fa-solid fa-sun"></i></th>
                                                     <th className="tr-thead">presence <i class="fa-solid fa-cloud-sun"></i></th>
                                                     <th className="tr-thead">Note</th>
-                                                    <th className="tr-thead">Q Formateur</th>
-                                                    <th className="tr-thead">Q Entreprise</th>
+                                                    <th className="tr-thead">Q. formateur</th>
+                                                    <th className="tr-thead">Q. entreprise</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">

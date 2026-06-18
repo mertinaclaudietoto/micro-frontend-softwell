@@ -38,9 +38,9 @@ export default function BudgetTheme({close,value}){
         console.log(valueUp);
         const value = await update(valueUp,url + "budget-theme")
         if (value == true) {
-            toast.success("Données modifié avec succès !");
+            toast.success("Données modifiées avec succès !");
         } else {
-            toast.error("Problème serveur où il ne peut pas être supprimé!");
+            toast.error("Problème serveur ou élément ne pouvant pas être supprimé !");
         }
     }
     const loadData = async () => {

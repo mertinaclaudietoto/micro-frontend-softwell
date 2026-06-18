@@ -28,7 +28,7 @@ export default function CardShowOffre({idpost,id,close}){
         const data = await send(recruitmentCandidate,url_recrutement + "recruitmentcandidate")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -67,7 +67,7 @@ export default function CardShowOffre({idpost,id,close}){
                     {value?.diplomes?.length > 0 ? (
                     <div className="pt-4 pb-2">
                         <p className="label-formulaire">
-                            Diplomes requises
+                            Diplômes requis
                         </p>
                         <div className="flex flex-wrap gap-2">
                         {value.diplomes.map((cert, index) => (

@@ -1,7 +1,7 @@
 export default function HeaderWithFiltre(){
     return(
         <div class="flex items-center justify-between mb-2">
-                    <h1 class="text-2xl font-bold">Les Criteres</h1>
+                    <h1 class="text-2xl font-bold">Les critères</h1>
                     <div class="flex items-center gap-4 mb-6">
                     <div class="ml-auto flex items-center gap-4">
                         <div class="relative">

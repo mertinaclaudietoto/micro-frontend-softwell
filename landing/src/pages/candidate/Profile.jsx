@@ -232,7 +232,7 @@ export default function Profile(){
         console.log(data);
         const value = await update(data,url_recrutement + "candidate")
         if (value == true) {
-            // toast.success("Données insérées avec succès !");
+            // toast.success("Données enregistrées avec succès !");
              window.location.reload();
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -306,7 +306,7 @@ export default function Profile(){
                                 <span className="text-white">+</span>
                             )}
                         </div>
-                        <p className="text-sm font-semibold text-gray-700">Entrer votre photo</p>
+                        <p className="text-sm font-semibold text-gray-700">Ajoutez votre photo</p>
                         <input
                             type="file"
                             accept="image/*"
@@ -328,7 +328,7 @@ export default function Profile(){
                             />
                         </div>
                         <div className="my-2">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Prenom</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
                             <input 
                                 type="text" 
                                 placeholder={data.firstName} 
@@ -351,7 +351,7 @@ export default function Profile(){
                             <label className="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                             <input 
                                 type="text" 
-                                placeholder="mots de passe" 
+                                placeholder="mot de passe" 
                                 className="input_singup"
                                 onChange={(event) => handlerVariable("password", event.target.value,setData)}
                             />
@@ -371,7 +371,7 @@ export default function Profile(){
                             </div>
                         </div>     
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">genre</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Genre</label>
                             <div class="flex gap-4">
                                 <Select onChange={handlerGenre} placeholder={data.genreName}  options={listGenre}/>
                             </div>
@@ -392,7 +392,7 @@ export default function Profile(){
                         </div>
                             
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Tel</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tél.</label>
                             <div class="relative">
                                 <input 
                                     type="text" 
@@ -414,7 +414,7 @@ export default function Profile(){
                     {/* hard skill */} 
                     <div class=" border-t border-gray-200 mt-8">
                         <div class="flex items-center justify-between mb-4 mt-2">
-                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Hard skill</h3>
+                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Compétences techniques</h3>
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
                             <div>
@@ -439,7 +439,7 @@ export default function Profile(){
                     {/* soft skill */}
                     <div class="border-t border-gray-200 mt-8">
                         <div class="flex items-center justify-between mb-4 mt-2">
-                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Soft skill</h3>
+                            <h3 class="block text-sm font-medium text-gray-700 mb-2">Compétences comportementales</h3>
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
                             <div>
@@ -524,7 +524,7 @@ export default function Profile(){
                     <div class="pt-6 border-t border-gray-200 ">
                         <div className="bg-gray-50 rounded-lg p-6 my-4">
                             <div class=" flex items-center justify-between mb-4 ">
-                                <h3 class="text-lg font-bold text-gray-900">Education</h3>
+                                <h3 class="text-lg font-bold text-gray-900">Formation</h3>
                                 <div class="hidden md:block flex items-center justify-end gap-3 mt-2">
                                     <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>(deleteAddEducation())}>
                                         Annuler
@@ -542,11 +542,11 @@ export default function Profile(){
                                     <Select onChange={handlerDiplome} placeholder={education.nameDiplome} options={listDiplome}/>
                                 </div>
                                 <div className="sm:mt-8 md:mt-0">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Universite</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Université</label>
                                     <Select onChange={handlerUniversity} placeholder={education.nameUniversity} options={listUniversity}/>
                                 </div>
                                 <div className="sm:mt-8 md:mt-0">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Annee de remise de dimplome</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Année de remise du diplôme</label>
                                     <div class="relative">
                                         <input 
                                             type="date" 
@@ -610,7 +610,7 @@ export default function Profile(){
                     <div class="">
                         <div className="bg-gray-50 rounded-lg p-6 my-4">
                             <div class="flex items-center justify-between py-4">
-                                <h3 class="text-lg font-bold text-gray-900">Experience</h3>
+                                <h3 class="text-lg font-bold text-gray-900">Expérience</h3>
                                 <div class="hidden md:block flex items-center justify-end gap-3">
                                     <button class="px-6 py-2 text-gray-600 hover:text-gray-700 font-medium" onClick={()=>{initExperience}}>
                                         Annuler
@@ -627,7 +627,7 @@ export default function Profile(){
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Entreprise</label>
                                     <input 
                                         type="text" 
-                                        placeholder="Enter Degree" 
+                                        placeholder="Saisir le diplôme" 
                                         value={experience.Entreprise}
                                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent"
                                         onChange={(event)=>{ handlerVariable("Entreprise",event.target.value,setExperiences)}}
@@ -638,7 +638,7 @@ export default function Profile(){
                                     <input 
                                         type="text" 
                                         value={experience.Poste}
-                                        placeholder="Enter College / University" 
+                                        placeholder="Saisir l'établissement" 
                                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-or focus:border-transparent"
                                         onChange={(event)=>{ handlerVariable("Poste",event.target.value,setExperiences)}}
                                     />
@@ -670,7 +670,7 @@ export default function Profile(){
                                 </div>
                             
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Type d'experience</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Type d'expérience</label>
                                     <div class="relative">
                                         <Select onChange={handlerExperience} placeholder={experience.name} options={listExperience} value={false}/>
                                     </div>
@@ -695,7 +695,7 @@ export default function Profile(){
                                 </button>
                             </div>
                         </div>
-                        <label class="text-or   font-bold text-sm my-2">Liste de vos  experience</label>
+                        <label class="text-or   font-bold text-sm my-2">Liste de vos expériences</label>
                         {data.experience.map((value,index)=>(
                             <div index={index} class="mt-4 bg-gray-50 rounded-lg p-4 relative">
                                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -708,12 +708,12 @@ export default function Profile(){
                                         <p class="font-medium text-gray-700">{value.Poste}</p>
                                     </div>
                                     <div>
-                                        <p class="text-xs text-gray-500 mb-1">Date debut et Date fin </p>
+                                        <p class="text-xs text-gray-500 mb-1">Date de début et date de fin </p>
                                         <p class="font-medium text-gray-700 ">{value.DateDebut} / {value.DateFin} </p>
                                         {/* {diffDate(value.datefin,value.datedebut)} */}
                                     </div>
                                     <div>
-                                        <p class="text-xs text-gray-500 mb-1">Type d'experience</p>
+                                        <p class="text-xs text-gray-500 mb-1">Type d'expérience</p>
                                         <p class="font-medium text-gray-700">{value.name}</p>
                                     </div>
                                 </div>

@@ -62,10 +62,10 @@ export default function CardUpdateTheme({close,value}){
         console.log(value)
         if (value == true) {
             window.location.reload();
-            toast.success("Données supprimer avec succès !");
+            toast.success("Données supprimées avec succès !");
             close(false);
         } else {
-            toast.error("Problème serveur où il ne peut pas être supprimé!");
+            toast.error("Problème serveur ou élément ne pouvant pas être supprimé !");
         }
     }
     const handlerSelectTrainingType = (opt) => {
@@ -129,7 +129,7 @@ export default function CardUpdateTheme({close,value}){
                     </div>
                 </div>
                 <label class="label-formulaire mt-4 mb-2">Type formation</label>
-                <Select options={trainingType}  placeholder="type du formation " onChange={handlerSelectTrainingType} value={false} />
+                <Select options={trainingType}  placeholder="Type de formation " onChange={handlerSelectTrainingType} value={false} />
                 {/* <div className="grid grid-cols-3 gap-3 mb-4">
                     {trainingType.map((v,id)=>(
                             <button index={id} class={"card-text-s-blue hover:bg-black-100"} onClick={()=>handlerVariable("idtypetraining",v.id,setTheme)}>
@@ -165,7 +165,7 @@ export default function CardUpdateTheme({close,value}){
                                 <div>
                                     <input 
                                         type="text" 
-                                        placeholder="Enter compétences" 
+                                        placeholder="Saisir les compétences" 
                                         class="input_singup"
                                         onChange={(event)=>{setSkill(event.target.value)}}
                                     />

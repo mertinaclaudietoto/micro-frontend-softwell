@@ -212,9 +212,9 @@ export default function Cost(){
                                 </LineChart>
                             </div>
                             <div className="flex items-center justify-between py-2 ">
-                                <p>Comparaison d'evolution de cout de formation par theme</p>
+                                <p>Comparaison de l'évolution du coût de formation par thème</p>
                                 <div class="flex gap-2 ">
-                                    <Select options={listTheme} onChange={handlerSelect} placeholder="theme" value={false}/>
+                                    <Select options={listTheme} onChange={handlerSelect} placeholder="Thème" value={false}/>
                                 </div>
                             </div>
                             <div className="flex flex-wrap gap-2">
@@ -257,7 +257,7 @@ export default function Cost(){
                             <div className="flex items-center justify-between py-2 ">
                                 <p>Comparaison de l’évolution des coûts de formation par service, département ou catégorie au sein de l’entreprise</p>
                                 <div class="flex gap-2 ">
-                                    <Select options={listChoixClassement} onChange={getStatByClassement} placeholder="service" value={false}/>
+                                    <Select options={listChoixClassement} onChange={getStatByClassement} placeholder="Service" value={false}/>
                                 </div>
                             </div>
                             <div className="flex flex-wrap gap-2">
@@ -300,10 +300,10 @@ export default function Cost(){
                          {/* filtre */}
                         <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                             <div class="flex items-center justify-between">
-                                <h2 class="text-xl font-semibold text-gray-800">Liste des coûts par employés </h2>
+                                <h2 class="text-xl font-semibold text-gray-800">Liste des coûts par employé </h2>
                                 <div class="flex items-center space-x-3">
                                     <div class="relative">
-                                        <input type="text" placeholder="nom organisme" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>filtreByWord(event.target.value)}/>
+                                        <input type="text" placeholder="Rechercher…" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>filtreByWord(event.target.value)}/>
                                         <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
@@ -320,7 +320,7 @@ export default function Cost(){
                                 <tr>
                                     <th class="tr-thead w-8">Matricule</th>
                                     <th class="tr-thead">Nom</th>
-                                    <th class="tr-thead">Prenom</th>
+                                    <th class="tr-thead">Prénom</th>
                                     <th class="tr-thead">Cost</th>
                                     <th class="tr-thead">Heure</th>
                                     {/* <th class="tr-thead"></th> */}

@@ -106,7 +106,7 @@ export default function UpdateModelEmailSendConvocation({close,value,changeModel
             {/* filtre */}
             <div class="p-4 mb-2 bg-white border-b border-gray-200 sticky top-0 z-50 pink ">
                 <div class="flex items-center justify-between gap-2">
-                    <h2 class=" flex gap-2 text-xl font-semibold text-gray-800">Construire votre model de {data.name} 
+                    <h2 class=" flex gap-2 text-xl font-semibold text-gray-800">Construire votre modèle de {data.name} 
                         <button className="flex justify-center items-center bg-red-300 w-10 h-10 rounded-full " onClick={()=>(setIsHiddenInfo(!isHiddenInfo))}>
                             <i class="fa-solid fa-info"></i>
                         </button>

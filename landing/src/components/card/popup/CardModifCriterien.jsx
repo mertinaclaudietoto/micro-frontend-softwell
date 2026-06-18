@@ -22,7 +22,7 @@ export default function CardModifCriterien({closePopup}){
                     <div class="relative">
                         <input 
                             type="email" 
-                            placeholder="votre email" 
+                            placeholder="votre numéro de téléphone" 
                             class="input_singup"
                         />
                         {/* <HiOutlineMap className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" /> */}
@@ -34,7 +34,7 @@ export default function CardModifCriterien({closePopup}){
                         <div class="relative">
                             <input 
                                 type="number" 
-                                placeholder="votre email" 
+                                placeholder="votre numéro de téléphone" 
                                 class="input_singup"
                             />
                             {/* <HiOutlineEnvelope className="icone_input" /> */}
@@ -46,7 +46,7 @@ export default function CardModifCriterien({closePopup}){
                         <div class="relative">
                             <input 
                                 type="email" 
-                                placeholder="votre email" 
+                                placeholder="votre numéro de téléphone" 
                                 class="input_singup"
                             />
                             {/* <HiOutlinePhone className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" /> */}
@@ -57,7 +57,7 @@ export default function CardModifCriterien({closePopup}){
                         <div class="relative">
                             <input 
                                 type="email" 
-                                placeholder="votre email" 
+                                placeholder="votre numéro de téléphone" 
                                 class="input_singup"
                             />
                             {/* <HiOutlinePhone className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" /> */}
@@ -68,7 +68,7 @@ export default function CardModifCriterien({closePopup}){
                         <div class="relative">
                             <input 
                                 type="email" 
-                                placeholder="votre email" 
+                                placeholder="votre numéro de téléphone" 
                                 class="input_singup"
                             />
                             {/* <HiOutlinePhone className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" /> */}
@@ -100,7 +100,7 @@ export default function CardModifCriterien({closePopup}){
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Description du poste</label>
                     <textarea 
-                        placeholder="Type here..." 
+                        placeholder="Décrivez-vous ici…" 
                         rows="4"
                         class="input_singup"
                     ></textarea>
@@ -108,7 +108,7 @@ export default function CardModifCriterien({closePopup}){
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Competence requise</label>
                     <textarea 
-                        placeholder="Type here..." 
+                        placeholder="Décrivez-vous ici…" 
                         rows="4"
                         class="input_singup"
                     ></textarea>

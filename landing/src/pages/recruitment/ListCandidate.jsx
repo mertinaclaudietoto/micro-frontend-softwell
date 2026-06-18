@@ -84,7 +84,7 @@ export default function ListCandidate(){
                                 <tr>
                                     <th class="tr-thead ">#</th>
                                     <th class="tr-thead">Nom</th>
-                                    <th class="tr-thead">Prenom</th>
+                                    <th class="tr-thead">Prénom</th>
                                     <th class="tr-thead">Age</th>
                                     <th class="tr-thead"></th>
                                 </tr>

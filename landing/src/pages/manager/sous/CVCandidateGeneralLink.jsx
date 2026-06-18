@@ -120,13 +120,13 @@ export default function CVCandidateGeneralLink(){
                                             <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[0]}`}>{value.name}</span>
                                         ))}
                                     </div>
-                                    <p class="text-sm-gray">Hard skills</p>
+                                    <p class="text-sm-gray">Compétences techniques</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidatehardskill.map((value,index)=>(
                                             <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[0]}`}>{value.name}</span>
                                         ))}
                                     </div>
-                                    <p class="text-sm-gray">Soft skills</p>
+                                    <p class="text-sm-gray">Compétences comportementales</p>
                                     <div className="flex flex-wrap gap-1">
                                         {data.candidatesoftskill.map((value,index)=>(
                                             <span key={index} class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textmandatory[0]}`}>{value.name}</span>

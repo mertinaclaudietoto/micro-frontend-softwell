@@ -96,7 +96,7 @@ export default function AddInvoice({close,value}){
         const response = await send(dataRequette,url + "invoice")
         // console.log(value)
         if (response == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");

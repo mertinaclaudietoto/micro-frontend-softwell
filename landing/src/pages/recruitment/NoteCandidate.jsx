@@ -85,7 +85,7 @@ export default function NoteCandidate({idrequest,idpost ,idstep,rang,email ,clos
                                             <tr>
                                                 <th class="tr-thead ">#</th>
                                                 <th class="tr-thead">Nom</th>
-                                                <th class="tr-thead">Prenom</th>
+                                                <th class="tr-thead">Prénom</th>
                                                 <th class="tr-thead">Age</th>
                                                 <th class="tr-thead">Obligatoire</th>
                                                 <th class="tr-thead">Souhaiter</th>

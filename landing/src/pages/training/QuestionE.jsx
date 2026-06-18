@@ -78,7 +78,7 @@ export default function QuestionE(){
         } 
     }
     const listeChoix =[
-        {id:"radio",name:"choix unique"},
+        {id:"radio",name:"Choix unique"},
         {id:"checkbox",name:"choix multiple"},
         {id: "text", name: "réponse libre"},
     ]
@@ -94,7 +94,7 @@ export default function QuestionE(){
         (accesObj?.question?.modification === null ||
          accesObj?.question?.modification === undefined)
     ) {
-        toast.error("Problème d'accée ,vous n'avez pas le droit de modifiée  !");
+        toast.error("Problème d'accès, vous n'avez pas le droit de modifier !");
         return;
     }
 
@@ -165,7 +165,7 @@ export default function QuestionE(){
                                         </div>
                                         <div className="w-1/3 relative">
                                             <div className="pt-9">
-                                                 <Select options={listeChoix}  onChange={handlerSelect} placeholder="choix unique" value={false}></Select>
+                                                 <Select options={listeChoix}  onChange={handlerSelect} placeholder="Choix unique" value={false}></Select>
                                             </div>
                                            
                                         </div>
@@ -230,7 +230,7 @@ export default function QuestionE(){
                                  <table class="w-full py-4 overflow-y-auto ">
                                     <thead class="bg-gray-50 border-b border-gray-200">
                                         <tr key="choix">
-                                            <th class="tr-thead ">List des  Respences</th>
+                                            <th class="tr-thead ">Liste des réponses</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-100">

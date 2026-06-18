@@ -158,16 +158,16 @@ export default function CardAddTraining({close}){
                 <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
                     <div className="max-w-7xl mx-auto bg-white p-10">
                         <div className="">
-                        <h3 className="font-bold">Ajout formation a faire </h3>
+                        <h3 className="font-bold">Ajout d'une formation à faire </h3>
                         <div className="grid grid-cols-2 ">
                             <div className="my-2">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Selectionnee la formation a faire </label>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Sélectionnez la formation à faire</label>
                                 <Select options={listTheme} onChange={handlerTheme}/>
                             </div>
                             <div className="flex gap-2 mt-8">
                                 <input 
                                     type="text" 
-                                    placeholder="Enter matricule  pour ajouter un nouveau participant" 
+                                    placeholder="Saisir le matricule pour ajouter un nouveau participant" 
                                     class="input_singup"
                                     onChange={(event)=>{setMatricule(event.target.value)}}
                                 />
@@ -181,15 +181,15 @@ export default function CardAddTraining({close}){
                         </div>
                         <div className="mt-8">
                         <div id="tasksList" class="">
-                            <label className="block text-sm font-bold text-gray-700 mb-2">List formateur avec prix </label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">Liste des formateurs avec prix </label>
                               <table class="w-full">
                                 <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>
                                         <th class="tr-thead w-8">#</th>
                                         <th class="tr-thead">Organisme</th>
                                         <th class="tr-thead">Email</th>
-                                        <th class="tr-thead">Tel</th>
-                                        <th class="tr-thead">En activiter</th>
+                                        <th class="tr-thead">Tél.</th>
+                                        <th class="tr-thead">En activité</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -228,7 +228,7 @@ export default function CardAddTraining({close}){
                                     <tr>
                                         <th class="tr-thead  w-8">Matricule </th>
                                         <th class="tr-thead">Demandeur</th>
-                                        <th class="tr-thead ">Beneficiaire</th>
+                                        <th class="tr-thead ">Bénéficiaire</th>
                                         <th class="tr-thead "></th>
                                     </tr>
                                 </thead>  

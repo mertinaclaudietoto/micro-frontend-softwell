@@ -17,7 +17,7 @@ export default function CardDemandeStaff({closePopup}){
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nombre de personnel à demander</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Saisir le mot de passe" 
                         class="input_formulaire"
                     />
                 </div>
@@ -25,7 +25,7 @@ export default function CardDemandeStaff({closePopup}){
                     <label class="block text-sm font-medium text-gray-700 mb-2">Date prévue de prise de poste</label>
                     <input 
                         type="date" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Saisir le mot de passe" 
                         class="input_formulaire"
                     />
                 </div>

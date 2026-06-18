@@ -55,7 +55,7 @@ export default function Wish1(){
     const deleteV = async (value)=>{
             const data = await deletev(value,url+"wish")
             if (data == true) {
-                // toast.success("Données insérées avec succès !");
+                // toast.success("Données enregistrées avec succès !");
                 window.location.reload();
             } else {
                 toast.error("Problème serveur, réessayez plus tard !");
@@ -81,7 +81,7 @@ export default function Wish1(){
                                 {/* filtre */}
                                 <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                                     <div class="flex items-center justify-between">
-                                        <h2 class="text-xl font-semibold text-gray-800">Liste Souhait en attente
+                                        <h2 class="text-xl font-semibold text-gray-800">Liste des souhaits en attente
                                             <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                                         </h2>
                                         
@@ -121,7 +121,7 @@ export default function Wish1(){
                                         <thead class="bg-gray-50 border-b border-gray-200">
                                             <tr>
                                                 <th class="tr-thead">Thème</th>
-                                                <th class="tr-thead flex justify-center items-center">Nombre souhaits</th>
+                                                <th class="tr-thead flex justify-center items-center">Nombre de souhaits</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -147,9 +147,9 @@ export default function Wish1(){
                                     <thead class="bg-gray-50 border-b border-gray-200">
                                         <tr>
                                             <th class="tr-thead">Type de souhait</th>
-                                            <th class="tr-thead">Theme</th>
-                                            <th class="tr-thead">Beneficiaire</th>
-                                            <th class="tr-thead">Souhaiteur</th>
+                                            <th class="tr-thead">Thème</th>
+                                            <th class="tr-thead">Bénéficiaire</th>
+                                            <th class="tr-thead">Demandeur</th>
                                             <th></th>
                                         </tr>
                                     </thead>

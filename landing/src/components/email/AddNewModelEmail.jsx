@@ -33,7 +33,7 @@ export default function AddNewModelEmail({close}) {
     const value = await send({ ...data, content: stringContent }, url_sendemail + "modelemail");
     // console.log(value)
     if (value == true) {
-        // toast.success("Données insérées avec succès !");
+        // toast.success("Données enregistrées avec succès !");
         // window.location.replace("/logincandidate");
         close(false);
     } else {
@@ -108,7 +108,7 @@ export default function AddNewModelEmail({close}) {
                     {/* filtre */}
                     <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-xl font-semibold text-gray-800">Construire votre model d'email
+                            <h2 class="text-xl font-semibold text-gray-800">Construire votre modèle d'e-mail
                                 {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                             </h2>
                             <div class="flex items-center space-x-3">
@@ -126,7 +126,7 @@ export default function AddNewModelEmail({close}) {
                     <div className="my-2">
                           <input 
                               type="text" 
-                              placeholder="Entrer le nom de ce model " 
+                              placeholder="Saisir le nom de ce modèle " 
                               className="input_singup"
                               onChange={(event) => handlerVariable("name", event.target.value,setData)}
                           />

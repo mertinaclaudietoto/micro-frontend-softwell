@@ -19,7 +19,7 @@ export default function Update({close,valueUp,entityName,urlApplication}){
         const data = await update(value,urlApplication + entityName)
         // console.log(value)
         if (data == true) {
-            // toast.success("Données insérées avec succès !");
+            // toast.success("Données enregistrées avec succès !");
             close(false);
             window.location.reload();
         } else {
@@ -31,7 +31,7 @@ export default function Update({close,valueUp,entityName,urlApplication}){
         const data = await deletev(value,urlApplication + entityName)
         // console.log(value)
         if (data == true) {
-            // toast.success("Données insérées avec succès !");
+            // toast.success("Données enregistrées avec succès !");
             close(false);
             window.location.reload();
         } else {

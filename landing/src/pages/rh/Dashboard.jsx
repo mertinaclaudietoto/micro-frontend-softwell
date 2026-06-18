@@ -38,7 +38,7 @@ export default function Dashboard(){
                                
                                 <div class="bg-white p-6 m-2">
                                     {/* <div class="flex items-center justify-between mb-4">
-                                        <h2 class="text-xl font-medium text-gray-900">Recruitment progress</h2>
+                                        <h2 class="text-xl font-medium text-gray-900">Avancement du recrutement</h2>
                                         <div class="flex gap-2">
                                             <button class="iconerond10">
                                                 <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

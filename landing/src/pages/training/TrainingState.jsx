@@ -115,7 +115,7 @@ export default function TrainingState({value,close}){
                                         {accesObj && (accesObj?.validation?.ajout_facture_session == null || accesObj?.validation?.ajout_facture_session=== undefined) ? null : (
                                             <th class="text-softbleu" onClick={()=>{setShowInvoice(true)}}>Facture</th>
                                         )}
-                                        <th className="text-softbleu" onClick={()=>{setShowParticipants(true)}}>Participant</th>
+                                        <th className="text-softbleu" onClick={()=>{setShowParticipants(true)}}>Participants</th>
                                         <th  className="text-softbleu" onClick={()=>close(false)}>Retour</th>
                                     </tr>
                                 </thead>
@@ -153,9 +153,9 @@ export default function TrainingState({value,close}){
                                             <thead className="bg-gray-50 border-b border-gray-200">
                                                 <tr>
                                                 <th className="tr-thead">Jours</th>
-                                                <th className="tr-thead">Debut matin</th>
+                                                <th className="tr-thead">Début matin</th>
                                                 <th className="tr-thead">Fin matin</th>
-                                                <th className="tr-thead">Debut soir</th>
+                                                <th className="tr-thead">Début soir</th>
                                                 <th className="tr-thead">Fin soir</th>
                                                 <th className="tr-thead"></th>
                                                 </tr>

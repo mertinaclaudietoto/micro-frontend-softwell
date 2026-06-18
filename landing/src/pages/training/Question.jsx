@@ -76,7 +76,7 @@ export default function Question(){
         } 
     }
     const listeChoix =[
-        {id:0,name:"choix unique"},
+        {id:0,name:"Choix unique"},
         {id:1,name:"choix multiple"},
     ]
     const submit = async ()=>{
@@ -96,7 +96,7 @@ export default function Question(){
             toast.error("Problème serveur, réessayez plus tard !");
         }
         }else{     
-            toast.error("Vous n'avez pas le droit de faire une modification!");
+            toast.error("Vous n'avez pas le droit de faire une modification !");
         }
     }
     useEffect(() => {
@@ -145,7 +145,7 @@ export default function Question(){
                                         </div>
                                         <div className="w-1/3 relative">
                                             <div className="pt-9">
-                                                 <Select options={listeChoix}  onChange={handlerSelect} placeholder="choix unique" value={false}></Select>
+                                                 <Select options={listeChoix}  onChange={handlerSelect} placeholder="Choix unique" value={false}></Select>
                                             </div>
                                            
                                         </div>
@@ -209,7 +209,7 @@ export default function Question(){
                                  <table class="w-full py-4 overflow-y-auto ">
                                     <thead class="bg-gray-50 border-b border-gray-200">
                                         <tr key="choix">
-                                            <th class="tr-thead ">List des  Respences</th>
+                                            <th class="tr-thead ">Liste des réponses</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-100">

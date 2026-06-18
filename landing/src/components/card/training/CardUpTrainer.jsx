@@ -48,6 +48,7 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
         idunit: 0,
         unitprice: 0,
         maxpersonne: 0,
+        volumeHoraire: 0,
         description: "",
         nameTheme: "",
         nameTrainer: "",
@@ -104,6 +105,7 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
         idunit: 0,
         unitprice: 0,
         maxpersonne: 0,
+        volumeHoraire: 0,
         description: "",
         nameTheme: "",
         nameTrainer: "",
@@ -132,7 +134,7 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
         const data = await update(value,url + "trainer")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -140,7 +142,7 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
     }
     return (
         <>
-        {showLink ? <CardForwardLink _url={url_front} endpoint={"questionnaire"}  closePopup={setShowLink}  parametres={parametres}  title={"Partagez le lien  pour les questionnaire de cette formateur"}/> : <></>}
+        {showLink ? <CardForwardLink _url={url_front} endpoint={"questionnaire"}  closePopup={setShowLink}  parametres={parametres}  title={"Partagez le lien pour les questionnaires de ce formateur"}/> : <></>}
         <div class="flex h-screen  "> 
             <Sidebar></Sidebar>
             <main class="flex-1 bg-white ">    
@@ -195,7 +197,7 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
                             />
                         </div>
                         <div className="my-2">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Tel</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Tél.</label>
                             <input 
                                 type="text"  
                                 className="input_singup"
@@ -208,15 +210,15 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
                         <div className="bg-gray-50 p-2 rounded">
                             <div className="flex  justify-between gap-2 ">
                                 <div>
-                                    <label className="label-formulaire mt-2 mb-1">theme</label>
+                                    <label className="label-formulaire mt-2 mb-1">Thème</label>
                                     <Select options={listThemes} onChange={handlerTheme} />
                                 </div>
                                 <div>
-                                    <label className="label-formulaire mt-2 mb-1">unite</label>
+                                    <label className="label-formulaire mt-2 mb-1">Unité</label>
                                     <Select options={listUnits} onChange={handlerUnit} />
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">prix unitaire</label>
+                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">Prix unitaire</label>
                                     <div class="relative">
                                         <input 
                                             type="number" 
@@ -231,7 +233,7 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">nombre  maximum de personne</label>
+                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">Nombre maximum de personnes</label>
                                     <div class="relative">
                                         <input 
                                             type="number" 
@@ -244,12 +246,26 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
                                         {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
                                 </div>
                                 </div>  
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">Volume horaire</label>
+                                    <div class="relative">
+                                        <input 
+                                            type="number" 
+                                            class="input_singup"
+                                            min="0"                  // force positif
+                                            step="0.01"
+                                            placeholder=""
+                                            onChange={(event) => handlerVariable("volumeHoraire", event.target.value,setPrice)}
+                                        />
+                                        {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
+                                    </div>
+                                </div>
                                 <button onClick={() => {handlerListThemeTrainer("Trainerthemes",price,null)}} class="btn-neutre-gray">
                                             <i class="fa-regular fa-plus"></i>
                                 </button>
                             </div>
                             <div>
-                                <label class="label-formulaire mt-2 mb-2">description</label>
+                                <label class="label-formulaire mt-2 mb-2">Description</label>
                                 <textarea 
                                     required
                                     placeholder={""} 
@@ -264,13 +280,13 @@ export default function CardUpTrainer({close,id,listThemes,accesObj}){
                                  <table class="w-full" k={2}>
                                  <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>
-                                        <th class="tr-thead ">Theme</th>
-                                        <th class="tr-thead">unite</th>
-                                        <th class="tr-thead w-8">prix unitaire</th>
-                                        <th class="tr-thead w-8">max personne</th>
-                                        <th class="tr-thead w-80">description</th>
+                                        <th class="tr-thead ">Thème</th>
+                                        <th class="tr-thead">Unité</th>
+                                        <th class="tr-thead w-8">Prix unitaire</th>
+                                        <th class="tr-thead w-8">Nombre max. de personnes</th>
+                                        <th class="tr-thead w-80">Description</th>
                                         {accesObj && (accesObj?.trainer?.partage_du_lien_du_questionnaire_de_lorganisme == null || accesObj?.trainer?.partage_du_lien_du_questionnaire_de_lorganisme === undefined) ? null : (
-                                            <th class="tr-thead ">questionnaire</th>
+                                            <th class="tr-thead ">Questionnaire</th>
                                         )}
                                         {accesObj && (accesObj?.trainer?.modification == null || accesObj?.trainer?.modification === undefined) ? null : (
                                             <th class="tr-thead ">Suppression</th>

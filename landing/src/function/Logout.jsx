@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 function useLogout() {
-    console.log("djeijdejdiejdie");
   const navigate = useNavigate();
   const logout = () => {
     // supprimer les informations de session

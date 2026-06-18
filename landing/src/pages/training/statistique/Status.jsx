@@ -64,7 +64,7 @@ export default function Status(){
                                 <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>
                                         <th class="tr-thead">Thème</th>
-                                        <th class="tr-thead flex justify-center items-center">Nombre souhaits</th>
+                                        <th class="tr-thead flex justify-center items-center">Nombre de souhaits</th>
                                         <th></th>
                                     </tr>
                                 </thead>

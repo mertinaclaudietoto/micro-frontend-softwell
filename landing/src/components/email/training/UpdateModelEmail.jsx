@@ -113,7 +113,7 @@ export default function UpdateModelEmail({close,value }) {
             {/* filtre */}
             <div class="p-4 mb-2 bg-white border-b border-gray-200 sticky top-0 z-50 pink ">
                 <div class="flex items-center justify-between gap-2">
-                    <h2 class="text-xl font-semibold text-gray-800">Construire votre model de {data.name}
+                    <h2 class="text-xl font-semibold text-gray-800">Construire votre modèle de {data.name}
                         {/* <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p> */}
                     </h2>
                     <div class="flex items-center space-x-3">

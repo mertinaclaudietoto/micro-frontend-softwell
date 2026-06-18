@@ -53,7 +53,7 @@ export default function ListCandidate(){
                             <label className="text-gray-400 text-xs">12-11-2025 / 20-11-2025</label>
                         </div>
                     </td>
-                    <td class="py-3 text-gray-500">Content designer</td>
+                    <td class="py-3 text-gray-500">Concepteur de contenu</td>
                     <td class="py-3 flex items-center gap-2">
                         <div class="w-2 h-2 bg-red-500 rounded-full"></div>
                         <span class="text-xs text-gray-600">Task</span>
@@ -72,7 +72,7 @@ export default function ListCandidate(){
                     <td class="py-3 text-gray-500">Node.js Developer</td>
                     <td class="py-3 flex items-center gap-2">
                         <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span class="text-xs text-gray-600">Resume review</span>
+                        <span class="text-xs text-gray-600">Revue du CV</span>
                     </td>
                 </tr>
 

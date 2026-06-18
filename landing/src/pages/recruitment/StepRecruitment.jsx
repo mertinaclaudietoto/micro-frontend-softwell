@@ -88,7 +88,7 @@ export default function StepRecruitment(){
                                 
                                 <div class="flex items-center space-x-3">
                                     <div class="relative">
-                                        <input type="text" placeholder="nom organisme" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>setSearch(event.target.value)}/>
+                                        <input type="text" placeholder="Rechercher…" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>setSearch(event.target.value)}/>
                                         <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
@@ -124,7 +124,7 @@ export default function StepRecruitment(){
                                     <th class="tr-thead w-8">#</th>
                                     <th class="tr-thead">Nom</th>
                                     <th class="tr-thead">Responsable</th>
-                                    <th class="tr-thead">Envois Email</th>
+                                    <th class="tr-thead">Envoi d'e-mail</th>
                                     <th class="tr-thead"></th>
                                     {/* <th class="tr-thead"></th> */}
                                 </tr>

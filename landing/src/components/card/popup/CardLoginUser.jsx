@@ -59,7 +59,7 @@ export default function CardLoginUser({closePopup}){
                     />
                 </div>
                 <div className='my-2'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                     <input 
                         type="password" 
                         class="input_formulaire"

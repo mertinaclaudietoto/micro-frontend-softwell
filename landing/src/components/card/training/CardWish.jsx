@@ -68,7 +68,7 @@ export default function CardWish({close}){
 
         const value = await send(listWish,url + "wish")
         if (value == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -113,7 +113,7 @@ export default function CardWish({close}){
                 <div className="flex gap-2">
                     <input 
                         type="text" 
-                        placeholder="Enter matricule participant" 
+                        placeholder="Saisir le matricule du participant" 
                         class="input_singup"
                         onChange={(event)=>{setMatricule(event.target.value)}}
                     />
@@ -129,7 +129,7 @@ export default function CardWish({close}){
                                     <tr>
                                         <th class="tr-thead ">Matricule</th>
                                         <th class="tr-thead">Nom</th>
-                                        <th class="tr-thead ">Prenom</th>
+                                        <th class="tr-thead ">Prénom</th>
                                         <th class="tr-thead "></th>
                                     </tr>
                                 </thead>

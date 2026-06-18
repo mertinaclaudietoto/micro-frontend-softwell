@@ -55,7 +55,7 @@ export default function UserProfile(){
     const deleteV = async (value)=>{
         const data = await deletev(value,url + 'employ')
         if (data == true) {
-            // toast.success("Données insérées avec succès !");
+            // toast.success("Données enregistrées avec succès !");
             close(false);
             window.location.reload();
         } else {
@@ -79,13 +79,13 @@ export default function UserProfile(){
                     {/* filtre */}
                     <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-xl font-semibold text-gray-800">Liste Comptes
+                            <h2 class="text-xl font-semibold text-gray-800">Liste des comptes
                                 <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
                             </h2>
                             
                             <div class="flex items-center space-x-3">
                                 <div class="relative">
-                                    <input type="text" placeholder="nom organisme" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>setSearch(event.target.value)}/>
+                                    <input type="text" placeholder="Rechercher…" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>setSearch(event.target.value)}/>
                                     <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -95,7 +95,7 @@ export default function UserProfile(){
                                 
                                 </div>
                                 <div class="relative ">
-                                    <Select options={listRole} placeholder={"liste formation"}  onChange={setIdRole} css={"pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"}/>
+                                    <Select options={listRole} placeholder={"Liste des formations"}  onChange={setIdRole} css={"pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"}/>
                                     <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -126,8 +126,8 @@ export default function UserProfile(){
                                 <tr class="border-b border-gray-200">
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Image</th>
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Matricule</th>
-                                    <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase ">Nom et prenom</th>
-                                    <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Role</th>
+                                    <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase ">Nom et prénom</th>
+                                    <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Rôle</th>
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase"></th>
                                     {/* Password  <i className={visible ? "fas fa-eye-slash" : "fas fa-eye"}></i> */}
                                     {/* <th>

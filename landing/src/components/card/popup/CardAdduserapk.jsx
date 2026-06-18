@@ -39,7 +39,7 @@ export default function CardAdduserapk({close,listRole}){
         const data = await send(user,url + "employ/registration")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -80,7 +80,7 @@ export default function CardAdduserapk({close,listRole}){
         <div className="flex space-x-2 ">
             <input placeholder={user.login} className="text-input input_formulaire  " onChange={(event)=>{handlerVariable("login",event.target.value,setUser)}}/>
         </div>
-        <label class="label-formulaire mb-2">mot de pass</label>
+        <label class="label-formulaire mb-2">Mot de passe</label>
         <div className="flex space-x-2 ">
             <input placeholder="" className="text-input input_formulaire  " onChange={(event)=>{handlerVariable("password",event.target.value,setUser)}}/>
         </div>

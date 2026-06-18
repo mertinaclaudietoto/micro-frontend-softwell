@@ -45,7 +45,7 @@ export default function PlateformeApply(){
         try {
             const response = await _login(login, url_recrutement + "candidate/login");
             if(response.data.success==false){
-                setText("Login ou Mot de passe incorrecte")
+                setText("Identifiant ou mot de passe incorrect")
             }
             if(response.data.data.id !=null){
                 const data = await send(buildInfoCandidat(response.data.data.id),url_recrutement + "recruitmentcandidate")
@@ -57,7 +57,7 @@ export default function PlateformeApply(){
                 }
             }
         } catch (error) {
-            setText("Login ou Mot de passe incorrecte")
+            setText("Identifiant ou mot de passe incorrect")
             console.error("Erreur login:", error);
         }
     };
@@ -106,7 +106,7 @@ export default function PlateformeApply(){
                     />
                 </div>
                 <div className='my-2'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                     <input 
                         type="password" 
                         class="input_formulaire"
@@ -170,7 +170,7 @@ export default function PlateformeApply(){
                     {value?.diplomes?.length > 0 ? (
                     <div className="pt-4 pb-2">
                         <p className="label-formulaire">
-                            Diplomes requises
+                            Diplômes requis
                         </p>
                         <div className="flex flex-wrap gap-2">
                         {value.diplomes.map((cert, index) => (

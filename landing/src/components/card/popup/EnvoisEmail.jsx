@@ -36,7 +36,7 @@ export default function UpdateModelEmail({close,value}) {
     const value = await update({ ...data, content: stringContent }, url_sendemail + "modelemail");
     // console.log(value)
     if (value == true) {
-        toast.success("Données insérées avec succès !");
+        toast.success("Données enregistrées avec succès !");
         window.location.replace("/email");
         // close(false);
     } else {

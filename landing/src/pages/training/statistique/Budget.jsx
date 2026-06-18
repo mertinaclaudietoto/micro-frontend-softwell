@@ -123,7 +123,7 @@ export default function Budget(){
                                 <h2 class="text-xl font-semibold text-gray-800">Liste des coûts et budgets pour une année par thème </h2>
                                 <div class="flex items-center space-x-3">
                                     <div class="relative flex gap-2">
-                                        <input type="text" placeholder="nom organisme" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>filtreByWord(event.target.value)}/>
+                                        <input type="text" placeholder="Rechercher…" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>filtreByWord(event.target.value)}/>
                                         <input 
                                             type="number"
                                             min="1900"

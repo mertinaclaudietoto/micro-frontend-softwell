@@ -25,6 +25,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
         idtheme: 0,
         idunit: 0,
         unitprice: 0,
+        volumeHoraire: 0,
         maxpersonne: 0,
         description: "",
         nameTheme: "",
@@ -77,6 +78,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
         });
         setPrice({
             id: 0,
+            volumeHoraire: 0,
             idtrainer: 0,
             idtheme: 0,
             idunit: 0,
@@ -101,7 +103,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
         const data = await send(value,url + "trainer")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -161,7 +163,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                             />
                         </div>
                         <div className="my-2">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Tel</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Tél.</label>
                             <input 
                                 type="text"  
                                 className="input_singup"
@@ -174,15 +176,16 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                         <div className="bg-gray-50 p-2 rounded">
                             <div className="flex  justify-between gap-2 ">
                                 <div>
-                                    <label className="label-formulaire mt-2 mb-1">theme</label>
+                                    <label className="label-formulaire mt-2 mb-1">Thème</label>
                                     <Select options={listThemes} onChange={handlerTheme} />
                                 </div>
                                 <div>
-                                    <label className="label-formulaire mt-2 mb-1">unite</label>
+                                    <label className="label-formulaire mt-2 mb-1">Unité</label>
                                     <Select options={listUnits} onChange={handlerUnit} />
                                 </div>
+                               
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">prix unitaire</label>
+                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">Prix unitaire</label>
                                     <div class="relative">
                                         <input 
                                             type="number" 
@@ -197,7 +200,7 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">nombre  maximum de personne</label>
+                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">Nombre maximum de personnes</label>
                                     <div class="relative">
                                         <input 
                                             type="number" 
@@ -208,14 +211,28 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                             onChange={(event) => handlerVariable("maxpersonne", event.target.value,setPrice)}
                                         />
                                         {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
-                                </div>
+                                    </div>
                                 </div>  
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mt-2 mb-2">Volume horaire</label>
+                                    <div class="relative">
+                                        <input 
+                                            type="number" 
+                                            class="input_singup"
+                                            min="0"                  // force positif
+                                            step="0.01"
+                                            placeholder={value.volumeHoraire}
+                                            onChange={(event) => handlerVariable("volumeHoraire", event.target.value,setPrice)}
+                                        />
+                                        {/* <i class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i> */}
+                                    </div>
+                                </div>
                                 <button onClick={() => {handlerListThemeTrainer("Trainerthemes",price,null)}} class="btn-neutre-gray">
                                             <i class="fa-regular fa-plus"></i>
                                 </button>
                             </div>
                             <div>
-                                    <label class="label-formulaire mt-2 mb-2">description</label>
+                                    <label class="label-formulaire mt-2 mb-2">Description</label>
                                     <textarea 
                                         required
                                         placeholder={""} 
@@ -229,11 +246,11 @@ export default function CardAddTrainer({close,infoTraining,listThemes}){
                                  <table class="w-full">
                                  <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>
-                                        <th class="tr-thead ">Theme</th>
-                                        <th class="tr-thead">unite</th>
-                                        <th class="tr-thead w-8">prix unitaire</th>
-                                        <th class="tr-thead w-8">max personne</th>
-                                        <th class="tr-thead w-80">description</th>
+                                        <th class="tr-thead ">Thème</th>
+                                        <th class="tr-thead">Unité</th>
+                                        <th class="tr-thead w-8">Prix unitaire</th>
+                                        <th class="tr-thead w-8">Nombre max. de personnes</th>
+                                        <th class="tr-thead w-80">Description</th>
                                         <th class="tr-thead "></th>
                                     </tr>
                                 </thead>

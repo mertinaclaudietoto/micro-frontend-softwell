@@ -88,7 +88,7 @@ export const infocandidate = {
     ],
     daterequest:'2025-06-12',
     post:12,
-    namepost:"Developpeur C#"
+    namepost:"Développeur C#"
 }
 export const listCandidate = [
   {

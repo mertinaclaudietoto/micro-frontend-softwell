@@ -28,7 +28,7 @@ export default function UpdateRecruitment({close,valueUp,entityName,listeRole,bo
         const data = await update(value,url_recrutement + entityName)
         // console.log(value)
         if (data == true) {
-            // toast.success("Données insérées avec succès !");
+            // toast.success("Données enregistrées avec succès !");
             close(false);
             window.location.reload();
         } else {
@@ -40,7 +40,7 @@ export default function UpdateRecruitment({close,valueUp,entityName,listeRole,bo
         const data = await deletev(value,url_recrutement + entityName)
         // console.log(value)
         if (data == true) {
-            // toast.success("Données insérées avec succès !");
+            // toast.success("Données enregistrées avec succès !");
             close(false);
             window.location.reload();
         } else {
@@ -78,11 +78,11 @@ export default function UpdateRecruitment({close,valueUp,entityName,listeRole,bo
                     />
                 </div>
                 <div className='mt-4 mb-6'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Rôle</label>
                     <Select options={listeRole} onChange={handlerRule} placeholder={listeRole?.find(v => v.id === value.idrole)?.name} value={false} />
                 </div>
                 <div className='mt-4 mb-6'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Envois Email</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Envoi d'e-mail</label>
                     <Select options={listeRole} onChange={handlerEmail} placeholder={booleanEmail?.find(v => v.id === value.email)?.name} value={false} />
                 </div>
                 <div className='mt-4 mb-6'>

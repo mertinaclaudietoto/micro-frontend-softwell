@@ -14,18 +14,18 @@ export default function CardChangePassWord({closePopup}){
                     text
                 </p> */}
                 <div className='my-2'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Ancienne</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ancien mot de passe</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Saisir le mot de passe" 
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                 </div>
                 <div className='my-2'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Nouveaux</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nouveau mot de passe</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Saisir le mot de passe" 
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                 </div>

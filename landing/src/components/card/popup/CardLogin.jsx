@@ -17,15 +17,15 @@ export default function CardLogin({closePopup}){
                     <label class="block text-sm font-medium text-gray-700 mb-2">Login</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Saisir le mot de passe" 
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                 </div>
                 <div className='my-2'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom complte" 
+                        placeholder="Saisir le mot de passe" 
                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                 </div>

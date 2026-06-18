@@ -17,10 +17,25 @@ export default function AddTimeRecruitment({close ,valueUp}){
         console.log("diff date "+diffDateStartEnd(value.datestart,value.dateend))
         const diff = diffDateStartEnd(value.datestart, value.dateend);
         if (diff !== null && diff > 0) {
-            const data = await update(value, url_recrutement + "recruitment_request");
+            const data = await update(
+                {
+                    id: value.id,
+                    postId: value.postId ?? value.PostId,
+                    numberOfCandidates: value.numberOfCandidates ?? value.NumberOfCandidates,
+                    requesterId: value.requesterId ?? value.RequesterId,
+                    requestDate: value.requestDate ?? value.RequestDate,
+                    motifRecrutement: value.motifRecrutement ?? value.MotifRecrutement ?? "",
+                    statusSetByUserId: value.statusSetByUserId ?? value.StatusSetByUserId ?? null,
+                    statusSetDate: value.statusSetDate ?? value.StatusSetDate ?? null,
+                    statusId: value.statusId ?? value.StatusId ?? null,
+                    datestart: value.datestart,
+                    dateend: value.dateend,
+                },
+                url_recrutement + "recruitment_request"
+            );
 
             if (data === true) {
-                toast.success("Données insérées avec succès !");
+                toast.success("Données enregistrées avec succès !");
                 close(false);
                 // window.location.reload();
             } else {
@@ -51,10 +66,10 @@ export default function AddTimeRecruitment({close ,valueUp}){
 
                     {value.datestart ==null ? 
                         <div className="my-2">
-                            <label className=" label-formulaire">Debut {value.datestart.split('T')[0]} </label>
+                            <label className=" label-formulaire">Début {value.datestart.split('T')[0]} </label>
                             <input 
                                 type="date" 
-                                placeholder="Entrer votre nom" 
+                                placeholder="" 
                                 className="input_singup text-gray-400"
                                 value={value.datestart}
                                 onChange={(event) => handlerVariable("datestart", event.target.value,setValue)}
@@ -62,10 +77,10 @@ export default function AddTimeRecruitment({close ,valueUp}){
                         </div>
                      : 
                         <div className="my-2">
-                            <label className=" label-formulaire">Debut {value.datestart.split('T')[0]}</label>
+                            <label className=" label-formulaire">Début {value.datestart.split('T')[0]}</label>
                             <input 
                                 type="date" 
-                                placeholder="Entrer votre nom" 
+                                placeholder="" 
                                 className="input_singup text-gray-400"
                                 value={value.datestart}
                                 readOnly={true}
@@ -78,7 +93,7 @@ export default function AddTimeRecruitment({close ,valueUp}){
                         <label className="label-formulaire">Fin {value.dateend.split('T')[0]}</label>
                         <input
                             type="date" 
-                            placeholder="Entrer votre nom" 
+                            placeholder="" 
                             className="input_singup text-gray-400"
                             value={value.dateend}
                             onChange={(event) => handlerVariable("dateend", event.target.value,setValue)}

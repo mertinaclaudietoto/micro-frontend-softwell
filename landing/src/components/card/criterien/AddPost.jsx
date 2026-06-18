@@ -255,7 +255,7 @@ export default function AddPost({close}){
         const data = await send(value,url_recrutement + "post")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -294,7 +294,7 @@ export default function AddPost({close}){
                 <div class="space-y-6">
                 <div class="my-2">
                     <div class="w-100">
-                        <label className="label-formulaire mt-2 mb-1">Post sage</label>
+                        <label className="label-formulaire mt-2 mb-1">Post Sage Paie</label>
                         <Select options={listPoste} placeholder="..." onChange={handlerListPost} nameIteme="intitule"  value={false}/>
                     </div>
                 </div>
@@ -302,7 +302,7 @@ export default function AddPost({close}){
                     <label className=" label-formulaire">Titre de l'offre</label>
                     <input 
                         type="text" 
-                        placeholder="Entrer votre nom" 
+                        placeholder="Saisir le titre" 
                         className="input_singup text-gray-400"
                         value={value.nom}
                         onChange={(event) => handlerVariable("nom", event.target.value,setValue)}
@@ -312,7 +312,7 @@ export default function AddPost({close}){
                     <label className="label-formulaire">Mission</label>
                     <textarea 
                         type="text" 
-                        placeholder="Entrer votre nom" 
+                        placeholder="Décrire la mission" 
                         className="input_singup text-gray-400"
                         value={value.mission}
                         onChange={(event) => handlerVariable("mission", event.target.value,setValue)}
@@ -323,7 +323,7 @@ export default function AddPost({close}){
                     <label className="label-formulaire mt-2">Objectif</label>
                     <textarea
                         type="text" 
-                        placeholder="Entrer votre nom" 
+                        placeholder="Décrire l'objectif" 
                         className="input_singup text-gray-400"
                         value={value.goals}
                         onChange={(event) => handlerVariable("goals", event.target.value,setValue)}
@@ -339,7 +339,7 @@ export default function AddPost({close}){
                         <Select options={listLocalisation} placeholder="..." onChange={handlerLocalisation} />
                     </div>
                 </div>
-                <label className="label-formulaire mt-2 mb-1">Anne d'experience entre </label>
+                <label className="label-formulaire mt-2 mb-1">Années d'expérience entre </label>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2 mb-8">
                     <div>
@@ -352,11 +352,11 @@ export default function AddPost({close}){
                     </div>
                 </div>
 
-                <label className=" mt-2 mb-1 label-formulaire">Diplome</label>
+                <label className=" mt-2 mb-1 label-formulaire">Diplôme</label>
                 <div className="bg-gray-50 p-2 rounded">
                     <div className="flex  justify-between gap-2 ">
                         <div>
-                            <label className="label-formulaire mt-2 mb-1">diplome</label>
+                            <label className="label-formulaire mt-2 mb-1">Diplôme</label>
                             <Select options={listDiplome} onChange={handlerDiplome} />
                         </div>
                         <div>
@@ -374,8 +374,8 @@ export default function AddPost({close}){
                     <table class="w-full">
                     <thead class="bg-gray-50 border-b border-gray-200">
                         <tr>
-                            <th class="tr-thead ">diplome</th>
-                            <th class="tr-thead">obligatoir?</th>
+                            <th class="tr-thead ">Diplôme</th>
+                            <th class="tr-thead">Obligatoire ?</th>
                             <th class="tr-thead w-8"></th>
                             <th class="tr-thead "></th>
                         </tr>
@@ -417,8 +417,8 @@ export default function AddPost({close}){
                     <table class="w-full">
                     <thead class="bg-gray-50 border-b border-gray-200">
                         <tr>
-                            <th class="tr-thead ">diplome</th>
-                            <th class="tr-thead">obligatoir?</th>
+                            <th class="tr-thead ">Diplôme</th>
+                            <th class="tr-thead">Obligatoire ?</th>
                             <th class="tr-thead w-8"></th>
                             <th class="tr-thead "></th>
                         </tr>
@@ -462,7 +462,7 @@ export default function AddPost({close}){
                     <thead class="bg-gray-50 border-b border-gray-200">
                         <tr>
                             <th class="tr-thead ">Skill</th>
-                            <th class="tr-thead">obligatoir?</th>
+                            <th class="tr-thead">Obligatoire ?</th>
                             <th class="tr-thead w-8"></th>
                             <th class="tr-thead "></th>
                         </tr>
@@ -505,7 +505,7 @@ export default function AddPost({close}){
                     <thead class="bg-gray-50 border-b border-gray-200">
                         <tr>
                             <th class="tr-thead ">Skill</th>
-                            <th class="tr-thead">obligatoir?</th>
+                            <th class="tr-thead">Obligatoire ?</th>
                             <th class="tr-thead w-8"></th>
                             <th class="tr-thead "></th>
                         </tr>
@@ -548,7 +548,7 @@ export default function AddPost({close}){
                     <thead class="bg-gray-50 border-b border-gray-200">
                         <tr>
                             <th class="tr-thead ">Skill</th>
-                            <th class="tr-thead">obligatoir?</th>
+                            <th class="tr-thead">Obligatoire ?</th>
                             <th class="tr-thead w-8"></th>
                             <th class="tr-thead "></th>
                         </tr>

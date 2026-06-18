@@ -31,7 +31,7 @@ const Footer2 = () => {
                     
                     <div class="lg:col-span-1">
                         <h2 class="text-2xl font-bold mb-2">BRAND NAME</h2>
-                        <p class="text-red-500 text-sm mb-6">Enter Your Slogan Here</p>
+                        <p class="text-red-500 text-sm mb-6">Saisir votre slogan ici</p>
                         <p class="text-sm text-gray-600 mb-6">
                             Consectetur adipiscing elit, sed do eiusmod tempor 
                             incididunt ut labore et dolore magna aliqua.

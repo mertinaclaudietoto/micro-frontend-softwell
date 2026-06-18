@@ -119,7 +119,7 @@ export default function Dashboard(){
                                
                                 <div class="bg-white p-6 m-2">
                                     <div class="flex items-center justify-between mb-4">
-                                        <h2 class="text-xl font-medium text-gray-900">Recruitment progress</h2>
+                                        <h2 class="text-xl font-medium text-gray-900">Avancement du recrutement</h2>
                                         <div class="flex gap-2">
                                             <button class="iconerond10">
                                                 <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,7 +137,7 @@ export default function Dashboard(){
                                         <thead>
                                             <tr class="text-gray-500 text-sm border-b">
                                                 <th class="pb-3">Candidate</th>
-                                                <th class="pb-3">Role</th>
+                                                <th class="pb-3">Rôle</th>
                                                 <th class="pb-3">Status</th>
                                             </tr>
                                         </thead>
@@ -174,7 +174,7 @@ export default function Dashboard(){
                                                         <label className="text-gray-400 text-xs">12-11-2025 / 20-11-2025</label>
                                                     </div>
                                                 </td>
-                                                <td class="py-3 text-gray-500">Content designer</td>
+                                                <td class="py-3 text-gray-500">Concepteur de contenu</td>
                                                 <td class="py-3 flex items-center gap-2">
                                                     <div class="w-2 h-2 bg-red-500 rounded-full"></div>
                                                     <span class="text-xs text-gray-600">Task</span>
@@ -193,7 +193,7 @@ export default function Dashboard(){
                                                 <td class="py-3 text-gray-500">Node.js Developer</td>
                                                 <td class="py-3 flex items-center gap-2">
                                                     <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                                    <span class="text-xs text-gray-600">Resume review</span>
+                                                    <span class="text-xs text-gray-600">Revue du CV</span>
                                                 </td>
                                             </tr>
 

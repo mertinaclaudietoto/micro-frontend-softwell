@@ -12,7 +12,7 @@ const Footer1 = () => {
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
                     <div>
                         <h2 class="text-2xl font-bold mb-2">BRAND NAME</h2>
-                        <p class="text-red-500 text-sm mb-6">Enter Your Slogan Here</p>
+                        <p class="text-red-500 text-sm mb-6">Saisir votre slogan ici</p>
                         <h3 class="font-bold mb-3">About Us</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">
                             Dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor 

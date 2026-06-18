@@ -1,9 +1,9 @@
 
 export   const parametres =[
        
-        {item :"Preferences",link:"/rh-steprecruitement",icone:"fas fa-sliders-h",actif:false},
+        {item :"Préférences",link:"/rh-steprecruitement",icone:"fas fa-sliders-h",actif:false},
         {item :"Mode Dark",link:"#",icone:"fas fa-moon",actif:false},
-        {item :"Themes",link:"#",icone:"fas fa-palette",actif:false},
+        {item :"Thèmes",link:"#",icone:"fas fa-palette",actif:false},
         {item :"Aide",link:"#",icone:"fas fa-question-circle",actif:false},
     ]
 export    const short =[

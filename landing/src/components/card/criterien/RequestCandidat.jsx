@@ -26,7 +26,7 @@ export default function RequestCandidat({close,valueUp}){
         const data = await send(value,url_recrutement + "recruitment_request")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
             // window.location.reload();
         } else {
@@ -68,7 +68,7 @@ export default function RequestCandidat({close,valueUp}){
                     <label className="label-formulaire mt-2">Motif</label>
                     <textarea
                         type="text" 
-                        placeholder="Entrer votre nom" 
+                        placeholder="Saisir le motif" 
                         className="input_singup text-gray-400"
                         value={value.goals}
                         onChange={(event) => handlerVariable("motifRecrutement", event.target.value,setValue)}

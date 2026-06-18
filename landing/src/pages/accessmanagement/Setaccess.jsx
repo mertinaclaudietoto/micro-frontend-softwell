@@ -48,7 +48,7 @@ export default function Setaccess({value,close}){
         console.log(newprofile);
         const response = newprofile.id != null ?  await update(newprofile,url + "roles")  :   await send(newprofile,url + "roles")
         if (response == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -65,16 +65,16 @@ export default function Setaccess({value,close}){
                         <div class=" p-6">
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <h1 class="text-xl font-semibold text-gray-900">Gestion Accès <b className="text-softbleu">{info.name}</b></h1>
+                                    <h1 class="text-xl font-semibold text-gray-900">Gestion des accès <b className="text-softbleu">{info.name}</b></h1>
                                     
                                     <button class="bg-softbleutini-12 hover:bg-softbleushade-12 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={()=>submit()}>
                                         <i class="fa-solid fa-pen text-white"></i>
                                         valider changement
                                     </button>
                                 </div>
-                                <p class="text-sm text-gray-600">Si vous voulez ajouter un nouveau profile <span className="text-or font-semibold">cliquez ici</span> ou 
-                                {close!=null ? <button className="text-softbleu font-semibold" onClick={()=>{close(false)}}>retour</button>
-                                 : <Link to="/access-profile"> <span className="text-softbleu font-semibold" onClick={()=>{close(false)}}>retour</span></Link>
+                                <p class="text-sm text-gray-600">Si vous voulez ajouter un nouveau profil <span className="text-or font-semibold">cliquez ici</span> ou 
+                                {close!=null ? <button className="text-softbleu font-semibold" onClick={()=>{close(false)}}>Retour</button>
+                                 : <Link to="/access-profile"> <span className="text-softbleu font-semibold" onClick={()=>{close(false)}}>Retour</span></Link>
                                 }
                                 .</p>
                             </div>
@@ -137,8 +137,8 @@ export default function Setaccess({value,close}){
                                 <table class="w-full h-screen overflow-y-auto ">
                                     <thead>
                                         <tr class="border-b border-gray-200">
-                                            <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Fonctionnalitees</th>
-                                            <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">Access</th>
+                                            <th class="text-left py-3 px-4 text-xs font-semibold text-gray-600 uppercase">Fonctionnalités</th>
+                                            <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">Accès</th>
                                             {/* <th class="text-center py-3 px-4 text-xs font-semibold text-gray-600 uppercase w-24">
                                                 <div className="flex space-x-2">
                                                     <button class="btn-neutre-gray" onClick={()=>{setOpenComparaison(true)}}>

@@ -149,9 +149,9 @@ function App() {
         <Route path="/crud-civility" element={ <CRUDIdName key={1} entityName={"civility"} Name={"Civilitee"} urlApplication={url_recrutement}  nameAccess={"infoentreprise"}/> } />
         <Route path="/crud-plateforme" element={ <CRUDIdName key={1} entityName={"plateforme"} Name={"Plateforme"} urlApplication={url_recrutement} nameAccess={"infoselectionrecruitment"} /> } />
         <Route path="/crud-localisation" element={ <CRUDIdName key={2} entityName={"localisation"} Name={"Localisation"} urlApplication={url_recrutement} nameAccess={"infoentreprise"} /> } />
-        <Route path="/crud-yearofexperience" element={ <CRUDIdName key={3} entityName={"yearsofexperience"} Name={"Annee d'experience"}  urlApplication={url_recrutement}  nameAccess={"infoselectionrecruitment"}/> } />
+        <Route path="/crud-yearofexperience" element={ <CRUDIdName key={3} entityName={"yearsofexperience"} Name={"Année d'expérience"}  urlApplication={url_recrutement}  nameAccess={"infoselectionrecruitment"}/> } />
         <Route path="/crud-certification" element={ <CRUDIdName key={4} entityName={"certification"} Name={"Certification"} urlApplication={url_recrutement} nameAccess={"infoselectionrecruitment"}/> } />
-        <Route path="/crud-diplome" element={ <CRUDIdName key={5} entityName={"diplome"} Name={"Diplome"}  urlApplication={url_recrutement} nameAccess={"infoselectionrecruitment"}/> } />
+        <Route path="/crud-diplome" element={ <CRUDIdName key={5} entityName={"diplome"} Name={"Diplôme"}  urlApplication={url_recrutement} nameAccess={"infoselectionrecruitment"}/> } />
         <Route path="/crud-hardskill" element={ <CRUDIdName key={6} entityName={"hardSkill"} Name={"Hard Skill"} urlApplication={url_recrutement} nameAccess={"infoselectionrecruitment"}/> } />
         <Route path="/crud-Language" element={ <CRUDIdName key={7} entityName={"language"} Name={"Hard Skill"}  urlApplication={url_recrutement}  nameAccess={"infoselectionrecruitment"}/> } />
         <Route path="/crud-mandatory" element={ <CRUDIdName key={8} entityName={"mandatory"} Name={"Obligatoire Status"} urlApplication={url_recrutement}  nameAccess={"infoselectionrecruitment"}/> } />
@@ -164,7 +164,7 @@ function App() {
 
 
         <Route path="/crud-university" element={ <CRUDIdName key={13} entityName={"university"} Name={"Etablisement d'origine"} urlApplication={url_recrutement}  nameAccess={"infoselectionrecruitment"}/> } />
-        <Route path="/crud-typeexperience" element={ <CRUDIdName key={14} entityName={"typeexperience"} Name={"Type d'experience "}  urlApplication={url_recrutement} nameAccess={"infoselectionrecruitment"}/> } />
+        <Route path="/crud-typeexperience" element={ <CRUDIdName key={14} entityName={"typeexperience"} Name={"Type d'expérience "}  urlApplication={url_recrutement} nameAccess={"infoselectionrecruitment"}/> } />
        
         <Route path="/crud-steprecruitment" element={ <StepRecruitment /> } />
 

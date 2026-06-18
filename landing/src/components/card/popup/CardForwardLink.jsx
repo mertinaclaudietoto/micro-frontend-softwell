@@ -19,7 +19,7 @@ export default function CardForwardLink({_url,endpoint,closePopup,parametres,tit
     const handleCopy = async () => {
         try {
         await navigator.clipboard.writeText(url);
-            toast.success("Lien copiées avec succès !");         
+            toast.success("Lien copié avec succès !");         
             // setTimeout(() => setCopied(false), 2000);
         } catch (err) {
             console.error("Erreur lors de la copie", err);

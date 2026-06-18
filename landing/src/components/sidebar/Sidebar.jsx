@@ -65,7 +65,7 @@ export default function Sidebar(){
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Parametre</h3>
+                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Paramètres</h3>
                                 <div class="space-y-1">
                                     {pages.infoentreprise.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                     {pages.parametre.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}

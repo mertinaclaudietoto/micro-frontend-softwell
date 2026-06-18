@@ -17,7 +17,7 @@ export default function  Footer3 () {
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
                 <div>
                     <h2 class="text-2xl font-bold mb-2">BRAND NAME</h2>
-                    <p class="text-red-500 text-sm mb-6">Enter Your Slogan Here</p>
+                    <p class="text-red-500 text-sm mb-6">Saisir votre slogan ici</p>
                     <div class="flex gap-2">
                         <a href="#" class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
                             <i class="fab fa-youtube"></i>

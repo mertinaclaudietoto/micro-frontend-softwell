@@ -23,7 +23,7 @@ export default function Login({closePopup}){
             const response = await _login(login, url + "employ/login");
             // console.log(response.data.data)
             if(response.data.success==false){
-                setText("Login ou Mot de passe incorrecte")
+                setText("Identifiant ou mot de passe incorrect")
             }
             if (response.data.data.token) {
                 sessionStorage.setItem("token", response.data.data.token);
@@ -37,7 +37,7 @@ export default function Login({closePopup}){
                 navigate("/accueil");
             }
         } catch (error) {
-            setText("Login ou Mot de passe incorrecte")
+            setText("Identifiant ou mot de passe incorrect")
             console.error("Erreur login:", error);
         }
     };
@@ -62,7 +62,7 @@ export default function Login({closePopup}){
                     />
                 </div>
                 <div className='my-2'>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Mots de passe</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                     <input 
                         type="password" 
                         class="input_formulaire"

@@ -17,10 +17,22 @@ export default function Presence(){
     const dataValue = decoded.split("|");
     const [data,setData]=useState([]);
     const getParticipants = async () => {
-        const data = await getData(
+        const response = await getData(
             url + `presence/${dataValue[0]}`
         );
-        setData( data.data);;
+        if (response.data != null) {
+            const participants = response.data;
+            const neverInitialized = participants.every(
+                (p) => p.Morning === 0 && p.Evening === 0
+            );
+            setData(
+                participants.map((participant) => ({
+                    ...participant,
+                    Morning: neverInitialized ? 1 : (participant.Morning ?? 1),
+                    Evening: neverInitialized ? 1 : (participant.Evening ?? 1),
+                }))
+            );
+        }
     };
     const updateAccess = (index, key, value) => {
         setData(prev => {
@@ -46,7 +58,7 @@ export default function Presence(){
             toast.error("Problème serveur, réessayez plus tard !");
         }
         }else{     
-            toast.error("Vous n'avez pas le droit de faire une modification!");
+            toast.error("Vous n'avez pas le droit de faire une modification !");
         }
     
     }
@@ -63,7 +75,7 @@ export default function Presence(){
                         <div class=" p-6">
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <p class=" font-semibold text-gray-900">Liste de presence ou formation  <b className="text-softbleu">{dataValue[1]}</b>  {dateToLetters(dataValue[2])}</p>
+                                    <p class=" font-semibold text-gray-900">Liste de présence ou formation  <b className="text-softbleu">{dataValue[1]}</b>  {dateToLetters(dataValue[2])}</p>
                                     <button class="bg-softbleutini-12 hover:bg-softbleushade-12 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2" onClick={()=>submit()}>
                                        Enregistrer
                                     </button>
@@ -97,10 +109,10 @@ export default function Presence(){
                                             </td>
                                             <td className="text-center py-5 w-8">
                                                 <input
-                                                type="checkbox"
-                                                className="w-4 h-4 text-blue-600 rounded border-gray-300"
-                                                checked={value.Morning === 1}
-                                                onChange={() => updateAccess(index, "Morning", value.Morning ==1 ?0:1)}
+                                                    type="checkbox"
+                                                    className="w-4 h-4 text-blue-600 rounded border-gray-300"
+                                                    checked={value.Morning === 1}
+                                                    onChange={() => updateAccess(index, "Morning", value.Morning ==1 ? 0:1)}
                                                 />
                                             </td>
                                             <td className="text-center py-5  w-8">

@@ -13,7 +13,7 @@ const Footer4 = () => {
                 <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-8">
                     <div>
                         <h2 class="text-2xl font-bold mb-2">BRAND NAME</h2>
-                        <p class="text-red-500 text-sm">Enter Your Slogan Here</p>
+                        <p class="text-red-500 text-sm">Saisir votre slogan ici</p>
                     </div>
                     <nav class="flex flex-wrap gap-6 text-sm">
                         <a href="#" class="hover:text-red-500">About</a>

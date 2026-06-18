@@ -136,7 +136,7 @@ export default function CardAddSession({close,idvalidation}){
         const data = await send(cleanData,url + "session")
         // console.log(value)
         if (data == true) {
-            toast.success("Données insérées avec succès !");
+            toast.success("Données enregistrées avec succès !");
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
@@ -152,10 +152,10 @@ export default function CardAddSession({close,idvalidation}){
                         <h3 className="font-bold">Ajout Nouvelle session </h3>
                         <div className="grid grid-cols-2 gap-5">
                             <div className="my-2">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Date Debut </label>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Date de début </label>
                                 <input 
                                     type="date" 
-                                    placeholder="Enter matricule  pour ajouter un nouveau participant" 
+                                    placeholder="Saisir le matricule pour ajouter un nouveau participant" 
                                     class="input_singup"
                                     onChange={(event)=>{handlerVariable("Datestart",event.target.value,setValue)}}
                                 />
@@ -164,7 +164,7 @@ export default function CardAddSession({close,idvalidation}){
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Date Fin </label>
                                 <input 
                                     type="date" 
-                                    placeholder="Enter matricule  pour ajouter un nouveau participant" 
+                                    placeholder="Saisir le matricule pour ajouter un nouveau participant" 
                                     class="input_singup"
                                     onChange={(event)=>{handlerVariable("Dateend",event.target.value,setValue)}}
                                 />
@@ -239,7 +239,7 @@ export default function CardAddSession({close,idvalidation}){
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
                                 <input 
                                     type="text" 
-                                    placeholder="Enter matricule  pour ajouter un nouveau participant" 
+                                    placeholder="Saisir le matricule pour ajouter un nouveau participant" 
                                     class="input_singup"
                                     onChange={(event)=>{setMatricule(event.target.value)}}
                                 />
@@ -254,7 +254,7 @@ export default function CardAddSession({close,idvalidation}){
                         </div>
                         <div className="mt-8">
                         <div id="tasksList" class="">
-                            <label className="block text-sm font-bold text-gray-700 mb-2">List formateur avec prix </label>
+                            <label className="block text-sm font-bold text-gray-700 mb-2">Liste des formateurs avec prix </label>
                               <table class="w-full">
                                 <thead class="bg-gray-50 border-b border-gray-200">
                                     <tr>
@@ -298,7 +298,7 @@ export default function CardAddSession({close,idvalidation}){
                             </table>
                         </div>
                         <div id="tasksList" class="">
-                                <label className="block text-sm font-bold text-gray-700 my-2">List Participant</label>
+                                <label className="block text-sm font-bold text-gray-700 my-2">Liste des participants</label>
                                 <table class="w-full">
                                  <thead >
                                     <tr>
@@ -310,7 +310,7 @@ export default function CardAddSession({close,idvalidation}){
                                             <div className="my-2 flex gap-2 justify-end">
                                                 <input 
                                                     type="text" 
-                                                    placeholder="Enter matricule  pour ajouter un nouveau participant" 
+                                                    placeholder="Saisir le matricule pour ajouter un nouveau participant" 
                                                     class="input_formulaire w-60 "
                                                     onChange={(event)=>{setMatricule(event.target.value)}}
                                                 />
@@ -323,7 +323,7 @@ export default function CardAddSession({close,idvalidation}){
                                     <tr class="bg-gray-50 border-b border-gray-200">
                                         <th class="tr-thead  w-8">Matricule </th>
                                         <th class="tr-thead">Nom</th>
-                                        <th class="tr-thead ">Prenom</th>
+                                        <th class="tr-thead ">Prénom</th>
                                         <th class="tr-thead ">Email</th>
                                         <th class="tr-thead "></th>
                                     </tr>
