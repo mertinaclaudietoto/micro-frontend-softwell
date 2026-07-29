@@ -15,7 +15,7 @@ export default function UpdatePost({close,id,valueUp}){
         goals: "Développer et maintenir des applications web performantes",
         mission: "Concevoir, développer et déployer des solutions web modernes",
         idContrat: 1,
-        salary: 2500000.0,
+        salary: 0,
         idLocalisation: 2,
         softSkills: [],
         hardSkills: [],
@@ -276,11 +276,15 @@ const handlerChangeTable = (name, value, index = null) => {
             url_recrutement + `tpostes`
         );
         if(datalistThemes.data!=null)
-            setListPoste(datalistThemes.data)
+            setListPoste(datalistThemes.data.map((p) => ({
+                ...p,
+                id: p.idPoste ?? p.id,
+                intitule: p.intitule ?? p.Intitule ?? "",
+            })))
     }
     const handlerListPost =(opt) =>{
         if(opt !=null){
-            handlerVariable("idpostsage", opt.id,setValue);
+            handlerVariable("idpostsage", opt.idPoste ?? opt.id, setValue);
         }
     }
     useEffect(() => {

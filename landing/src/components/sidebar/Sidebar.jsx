@@ -1,14 +1,27 @@
 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import SidebarLargButton from "./button/SidebarLargButton";
-import CardPub from "./card/CardPub";
 import SidebarShortButton from "./button/SidebarShortButton";
 import { datasidebar } from "../../data/data";
 import useLogout from "../../function/Logout";
 export default function Sidebar(){
     const [isOpen ,setIsOpen]=useState(false);
+    const navigate = useNavigate();
     const pages =datasidebar;
+    const selectedSpace = sessionStorage.getItem("selectedSpace");
+    const activePages = pages[selectedSpace] ?? [];
+    const spaceLabel =
+        selectedSpace === "formation"
+            ? "Formation"
+            : selectedSpace === "recrutement"
+            ? "Recrutement"
+            : "Choisir un espace";
     const logout = useLogout();
+    const changeSpace = () => {
+        sessionStorage.removeItem("selectedSpace");
+        navigate("/accueil");
+    };
     return (
         <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll "> 
         <div class="bg-white-200  h-screen ">
@@ -24,16 +37,15 @@ export default function Sidebar(){
                     </button>
                     {/* notification */}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
-                        {pages.formation.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
-                    {/* dasboard */}
-                    <div class="w-full h-px bg-gray-200 my-1"></div>
-                    <div class="flex-1"></div>
-                        {pages.recrutement.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+                        {activePages.map((value,index)=>(<SidebarShortButton key={`${value.label}-${index}`} link={value.link} icone={value.icone} label={value.label} actif={value.actif} accesValue={value.acces}/>))}
                     <div class="w-full h-px bg-gray-200 my-1"></div>
                     <div class="flex-1"></div>
                     <div class="w-full h-px bg-gray-200 my-1"></div>
-                        {pages.infoentreprise.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
-                        {pages.parametre.map((value,index)=>(<SidebarShortButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems}/>))}
+                        {pages.infoentreprise.map((value,index)=>(<SidebarShortButton key={`${value.label}-${index}`} link={value.link} icone={value.icone} label={value.label} actif={value.actif} accesValue={value.acces}/>))}
+                        {pages.parametre.map((value,index)=>(<SidebarShortButton key={`${value.label}-${index}`} link={value.link} icone={value.icone} label={value.label} actif={value.actif} accesValue={value.acces}/>))}
+                    <button class="card-icone-simple text-gray-500 hover:bg-gray-100" onClick={changeSpace} title="Changer d’espace">
+                        <i class="fa-solid fa-right-left"></i>
+                    </button>
                 </aside>
                 ) : (
                     <aside class="w-80 bg-white  flex flex-col border-r border-gray-200">
@@ -42,7 +54,10 @@ export default function Sidebar(){
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                                     <path d="M16 4L19 13L28 16L19 19L16 28L13 19L4 16L13 13L16 4Z" fill="#4F46E5"/>
                                 </svg>
-                                <span class="text-xl font-semibold text-gray-800">SoftWell</span>
+                                <div>
+                                    <span class="text-xl font-semibold text-gray-800">SoftWell</span>
+                                    <p class="text-xs text-gray-400">{spaceLabel}</p>
+                                </div>
                             </div>
                             <button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-500" onClick={()=>{setIsOpen(!isOpen)}}>
                                 <i class="fas fa-bars"></i>
@@ -53,22 +68,19 @@ export default function Sidebar(){
 
                         <div class="flex-1 overflow-y-auto">
                             <div class="p-4">
-                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Formation</h3>
+                                <div class="flex items-center justify-between mb-3 px-4">
+                                    <h3 class="text-sm font-medium text-gray-500">{spaceLabel}</h3>
+                                    <button class="text-xs text-softbleu hover:underline" onClick={changeSpace}>Changer</button>
+                                </div>
                                 <div class="space-y-1">
-                                    {pages.formation.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
+                                    {activePages.map((value,index)=>(<SidebarLargButton key={`${value.label}-${index}`} link={value.link} icone={value.icone} label={value.label} actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Recrutement</h3>
+                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Paramètres généraux</h3>
                                 <div class="space-y-1">
-                                    {pages.recrutement.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <h3 class="text-sm font-medium text-gray-500 mb-3 px-4">Paramètres</h3>
-                                <div class="space-y-1">
-                                    {pages.infoentreprise.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
-                                    {pages.parametre.map((value,index)=>(<SidebarLargButton link={value.link} index={index} icone={value.icone} label={value.label}  actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
+                                    {pages.infoentreprise.map((value,index)=>(<SidebarLargButton key={`${value.label}-${index}`} link={value.link} icone={value.icone} label={value.label} actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
+                                    {pages.parametre.map((value,index)=>(<SidebarLargButton key={`${value.label}-${index}`} link={value.link} icone={value.icone} label={value.label} actif={value.actif} subItems={value.subItems} accesValue={value.acces}/>))}
                                 </div>
                             </div>
                             {/* pub */}

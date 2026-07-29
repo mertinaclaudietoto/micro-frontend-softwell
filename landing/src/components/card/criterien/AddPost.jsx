@@ -9,14 +9,49 @@ import { getData, send } from "../../../function/Axios";
 import Select from "../../../function/selectSimple";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function AddPost({close}){
+
+const mapSkillItems = (items, idKey) =>
+    items.map((item) => ({
+        [idKey]: item[idKey],
+        idMandatory: item.idMandatory,
+    }));
+
+const buildPostPayload = (form) => ({
+    nom: form.nom?.trim() ?? "",
+    goals: form.goals?.trim() ?? "",
+    mission: form.mission?.trim() ?? "",
+    idContrat: form.idContrat ?? null,
+    idLocalisation: form.idLocalisation ?? null,
+    idYearLeft: form.idYearLeft ?? null,
+    idYearRight: form.idYearRight ?? null,
+    idpostsage: form.idpostsage ?? null,
+    salary: form.salary !== "" && form.salary != null ? Number(form.salary) : null,
+    softSkills: mapSkillItems(form.softSkills ?? [], "idSoftSkill"),
+    hardSkills: mapSkillItems(form.hardSkills ?? [], "idHardSkill"),
+    languages: mapSkillItems(form.languages ?? [], "idLanguage"),
+    diplomes: (form.diplomes ?? []).map((d) => ({
+        idDiplome: d.idDiplome,
+        idMandatory: d.idMandatory,
+    })),
+    certifications: (form.certifications ?? [])
+        .filter((c) => c.idCertification != null && c.idMandatory != null)
+        .map((c) => ({
+            idCertification: c.idCertification,
+            idMandatory: c.idMandatory,
+        })),
+});
+
+export default function AddPost({ close, onSuccess }) {
     const [value, setValue] = useState({
-        nom: "Développeur Full Stack",
-        goals: "Développer et maintenir des applications web performantes",
-        mission: "Concevoir, développer et déployer des solutions web modernes",
-        idContrat: 1,
-        salary: 2500000.0,
-        idLocalisation: 2,
+        nom: "",
+        goals: "",
+        mission: "",
+        idContrat: null,
+        salary:0,
+        idLocalisation: null,
+        idYearLeft: null,
+        idYearRight: null,
+        idpostsage: null,
         softSkills: [],
         hardSkills: [],
         languages: [],
@@ -40,18 +75,23 @@ export default function AddPost({close}){
         });
     };
     const [listPoste,setListPoste]=useState();
-    const getListPoste = async ()=>{
-        const datalistThemes =  await getData(
-            url_recrutement + `tpostes`
-        );
-        if(datalistThemes.data!=null)
-            setListPoste(datalistThemes.data)
-    }
-    const handlerListPost =(opt) =>{
-        if(opt !=null){
-            handlerVariable("idpostsage", opt.id,setValue);
+    const getListPoste = async () => {
+        const response = await getData(url_recrutement + "tpostes");
+        if (response.data != null) {
+            setListPoste(
+                response.data.map((p) => ({
+                    ...p,
+                    id: p.idPoste ?? p.id,
+                    intitule: p.intitule ?? p.Intitule ?? "",
+                }))
+            );
         }
-    }
+    };
+    const handlerListPost = (opt) => {
+        if (opt != null) {
+            handlerVariable("idpostsage", opt.idPoste ?? opt.id, setValue);
+        }
+    };
     const [listContrat,setListContrat]=useState([])
     const getListContrat = async ()=>{
         const datalistThemes =  await getData(
@@ -69,12 +109,10 @@ export default function AddPost({close}){
             setListYearOfexperience(datalistThemes.data)
     }
      const handlerYearLeft =(opt) =>{
-        handlerVariable("idYearLeft", opt.id,setValue);
-        // handlerVariable("nameTheme", opt.name,setPrice)
+        if (opt != null) handlerVariable("idYearLeft", opt.id, setValue);
     }
     const handlerYearRight =(opt) =>{
-        handlerVariable("idYearRight", opt.id,setValue);
-        // handlerVariable("nameTheme", opt.name,setPrice)
+        if (opt != null) handlerVariable("idYearRight", opt.id, setValue);
     }
 
     const [listLocalisation,setListlocalisation]=useState([])
@@ -98,8 +136,8 @@ export default function AddPost({close}){
    
 
     const[valueDiplome,setValueDiplome]=useState({
-      idDiplome: 1,
-      idMandatory: 2,
+      idDiplome: null,
+      idMandatory: null,
       nameDiplome:"",
       nameMandatory:"",
     })
@@ -136,8 +174,8 @@ export default function AddPost({close}){
     }
   
     const[valueSoftSkill,setValueSoftSkill]=useState({
-      idSoftSkill: 1,
-      idMandatory: 2,
+      idSoftSkill: null,
+      idMandatory: null,
       nameS:"",
       nameM:"",
     })
@@ -164,20 +202,22 @@ export default function AddPost({close}){
             setListHardSkill (datalistThemes.data)
     }
     const[valueHardSkill,setValueHardSkill]=useState({
-      idHardSkill: 1,
-      idMandatory: 2,
+      idHardSkill: null,
+      idMandatory: null,
       nameS:"",
       nameM:"",
     })
     const handlerHardSkill =(opt) =>{
-        console.log(opt)
-        handlerVariable("idHardSkill", opt.id,setValueHardSkill);
-        handlerVariable("nameS", opt.name,setValueHardSkill);
+        if (opt != null) {
+            handlerVariable("idHardSkill", opt.id, setValueHardSkill);
+            handlerVariable("nameS", opt.name, setValueHardSkill);
+        }
     }
     const handlerMandatoryH=(opt) =>{
-        console.log(opt)
-        handlerVariable("idMandatory", opt.id,setValueHardSkill);
-        handlerVariable("nameM", opt.name,setValueHardSkill);
+        if (opt != null) {
+            handlerVariable("idMandatory", opt.id, setValueHardSkill);
+            handlerVariable("nameM", opt.name, setValueHardSkill);
+        }
     }
     //language
     const [listLanguage,setListLanguage]=useState([])
@@ -189,8 +229,8 @@ export default function AddPost({close}){
             setListLanguage(datalistThemes.data)
     }
     const[valueLanguage,setValueLanguage]=useState({
-      idLanguage: 1,
-      idMandatory: 2,
+      idLanguage: null,
+      idMandatory: null,
       nameS:"",
       nameM:"",
     })
@@ -224,24 +264,22 @@ export default function AddPost({close}){
       nameM:"",
     })
     const handlerCertification =(opt) =>{
-        console.log(opt)
-        handlerVariable("idCertification", opt.id,setValueCertification);
-        handlerVariable("nameS", opt.name,setValueCertification);
+        if (opt != null) {
+            handlerVariable("idCertification", opt.id, setValueCertification);
+            handlerVariable("nameS", opt.name, setValueCertification);
+        }
     }
     const handlerMandatoryC=(opt) =>{
-        console.log(opt)
-        handlerVariable("idMandatory", opt.id,setValueCertification);
-        handlerVariable("nameM", opt.name,setValueCertification);
+        if (opt != null) {
+            handlerVariable("idMandatory", opt.id, setValueCertification);
+            handlerVariable("nameM", opt.name, setValueCertification);
+        }
     }
     const handlerLocalisation =(opt) =>{
-        console.log(opt)
-        handlerVariable("idLocalisation", opt.id,setValue);
-        // handlerVariable("nameTheme", opt.name,setPrice)
+        if (opt != null) handlerVariable("idLocalisation", opt.id, setValue);
     }
      const handlerContrat =(opt) =>{
-        console.log(opt)
-        handlerVariable("idContrat", opt.id,setValue);
-        // handlerVariable("nameTheme", opt.name,setPrice)
+        if (opt != null) handlerVariable("idContrat", opt.id, setValue);
     }
 
     const handlerVariable = (name, value,setFunction) => {
@@ -250,17 +288,50 @@ export default function AddPost({close}){
             [name]: value,
         }));
     };
-    const submit = async ()=>{
-        console.log(value);
-        const data = await send(value,url_recrutement + "post")
-        // console.log(value)
-        if (data == true) {
+    const addCriteriaItem = (field, item, idKey, label) => {
+        if (item[idKey] == null || item.idMandatory == null) {
+            toast.warning(`Sélectionnez un élément et son caractère obligatoire pour : ${label}.`);
+            return;
+        }
+        handlerChangeTable(field, item, null);
+    };
+
+    const validateForm = () => {
+        if (!value.nom?.trim()) {
+            toast.warning("Le titre de l'offre est obligatoire.");
+            return false;
+        }
+        if (!value.mission?.trim()) {
+            toast.warning("La mission est obligatoire.");
+            return false;
+        }
+        if (!value.goals?.trim()) {
+            toast.warning("L'objectif est obligatoire.");
+            return false;
+        }
+        if (!value.idContrat) {
+            toast.warning("Sélectionnez un type de contrat.");
+            return false;
+        }
+        if (!value.idLocalisation) {
+            toast.warning("Sélectionnez une localisation.");
+            return false;
+        }
+        return true;
+    };
+
+    const submit = async () => {
+        if (!validateForm()) return;
+        const payload = buildPostPayload(value);
+        const data = await send(payload, url_recrutement + "post");
+        if (data === true) {
             toast.success("Données enregistrées avec succès !");
+            onSuccess?.();
             close(false);
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
         }
-    }
+    };
     useEffect(() => {
         getListContrat();
         getListLocalisation();
@@ -281,7 +352,8 @@ export default function AddPost({close}){
             <div className=" flex justify-center items-center p-8   ">
                 <div class=" relative w-full max-w-3xl bg-white rounded-xl shadow-lg p-8">
                      <button
-                    onClick={() => close()}
+                    type="button"
+                    onClick={() => close(false)}
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
                     aria-label="Fermer"
                 >
@@ -332,13 +404,24 @@ export default function AddPost({close}){
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2 mb-8">
                     <div>
                         <label className="label-formulaire mt-2 mb-1">Contrat</label>
-                        <Select options={listContrat} placeholder="CDI" onChange={handlerContrat} />
+                        <Select options={listContrat} placeholder="Type de contrat" onChange={handlerContrat} />
                     </div>
                     <div>
                         <label className=" mt-2 mb-1 label-formulaire">Localisation</label>
-                        <Select options={listLocalisation} placeholder="..." onChange={handlerLocalisation} />
+                        <Select options={listLocalisation} placeholder="Localisation" onChange={handlerLocalisation} />
                     </div>
                 </div>
+                {/* <div className="my-2">
+                    <label className="label-formulaire">Salaire (Ar)</label>
+                    <input
+                        type="number"
+                        min="0"
+                        placeholder="Montant du salaire"
+                        className="input_singup text-gray-700"
+                        value={value.salary}
+                        onChange={(event) => handlerVariable("salary", event.target.value, setValue)}
+                    />
+                </div> */}
                 <label className="label-formulaire mt-2 mb-1">Années d'expérience entre </label>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2 mb-8">
@@ -364,7 +447,7 @@ export default function AddPost({close}){
                             <Select options={listMandatory} onChange={handlerMandatoryD} />
                         </div>
                         <div className="mt-10">
-                            <button  onClick={(event) => {event.preventDefault(); handlerChangeTable("diplomes",valueDiplome,null)}} class="btn-neutre-gray">
+                            <button type="button" onClick={(event) => {event.preventDefault(); addCriteriaItem("diplomes", valueDiplome, "idDiplome", "diplôme");}} class="btn-neutre-gray">
                                     <i class="fa-regular fa-plus"></i>
                             </button>
                         </div>
@@ -386,7 +469,7 @@ export default function AddPost({close}){
                         <td class="px-6 py-4">{v.nameDiplome}</td>
                         <td class="px-6 py-4">{v.nameMandatory}</td>
                         <td>
-                            <button  onClick={() => {handlerChangeTable("diplomes",valueDiplome,k)}} class="btn-neutre-gray">
+                            <button type="button" onClick={() => {handlerChangeTable("diplomes", null, k)}} class="btn-neutre-gray">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </td>
@@ -407,7 +490,7 @@ export default function AddPost({close}){
                             <Select options={listMandatory} onChange={handlerMandatoryC} />
                         </div>
                         <div className="mt-10">
-                            <button  onClick={(event) => {event.preventDefault(); handlerChangeTable("certifications",valueCertification,null)}} class="btn-neutre-gray">
+                            <button type="button" onClick={(event) => {event.preventDefault(); addCriteriaItem("certifications", valueCertification, "idCertification", "certification");}} class="btn-neutre-gray">
                                     <i class="fa-regular fa-plus"></i>
                             </button>
                         </div>
@@ -417,19 +500,18 @@ export default function AddPost({close}){
                     <table class="w-full">
                     <thead class="bg-gray-50 border-b border-gray-200">
                         <tr>
-                            <th class="tr-thead ">Diplôme</th>
+                            <th class="tr-thead ">Certification</th>
                             <th class="tr-thead">Obligatoire ?</th>
                             <th class="tr-thead w-8"></th>
-                            <th class="tr-thead "></th>
                         </tr>
                     </thead>
                     
                 {value.certifications.map((v,k)=>(
-                    <tr index={k}>
+                    <tr key={k}>
                         <td class="px-6 py-4">{v.nameS}</td>
                         <td class="px-6 py-4">{v.nameM}</td>
                         <td>
-                            <button  onClick={() => {handlerChangeTable("certifications",valueCertification,k)}} class="btn-neutre-gray">
+                            <button type="button" onClick={() => {handlerChangeTable("certifications", null, k)}} class="btn-neutre-gray">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </td>
@@ -451,7 +533,7 @@ export default function AddPost({close}){
                             <Select options={listMandatory} onChange={handlerMandatoryS} />
                         </div>
                         <div className="mt-10">
-                            <button  onClick={(event) => {event.preventDefault(); handlerChangeTable("softSkills",valueSoftSkill,null)}} class="btn-neutre-gray">
+                            <button type="button" onClick={(event) => {event.preventDefault(); addCriteriaItem("softSkills", valueSoftSkill, "idSoftSkill", "soft skill");}} class="btn-neutre-gray">
                                     <i class="fa-regular fa-plus"></i>
                             </button>
                         </div>
@@ -494,7 +576,7 @@ export default function AddPost({close}){
                             <Select options={listMandatory} onChange={handlerMandatoryH} />
                         </div>
                         <div className="mt-10">
-                            <button  onClick={(event) => {event.preventDefault(); handlerChangeTable("hardSkills",valueHardSkill,null)}} class="btn-neutre-gray">
+                            <button type="button" onClick={(event) => {event.preventDefault(); addCriteriaItem("hardSkills", valueHardSkill, "idHardSkill", "hard skill");}} class="btn-neutre-gray">
                                     <i class="fa-regular fa-plus"></i>
                             </button>
                         </div>
@@ -516,7 +598,7 @@ export default function AddPost({close}){
                         <td class="px-6 py-4">{v.nameS}</td>
                         <td class="px-6 py-4">{v.nameM}</td>
                         <td>
-                            <button  onClick={(event) => {event.preventDefault(); handlerChangeTable("hardSkills",valueSoftSkill,k)}} class="btn-neutre-gray">
+                            <button type="button" onClick={(event) => {event.preventDefault(); handlerChangeTable("hardSkills", null, k)}} class="btn-neutre-gray">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </td>
@@ -537,7 +619,7 @@ export default function AddPost({close}){
                             <Select options={listMandatory} onChange={handlerMandatoryL} />
                         </div>
                         <div className="mt-10">
-                            <button  onClick={(event) => {event.preventDefault(); handlerChangeTable("languages",valueLanguage,null)}} class="btn-neutre-gray">
+                            <button type="button" onClick={(event) => {event.preventDefault(); addCriteriaItem("languages", valueLanguage, "idLanguage", "langue");}} class="btn-neutre-gray">
                                     <i class="fa-regular fa-plus"></i>
                             </button>
                         </div>
@@ -569,11 +651,12 @@ export default function AddPost({close}){
             </div>
 
             <div class="flex justify-end gap-4 pt-4">
-                <button type="reset"
-                class="btn-neutre-gray">
+                <button type="button"
+                class="btn-neutre-gray"
+                onClick={() => close(false)}>
                 Annuler
                 </button>
-                <button onClick={()=>{submit()}} class="btn-action">
+                <button type="button" onClick={()=>{submit()}} class="btn-action">
                 Enregistrer 
                 </button>
             </div>

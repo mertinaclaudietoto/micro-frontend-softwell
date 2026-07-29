@@ -39,10 +39,27 @@ export default function BudgetTheme({close,value}){
         const value = await update(valueUp,url + "budget-theme")
         if (value == true) {
             toast.success("Données modifiées avec succès !");
+            loadData();
         } else {
-            toast.error("Problème serveur ou élément ne pouvant pas être supprimé !");
+            toast.error("Problème serveur ou élément ne pouvant pas être modifié !");
         }
     }
+    const deleteBudget = async (budgetItem) => {
+        if (
+            !window.confirm(
+                `Supprimer le budget de l'année ${budgetItem.year} (${formatMoney(budgetItem.montant)} Ar) ?`
+            )
+        ) {
+            return;
+        }
+        const result = await deletev(budgetItem, url + "budget-theme");
+        if (result === true) {
+            toast.success("Budget supprimé avec succès !");
+            loadData();
+        } else {
+            toast.error("Problème serveur, réessayez plus tard !");
+        }
+    };
     const loadData = async () => {
             const data = await getData(url + `budget-theme/${value.id}`);
             if(data.data!=null)
@@ -58,6 +75,7 @@ export default function BudgetTheme({close,value}){
     }, []);
     const isCanAddBudget = accesObj  && (accesObj?.budget?.ajout == null || accesObj?.budget?.ajout == undefined) 
     const isCanUpdateBudget = accesObj  && (accesObj?.budget?.modification == null || accesObj?.budget?.modification == undefined) 
+    const isCanDeleteBudget = accesObj && (accesObj?.budget?.suppression == null || accesObj?.budget?.suppression == undefined)
 
 
     return(
@@ -108,7 +126,7 @@ export default function BudgetTheme({close,value}){
                             <tr>
                                 <th class="tr-thead w-8">Année</th>
                                 <th class="tr-thead">Montant (Ar)</th>
-                                <th class="tr-thead"></th>
+                                <th class="tr-thead text-center">Actions</th>
 
                             </tr>
                         </thead>
@@ -127,11 +145,18 @@ export default function BudgetTheme({close,value}){
                                             />
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-500">
+                                        <div class="flex items-center justify-center gap-2">
                                         {isCanUpdateBudget!=true ?
-                                            <button onClick={()=>{updateMontant(value)}}>
-                                                <i class="fa-solid fa-pen"></i>
+                                            <button type="button" onClick={()=>{updateMontant(value)}} title="Modifier">
+                                                <i class="fa-solid fa-pen text-gray-500 hover:text-softbleu"></i>
                                             </button> : <></>
-                                        } 
+                                        }
+                                        {isCanDeleteBudget!=true ?
+                                            <button type="button" onClick={()=>{deleteBudget(value)}} title="Supprimer">
+                                                <i class="fa-regular fa-trash-can text-red-500 hover:text-red-700"></i>
+                                            </button> : <></>
+                                        }
+                                        </div>
                                     </td>
                                 </tr>
                                 </>

@@ -34,6 +34,7 @@ export default function Login({closePopup}){
             }
              if (response.data.data.access) {
                 sessionStorage.setItem("access", response.data.data.access);
+                sessionStorage.removeItem("selectedSpace");
                 navigate("/accueil");
             }
         } catch (error) {

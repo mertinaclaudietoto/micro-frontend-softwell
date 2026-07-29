@@ -45,6 +45,7 @@ export default function CriterienStaff(){
         const data = await getData(
             url_recrutement + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
         );
+        console.log(data);
         setData( data.data);
     }, [numpage, search,nameE]); // dépendances de loadData
 
@@ -157,7 +158,16 @@ export default function CriterienStaff(){
             </div>
             </div>
         </main>
-         {showAdd ? <AddPost key={1} close={setShowAdd} /> : <></>}
+         {showAdd ? (
+            <AddPost
+                key={1}
+                close={setShowAdd}
+                onSuccess={() => {
+                    loadData();
+                    getNbrLigne();
+                }}
+            />
+         ) : <></>}
          {showUpdate ? <UpdatePost key={2}  close={setShowUpdate}  id={upValue.id} valueUp={upValue} /> : <></>}
         {showRequest ? <RequestCandidat key={3} close={setShowRequest}  valueUp={demandeValue}/> :<></>}
     </div>

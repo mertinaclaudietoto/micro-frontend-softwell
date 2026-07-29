@@ -204,7 +204,7 @@ function App() {
         <Route path="/apply-registration/:encryptParametres" element={ <PlateformeRegistration/>   } />
         <Route path="/apply-by-plateforme/:encryptParametres" element={ <PlateformeApply/>   } />
 
-        <Route path="/accueil" element={ <AccueilGenerale/>   } />
+        <Route path="/accueil" element={<ProtectedRoute><AccueilGenerale/></ProtectedRoute>} />
 
       </Routes>
     </>

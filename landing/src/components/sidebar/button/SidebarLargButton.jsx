@@ -3,8 +3,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 export default function SidebarLargButton({ link, icone, label, actif, subItems ,accesValue}) {
   const acces = sessionStorage.getItem("access");
-  // console.log(label);
-  const accesObj = JSON.parse(acces);
+  let accesObj = {};
+  try {
+    accesObj = JSON.parse(acces || "{}");
+  } catch {
+    accesObj = {};
+  }
   // console.log(accesObj);
 
   

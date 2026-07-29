@@ -513,7 +513,7 @@ export const accessinfo ={
   percentage:30,
   listpage : [
   { icone: "fa-solid fa-palette",access:"theme" ,name: "Thèmes", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] }] },
-  { icone: "fa-solid fa-piggy-bank",access:"budget" ,name: "Budget de formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "modification", boolean: [false] }] },
+  { icone: "fa-solid fa-piggy-bank",access:"budget" ,name: "Budget de formation", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "modification", boolean: [false] },{ name: "suppression", boolean: [false] }] },
   { icone: "fa-solid fa-chalkboard-user",access:"trainer", name: "Formateur", listfunction: [{ name: "lecture", boolean: [false] },{ name: "ajout", boolean: [false] },{ name: "suppression", boolean: [false] },{ name: "modification", boolean: [false] },{ name: "voir_detaille", boolean: [false] }] },
   { icone: "fa-solid fa-layer-groupr",access:"wish", name: "Souhait", listfunction: [
     { name: "lecture", boolean: [false] },
@@ -1301,12 +1301,64 @@ export   const  datasidebar =
                 // {label :"Liste des demandes",icone : "fa-solid fa-bullhorn",actif:false,link:"/manager/listrequeste"},
 }
 
+export const getTrainingStatusStyle = (statuId) => {
+  const styles = {
+    1: {
+      card: "bg-green-50 border-green-200",
+      badge: "bg-green-100 text-green-800",
+      border: "border-l-green-500",
+      icon: "fa-solid fa-check-circle text-green-600",
+    },
+    2: {
+      card: "bg-red-50 border-red-200",
+      badge: "bg-red-100 text-red-800",
+      border: "border-l-red-500",
+      icon: "fa-solid fa-times-circle text-red-600",
+    },
+    3: {
+      card: "bg-blue-50 border-blue-200",
+      badge: "bg-blue-100 text-blue-800",
+      border: "border-l-blue-500",
+      icon: "fa-solid fa-play-circle text-blue-600",
+    },
+    4: {
+      card: "bg-gray-50 border-gray-300",
+      badge: "bg-gray-100 text-gray-600",
+      border: "border-l-gray-400",
+      icon: "fa-solid fa-ban text-gray-500",
+    },
+    5: {
+      card: "bg-amber-50 border-amber-200",
+      badge: "bg-amber-100 text-amber-800",
+      border: "border-l-amber-500",
+      icon: "fa-solid fa-clock text-amber-600",
+    },
+  };
+  return (
+    styles[statuId] ?? {
+      card: "bg-gray-50 border-gray-200",
+      badge: "bg-gray-100 text-gray-800",
+      border: "border-l-gray-300",
+      icon: "fa-solid fa-circle text-gray-500",
+    }
+  );
+};
+
 export const getcolorstate = (text) => {
+  if (typeof text === "number") {
+    return getTrainingStatusStyle(text).badge;
+  }
   switch (text) {
     case 2:
       return "bg-red-100 text-red-800";
     case 1:
       return "bg-green-100 text-green-800";
+    case 3:
+      return "bg-blue-100 text-blue-800";
+    case 4:
+      return "bg-gray-100 text-gray-600";
+    case 5:
+      return "bg-amber-100 text-amber-800";
     case "en attente":
       return "bg-yellow-100 text-yellow-800";
     case "en cours":
@@ -1314,7 +1366,7 @@ export const getcolorstate = (text) => {
     case "terminé":
       return "bg-purple-100 text-purple-800";
     default:
-      return "bg-gray-100 text-gray-800"; // valeur par défaut propre
+      return "bg-gray-100 text-gray-800";
   }
 };
 export const trainingListToBeValidated = [
