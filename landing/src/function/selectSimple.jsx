@@ -11,7 +11,7 @@ export default function Select({ options = [], placeholder = "Rechercher...", on
   const inputRef = useRef(null);
   const listRef = useRef(null);
   const filtered = options.filter((opt) =>
-    opt[nameIteme].toLowerCase().includes(query.trim().toLowerCase())
+    (opt?.[nameIteme] ?? "").toString().toLowerCase().includes(query.trim().toLowerCase())
   );
   useEffect(() => {
     // reset highlight when filtered changes

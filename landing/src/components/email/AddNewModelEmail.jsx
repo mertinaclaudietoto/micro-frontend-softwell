@@ -12,7 +12,7 @@ import { Sidebar } from "../sidebar";
 import { uploadCompressedImage } from "../../function/uplaodimage";
 import { url_recrutement_image, url_sendemail } from "../../data/data";
 import { send } from "../../function/Axios";
-export default function AddNewModelEmail({close}) {
+export default function AddNewModelEmail({close, onSuccess}) {
 
   const [data, setData] = useState({
     name:null,
@@ -29,13 +29,23 @@ export default function AddNewModelEmail({close}) {
         }
   };
   const save = async()=>{
+    if (!data.name?.trim()) {
+        toast.error("Veuillez saisir le nom du modèle.");
+        return;
+    }
+    if (!data.content) {
+        toast.error("Veuillez saisir le contenu du modèle.");
+        return;
+    }
     const stringContent = JSON.stringify(data.content);
-    const value = await send({ ...data, content: stringContent }, url_sendemail + "modelemail");
-    // console.log(value)
+    const value = await send({ ...data, name: data.name.trim(), content: stringContent }, url_sendemail + "modelemail");
     if (value == true) {
-        // toast.success("Données enregistrées avec succès !");
-        // window.location.replace("/logincandidate");
-        close(false);
+        toast.success("Modèle enregistré avec succès !");
+        if (onSuccess) {
+            await onSuccess();
+        } else {
+            close(false);
+        }
     } else {
         toast.error("Problème serveur, réessayez plus tard !");
     }

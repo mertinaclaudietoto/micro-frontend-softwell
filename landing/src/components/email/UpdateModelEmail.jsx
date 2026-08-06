@@ -12,7 +12,7 @@ import { Sidebar } from "../sidebar";
 import { uploadCompressedImage } from "../../function/uplaodimage";
 import { url_recrutement_image, url_sendemail } from "../../data/data";
 import { send, update } from "../../function/Axios";
-export default function UpdateModelEmail({close,value}) {
+export default function UpdateModelEmail({close,value, onSuccess}) {
     console.log(value?.content);
   if (typeof value?.content === "string") {
     value.content = JSON.parse(value.content);
@@ -32,12 +32,14 @@ export default function UpdateModelEmail({close,value}) {
   const save = async()=>{
     const stringContent = JSON.stringify(data.content);
     console.log(stringContent);
-    const value = await update({ ...data, content: stringContent }, url_sendemail + "modelemail");
-    // console.log(value)
-    if (value == true) {
+    const ok = await update({ ...data, content: stringContent }, url_sendemail + "modelemail");
+    if (ok == true) {
         toast.success("Données modifiées avec succès !");
-        window.location.replace("/email");
-        // close(false);
+        if (onSuccess) {
+            await onSuccess();
+        } else {
+            close(false);
+        }
     } else {
         toast.error("Problème serveur, réessayez plus tard !");
     }

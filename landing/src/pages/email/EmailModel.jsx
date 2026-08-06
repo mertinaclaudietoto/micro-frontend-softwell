@@ -1,7 +1,6 @@
 
-import { useEffect,useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { deletev, getData } from "../../function/Axios";
-import { Link } from "react-router-dom";
 import { Sidebar } from "../../components";
 import { useState } from "react";
 import { textbackground, url_sendemail } from "../../data/data";
@@ -9,150 +8,217 @@ import AddNewModelEmail from "../../components/email/AddNewModelEmail";
 import UpdateModelEmail from "../../components/email/UpdateModelEmail";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function EmailModel(){
-    // TODO:delete and update
+
+export default function EmailModel() {
     const acces = sessionStorage.getItem("access");
     const accesObj = JSON.parse(acces);
-    const [nameE,setNameE]=useState("modelemail");
-    const [data,setData]=useState([]); 
-    const [search ,setSearch]=useState("");
-    const [showUpdate ,setShowUpdate]=useState(false);
-    const [showAdd ,setShowAdd]=useState(false);
-    const [upValue ,setUpValue]=useState(null);
-    const nbrSize=10;
-    const [nbrligne ,setNbrLigne]=useState(0)
-    const [numpage,setNumpage]=useState(1);
-    const modification = (value)=>{
-            setUpValue(value);
-            setShowUpdate(true);
-    }
-    const pagination =(value)=>{
-        setNumpage(
-        value < 1
-            ? 1
-            : value > Math.ceil(nbrligne / nbrSize)
-            ? Math.ceil(nbrligne / nbrSize)
-            : value
-        );
-    }
+    const nameE = "modelemail";
+    const [data, setData] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
+    const [search, setSearch] = useState("");
+    const [showUpdate, setShowUpdate] = useState(false);
+    const [showAdd, setShowAdd] = useState(false);
+    const [upValue, setUpValue] = useState(null);
+    const nbrSize = 10;
+    const [nbrligne, setNbrLigne] = useState(0);
+    const [numpage, setNumpage] = useState(1);
+
+    const modification = (value) => {
+        setUpValue(value);
+        setShowUpdate(true);
+    };
+
+    const pagination = (value) => {
+        const maxPage = Math.max(1, Math.ceil(nbrligne / nbrSize) || 1);
+        setNumpage(value < 1 ? 1 : value > maxPage ? maxPage : value);
+    };
+
+    const getNbrLigne = useCallback(async () => {
+        try {
+            const response = await getData(url_sendemail + `${nameE}/count`);
+            if (response?.data != null) setNbrLigne(response.data);
+        } catch {
+            setNbrLigne(0);
+        }
+    }, [nameE]);
+
     const loadData = useCallback(async () => {
-        console.log(nameE)
-        const data = await getData(
-            url_sendemail + `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${search!=null ? '&search=' + encodeURIComponent(search) : ''}`
-        );
-        setData( data.data);
-        console.log(data);
-    }, [numpage, search,nameE]); // dépendances de loadData
-    const getNbrLigne = async ()=>{
-        const data = await getData(url_sendemail + `${nameE}/count`);
-        if(data.data!=null)
-            setNbrLigne(data.data);
-        
-    }
-    const _delete = async (value)=>{
-        const data = await deletev(value,url_sendemail + `${nameE}`);
-        if (data == true) {
-            toast.success("Données enregistrées avec succès !");
-            window.location.replace("/email");
-            // close(false);
+        try {
+            const searchParam = search?.trim()
+                ? `&search=${encodeURIComponent(search.trim())}`
+                : "";
+            const response = await getData(
+                url_sendemail +
+                    `${nameE}/pagination?pageNumber=${numpage}&pageSize=${nbrSize}${searchParam}`
+            );
+            setData(Array.isArray(response?.data) ? response.data : []);
+        } catch {
+            setData([]);
+            toast.error("Impossible de charger les modèles e-mail.");
+        }
+    }, [numpage, search, nameE]);
+
+    const refreshList = useCallback(async () => {
+        await getNbrLigne();
+        await loadData();
+    }, [getNbrLigne, loadData]);
+
+    const _delete = async (value) => {
+        const ok = await deletev(value, url_sendemail + `${nameE}`);
+        if (ok === true) {
+            toast.success("Modèle supprimé avec succès !");
+            await refreshList();
         } else {
             toast.error("Problème serveur, réessayez plus tard !");
         }
-    }
-    const sendsearch = async()=>{
+    };
+
+    const sendsearch = () => {
         setNumpage(1);
-    }
-    useEffect(() => {
-            getNbrLigne();
-        }, []);
+        setSearch(searchInput);
+    };
 
     useEffect(() => {
-            loadData();
-        }, [loadData]);
-      return(
-        <>
-        {showAdd ? <AddNewModelEmail  close={setShowAdd}   entityName={nameE}   />  :
-        showUpdate  ? <UpdateModelEmail close={setShowUpdate} value={upValue}  entityName={nameE} /> : 
-        <div class="flex h-screen ">
-            <Sidebar/>
-            <main class="flex-1 ">    
-                <div class="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
+        getNbrLigne();
+    }, [getNbrLigne]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
+
+    if (showAdd) {
+        return (
+            <AddNewModelEmail
+                close={setShowAdd}
+                entityName={nameE}
+                onSuccess={async () => {
+                    setShowAdd(false);
+                    setNumpage(1);
+                    setSearch("");
+                    setSearchInput("");
+                    await getNbrLigne();
+                    // loadData se relance via deps (numpage/search) ; forcer aussi :
+                    const response = await getData(
+                        url_sendemail +
+                            `${nameE}/pagination?pageNumber=1&pageSize=${nbrSize}`
+                    );
+                    setData(Array.isArray(response?.data) ? response.data : []);
+                }}
+            />
+        );
+    }
+
+    if (showUpdate) {
+        return (
+            <UpdateModelEmail
+                close={setShowUpdate}
+                value={upValue}
+                entityName={nameE}
+                onSuccess={async () => {
+                    setShowUpdate(false);
+                    await refreshList();
+                }}
+            />
+        );
+    }
+
+    return (
+        <div className="flex h-screen ">
+            <Sidebar />
+            <main className="flex-1 ">
+                <div className="bg-[#e5ddd5] bg-[url('/background1.jpg')] bg-repeat bg-scroll min-h-screen w-full overflow-y-auto p-6">
                     <div className=" max-w-7xl mx-auto bg-white p-10 ">
-                        {/* filtre */}
-                        <div class="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
-                            <div class="flex items-center justify-between">
-                                <h2 class="text-xl font-semibold text-gray-800">Liste des modèles e-mail
-                                    <p className="text-xs text-gray-400">{`page ${numpage}/${Math.ceil(nbrligne / nbrSize)}`}</p>
+                        <div className="p-4 mb-2 border-b border-gray-200 sticky top-0 z-50 pink ">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-semibold text-gray-800">
+                                    Liste des modèles e-mail
+                                    <p className="text-xs text-gray-400">{`page ${numpage}/${Math.max(1, Math.ceil(nbrligne / nbrSize) || 1)}`}</p>
                                 </h2>
-                                <div class="flex items-center space-x-3">
-                                    <div class="relative">
-                                        <input type="text" placeholder="Rechercher…" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  " onChange={(event)=>setSearch(event.target.value)}/>
-                                        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                <div className="flex items-center space-x-3">
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            placeholder="Rechercher…"
+                                            value={searchInput}
+                                            className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500  "
+                                            onChange={(event) => setSearchInput(event.target.value)}
+                                            onKeyDown={(event) => {
+                                                if (event.key === "Enter") sendsearch();
+                                            }}
+                                        />
+                                        <svg className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
-                                        <button onClick={()=>sendsearch()} >
-                                            <span class="absolute right-3 top-2.5 text-xs text-gray-400 border border-gray-300 px-1.5 py-0.5 rounded">⌘K</span>
+                                        <button type="button" onClick={sendsearch}>
+                                            <span className="absolute right-3 top-2.5 text-xs text-gray-400 border border-gray-300 px-1.5 py-0.5 rounded">⌘K</span>
                                         </button>
-                                    
                                     </div>
                                     <div className="flex space-x-2">
                                         {accesObj && (accesObj?.modelemails?.ajout == null || accesObj?.modelemails?.ajout === undefined) ? null : (
-                                            <button class="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu" onClick={()=>{setShowAdd(true)}}>
-                                                <i class="fa-solid fa-plus"></i>
+                                            <button
+                                                type="button"
+                                                className="px-4 py-2 bg-softbleutini-12 text-white rounded-lg text-sm flex items-center hover:bg-softbleu"
+                                                onClick={() => setShowAdd(true)}
+                                            >
+                                                <i className="fa-solid fa-plus"></i>
                                             </button>
                                         )}
-                                        <button className="btn-neutre-gray" onClick={()=>pagination(numpage-1)} title="Précédent">
+                                        <button type="button" className="btn-neutre-gray" onClick={() => pagination(numpage - 1)} title="Précédent">
                                             <i className="fas fa-arrow-left"></i>
                                         </button>
-                                        <button className="btn-neutre-gray" onClick={()=>pagination(numpage+1)} title="Suivant">
+                                        <button type="button" className="btn-neutre-gray" onClick={() => pagination(numpage + 1)} title="Suivant">
                                             <i className="fas fa-arrow-right"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {/* filtre */}
-                        <div class="overflow-x-auto  mt-2">
-                        <table class="w-full">
-                            <thead class="bg-gray-50 border-b border-gray-200">
-                                <tr>
-                                    <th class="tr-thead w-8">#</th>
-                                    <th class="tr-thead">Nom</th>
-                                    <th class="tr-thead w-8"></th>
-                                    {/* <th class="tr-thead"></th> */}
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                {data.map((value,index)=>(
-                                    <>
-                                    <tr index={index} className={value.active==4 ?"bg-gray-50  hover:bg-gray-100":" hover:bg-gray-50"}>
-                                        <td class="px-6 py-4"><span class={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index]}`}>{value.id}</span></td>
-                                        <td class="px-6 py-4 text-sm text-gray-500">{value.name}</td>
-                                        {accesObj && (accesObj?.modelemails?.modification == null || accesObj?.modelemails?.modification === undefined) ? null : (
-                                            <td className="px-6 py-4 ">
-                                                <span
-                                                    onClick={() =>  modification(value)}   // adapte selon ton code
-                                                >
-                                                    <i className="fas fa-edit text-gray-400"></i>
-                                                </span>
-                                            </td>
-                                        )}
-                                        {accesObj && (accesObj?.modelemails?.suppression == null || accesObj?.modelemails?.suppression === undefined) ? null : (
-                                            <td onClick={() =>  _delete(value)} >
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </td>
-                                        )}
+                        <div className="overflow-x-auto  mt-2">
+                            <table className="w-full">
+                                <thead className="bg-gray-50 border-b border-gray-200">
+                                    <tr>
+                                        <th className="tr-thead w-8">#</th>
+                                        <th className="tr-thead">Nom</th>
+                                        <th className="tr-thead w-8"></th>
                                     </tr>
-                                    </>
-                                ))}
-                            </tbody>
-                        </table>
-                        </div>  
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    {data.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={3} className="px-6 py-8 text-sm text-gray-400 text-center">
+                                                Aucun modèle e-mail trouvé.
+                                            </td>
+                                        </tr>
+                                    ) : (
+                                        data.map((value, index) => (
+                                            <tr key={value.id ?? index} className={value.active == 4 ? "bg-gray-50  hover:bg-gray-100" : " hover:bg-gray-50"}>
+                                                <td className="px-6 py-4">
+                                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${textbackground[index % 10]}`}>
+                                                        {value.id}
+                                                    </span>
+                                                </td>
+                                                <td className="px-6 py-4 text-sm text-gray-500">{value.name}</td>
+                                                {accesObj && (accesObj?.modelemails?.modification == null || accesObj?.modelemails?.modification === undefined) ? null : (
+                                                    <td className="px-6 py-4 ">
+                                                        <span onClick={() => modification(value)} className="cursor-pointer">
+                                                            <i className="fas fa-edit text-gray-400"></i>
+                                                        </span>
+                                                    </td>
+                                                )}
+                                                {accesObj && (accesObj?.modelemails?.suppression == null || accesObj?.modelemails?.suppression === undefined) ? null : (
+                                                    <td onClick={() => _delete(value)} className="cursor-pointer">
+                                                        <i className="fa-regular fa-trash-can"></i>
+                                                    </td>
+                                                )}
+                                            </tr>
+                                        ))
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </main>
         </div>
-}
-        </>
-    )
+    );
 }
